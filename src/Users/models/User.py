@@ -1,3 +1,7 @@
+from src.Users.models.Nationality import Nationality
+from src.Users.models.UserType import UserType
+
+
 class User:
 
     id = 0
@@ -22,13 +26,28 @@ class User:
     contect_mode = ''
     privacy_agreement = 0
 
+    Nationality_N = None
+    Nationality_S = None
+    userType = None
+
     def __init__(self):
         pass
 
     def __init__(self,id, nationality_id, state_id, user_type_id, username
                  , registration_date, name, surname, gender, birthplace
-                 , birthdate, city, address, postal_code, distrit,
-                 first_cellphone, telephone, email, fiscal_code, contect_mode, privacy_agreement):
+                 , birthdate, city, address, postal_code, distrit
+                 ,first_cellphone, telephone, email, fiscal_code, contect_mode
+                 ,privacy_agreement
+
+                 #partono le join
+                 #1) join con nationality
+                 ,codeN
+
+                 #2) join con states
+                 ,codeS
+
+                 #3) join con type user
+                 ,description):
 
         self.id = id
         self.nationality_id = nationality_id
@@ -51,3 +70,16 @@ class User:
         self.fiscal_code = fiscal_code
         self.contect_mode = contect_mode
         self.privacy_agreement = privacy_agreement
+
+        self.nationality_N = Nationality(nationality_id, codeN)
+
+        self.nationality_S = Nationality(state_id, codeS)
+
+        self.userType = UserType(user_type_id, description)
+
+
+
+
+
+
+
