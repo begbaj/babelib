@@ -5,22 +5,18 @@ from src.Users.models.User import User
 
 class DatabaseManager:
     """
-    DatabaseManager handles the connection to the database
-
+    DatabaseManager handles the connection to the Databse
     ----
     Attributes:
-
-
     ----
     Methods:
-
     """
 
 
     _conn = ""
-    def __init__(self, user_, password_, host_, port_, database_):
+    def __init__(self, user, password, host, port, database):
         """
-        Initialize database manager
+        Initialize Databse manager
         :param user_: username for db access
         :param password_: password
         :param host_: db host ip/domain
@@ -28,11 +24,11 @@ class DatabaseManager:
         :param database_: db name
         """
         _conn = mariadb.connect(
-            user=user_,
-            password=password_,
-            host=host_,
-            port=port_,
-            database=database_
+            user=user,
+            password=password,
+            host=host,
+            port=port,
+            database=database
         )
         self.cur = _conn.cursor(named_tuple=True)
 
@@ -59,7 +55,7 @@ class DatabaseManager:
 
     # Print List of Contacts
     def get_users(self):
-        """Retrieves the list of contacts from the database and prints to stdout"""
+        """Retrieves the list of contacts from the Databse and prints to stdout"""
 
         # Initialize Variables
         users = []
@@ -85,7 +81,7 @@ class DatabaseManager:
     def select(self, table:str, values:str, where:str):
         pass
 
-    def insert(self):
+    def insert(self, into:str, items:str, values:str):
         pass
 
     def delete(self):
