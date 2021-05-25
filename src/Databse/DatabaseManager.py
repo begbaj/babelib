@@ -40,7 +40,7 @@ class DatabaseManager:
     def find_user_by_id(self, id):
 
         try:
-            self.cur.execute(f"Select * from users where id = {id}")
+            self.cur.execute(f"Select * from users u left join nationalities n on n.id = u.nationality_id left join nationalities n2 on n2.id = u.state_id left join users_types us on us.id = u.user_type_id where u.id = {id}")
         except mariadb.Error as e:
             print(f"Error: {e}")
 
@@ -49,7 +49,7 @@ class DatabaseManager:
                  , row.registration_date, row.name, row.surname, row.gender, row.birthplace
                  , row.birthdate, row.city, row.address, row.postal_code, row.distrit
                  ,row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                 ,row.contect_mode, row.privacy_agreement)
+                 ,row.contect_mode, row.privacy_agreement, row.code, row[25], row.description)
 
         return user
 
@@ -61,9 +61,9 @@ class DatabaseManager:
         users = []
 
         # List users
-
         try:
-            self.cur.execute(f"Select * from users")
+            self.cur.execute(f"Select * from users u left join nationalities n on n.id = u.nationality_id left join nationalities n2 on n2.id = u.state_id left join users_types us on us.id = u.user_type_id")
+
         except mariadb.Error as e:
             print(f"Error: {e}")
 
@@ -72,7 +72,7 @@ class DatabaseManager:
                         , row.registration_date, row.name, row.surname, row.gender, row.birthplace
                         , row.birthdate, row.city, row.address, row.postal_code, row.distrit
                         , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
+                        , row.contect_mode, row.privacy_agreement, row.code, row[25], row.description) #row[25] è il code per lo stato di appartenenza
             users.append(user)
 
         return users
