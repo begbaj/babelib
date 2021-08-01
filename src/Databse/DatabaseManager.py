@@ -128,7 +128,7 @@ class DatabaseManager:
 
 
 
-    def insert(self, user):
+    def insert_user(self, user):
         try:
             self.cur.execute(
                 f"Insert into users"
@@ -169,7 +169,7 @@ class DatabaseManager:
         except mariadb.Error as e:
             print(f"Error: {e}")
 
-    def delete(self, id):
+    def delete_user(self, id):
         try:
             self.cur.execute(f"delete from user where id = {id}")
 
