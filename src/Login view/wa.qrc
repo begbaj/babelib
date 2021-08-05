@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="waa">
+    <file>background.jpg</file>
+  </qresource>
+</RCC>

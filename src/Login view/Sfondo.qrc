@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="Libreria">
+    <file>background.jpg</file>
+  </qresource>
+</RCC>
