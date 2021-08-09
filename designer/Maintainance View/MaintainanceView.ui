@@ -30,9 +30,9 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>180</y>
+      <y>160</y>
       <width>1061</width>
-      <height>631</height>
+      <height>651</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -60,10 +60,10 @@ background-color:rgba(0, 192, 225, 85)</string>
      </property>
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>20</x>
        <y>20</y>
-       <width>1041</width>
-       <height>601</height>
+       <width>1031</width>
+       <height>611</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -466,7 +466,7 @@ border-radius:16px;</string>
       <x>220</x>
       <y>80</y>
       <width>1061</width>
-      <height>91</height>
+      <height>71</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -491,7 +491,7 @@ background-color:rgba(0, 192, 225, 85)</string>
     <widget class="QLineEdit" name="lineEdit">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>50</x>
        <y>10</y>
        <width>751</width>
        <height>41</height>
@@ -504,8 +504,8 @@ background-color:rgba(0, 192, 225, 85)</string>
     <widget class="QLabel" name="searchLabel">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>20</y>
+       <x>70</x>
+       <y>19</y>
        <width>291</width>
        <height>21</height>
       </rect>
@@ -523,7 +523,7 @@ font: italic 10pt &quot;Arial&quot;;</string>
     <widget class="QComboBox" name="filtersComboBox">
      <property name="geometry">
       <rect>
-       <x>780</x>
+       <x>810</x>
        <y>20</y>
        <width>171</width>
        <height>22</height>
@@ -556,10 +556,10 @@ font: italic 10pt &quot;Arial&quot;;</string>
     <widget class="QPushButton" name="searchPushButton">
      <property name="geometry">
       <rect>
-       <x>970</x>
+       <x>990</x>
        <y>10</y>
-       <width>81</width>
-       <height>41</height>
+       <width>61</width>
+       <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -571,39 +571,16 @@ border-radius:16px;</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../img/magnifier.png</normaloff>../img/magnifier.png</iconset>
+       <normaloff>../../../../Downloads/magnifier.png</normaloff>
+       <normalon>../../../../Downloads/loupe (1).png</normalon>
+       <activeon>../../../../Downloads/loupe (1).png</activeon>
+       <selectedon>../../../../Downloads/loupe (1).png</selectedon>../../../../Downloads/magnifier.png</iconset>
      </property>
      <property name="iconSize">
       <size>
        <width>32</width>
        <height>32</height>
       </size>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>60</y>
-       <width>131</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Mostra Scartati</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox_2">
-     <property name="geometry">
-      <rect>
-       <x>170</x>
-       <y>60</y>
-       <width>131</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Mostra in Quarantena</string>
      </property>
     </widget>
    </widget>

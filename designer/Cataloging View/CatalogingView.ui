@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>917</width>
+    <width>1300</width>
     <height>850</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
   <property name="maximumSize">
    <size>
     <width>1300</width>
-    <height>850</height>
+    <height>1500</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
       <x>0</x>
       <y>0</y>
       <width>211</width>
-      <height>831</height>
+      <height>1281</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -74,8 +74,8 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
     <widget class="QPushButton" name="returnButton">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>740</y>
+       <x>40</x>
+       <y>730</y>
        <width>71</width>
        <height>51</height>
       </rect>
@@ -97,7 +97,7 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="editButton">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -124,14 +124,68 @@ background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx
       </size>
      </property>
     </widget>
+    <widget class="QPushButton" name="saveButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>230</y>
+       <width>141</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius:16px;
+background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));</string>
+     </property>
+     <property name="text">
+      <string>Salva</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/save.png</normaloff>../img/save.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="saveButton_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>650</y>
+       <width>141</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius:16px;
+background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));</string>
+     </property>
+     <property name="text">
+      <string>Scarta</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
    </widget>
    <widget class="QLabel" name="background">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>140</x>
       <y>-10</y>
-      <width>1371</width>
-      <height>1091</height>
+      <width>1381</width>
+      <height>841</height>
      </rect>
     </property>
     <property name="text">
@@ -223,7 +277,7 @@ background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx
      <rect>
       <x>230</x>
       <y>130</y>
-      <width>641</width>
+      <width>551</width>
       <height>421</height>
      </rect>
     </property>
@@ -280,64 +334,6 @@ background-color:rgba(0, 192, 225, 85)</string>
       <rect>
        <x>190</x>
        <y>70</y>
-       <width>321</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>1</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius: 20px;
-border-style: outset;
-border-width: 2px;
-border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-    </widget>
-    <widget class="QFrame" name="natureFrame">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>120</y>
-       <width>321</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>1</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius: 20px;
-border-style: outset;
-border-width: 2px;
-border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-    </widget>
-    <widget class="QFrame" name="tyoeFrame">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>170</y>
        <width>321</width>
        <height>31</height>
       </rect>
@@ -607,13 +603,49 @@ background-color:none;</string>
       </rect>
      </property>
     </widget>
+    <widget class="QComboBox" name="genreBox_2">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>120</y>
+       <width>321</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 10pt &quot;Arial&quot;;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>pippo</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QComboBox" name="genreBox_3">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>170</y>
+       <width>321</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 10pt &quot;Arial&quot;;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>pippo</string>
+      </property>
+     </item>
+    </widget>
    </widget>
    <widget class="QFrame" name="frame_12">
     <property name="geometry">
      <rect>
       <x>230</x>
       <y>620</y>
-      <width>641</width>
+      <width>551</width>
       <height>181</height>
      </rect>
     </property>
@@ -895,6 +927,345 @@ background-color:none;</string>
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QFrame" name="frame_15">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>130</y>
+      <width>481</width>
+      <height>671</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>1</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 20px;
+border-style: outset;
+border-width: 2px;
+border-color:rgb(27,25,39);
+background-color:rgba(0, 192, 225, 85)</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="titleLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Stato Interno</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="authorLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>80</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Stato Esterno</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="natureLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>130</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Disponibilità</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="typeLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>410</y>
+       <width>47</width>
+       <height>13</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Note</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="genreBox_5">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>120</y>
+       <width>241</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 10pt &quot;Arial&quot;;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>pippo</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QTextEdit" name="textEdit">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>440</y>
+       <width>461</width>
+       <height>221</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="genreBox_6">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>70</y>
+       <width>241</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 10pt &quot;Arial&quot;;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>pippo</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QComboBox" name="genreBox_7">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>20</y>
+       <width>241</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 10pt &quot;Arial&quot;;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>pippo</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QPushButton" name="editButton_2">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>220</y>
+       <width>241</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius:16px;
+background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));</string>
+     </property>
+     <property name="text">
+      <string>Inizia Quarantena</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/edit.png</normaloff>../img/edit.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLabel" name="typeLabel_5">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>300</y>
+       <width>131</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Giorni rimanenti:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="typeLabel_6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>350</y>
+       <width>201</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Torna disponibile il: </string>
+     </property>
+    </widget>
+    <widget class="QFrame" name="titleFrame_2">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>290</y>
+       <width>241</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>1</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius: 20px;
+border-style: outset;
+border-width: 2px;
+border-color:rgb(27,25,39);
+background-color:rgba(0, 192, 225, 85)</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+    <widget class="QFrame" name="titleFrame_3">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>340</y>
+       <width>241</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>1</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius: 20px;
+border-style: outset;
+border-width: 2px;
+border-color:rgb(27,25,39);
+background-color:rgba(0, 192, 225, 85)</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="natureLabel_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>234</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Quarantena</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="inventaryLabel_2">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>90</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 bold 12pt &quot;Arial&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Stato</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="inventaryImage_2">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>90</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../img/maintenance.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
    <zorder>background</zorder>
    <zorder>frame_2</zorder>
    <zorder>catalogingViewLabel</zorder>
@@ -905,6 +1276,9 @@ background-color:none;</string>
    <zorder>frame_12</zorder>
    <zorder>collocationImage</zorder>
    <zorder>collocationImage_2</zorder>
+   <zorder>frame_15</zorder>
+   <zorder>inventaryLabel_2</zorder>
+   <zorder>inventaryImage_2</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionModifica">
