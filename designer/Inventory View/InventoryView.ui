@@ -571,7 +571,7 @@ border-radius:16px;</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../img/magnifier.png</normaloff>../img/magnifier.png</iconset>
+       <normaloff>../img/search-3.png</normaloff>../img/search-3.png</iconset>
      </property>
      <property name="iconSize">
       <size>
