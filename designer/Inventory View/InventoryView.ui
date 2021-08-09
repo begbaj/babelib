@@ -29,10 +29,10 @@
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>90</y>
-      <width>1071</width>
-      <height>721</height>
+      <x>220</x>
+      <y>160</y>
+      <width>1061</width>
+      <height>651</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -61,9 +61,9 @@ background-color:rgba(0, 192, 225, 85)</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>30</y>
+       <y>20</y>
        <width>1031</width>
-       <height>671</height>
+       <height>611</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -136,13 +136,13 @@ border-radius:10px;</string>
       <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>120</number>
+      <number>130</number>
      </attribute>
      <attribute name="horizontalHeaderHighlightSections">
       <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderMinimumSectionSize">
-      <number>30</number>
+      <number>50</number>
      </attribute>
      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
       <bool>true</bool>
@@ -285,7 +285,7 @@ border-radius:10px;</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>201</width>
+      <width>221</width>
       <height>831</height>
      </rect>
     </property>
@@ -300,12 +300,12 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QPushButton" name="userButton">
+    <widget class="QPushButton" name="modifyButton">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>10</x>
        <y>290</y>
-       <width>81</width>
+       <width>171</width>
        <height>51</height>
       </rect>
      </property>
@@ -314,11 +314,11 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
 border-radius:16px;</string>
      </property>
      <property name="text">
-      <string/>
+      <string>Modifica Documento</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/remove book.png</normaloff>images/remove book.png</iconset>
+       <normaloff>../img/modify book.png</normaloff>../img/modify book.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -327,12 +327,12 @@ border-radius:16px;</string>
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="catolgingButton">
+    <widget class="QPushButton" name="removeButton">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>10</x>
        <y>210</y>
-       <width>81</width>
+       <width>171</width>
        <height>51</height>
       </rect>
      </property>
@@ -341,11 +341,11 @@ border-radius:16px;</string>
 border-radius:16px;</string>
      </property>
      <property name="text">
-      <string/>
+      <string>Elimina Documento</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/modify book.png</normaloff>images/modify book.png</iconset>
+       <normaloff>../img/remove book.png</normaloff>../img/remove book.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -354,7 +354,7 @@ border-radius:16px;</string>
       </size>
      </property>
     </widget>
-    <widget class="QLabel" name="label_7">
+    <widget class="QLabel" name="logo">
      <property name="geometry">
       <rect>
        <x>44</x>
@@ -373,18 +373,18 @@ border-radius:16px;</string>
       <enum>Qt::RichText</enum>
      </property>
      <property name="pixmap">
-      <pixmap>../Home View/images/Babelib.icns</pixmap>
+      <pixmap>../img/Babelib-removebg-preview.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="movementButton">
+    <widget class="QPushButton" name="addButton">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>10</x>
        <y>130</y>
-       <width>81</width>
+       <width>171</width>
        <height>51</height>
       </rect>
      </property>
@@ -393,11 +393,11 @@ border-radius:16px;</string>
 background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));</string>
      </property>
      <property name="text">
-      <string/>
+      <string>Aggiungi Documento</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/add book.png</normaloff>images/add book.png</iconset>
+       <normaloff>../img/add book.png</normaloff>../img/add book.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -406,7 +406,7 @@ background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="settingButton">
+    <widget class="QPushButton" name="returnButton">
      <property name="geometry">
       <rect>
        <x>60</x>
@@ -423,7 +423,7 @@ background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/go back.png</normaloff>images/go back.png</iconset>
+       <normaloff>../img/go back.png</normaloff>../img/go back.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -432,12 +432,12 @@ background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="userButton_2">
+    <widget class="QPushButton" name="maintainanceButton">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>10</x>
        <y>370</y>
-       <width>81</width>
+       <width>171</width>
        <height>51</height>
       </rect>
      </property>
@@ -446,11 +446,11 @@ background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx
 border-radius:16px;</string>
      </property>
      <property name="text">
-      <string/>
+      <string>Manutenzione Documenti</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/maintenance.png</normaloff>images/maintenance.png</iconset>
+       <normaloff>../img/maintenance.png</normaloff>../img/maintenance.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -460,34 +460,12 @@ border-radius:16px;</string>
      </property>
     </widget>
    </widget>
-   <widget class="QLabel" name="label_6">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>-10</y>
-      <width>1371</width>
-      <height>1091</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="textFormat">
-     <enum>Qt::RichText</enum>
-    </property>
-    <property name="pixmap">
-     <pixmap>../Home View/images/Sfondo.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QFrame" name="searchFrame">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>10</y>
-      <width>1071</width>
+      <x>220</x>
+      <y>80</y>
+      <width>1061</width>
       <height>71</height>
      </rect>
     </property>
@@ -523,7 +501,7 @@ background-color:rgba(0, 192, 225, 85)</string>
       <string/>
      </property>
     </widget>
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="searchLabel">
      <property name="geometry">
       <rect>
        <x>70</x>
@@ -542,7 +520,7 @@ font: italic 10pt &quot;Arial&quot;;</string>
       <string>Cerca nel Catalogo</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox">
+    <widget class="QComboBox" name="filtersComboBox">
      <property name="geometry">
       <rect>
        <x>810</x>
@@ -575,7 +553,7 @@ font: italic 10pt &quot;Arial&quot;;</string>
       </property>
      </item>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="searchPushButton">
      <property name="geometry">
       <rect>
        <x>990</x>
@@ -606,10 +584,66 @@ border-radius:16px;</string>
      </property>
     </widget>
    </widget>
-   <zorder>label_6</zorder>
+   <widget class="QLabel" name="background">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>-10</y>
+      <width>1221</width>
+      <height>891</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../img/background_blur.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="catalogingLabel">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>20</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 bold 14pt &quot;Arial&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Cataloging View</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="catalogingImage">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>20</y>
+      <width>47</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../img/Icona Catalogazione.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <zorder>background</zorder>
    <zorder>frame</zorder>
    <zorder>frame_2</zorder>
    <zorder>searchFrame</zorder>
+   <zorder>catalogingLabel</zorder>
+   <zorder>catalogingImage</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionModifica">
