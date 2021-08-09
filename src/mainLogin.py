@@ -24,18 +24,17 @@ class Login(QMainWindow):
             self.error_label.setText("Inserisci tutti i campi")
         else:
             conn = mariadb.connect(
-                    user="root",
-                    password="sa",
-                    host="127.0.0.1",
-                    port=3306,
-                    database="babelib_db"
+                user="root",
+                password="5885",
+                host="127.0.0.1",
+                port=3306,
+                database="babelib"
             )
             cur = conn.cursor(named_tuple=True)
             conn.autocommit = True
             cur.execute(f"SELECT password FROM administrator WHERE username = '{username}'")
             result = cur.fetchone()
             print(result)
-
 
             if password == result.password:
                 print('Accesso eseguito correttamente')

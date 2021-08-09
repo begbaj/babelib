@@ -2,16 +2,35 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>687</width>
-    <height>602</height>
+    <width>670</width>
+    <height>650</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>670</width>
+    <height>650</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>670</width>
+    <height>650</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Login</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../Babelib.icns</normaloff>../Babelib.icns</iconset>
   </property>
   <property name="whatsThis">
    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/Libreria/background.pdf&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -119,9 +138,9 @@ border-radius:15px;</string>
     <widget class="QLabel" name="username_label">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>70</x>
        <y>160</y>
-       <width>111</width>
+       <width>131</width>
        <height>31</height>
       </rect>
      </property>
@@ -139,9 +158,9 @@ border:null;</string>
     <widget class="QLabel" name="password_label">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>260</y>
-       <width>111</width>
+       <x>74</x>
+       <y>268</y>
+       <width>131</width>
        <height>31</height>
       </rect>
      </property>
@@ -171,8 +190,11 @@ border:null;</string>
      <property name="text">
       <string/>
      </property>
+     <property name="textFormat">
+      <enum>Qt::RichText</enum>
+     </property>
      <property name="pixmap">
-      <pixmap resource="User.qrc">:/icon/profile.png</pixmap>
+      <pixmap>Images/profile.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -214,6 +236,58 @@ border:none;
       <string>Mantieni l'accesso</string>
      </property>
     </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>263</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color:transparent;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::RichText</enum>
+     </property>
+     <property name="pixmap">
+      <pixmap>Images/lock-icon.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>37</x>
+       <y>160</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color:transparent;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::RichText</enum>
+     </property>
+     <property name="pixmap">
+      <pixmap>Images/User_icon.icns</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
@@ -230,8 +304,11 @@ border:none;
     <property name="text">
      <string/>
     </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
     <property name="pixmap">
-     <pixmap resource="logo.qrc">:/Logo/Babelib-removebg-preview.png</pixmap>
+     <pixmap>Images/Babelib-removebg-preview.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -259,11 +336,17 @@ border-style: outset;</string>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>-150</x>
+      <x>-10</x>
       <y>0</y>
-      <width>931</width>
-      <height>731</height>
+      <width>971</width>
+      <height>681</height>
      </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1000</width>
+      <height>1000</height>
+     </size>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
@@ -271,8 +354,11 @@ border-style: outset;</string>
     <property name="text">
      <string/>
     </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
     <property name="pixmap">
-     <pixmap resource="wa.qrc">:/waa/background.jpg</pixmap>
+     <pixmap>Images/remix.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -285,12 +371,6 @@ border-style: outset;</string>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="logo.qrc"/>
-  <include location="wa.qrc"/>
-  <include location="Sfondo.qrc"/>
-  <include location="Icon.qrc"/>
-  <include location="User.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

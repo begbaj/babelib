@@ -6,15 +6,15 @@ from src.Users.models.User import User
 
 class DatabaseManager:
     """
-    DatabaseManager handles the connection to the Databse
+    DatabaseManager handles the connection to the Database
     ----
     Attributes:
     ----
     Methods:
     """
 
-
     _conn = ""
+
     def __init__(self, user, password, host, port, database):
         """
         Initialize Databse manager
@@ -36,7 +36,7 @@ class DatabaseManager:
     def query(self, query: str) -> bool:
         pass
 
-    #def select_user
+    # def select_user
 
     def find_user_by_id(self, id):
 
@@ -52,10 +52,10 @@ class DatabaseManager:
 
         for row in self.cur.fetchall():
             user = User(row.Id, row.nationality_id, row.state_id, row.user_type_id, row.username
-                 , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                 , row.birthdate, row.city, row.address, row.postal_code, row.distrit
-                 ,row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                 ,row.contect_mode, row.privacy_agreement)
+                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
+                        , row.birthdate, row.city, row.address, row.postal_code, row.distrit
+                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
+                        , row.contect_mode, row.privacy_agreement)
 
             user.Nationality_N = Nationality(row.nationality_id, row.code)
             user.Nationality_S = Nationality(row.state_id, row[25])  # row[25] è il code per lo stato di appartenenza
@@ -84,19 +84,16 @@ class DatabaseManager:
                         , row.registration_date, row.name, row.surname, row.gender, row.birthplace
                         , row.birthdate, row.city, row.address, row.postal_code, row.distrit
                         , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement) #row[25] è il code per lo stato di appartenenza
+                        , row.contect_mode, row.privacy_agreement)  # row[25] è il code per lo stato di appartenenza
 
             user.Nationality_N = Nationality(row.nationality_id, row.code)
-            user.Nationality_S = Nationality(row.state_id, row[25]) #row[25] è il code per lo stato di appartenenza
-
+            user.Nationality_S = Nationality(row.state_id, row[25])  # row[25] è il code per lo stato di appartenenza
 
             users.append(user)
 
         return users
 
-
     def set_user(self, user):
-
 
         try:
             self.cur.execute(
@@ -125,8 +122,6 @@ class DatabaseManager:
 
         except mariadb.Error as e:
             print(f"Error: {e}")
-
-
 
     def insert_user(self, user):
         try:
@@ -175,6 +170,3 @@ class DatabaseManager:
 
         except mariadb.Error as e:
             print(f"Error: {e}")
-
-
-
