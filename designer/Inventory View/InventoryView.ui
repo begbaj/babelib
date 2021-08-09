@@ -571,10 +571,7 @@ border-radius:16px;</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../../../../Downloads/magnifier.png</normaloff>
-       <normalon>../../../../Downloads/loupe (1).png</normalon>
-       <activeon>../../../../Downloads/loupe (1).png</activeon>
-       <selectedon>../../../../Downloads/loupe (1).png</selectedon>../../../../Downloads/magnifier.png</iconset>
+       <normaloff>../img/magnifier.png</normaloff>../img/magnifier.png</iconset>
      </property>
      <property name="iconSize">
       <size>
