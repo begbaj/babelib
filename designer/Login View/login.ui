@@ -140,7 +140,7 @@ border-radius:15px;</string>
       <rect>
        <x>70</x>
        <y>160</y>
-       <width>131</width>
+       <width>111</width>
        <height>31</height>
       </rect>
      </property>
@@ -160,7 +160,7 @@ border:null;</string>
       <rect>
        <x>74</x>
        <y>268</y>
-       <width>131</width>
+       <width>91</width>
        <height>31</height>
       </rect>
      </property>

@@ -79,7 +79,7 @@ background-color:qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0 
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../Home view/user.png</normaloff>../Home view/user.png</iconset>
+      <normaloff>images/Icona User.png</normaloff>images/Icona User.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -167,7 +167,7 @@ background-color: transparent;
 border:none;</string>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
@@ -182,7 +182,7 @@ border:none;</string>
          <x>0</x>
          <y>0</y>
          <width>461</width>
-         <height>261</height>
+         <height>271</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -250,14 +250,14 @@ border-radius:10px;</string>
        <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>false</bool>
        </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>30</number>
+       </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>120</number>
        </attribute>
        <attribute name="horizontalHeaderHighlightSections">
         <bool>false</bool>
-       </attribute>
-       <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>30</number>
        </attribute>
        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
         <bool>false</bool>
@@ -354,7 +354,7 @@ border-radius:10px;</string>
        </column>
        <item row="0" column="0">
         <property name="text">
-         <string>Began Bajrami</string>
+         <string/>
         </property>
         <property name="textAlignment">
          <set>AlignLeading|AlignVCenter</set>
@@ -377,7 +377,7 @@ border-radius:10px;</string>
        </item>
        <item row="1" column="0">
         <property name="text">
-         <string>Davide De Zuane</string>
+         <string/>
         </property>
        </item>
        <item row="1" column="1">
@@ -397,7 +397,7 @@ border-radius:10px;</string>
        </item>
        <item row="2" column="0">
         <property name="text">
-         <string>Pietro SMUSI</string>
+         <string/>
         </property>
        </item>
        <item row="2" column="1">
@@ -417,12 +417,12 @@ border-radius:10px;</string>
        </item>
        <item row="3" column="0">
         <property name="text">
-         <string>Chiara Gobbi</string>
+         <string/>
         </property>
        </item>
        <item row="4" column="0">
         <property name="text">
-         <string>Ben Fatto Da Ni Ele</string>
+         <string/>
         </property>
        </item>
       </widget>
@@ -439,8 +439,8 @@ border-radius:10px;</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>471</width>
-         <height>261</height>
+         <width>461</width>
+         <height>271</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -496,14 +496,14 @@ border-radius:10px;</string>
        <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>false</bool>
        </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>30</number>
+       </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>120</number>
        </attribute>
        <attribute name="horizontalHeaderHighlightSections">
         <bool>false</bool>
-       </attribute>
-       <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>30</number>
        </attribute>
        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
         <bool>false</bool>
@@ -584,7 +584,7 @@ border-radius:10px;</string>
        </column>
        <item row="0" column="0">
         <property name="text">
-         <string>Davide De Zuane</string>
+         <string/>
         </property>
         <property name="textAlignment">
          <set>AlignLeading|AlignVCenter</set>
@@ -592,7 +592,7 @@ border-radius:10px;</string>
        </item>
        <item row="1" column="0">
         <property name="text">
-         <string>Daniele Benfatto</string>
+         <string/>
         </property>
        </item>
       </widget>
@@ -609,7 +609,7 @@ border-radius:10px;</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>481</width>
+         <width>461</width>
          <height>271</height>
         </rect>
        </property>
@@ -666,14 +666,14 @@ border-radius:10px;</string>
        <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>false</bool>
        </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>30</number>
+       </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>120</number>
        </attribute>
        <attribute name="horizontalHeaderHighlightSections">
         <bool>false</bool>
-       </attribute>
-       <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>30</number>
        </attribute>
        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
         <bool>false</bool>
@@ -754,7 +754,7 @@ border-radius:10px;</string>
        </column>
        <item row="0" column="0">
         <property name="text">
-         <string>Davide De Zuane</string>
+         <string/>
         </property>
         <property name="textAlignment">
          <set>AlignLeading|AlignVCenter</set>
@@ -762,12 +762,12 @@ border-radius:10px;</string>
        </item>
        <item row="1" column="0">
         <property name="text">
-         <string>Daniele Benfatto</string>
+         <string/>
         </property>
        </item>
        <item row="2" column="0">
         <property name="text">
-         <string>Began Bajrami</string>
+         <string/>
         </property>
        </item>
        <item row="2" column="1">
@@ -782,7 +782,7 @@ border-radius:10px;</string>
        </item>
        <item row="3" column="0">
         <property name="text">
-         <string>Chiara Gobbi</string>
+         <string/>
         </property>
        </item>
       </widget>
@@ -864,7 +864,7 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>610</y>
+       <y>620</y>
        <width>81</width>
        <height>51</height>
       </rect>
@@ -879,7 +879,7 @@ border-radius:16px;
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../Home view/customer-service.png</normaloff>../Home view/customer-service.png</iconset>
+       <normaloff>images/Icona Servizi.png</normaloff>images/Icona Servizi.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -892,7 +892,7 @@ border-radius:16px;
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>290</y>
+       <y>300</y>
        <width>81</width>
        <height>51</height>
       </rect>
@@ -906,7 +906,7 @@ border-radius:16px;</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../Home view/group.png</normaloff>../Home view/group.png</iconset>
+       <normaloff>images/Icona Utenti.png</normaloff>images/Icona Utenti.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -919,7 +919,7 @@ border-radius:16px;</string>
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>370</y>
+       <y>380</y>
        <width>81</width>
        <height>51</height>
       </rect>
@@ -946,7 +946,7 @@ border-radius:16px;</string>
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>450</y>
+       <y>460</y>
        <width>81</width>
        <height>51</height>
       </rect>
@@ -973,7 +973,7 @@ border-radius:16px;</string>
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>210</y>
+       <y>220</y>
        <width>81</width>
        <height>51</height>
       </rect>
@@ -996,7 +996,7 @@ border-radius:16px;</string>
       </size>
      </property>
     </widget>
-    <widget class="QLabel" name="label_7">
+    <widget class="QLabel" name="labelicon">
      <property name="geometry">
       <rect>
        <x>44</x>
@@ -1015,7 +1015,7 @@ border-radius:16px;</string>
       <enum>Qt::RichText</enum>
      </property>
      <property name="pixmap">
-      <pixmap>images/Babelib.icns</pixmap>
+      <pixmap>../img/Babelib.icns</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -1025,7 +1025,7 @@ border-radius:16px;</string>
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>130</y>
+       <y>140</y>
        <width>81</width>
        <height>51</height>
       </rect>
@@ -1052,7 +1052,7 @@ background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>530</y>
+       <y>540</y>
        <width>81</width>
        <height>51</height>
       </rect>
@@ -1125,7 +1125,7 @@ qproperty-wordWrap: true;</string>
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../Home view/borrow-book-2078990-1757778.png</normaloff>../Home view/borrow-book-2078990-1757778.png</iconset>
+      <normaloff>images/Icona Prestito.png</normaloff>images/Icona Prestito.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -1150,7 +1150,7 @@ qproperty-wordWrap: true;</string>
      <enum>Qt::RichText</enum>
     </property>
     <property name="pixmap">
-     <pixmap>images/Sfondo.png</pixmap>
+     <pixmap>../img/background_blur.jpg</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>

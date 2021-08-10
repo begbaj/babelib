@@ -1,13 +1,14 @@
 import mariadb
-import sys
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
 from PyQt5.uic import loadUi
+from homeView import HomeView
 
-class Login(QMainWindow):
+
+class LoginView(QMainWindow):
     def __init__(self):
-        super(Login, self).__init__()
-        loadUi("Login view/login.ui",self) #importa il designer
+        super(LoginView, self).__init__()
+        loadUi("../designer/Login view/login.ui",self) #importa il designer
         self.LoginButton.clicked.connect(self.loginfunction) #quando il bottone viene cliccato chiama la funzione submitfunction
         self.PasswordField.setEchoMode(QtWidgets.QLineEdit.Password) #fa comparire gli asterischi quando si mette la password
 
@@ -25,10 +26,10 @@ class Login(QMainWindow):
         else:
             conn = mariadb.connect(
                 user="root",
-                password="5885",
+                password="89428iPZKTJzQ2fTT845mpre3",
                 host="127.0.0.1",
                 port=3306,
-                database="babelib"
+                database="babelib_db"
             )
             cur = conn.cursor(named_tuple=True)
             conn.autocommit = True
@@ -38,16 +39,12 @@ class Login(QMainWindow):
 
             if password == result.password:
                 print('Accesso eseguito correttamente')
+                self.goHomeView()
                 self.error_label.setText("")
             else:
                 self.error_label.setText("Username o Password errati")
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    mainwindow = Login()
-    widget = QtWidgets.QStackedWidget()
-    widget.addWidget(mainwindow)
-    widget.setFixedWidth(600)
-    widget.setFixedHeight(600)
-    widget.show()
-    app.exec_() #Lancia l'applicazione
+    def goHomeView(self):
+        self.cams = HomeView()
+        self.cams.show()
+        self.close()
