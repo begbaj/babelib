@@ -3,7 +3,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
 from PyQt5.uic import loadUi
 
-from src.Databse.DatabaseManager import DatabaseManager
+from src.Database.DatabaseManager import DatabaseManager
 from  src.homeView import HomeView
 
 
