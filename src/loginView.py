@@ -10,7 +10,7 @@ class LoginView(QMainWindow):
         super(LoginView, self).__init__()
         loadUi("../designer/Login view/login.ui",self) #importa il designer
         self.LoginButton.clicked.connect(self.loginfunction) #quando il bottone viene cliccato chiama la funzione submitfunction
-        self.PasswordField.setEchoMode(QtWidgets.QLineEdit.Password) #fa comparire gli asterischi quando si mette la password
+        self.PassworField.setEchoMode(QtWidgets.QLineEdit.Password) #fa comparire gli asterischi quando si mette la password
 
     def submitfunction(self):
         username = self.UsernameField.text()
@@ -26,7 +26,7 @@ class LoginView(QMainWindow):
         else:
             conn = mariadb.connect(
                 user="root",
-                password="89428iPZKTJzQ2fTT845mpre3",
+                password="sa",
                 host="127.0.0.1",
                 port=3306,
                 database="babelib_db"
