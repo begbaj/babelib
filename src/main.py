@@ -10,7 +10,5 @@ if __name__ == "__main__":
     mainwindow = LoginView()
     widget = QtWidgets.QStackedWidget()
     widget.addWidget(mainwindow)
-    widget.setFixedWidth(600)
-    widget.setFixedHeight(600)
     widget.show()
     app.exec() #Lancia l'applicazione

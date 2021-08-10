@@ -6,16 +6,28 @@ from homeView import HomeView
 
 
 class LoginView(QMainWindow):
+
     def __init__(self):
         super(LoginView, self).__init__()
-        loadUi("../designer/Login view/login.ui",self) #importa il designer
-        self.LoginButton.clicked.connect(self.loginfunction) #quando il bottone viene cliccato chiama la funzione submitfunction
-        self.PassworField.setEchoMode(QtWidgets.QLineEdit.Password) #fa comparire gli asterischi quando si mette la password
+        loadUi("../designer/Login view/login.ui",self)
+        self.setUp()
 
-    def submitfunction(self):
-        username = self.UsernameField.text()
-        password = self.PasswordField.text()
-        print("Accesso eseguito correttamente come: ", username)
+    def setUp(self):
+        self.LoginButton.clicked.connect(self.loginfunction)
+        self.PasswordField.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.setFixedSize(660, 680)
+
+    def passwcompare(self, password, result):
+        try:
+            if password == result.password:
+                self.error_label.setText("")
+                self.goHomeView()
+            else:
+                self.error_label.setText("Username o Password Sbagliati")
+        except:
+            self.error_label.setText("")
+            self.error_label.setText("Username o Password Sbagliati")
+
 
     def loginfunction(self):
         username = self.UsernameField.text()
@@ -26,7 +38,7 @@ class LoginView(QMainWindow):
         else:
             conn = mariadb.connect(
                 user="root",
-                password="sa",
+                password="2810",
                 host="127.0.0.1",
                 port=3306,
                 database="babelib_db"
@@ -35,14 +47,7 @@ class LoginView(QMainWindow):
             conn.autocommit = True
             cur.execute(f"SELECT password FROM administrator WHERE username = '{username}'")
             result = cur.fetchone()
-            print(result)
-
-            if password == result.password:
-                print('Accesso eseguito correttamente')
-                self.goHomeView()
-                self.error_label.setText("")
-            else:
-                self.error_label.setText("Username o Password errati")
+            self.passwcompare(password,result)
 
     def goHomeView(self):
         self.cams = HomeView()
