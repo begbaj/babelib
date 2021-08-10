@@ -552,6 +552,21 @@ font: italic 10pt &quot;Arial&quot;;</string>
        <string>ISBN</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>BID</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Numero Inventario</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Note</string>
+      </property>
+     </item>
     </widget>
     <widget class="QPushButton" name="searchPushButton">
      <property name="geometry">

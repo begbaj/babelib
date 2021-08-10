@@ -1,4 +1,4 @@
-from src.Databse.DatabaseManager import DatabaseManager
+from src.Database.DatabaseManager import DatabaseManager
 from src.Users.models.User import User
 
 
