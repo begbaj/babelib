@@ -4,7 +4,7 @@ from src.Users.models.User import User
 
 class UserManager:
 
-    db = DatabaseManager("root", "sa", "localhost", 3306, "babelib_db")
+    db = DatabaseManager()
 
     def list(self):
         user = self.db.get_users()

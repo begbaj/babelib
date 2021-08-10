@@ -2,10 +2,13 @@ import mariadb
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
 from PyQt5.uic import loadUi
-from homeView import HomeView
+
+from src.Databse.DatabaseManager import DatabaseManager
+from  src.homeView import HomeView
 
 
 class LoginView(QMainWindow):
+    db = DatabaseManager()
 
     def __init__(self):
         super(LoginView, self).__init__()
@@ -33,20 +36,12 @@ class LoginView(QMainWindow):
         username = self.UsernameField.text()
         password = self.PasswordField.text()
 
+
+
         if len(username) == 0 or len(password) == 0:
             self.error_label.setText("Inserisci tutti i campi")
         else:
-            conn = mariadb.connect(
-                user="root",
-                password="2810",
-                host="127.0.0.1",
-                port=3306,
-                database="babelib_db"
-            )
-            cur = conn.cursor(named_tuple=True)
-            conn.autocommit = True
-            cur.execute(f"SELECT password FROM administrator WHERE username = '{username}'")
-            result = cur.fetchone()
+            result = self.db.loginQuery(username)
             self.passwcompare(password,result)
 
     def goHomeView(self):

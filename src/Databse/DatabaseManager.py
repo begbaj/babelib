@@ -2,7 +2,8 @@ import mariadb
 
 from src.Users.models.Nationality import Nationality
 from src.Users.models.User import User
-
+import json
+import os
 
 class DatabaseManager:
     """
@@ -15,7 +16,8 @@ class DatabaseManager:
 
     _conn = ""
 
-    def __init__(self, user, password, host, port, database):
+    #def __init__(self, user, password, host, port, database):
+    def __init__(self):
         """
         Initialize Databse manager
         :param user_: username for db access
@@ -24,17 +26,31 @@ class DatabaseManager:
         :param port_: db host port
         :param database_: db name
         """
+
+        #"root", "sa", "localhost", 3306, "babelib_db"
+        #C:\Users\DanieleB\PycharmProjects\babelib\src\Databse\DB Setting\db.json
+
+        data = json.load(open(os.path.abspath("Databse\DB Setting\db.json")))
+
+
+
         _conn = mariadb.connect(
-            user=user,
-            password=password,
-            host=host,
-            port=port,
-            database=database
+            user=data["user"],
+            password=data["password"],
+            host=data["host"],
+            port=data["port"],
+            database=data["database"]
         )
         self.cur = _conn.cursor(named_tuple=True)
+        _conn.autocommit = True
+        self._conn = _conn
 
     def query(self, query: str) -> bool:
         pass
+
+    def loginQuery(self, username):
+        self.cur.execute(f"SELECT password FROM administrator WHERE username = '{username}'")
+        return self.cur.fetchone()
 
     # region Users
     def get_users(self):
