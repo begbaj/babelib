@@ -1,4 +1,6 @@
 from src.Database.DatabaseManager import DatabaseManager
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
 from src.Users.models.User import User
 
 
@@ -7,8 +9,8 @@ class UserManager:
     db = DatabaseManager()
 
     def list(self):
-        user = self.db.get_users()
-        return user
+        users = self.db.get_users()
+        return users
 
     def find(self, id):
         user = self.db.find_user_by_id(id)
