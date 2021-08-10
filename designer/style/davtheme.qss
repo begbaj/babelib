@@ -1,4 +1,3 @@
-
 QMainWindow{
     background-image: "../img/background_blur.png"
 }

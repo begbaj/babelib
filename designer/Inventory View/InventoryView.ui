@@ -589,6 +589,10 @@ border-radius:16px;</string>
        <height>17</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;
+background-color: transparent;</string>
+     </property>
      <property name="text">
       <string>Mostra Scartati</string>
      </property>
@@ -601,6 +605,10 @@ border-radius:16px;</string>
        <width>131</width>
        <height>17</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;
+background-color: transparent;</string>
      </property>
      <property name="text">
       <string>Mostra in Quarantena</string>
@@ -639,7 +647,7 @@ border-radius:16px;</string>
      <string notr="true">font: 75 bold 14pt &quot;Arial&quot;;</string>
     </property>
     <property name="text">
-     <string>Cataloging View</string>
+     <string>Catalogazione</string>
     </property>
    </widget>
    <widget class="QLabel" name="catalogingImage">
