@@ -16,15 +16,10 @@ class UserView(QMainWindow):
     def __init__(self):
         super(UserView, self).__init__()
         loadUi("../designer/User view/UserView.ui", self)
-        users = self.userM.list()
+        self.users = self.userM.list()
+        self.loadData()
 
-        row = 0
-        self.userTable.setRowCount(len(users))
-        for user in users:
-            self.userTable.setItem(row, 0, QtWidgets.QTableWidgetItem(user.name))
-            self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
-            self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.city))
-            row = row + 1
+
 
         #users = self.userM.list()
         #for row in users:
@@ -32,8 +27,14 @@ class UserView(QMainWindow):
 
         self.setUp()
 
-    #def loadData(self):
-
+    def loadData(self):
+        row = 0
+        self.userTable.setRowCount(len(self.users))
+        for user in self.users:
+            self.userTable.setItem(row, 0, QtWidgets.QTableWidgetItem(user.name))
+            self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
+            self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.city))
+            row = row + 1
 
 
 
