@@ -36,33 +36,7 @@ class DatabaseManager:
     def query(self, query: str) -> bool:
         pass
 
-    # def select_user
-
-    def find_user_by_id(self, id):
-
-        try:
-            self.cur.execute(f"Select * from users u "
-                             f"left join nationalities n on n.id = u.nationality_id "
-                             f"left join nationalities n2 on n2.id = u.state_id "
-                             f"left join users_types us on us.id = u.user_type_id "
-                             f"where u.id = {id}")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.Id, row.nationality_id, row.state_id, row.user_type_id, row.username
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.distrit
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-
-            user.Nationality_N = Nationality(row.nationality_id, row.code)
-            user.Nationality_S = Nationality(row.state_id, row[25])  # row[25] è il code per lo stato di appartenenza
-
-        return user
-
-    # Print List of Contacts
+    # region Users
     def get_users(self):
         """Retrieves the list of contacts from the Databse and prints to stdout"""
 
@@ -170,3 +144,34 @@ class DatabaseManager:
 
         except mariadb.Error as e:
             print(f"Error: {e}")
+
+    def find_user_by_id(self, id):
+
+        try:
+            self.cur.execute(f"Select * from users u "
+                             f"left join nationalities n on n.id = u.nationality_id "
+                             f"left join nationalities n2 on n2.id = u.state_id "
+                             f"left join users_types us on us.id = u.user_type_id "
+                             f"where u.id = {id}")
+
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
+        for row in self.cur.fetchall():
+            user = User(row.Id, row.nationality_id, row.state_id, row.user_type_id, row.username
+                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
+                        , row.birthdate, row.city, row.address, row.postal_code, row.distrit
+                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
+                        , row.contect_mode, row.privacy_agreement)
+
+            user.Nationality_N = Nationality(row.nationality_id, row.code)
+            user.Nationality_S = Nationality(row.state_id, row[25])  # row[25] è il code per lo stato di appartenenza
+
+        return user
+    # endregion
+
+    # region Items
+    # endregion
+
+    # region Movements
+    # endregion
