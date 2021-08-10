@@ -7,3 +7,6 @@ class HomeView(QMainWindow):
     def __init__(self):
         super(HomeView, self).__init__()
         loadUi("../designer/Home view/HomeView.ui", self)
+
+    def setUp(self):
+        pass
