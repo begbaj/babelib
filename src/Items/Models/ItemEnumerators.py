@@ -5,51 +5,51 @@ class RankEnum(enum.Enum):
     max = 1
 
 class TypeEnum(enum.Enum):
-    printed_cartography = "pcar"
-    handwritten_cartography = "hcar"
-    booklet = "bklt"
-    printed_modern_text = "pmtx"
+    printed_cartography = 1
+    handwritten_cartography = 2
+    booklet = 3
+    printed_modern_text = 4
     #anche altri
 
 class AvailabilityEnum(enum.Enum):
-    available = "a"
-    unavailable = "u"
-    quarantine = "q"
-    maintainance = "m"
+    available = 1
+    unavailable = 2
+    quarantine = 3
+    maintainance = 4
     #anche altri
 
 class NatureEnum(enum.Enum):
-    monography = "mono"
-    analitic = "anlit"
-    periodic = "prod"
+    monography = 1
+    analitic = 2
+    periodic = 3
 
 class SMUSIEnum(enum.Enum):
-    none = "none"
-    incorrect = "scor"
-    mediocre = "medi"
-    used = "usat"
-    outmoded = "supe"
-    inappropriate = "inap"
+    none = 0
+    incorrect = 1
+    mediocre = 2
+    used = 3
+    outmoded = 4
+    inappropriate = 5
 
 class MaterialEnum(enum.Enum):
-    modern_book = "modb"
-    graphic_book = "grph"
-    audiovideo = "audv"
-    e_resource = "eres"
-    music = "musc"
+    modern_book = 1
+    graphic_book = 2
+    audiovideo = 3
+    e_resource = 4
+    music = 5
 
 class ItemGenreEnum(enum.Enum):
-    fantasy = "fantasy"
-    sci_fi = "sci-fi"
-    historic = "historic"
+    fantasy = 1
+    sci_fi = 2
+    historic = 3
     #anche altri
 
 class ExternalStateEnum(enum.Enum):
-    evidenziato = "ev"
-    strappato = "st"
+    evidenziato = 1
+    strappato = 2
     #anche altri
 
 class LangEnum(enum.Enum):
-    italian = "IT"
-    english = "EN"
+    italian = 1
+    english = 2
     #etc

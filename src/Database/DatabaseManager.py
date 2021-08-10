@@ -1,5 +1,6 @@
 import mariadb
 
+from src.Items.Models.ItemEnumerators import RankEnum
 from src.Users.models.Nationality import Nationality
 from src.Users.models.User import User
 import json
@@ -19,7 +20,7 @@ class DatabaseManager:
     #def __init__(self, user, password, host, port, database):
     def __init__(self):
         """
-        Initialize Databse manager
+        Initialize Database manager
         :param user_: username for db access
         :param password_: password
         :param host_: db host ip/domain
@@ -54,7 +55,7 @@ class DatabaseManager:
 
     # region Users
     def get_users(self):
-        """Retrieves the list of contacts from the Databse and prints to stdout"""
+        """Retrieves the list of contacts from the Database and prints to stdout"""
 
         # Initialize Variables
         users = []
@@ -187,6 +188,75 @@ class DatabaseManager:
     # endregion
 
     # region Items
+
+    def insert_item(self,item):
+        if item.catalogation_level == RankEnum.max:
+            query = f"INSERT INTO items"\
+                    f" (material_id, nature_id, type_id, lang_id, availability, bid, inventory_num, isbn,"\
+                    f" title, author, cataloging_level, publication_date, publication_state, rack, shelf, position," \
+                    f" opac_visibility, price, quarantine_start_date, quarantine_end_date, discarded, discarded_date, note)"\
+                    f" VALUES "\
+                    f" (" \
+                    f" {item.material}, {item.nature}, {item.type}, {item.lang}, {item.availability}, {item.bid},"\
+                    f" {item.inventory_num}, {item.isbn}, {item.title}, {item.author}, {item.catalogation_level}, {item.publication_date}," \
+                    f" {item.rack}, {item.shelf}, {item.position},"\
+                    f" {item.opac_visibility},{item.price},{item.quaratine_start_date},{item.quarantine_end_date},{item.discarded},"\
+                    f" {item.discarded_date},{item.note});"
+
+            for genre in item.genre:
+                query += f"INSERT INTO items_genres (item_id, genre_id) VALUES ({item.id, genre});"
+
+            for state in item.inner_state:
+                query +=f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({item.id, state});"
+
+            for state in item.external_state:
+                query += f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({item.id,state});"
+
+
+        else:
+            ##TODO: aggiungere min level cataloging
+            ##TODO: SISTEMARE CATALOGATION IN CATALOGING
+            raise Exception("min level cataloging is not supported yet")
+
+        try:
+            self.cur.execute(query)
+            self.cur.commit()
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
+    def get_items(self,search_field, search_mode,quarantined = False, discarded = False):
+        # id=None, material_id=None, nature_id=None, type_id=None, lang_id=None, availability=None, bid=None,
+        # inventory_num=None, isbn=None, title=None, author=None, cataloging_level=None, publication_date=None,
+        # publication_state=None, rack=None, shelf=None, position=None, opac_visibility=None, price=None,
+        # quarantine_start_date=None, quarantine_end_date=None, discarded=None, discarded_date=None, note=None
+        if search_mode == 0:
+            query = f"SELECT * FROM items where bid like '%{search_field}%'" \
+                    f"or inventory_num like '%{search_field}%'" \
+                    f"or isbn like '%{search_field}%'" \
+                    f"or title like '%{search_field}%'" \
+                    f"or author like '%{search_field}%'" \
+                    f"or note like '%{search_field}%';"
+        elif search_mode == 1: #Title
+            query = f"SELECT * FROM items WHERE title LIKE '%{search_field}%'"
+        elif search_mode == 2: #Author
+            query = f"SELECT * FROM items WHERE author LIKE '%{search_field}%'"
+        elif search_mode == 3: #ISBN
+            query = f"SELECT * FROM items WHERE isbn LIKE '%{search_field}%'"
+        elif search_mode == 4: #BID
+            query = f"SELECT * FROM items WHERE bid LIKE '%{search_field}%'"
+        elif search_mode == 5: #Inventory number
+            query = f"SELECT * FROM items WHERE inventory_num LIKE '%{search_field}%'"
+        elif search_mode == 6: #Note
+            query = f"SELECT * FROM items WHERE note LIKE '%{search_field}%'"
+
+        if quarantined == False:
+            query += " AND WHERE quarantine_end_date <= CURRENT_DATE "
+        if discarded == False:
+            query += " AND WHERE discarded NOT 1"
+
+    def get_item(self, id):
+        pass
+
     # endregion
 
     # region Movements
