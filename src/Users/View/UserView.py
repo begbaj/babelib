@@ -12,12 +12,12 @@ class UserView(QMainWindow):
 
     userM = UserManager()
 
-    def __init__(self):
+    def __init__(self, widget):
         super(UserView, self).__init__()
         loadUi("../designer/User view/UserView.ui", self)
         self.users = self.userM.list()
         self.loadData()
-
+        self.widget = widget
 
 
         #users = self.userM.list()
@@ -35,17 +35,10 @@ class UserView(QMainWindow):
             self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.city))
             row = row + 1
 
-
-
-
-
-
     def setUp(self):
-        pass
-        #self.backButton.clicked.connect(self.back)
+        self.backButton.clicked.connect(self.back)
 
-    #def back(self):
-        #self.cams = HomeView()
-        #self.cams.show()
-        #self.close()
+    def back(self):
+        self.widget.setCurrentIndex(self.widget.currentIndex() - 1)
+
 

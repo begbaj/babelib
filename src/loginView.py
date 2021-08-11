@@ -8,10 +8,11 @@ from src.homeView import HomeView
 class LoginView(QMainWindow):
     db = DatabaseManager()
 
-    def __init__(self):
+    def __init__(self, widget):
         super(LoginView, self).__init__()
         loadUi("../designer/Login view/login.ui",self)
         self.setUp()
+        self.widget = widget
 
     def setUp(self):
         self.LoginButton.clicked.connect(self.loginfunction)
@@ -22,7 +23,6 @@ class LoginView(QMainWindow):
         try:
             if password == result.password:
                 self.error_label.setText("")
-                self.goHomeView()
             else:
                 self.error_label.setText("Username o Password Sbagliati")
         except:
@@ -36,9 +36,10 @@ class LoginView(QMainWindow):
             self.error_label.setText("Inserisci tutti i campi")
         else:
             result = self.db.loginQuery(username)
-            self.passwcompare(password,result)
+            self.passwcompare(password, result)
+            self.goHomeView()
 
     def goHomeView(self):
-        view = HomeView()
-        view.show()
-        self.close()
+        homeView = HomeView(self.widget)
+        self.widget.addWidget(homeView)
+        self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
