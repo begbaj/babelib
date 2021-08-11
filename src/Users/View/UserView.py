@@ -12,7 +12,6 @@ class UserView(QMainWindow):
 
     userM = UserManager()
 
-
     def __init__(self):
         super(UserView, self).__init__()
         loadUi("../designer/User view/UserView.ui", self)

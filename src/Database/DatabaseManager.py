@@ -31,7 +31,7 @@ class DatabaseManager:
         #"root", "sa", "localhost", 3306, "babelib_db"
         #C:\Users\DanieleB\PycharmProjects\babelib\src\Databse\DB Setting\db.json
 
-        data = json.load(open(os.path.abspath("Database\DB Setting\db.json")))
+        data = json.load(open(os.path.abspath("Database/DB Setting/db.json")))
 
 
 

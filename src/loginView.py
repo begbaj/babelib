@@ -1,10 +1,8 @@
-import mariadb
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
+from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QAction, QWidget
 from PyQt5.uic import loadUi
-
 from src.Database.DatabaseManager import DatabaseManager
-from  src.homeView import HomeView
+from src.homeView import HomeView
 
 
 class LoginView(QMainWindow):
@@ -29,15 +27,11 @@ class LoginView(QMainWindow):
                 self.error_label.setText("Username o Password Sbagliati")
         except:
             self.error_label.setText("")
-            self.error_label.setText("Username o Password Sbagliati")
-
+            self.error_label.setText("wa")
 
     def loginfunction(self):
         username = self.UsernameField.text()
         password = self.PasswordField.text()
-
-
-
         if len(username) == 0 or len(password) == 0:
             self.error_label.setText("Inserisci tutti i campi")
         else:
@@ -45,6 +39,6 @@ class LoginView(QMainWindow):
             self.passwcompare(password,result)
 
     def goHomeView(self):
-        self.cams = HomeView()
-        self.cams.show()
+        view = HomeView()
+        view.show()
         self.close()
