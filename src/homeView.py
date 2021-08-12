@@ -34,17 +34,21 @@ class HomeView(QMainWindow):
 
     # region Collegamenti View
     def gouserview(self):
-        view = UserView(self.widget)
-        self.widget.addWidget(view)
-        self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
+        self.userview = UserView(self.widget)
+        self.userview.show()
+
+        #self.widget.addWidget(view)
+        #self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
 
     def gostatsview(self):
         pass
 
     def goinventoryview(self):
-        view = ItemView(self.widget)
-        self.widget.addWidget(view)
-        self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
+        self.itemview = ItemView(self.widget)
+        self.itemview.show()
+
+        #self.widget.addWidget(view)
+        #self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
 
     def goreportview(self):
         pass

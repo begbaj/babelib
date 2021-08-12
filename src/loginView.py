@@ -40,6 +40,10 @@ class LoginView(QMainWindow):
             self.goHomeView()
 
     def goHomeView(self):
-        homeView = HomeView(self.widget)
-        self.widget.addWidget(homeView)
+
+
+
+        self.homeView = HomeView(self.widget)
+        #self.homeView.show()
+        self.widget.addWidget(self.homeView)
         self.widget.setCurrentIndex(self.widget.currentIndex() + 1)

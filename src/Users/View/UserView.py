@@ -1,6 +1,6 @@
 import mariadb
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
+from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QPushButton
 from PyQt5.uic import loadUi
 import sys
 #sys.path.append('C:\\Users\\DanieleB\\PycharmProjects\\babelib\\src\\homeView.py')
@@ -40,10 +40,17 @@ class UserView(QMainWindow):
         self.schedaButton.clicked.connect(self.gousercard)
 
     def back(self):
-        self.widget.setCurrentIndex(self.widget.currentIndex() - 1)
+        #self.widget.setCurrentIndex(self.widget.currentIndex() - 1)
+        self.close()
 
     def gousercard(self):
         row = self.userTable.currentRow()
+        #if row == -1:
+            #dialog = QDialog()
+            #dialog.setWindowTitle("Errore")
+            #dialog.setText("Devi prima selezionare un utente!")
+
+
         user = self.users[row]
 
         self.view = UserCardView(self.widget, user)
