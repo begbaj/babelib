@@ -1,4 +1,5 @@
 from src.Database.DatabaseManager import DatabaseManager
+from src.Items.Models import ItemEnumerators
 from src.Items.Models.Item import Item
 
 
@@ -15,7 +16,32 @@ class ItemManager:
         pass
 
     def get_items(self,search_field, search_mode,quarantined = False, discarded = False):
-        return self.dbms.get_items(search_field, search_mode, quarantined, discarded)
+        fitems = []
+        for dbitem in self.dbms.get_items(search_field, search_mode, quarantined, discarded):
+            item = Item()
+            item.id = dbitem.Id
+            item.availability = ItemEnumerators.AvailabilityEnum(int(dbitem.availability))
+            item.bid = dbitem.bid
+            item.inventory_num = dbitem.inventory_num
+            item.isbn = dbitem.isbn
+            item.title = dbitem.title
+            item.author = dbitem.author
+            item.cataloging_level = ItemEnumerators.RankEnum(int.from_bytes(dbitem.cataloging_level, 'big'))
+            item.publication_date = dbitem.publication_date
+            item.publication_state = dbitem.pubblication_state
+            item.rack = dbitem.rack
+            item.shelf = dbitem.shelf
+            item.position = dbitem.position
+            item.opac_visibility = dbitem.opac_visibility
+            item.price = dbitem.price
+            item.quaratine_start_date = dbitem.quarantine_start_date
+            item.quarantine_end_date = dbitem.quarantine_end_date
+            item.discarded = dbitem.discarded
+            item.discarded_date = dbitem.discarded_date
+            item.note = dbitem.note
+            fitems.append(item)
+            #TODO: dobbiamo fare il get dei generi del libro, cosi anche per material nature type lang
+        return fitems
 
     def edit_position(self, item, new_pos):
         pass
@@ -46,3 +72,4 @@ class ItemManager:
 
     def edit_position(self):
         pass
+
