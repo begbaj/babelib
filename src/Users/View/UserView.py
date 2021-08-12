@@ -15,6 +15,7 @@ class UserView(QMainWindow):
 
     def __init__(self, widget):
         super(UserView, self).__init__()
+        self.setFixedSize(1000, 1200)
         loadUi("../designer/User view/UserView.ui", self)
         self.users = self.userM.list()
         self.loadData()
@@ -42,8 +43,16 @@ class UserView(QMainWindow):
         self.widget.setCurrentIndex(self.widget.currentIndex() - 1)
 
     def gousercard(self):
-        view = UserCardView(self.widget)
-        self.widget.addWidget(view)
-        self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
+        row = self.userTable.currentRow()
+        user = self.users[row]
+
+        self.view = UserCardView(self.widget, user)
+        self.view.show()
+        #self.close()
+        #self.widget.addWidget(view)
+        #self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
+        #self.widget.show()
+
+
 
 

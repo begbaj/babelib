@@ -9,6 +9,7 @@ class HomeView(QMainWindow):
 
     def __init__(self,widget):
         super(HomeView, self).__init__()
+        self.setFixedSize(660, 500)
         loadUi("../designer/Home view/HomeView.ui", self)
         self.setup()
         self.widget = widget
