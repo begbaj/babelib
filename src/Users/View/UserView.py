@@ -1,6 +1,6 @@
 import mariadb
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QPushButton
+from PyQt5 import QtWidgets, Qt
+from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QPushButton, QWidget, QLabel
 from PyQt5.uic import loadUi
 import sys
 #sys.path.append('C:\\Users\\DanieleB\\PycharmProjects\\babelib\\src\\homeView.py')
@@ -15,16 +15,12 @@ class UserView(QMainWindow):
 
     def __init__(self, widget):
         super(UserView, self).__init__()
-        self.setFixedSize(1000, 1200)
         loadUi("../designer/User view/UserView.ui", self)
         self.users = self.userM.list()
-        self.loadData()
         self.widget = widget
-        self.setup()
 
-        #users = self.userM.list()
-        #for row in users:
-        #self.userTable.setColumnWidth(0,10)
+        self.loadData()
+        self.setup()
 
     def loadData(self):
         row = 0
@@ -40,26 +36,25 @@ class UserView(QMainWindow):
         self.schedaButton.clicked.connect(self.gousercard)
 
     def back(self):
-        #self.widget.setCurrentIndex(self.widget.currentIndex() - 1)
         self.close()
 
     def gousercard(self):
         row = self.userTable.currentRow()
-        #if row == -1:
-            #dialog = QDialog()
-            #dialog.setWindowTitle("Errore")
-            #dialog.setText("Devi prima selezionare un utente!")
+        if row == -1:
+            self.showpopup()
+        else:
+            user = self.users[row]
+            self.view = UserCardView(self.widget, user)
+            self.view.show()
+
+    def showpopup(self):
+        self.pop = Popup()
+        self.pop.show()
 
 
-        user = self.users[row]
-
-        self.view = UserCardView(self.widget, user)
-        self.view.show()
-        #self.close()
-        #self.widget.addWidget(view)
-        #self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
-        #self.widget.show()
-
-
-
-
+class Popup(QDialog):
+    def __init__(self):
+        super(Popup, self).__init__()
+        loadUi("../designer/PopUp/Popup.ui", self)
+        self.setWindowTitle('Errore')
+        self.setModal(True)

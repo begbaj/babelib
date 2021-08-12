@@ -1,0 +1,1148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>809</width>
+    <height>884</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Scheda Utente</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>211</width>
+      <height>1281</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;
+background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:0 rgba(32, 30, 39, 255), stop:0.571429 rgba(0, 178, 210, 48));
+</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="logoImage">
+     <property name="geometry">
+      <rect>
+       <x>57</x>
+       <y>40</y>
+       <width>71</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::RichText</enum>
+     </property>
+     <property name="pixmap">
+      <pixmap>images/Icona Dettaglio.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="returnButton">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>760</y>
+       <width>71</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/Icona Close.png</normaloff>images/Icona Close.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>50</width>
+       <height>50</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="editButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>160</y>
+       <width>141</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius:16px;
+background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));</string>
+     </property>
+     <property name="text">
+      <string>Modifica Campi</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/Icona Modifica.png</normaloff>images/Icona Modifica.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="saveButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>230</y>
+       <width>141</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius:16px;
+background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));</string>
+     </property>
+     <property name="text">
+      <string>Salva</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/Icona Salva.png</normaloff>images/Icona Salva.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frame_11">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>50</y>
+      <width>541</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>1</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 20px;
+border-style: outset;
+border-width: 2px;
+border-color:rgb(27,25,39);
+background-color:rgba(0, 192, 225, 85)</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="titleLabel">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>32</y>
+       <width>41</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Nome</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="authorLabel">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>32</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Cognome</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="natureLabel">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>80</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Codice Fiscale</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="typeLabel">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>80</y>
+       <width>47</width>
+       <height>13</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Sesso</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="genreLabel">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>580</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Luogo di Nascita</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="genderBox">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>70</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 10pt &quot;Arial&quot;;
+border:none;</string>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <item>
+      <property name="text">
+       <string>M</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>F</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLineEdit" name="nameField">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>33</y>
+       <width>171</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="surnameField">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>33</y>
+       <width>201</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="fiscalcodeField">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>77</y>
+       <width>271</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="typeLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>170</y>
+       <width>131</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Codice Utente Nazionale</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="typeLabel_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>210</y>
+       <width>131</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Codice Utente Locale</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="nameField_5">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>170</y>
+       <width>351</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="nameField_6">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>210</y>
+       <width>351</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="positionLabel_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>130</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Data di Nascita</string>
+     </property>
+    </widget>
+    <widget class="QDateEdit" name="dateEdit">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>125</y>
+       <width>110</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="dateLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>130</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Nazionalità</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="nationBox">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>122</y>
+       <width>201</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 10pt &quot;Arial&quot;;
+border:none;</string>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <item>
+      <property name="text">
+       <string>pippo</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="dateLabel_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>250</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Tipologia Utente</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="usertypeBox">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>241</y>
+       <width>201</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 10pt &quot;Arial&quot;;
+border:none</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>pippo</string>
+      </property>
+     </item>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>400</y>
+      <width>541</width>
+      <height>291</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 20px;
+border-style: outset;
+border-width: 2px;
+border-color:rgb(27,25,39);
+background-color:rgba(0, 192, 225, 85)</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="positionLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>110</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Stato</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="ninventaryLabe_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Indirizzo</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="addressField">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>30</y>
+       <width>411</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="ISBNLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Città</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="cityField">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>70</y>
+       <width>201</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="palchettoLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>70</y>
+       <width>41</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>C.A.P.</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="capField">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>70</y>
+       <width>151</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="ISBNLabel_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>110</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Provincia</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="districtBox">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>100</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 10pt &quot;Arial&quot;;
+border:none;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>pippo</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="ninventaryLabe_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>180</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Cellulare</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="ninventaryLabe_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>212</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Email</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="ninventaryLabe_5">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>242</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Telefono</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="cellField">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>180</y>
+       <width>201</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="emailField">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>212</y>
+       <width>201</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="telephonField">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>242</y>
+       <width>201</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>180</y>
+       <width>100</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color:transparent</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_2">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>210</y>
+       <width>100</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color:transparent</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_3">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>240</y>
+       <width>100</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color:transparent</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="titleLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>150</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Contatto preferenziale</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="stateBox">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>100</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 10pt &quot;Arial&quot;;
+border:none;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>pippo</string>
+      </property>
+     </item>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frame_3">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>740</y>
+      <width>541</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 20px;
+border-style: outset;
+border-width: 2px;
+border-color:rgb(27,25,39);
+background-color:rgba(0, 192, 225, 85)</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QCheckBox" name="checkBox">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>221</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color:transparent
+</string>
+     </property>
+     <property name="text">
+      <string>Trattamento dati personali</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>221</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color:transparent
+</string>
+     </property>
+     <property name="text">
+      <string>Servizio Neswletter</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>710</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;
+background-color:transparent</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="pixmap">
+     <pixmap>images/Icona Consensi.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>377</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;
+background-color:transparent</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="pixmap">
+     <pixmap>images/Icona Recapiti.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>20</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;
+background-color: transparent</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="pixmap">
+     <pixmap>images/Icona Dati Personali.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
