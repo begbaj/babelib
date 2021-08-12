@@ -40,5 +40,3 @@ class UserView(QMainWindow):
 
     def back(self):
         self.widget.setCurrentIndex(self.widget.currentIndex() - 1)
-
-
