@@ -5,7 +5,13 @@ from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
 from PyQt5.uic import loadUi
 from datetime import datetime
 
+#from src.Users.View.UserView import UserView
+from src.Users.controllers.UserManager import UserManager
+
+
 class UserCardView(QMainWindow):
+
+    userM = UserManager()
 
     def __init__(self, widget, user):
         super(UserCardView, self).__init__()
@@ -38,15 +44,10 @@ class UserCardView(QMainWindow):
     def setup(self):
         # Button
         self.returnButton.clicked.connect(self.back)
-        self.editButton.clicked.connect(self.edituser)
+        self.editButton.clicked.connect(self.enablefiled)
         self.saveButton.clicked.connect(self.save)
 
         self.disablefield()
-
-    def edituser(self):
-        self.enablefiled()
-        ## aggiornare campi
-        self.save()
 
     def disablefield(self):
         # Box
@@ -84,12 +85,33 @@ class UserCardView(QMainWindow):
         pass
 
     def save(self):
-        # salva le modifiche, fa una query al database e aggiorna i campi dell'utente
-        pass
+        ## aggiornare campi
+        self.user.name = self.nameField.text()
+        self.user.surname = self.surnameField.text()
+        self.user.fiscal_code = self.fiscalcodeField.text()
+        self.user.address = self.addressField.text()
+        self.user.city = self.cityField.text()
+        self.user.postal_code = self.capField.text()
+        self.user.first_cellphone = self.cellField.text()
+        self.user.email = self.emailField.text()
+        self.user.telephone = self.telephonField.text()
+
+        #TODO implementare contatto preferenziale e privacy agreement
+        #self.user.contect_mode =
+        # f", u.contect_mode = {user.contect_mode}"
+        # f", u.privacy_agreement = {user.privacy_agreement}"
+
+
+        self.userM.set(self.user)
 
     def back(self):
         #self.widget.setCurrentIndex(self.widget.currentIndex() - 1)
         #self.widget.add(UserCardView)
         #self.close()
+
+        #view = UserView(self.widget)
+        #view.show()
+
+
         self.close()
 

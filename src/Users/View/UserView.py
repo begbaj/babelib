@@ -18,9 +18,9 @@ class UserView(QMainWindow):
         loadUi("../designer/User view/UserView.ui", self)
         self.users = self.userM.list()
         self.widget = widget
-
         self.loadData()
         self.setup()
+
 
     def loadData(self):
         row = 0
@@ -34,22 +34,32 @@ class UserView(QMainWindow):
     def setup(self):
         self.backButton.clicked.connect(self.back)
         self.schedaButton.clicked.connect(self.gousercard)
+        self.deleteButton.clicked.connect(self.delete)
 
     def back(self):
         self.close()
 
     def gousercard(self):
-        row = self.userTable.currentRow()
-        if row == -1:
+        rowTable = self.userTable.currentRow()
+
+        if rowTable == -1:
             self.showpopup()
         else:
-            user = self.users[row]
+            user = self.users[rowTable]
             self.view = UserCardView(self.widget, user)
             self.view.show()
 
     def showpopup(self):
         self.pop = Popup()
         self.pop.show()
+
+    def delete(self):
+        rowTable = self.userTable.currentRow()
+        self.userM.delete(self.users[rowTable].id)
+        #self.users[rowTable].remove()
+        self.users.remove(self.users[rowTable])
+        self.userTable.removeRow(rowTable)
+        #self.loadData()
 
 
 class Popup(QDialog):

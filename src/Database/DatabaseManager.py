@@ -91,24 +91,24 @@ class DatabaseManager:
                 f", u.state_id = {user.state_id}"
                 f", u.user_type_id = {user.user_type_id}"
                 f", u.username = {user.username}"
-                f", u.registration_date = {user.registration_date}"
-                f", u.name = {user.name}"
-                f", u.surname = {user.surname}"
-                f", u.gender = {user.gender}"
-                f", u.birthplace = {user.birthplace}"
-                f", u.birthdate = {user.birthdate}"
-                f", u.city = {user.city}"
-                f", u.address = {user.address}"
-                f", u.postal_code = {user.postal_code}"
-                f", u.distrit = {user.distrit}"
-                f", u.first_cellphone = {user.first_cellphone}"
-                f", u.telephone = {user.telephone}"
-                f", u.email = {user.email}"
-                f", u.fiscal_code = {user.fiscal_code}"
-                f", u.contect_mode = {user.contect_mode}"
-                f", u.privacy_agreement = {user.privacy_agreement}"
+                f", u.registration_date = '{user.registration_date}'"
+                f", u.name = '{user.name}'"
+                f", u.surname = '{user.surname}'"
+                f", u.gender = '{user.gender}'"
+                f", u.birthplace = '{user.birthplace}'"
+                f", u.birthdate = '{user.birthdate}'"
+                f", u.city = '{user.city}'"
+                f", u.address = '{user.address}'"
+                f", u.postal_code = '{user.postal_code}'"
+                f", u.distrit = '{user.distrit}'"
+                f", u.first_cellphone = '{user.first_cellphone}'"
+                f", u.telephone = '{user.telephone}'"
+                f", u.email = '{user.email}'"
+                f", u.fiscal_code = '{user.fiscal_code}'"
+                #f", u.contect_mode = {user.contect_mode}"
+                #f", u.privacy_agreement = {user.privacy_agreement}"
                 f" where id = {user.id}")
-
+            self.f = 0
         except mariadb.Error as e:
             print(f"Error: {e}")
 
@@ -155,7 +155,7 @@ class DatabaseManager:
 
     def delete_user(self, id):
         try:
-            self.cur.execute(f"delete from user where id = {id}")
+            self.cur.execute(f"delete from users where id = {id}")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
