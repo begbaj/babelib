@@ -15,7 +15,7 @@ class Item():
 
         self.title = ""
         self.author = ""
-        self.catalogation_level = RankEnum.min
+        self.cataloging_level = RankEnum.min
         self.material = MaterialEnum.graphic_book
         self.nature = NatureEnum.analitic
         self.type = TypeEnum.booklet
@@ -33,11 +33,11 @@ class Item():
         self.position = 0
 
         self.opac_visibility = False
-        self.prive = 0
+        self.price = 0
 
         self.availability = AvailabilityEnum()
         self.quaratine_start_date = datetime.datetime.now()
-        self.end_date = datetime.datetime.now()
+        self.quarantine_end_date = datetime.datetime.now()
         self.discarded = False
         self.discarded_date = datetime.datetime.now()
 
@@ -53,7 +53,7 @@ class Item():
 
         self.title = title
         self.author = author
-        self.catalogation_level = catalogation_level
+        self.cataloging_level = catalogation_level
 
 
     def __str__(self):

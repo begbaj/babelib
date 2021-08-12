@@ -187,8 +187,10 @@ class DatabaseManager:
 
     # region Items
 
+
+##########################################
     def insert_item(self,item):
-        if item.catalogation_level == RankEnum.max:
+        if item.cataloging_level == RankEnum.max:
             query = f"INSERT INTO items"\
                     f" (material_id, nature_id, type_id, lang_id, availability, bid, inventory_num, isbn,"\
                     f" title, author, cataloging_level, publication_date, publication_state, rack, shelf, position," \
@@ -196,7 +198,7 @@ class DatabaseManager:
                     f" VALUES "\
                     f" (" \
                     f" {item.material}, {item.nature}, {item.type}, {item.lang}, {item.availability}, {item.bid},"\
-                    f" {item.inventory_num}, {item.isbn}, {item.title}, {item.author}, {item.catalogation_level}, {item.publication_date}," \
+                    f" {item.inventory_num}, {item.isbn}, {item.title}, {item.author}, {item.cataloging_level}, {item.publication_date}," \
                     f" {item.rack}, {item.shelf}, {item.position},"\
                     f" {item.opac_visibility},{item.price},{item.quaratine_start_date},{item.quarantine_end_date},{item.discarded},"\
                     f" {item.discarded_date},{item.note});"
@@ -227,42 +229,64 @@ class DatabaseManager:
         # inventory_num=None, isbn=None, title=None, author=None, cataloging_level=None, publication_date=None,
         # publication_state=None, rack=None, shelf=None, position=None, opac_visibility=None, price=None,
         # quarantine_start_date=None, quarantine_end_date=None, discarded=None, discarded_date=None, note=None
+        query = ""
         if search_mode == 0:
-            query = f"SELECT * FROM items where bid like '%{search_field}%'" \
+            query += f"SELECT * FROM items where bid like '%{search_field}%'" \
                     f"or inventory_num like '%{search_field}%'" \
                     f"or isbn like '%{search_field}%'" \
                     f"or title like '%{search_field}%'" \
                     f"or author like '%{search_field}%'" \
                     f"or note like '%{search_field}%';"
         elif search_mode == 1: #Title
-            query = f"SELECT * FROM items WHERE title LIKE '%{search_field}%'"
+            query += f"SELECT * FROM items WHERE title LIKE '%{search_field}%'"
         elif search_mode == 2: #Author
-            query = f"SELECT * FROM items WHERE author LIKE '%{search_field}%'"
+            query += f"SELECT * FROM items WHERE author LIKE '%{search_field}%'"
         elif search_mode == 3: #ISBN
-            query = f"SELECT * FROM items WHERE isbn LIKE '%{search_field}%'"
+            query += f"SELECT * FROM items WHERE isbn LIKE '%{search_field}%'"
         elif search_mode == 4: #BID
-            query = f"SELECT * FROM items WHERE bid LIKE '%{search_field}%'"
+            query += f"SELECT * FROM items WHERE bid LIKE '%{search_field}%'"
         elif search_mode == 5: #Inventory number
-            query = f"SELECT * FROM items WHERE inventory_num LIKE '%{search_field}%'"
+            query += f"SELECT * FROM items WHERE inventory_num LIKE '%{search_field}%'"
         elif search_mode == 6: #Note
-            query = f"SELECT * FROM items WHERE note LIKE '%{search_field}%'"
+            query += f"SELECT * FROM items WHERE note LIKE '%{search_field}%'"
+        else:
+            raise Exception("invalid search_mode")
 
-        if quarantined == False:
+        if not quarantined:
             query += " AND WHERE quarantine_end_date <= CURRENT_DATE "
-        if discarded == False:
+        if not discarded:
             query += " AND WHERE discarded NOT 1"
+
+        try:
+            self.cur.execute(query)
+            return self.cur.fetchall()
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
+
 
     def get_item(self, id):
         query = f"SELECT * FROM items WHERE id = '%{id}%'"
 
-    def edit_availability (self, availability):
-        pass
 
-    def edit_item(self):
-        pass
+    def edit_item(self,item):
+        query = f"update items set " \
+                f"material_id = {item.material}, nature_id = {item.nature}, type_id = {item.type}, "\
+                f"lang_id = {item.lang}, availability = {item.availability}, bid = {item.bid}, "\
+                f"inventory_num={item.inventory_num}, isbn={item.isbn}, title={item.title}, author={item.author}, "\
+                f"cataloging_level={item.cataloging_level}, publication_date={item.publication_date}, "\
+                f"publication_state={item.publication_state}, rack={item.rack}, shelf={item.shelf}, position={item.position}, "\
+                f"opac_visibility={item.opac_visibility}, price={item.price}, quarantine_start_date={item.quaratine_start_date}, "\
+                f"quarantine_end_date={item.quarantine_end_date}, discarded={item.discarded}, discarded_date={item.discarded_date}, "\
+                f"note={item.note} "\
+                f"where id = {item.id}"
+        try:
+            self.cur.execute(query)
+            self.cur.commit()
+        except mariadb.Error as e:
+            print(f"Error: {e}")
 
-    def edit_position(self):
-        pass
+
 
 
 
