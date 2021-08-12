@@ -4,20 +4,22 @@ from PyQt5.uic import loadUi
 from src.Database.DatabaseManager import DatabaseManager
 from src.homeView import HomeView
 
-
 class LoginView(QMainWindow):
     db = DatabaseManager()
+
+    # def __init__(self):
+    #     super(LoginView, self).__init__()
+    #     loadUi("../designer/Login view/login.ui",self)
+    #
+    #     self.LoginButton.clicked.connect(self.loginfunction)
+    #     self.PasswordField.setEchoMode(QtWidgets.QLineEdit.Password)
 
     def __init__(self, widget):
         super(LoginView, self).__init__()
         loadUi("../designer/Login view/login.ui",self)
-        self.setUp()
-        self.widget = widget
-
-    def setUp(self):
         self.LoginButton.clicked.connect(self.loginfunction)
         self.PasswordField.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.setFixedSize(660, 680)
+        self.widget = widget
 
     def passwcompare(self, password, result):
         try:
@@ -25,9 +27,8 @@ class LoginView(QMainWindow):
                 self.error_label.setText("")
             else:
                 self.error_label.setText("Username o Password Sbagliati")
-        except:
-            self.error_label.setText("")
-            self.error_label.setText("wa")
+        except Exception as err:
+            self.error_label.setText(err)
 
     def loginfunction(self):
         username = self.UsernameField.text()
@@ -40,10 +41,6 @@ class LoginView(QMainWindow):
             self.goHomeView()
 
     def goHomeView(self):
-
-
-
-        self.homeView = HomeView(self.widget)
-        #self.homeView.show()
-        self.widget.addWidget(self.homeView)
+        homeView = HomeView(self.widget)
+        self.widget.addWidget(homeView)
         self.widget.setCurrentIndex(self.widget.currentIndex() + 1)

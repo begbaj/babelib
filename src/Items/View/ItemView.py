@@ -1,7 +1,7 @@
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem
 from PyQt5.uic import loadUi
 from PyQt5.uic.properties import QtWidgets, QtCore
-import datetime
+from datetime import datetime
 
 from src.Items.Controllers.ItemManager import ItemManager
 
@@ -14,27 +14,35 @@ class ItemView(QMainWindow):
         super(ItemView, self).__init__()
         loadUi("../designer/Inventory view/InventoryView.ui", self)
         self.widget = widget
-        self.searchButton.clicked.connect(lambda: self.getItems())
+        try:
+            self.searchButton.clicked.connect(lambda: self.getItems())
+        except Exception as err:
+            print(err)
 
     def getItems(self):
         row = 0
-        items = self.itmManager.get_items(self.searchField.text,self.searchMode.currentIndex,
-                                          self.quarantineCheckBox.isChecked(),self.discardedCheckBox.isChecked)
-        self.itemTable.setRowCount(len(items))
+        items = self.itmManager.get_items(self.searchField.text(),self.searchMode.currentIndex(),
+                                          self.quarantineCheckBox.isChecked(),self.discardedCheckBox.isChecked())
+        self.itemTable.clearContents()
         for item in items:
-            self.itemTable.setItem(row, 0, QtWidgets.QTableWidgetItem(item.title))
-            self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(item.author))
-            self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(item.isbn))
-            self.userTable.setItem(row, 3, QtWidgets.QTableWidgetItem(item.bid))
-            self.userTable.setItem(row, 4, QtWidgets.QTableWidgetItem(item.inventory_num))
-            self.userTable.setItem(row, 5, QtWidgets.QTableWidgetItem(item.external_state))
-            if item.quarantine_end_date >= datetime.datetime():
-                self.userTable.setItem(row, 6, QtWidgets.QTableWidgetItem('Si'))
+            row = self.itemTable.rowCount()
+            self.itemTable.insertRow(row)
+            self.itemTable.setItem(row, 0, QTableWidgetItem(item.title))
+            self.itemTable.setItem(row, 1, QTableWidgetItem(item.author))
+            self.itemTable.setItem(row, 2, QTableWidgetItem(item.isbn))
+            self.itemTable.setItem(row, 3, QTableWidgetItem(item.bid))
+            self.itemTable.setItem(row, 4, QTableWidgetItem(item.inventory_num))
+            self.itemTable.setItem(row, 5, QTableWidgetItem(str(item.availability.value)))
+            if item.quarantine_end_date is not None:
+                if item.quarantine_end_date >= datetime.now():
+                    self.itemTable.setItem(row, 6, QTableWidgetItem('Si'))
+                else:
+                    self.itemTable.setItem(row, 6, QTableWidgetItem('No'))
             else:
-                self.userTable.setItem(row, 6, QtWidgets.QTableWidgetItem('No'))
-            self.userTable.setItem(row, 6, QtWidgets.QTableWidgetItem(item.note))
+                self.itemTable.setItem(row, 6, QTableWidgetItem('No'))
+
+            self.itemTable.setItem(row, 7, QTableWidgetItem(item.note))
             row = row + 1
-        pass
 
     def goBack(self):
         self.widget.setCurrentIndex(self.widget.currentIndex() - 1)

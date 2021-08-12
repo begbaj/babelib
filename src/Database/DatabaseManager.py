@@ -236,7 +236,7 @@ class DatabaseManager:
                     f"or isbn like '%{search_field}%'" \
                     f"or title like '%{search_field}%'" \
                     f"or author like '%{search_field}%'" \
-                    f"or note like '%{search_field}%';"
+                    f"or note like '%{search_field}%'"
         elif search_mode == 1: #Title
             query += f"SELECT * FROM items WHERE title LIKE '%{search_field}%'"
         elif search_mode == 2: #Author
@@ -253,9 +253,9 @@ class DatabaseManager:
             raise Exception("invalid search_mode")
 
         if not quarantined:
-            query += " AND WHERE quarantine_end_date <= CURRENT_DATE "
+            query += " AND quarantine_end_date <= CURRENT_DATE "
         if not discarded:
-            query += " AND WHERE discarded NOT 1"
+            query += " AND discarded <> 1"
 
         try:
             self.cur.execute(query)
@@ -268,6 +268,8 @@ class DatabaseManager:
     def get_item(self, id):
         query = f"SELECT * FROM items WHERE id = '%{id}%'"
 
+    def edit_availability (self, availability):
+        pass
 
     def edit_item(self,item):
         query = f"update items set " \
