@@ -1,7 +1,7 @@
 {
   "user": "root",
-  "password": "sa",
+  "password": "2810",
   "host": "localhost",
   "port": 3306,
-  "database": "babelib"
+  "database": "babelib_db"
 }
