@@ -33,8 +33,6 @@ class DatabaseManager:
 
         data = json.load(open(os.path.abspath("Database/DB Setting/db.json")))
 
-
-
         _conn = mariadb.connect(
             user=data["user"],
             password=data["password"],
@@ -255,7 +253,18 @@ class DatabaseManager:
             query += " AND WHERE discarded NOT 1"
 
     def get_item(self, id):
+        query = f"SELECT * FROM items WHERE id = '%{id}%'"
+
+    def edit_availability (self, availability):
         pass
+
+    def edit_item(self):
+        pass
+
+    def edit_position(self):
+        pass
+
+
 
     # endregion
 
