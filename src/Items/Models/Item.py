@@ -3,7 +3,7 @@ import datetime
 from src.Items.Models.ItemEnumerators import *
 
 
-class Item():
+class Item:
     """
     Model for Item objects
     """
