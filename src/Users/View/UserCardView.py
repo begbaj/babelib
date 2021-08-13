@@ -19,7 +19,6 @@ class UserCardView(QMainWindow):
         self.pop = ''
         # Metodi iniziali
         self.setup()
-        self.loaduser()
 
     def __init__(self):
         super(UserCardView, self).__init__()
@@ -27,23 +26,25 @@ class UserCardView(QMainWindow):
         # Variabili di Istanza
         self.pop = ''
         # Metodi iniziali
-        self.setupnew()
+        self.setup_new()
 
     def setup(self):
         # Button
         self.editButton.setEnabled(True)
         self.returnButton.clicked.connect(self.back)
-        self.editButton.clicked.connect(self.enablefiled)
+        self.editButton.clicked.connect(self.enable_filed)
         self.saveButton.clicked.connect(self.save)
         # Disable Field
-        self.disablefield()
+        self.disable_field()
+        # Load User
+        self.load_user()
 
-    def setupnew(self):
+    def setup_new(self):
         # Button
         self.returnButton.clicked.connect(self.close)
-        self.saveButton.clicked.connect(self.save)
+        self.saveButton.clicked.connect(self.save_new)
 
-    def disablefield(self):
+    def disable_field(self):
         # Line Edit disabled
         self.nameField.setReadOnly(True)
         self.surnameField.setReadOnly(True)
@@ -64,7 +65,7 @@ class UserCardView(QMainWindow):
         self.dateEdit.setReadOnly(True)
         self.dateEdit.setDisabled(True)
 
-    def enablefiled(self):
+    def enable_filed(self):
         # Line Edit enable
         self.nameField.setReadOnly(False)
         self.surnameField.setReadOnly(False)
@@ -86,7 +87,7 @@ class UserCardView(QMainWindow):
         self.dateEdit.setDisabled(False)
         self.editButton.setEnabled(False)
 
-    def loaduser(self):
+    def load_user(self):
         # Line Edit
         self.nameField.setText(self.user.name)
         self.surnameField.setText(self.user.surname)
@@ -125,15 +126,15 @@ class UserCardView(QMainWindow):
         # Date update
         self.user.birthdate = self.dateEdit.date().toPyDate()
         # PopUp per la conferma
-        self.showpopup(self.userM, self.user)
+        self.show_popup(self.userM, self.user)
 
-    def savenew(self):
+    def save_new(self):
         pass
 
     def back(self):
         self.close()
 
-    def showpopup(self, userM, user):
+    def show_popup(self, userM, user):
         self.pop = SavePopUp(userM, user)
         self.pop.show()
 

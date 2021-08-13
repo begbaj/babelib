@@ -19,17 +19,17 @@ class UserView(QMainWindow):
         self.users = self.userM.list()
         self.widget = widget
         self.pop = ''
-        self.loadData()
+        self.load_data()
         self.setup()
 
     def setup(self):
-        self.userButton.clicked.connect(self.newuser)
+        self.userButton.clicked.connect(self.__go_new_user)
         self.backButton.clicked.connect(self.back)
-        self.schedaButton.clicked.connect(self.gousercard)
+        self.schedaButton.clicked.connect(self.__go_user_card)
         self.deleteButton.clicked.connect(self.delete)
-        self.refreshButton.clicked.connect(self.loadData)
+        self.refreshButton.clicked.connect(self.load_data)
 
-    def loadData(self):
+    def load_data(self):
         row = 0
         self.userTable.setRowCount(len(self.users))
         for user in self.users:
@@ -41,11 +41,10 @@ class UserView(QMainWindow):
     def back(self):
         self.close()
 
-    def gousercard(self):
+    def __go_user_card(self):
         rowtable = self.userTable.currentRow()
-
         if rowtable == -1:
-            self.showpopup()
+            self.show_popup()
         else:
             user = self.users[rowtable]
             self.view = UserCardView(self.widget, user)
@@ -59,11 +58,11 @@ class UserView(QMainWindow):
         self.userTable.removeRow(rowtable)
         # self.loadData()
 
-    def showpopup(self):
+    def show_popup(self):
         self.pop = Popup()
         self.pop.show()
 
-    def newuser(self):
+    def __go_new_user(self):
         self.view = UserCardView()
         self.view.show()
 
