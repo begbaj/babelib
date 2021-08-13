@@ -5,7 +5,6 @@ from datetime import datetime
 
 from src.Items.Controllers.ItemManager import ItemManager
 
-
 class ItemView(QMainWindow):
 
     itmManager = ItemManager()
@@ -52,5 +51,3 @@ class ItemView(QMainWindow):
 
     def deleteButton(self):
         pass
-
-
