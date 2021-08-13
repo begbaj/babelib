@@ -9,12 +9,12 @@ class ItemManager:
     def __init__(self):
         self.dbms = DatabaseManager()
 
-    def add_item(cls, item) -> None:
-        cls.dbms.insert_item(item)
+    def add_item(self, item) -> None:
+        self.dbms.insert_item(item)
         pass
 
-    def get_item(cls, id) -> Item:
-        return cls.__convert_dbitem(cls.dbms.get_item(id))
+    def get_item(self, id) -> Item:
+        return self.__convert_dbitem(self.dbms.get_item(id))
 
     def get_items(self,search_field, search_mode, quarantined=False, discarded=False) -> [Item]:
         fitems = []
@@ -23,10 +23,10 @@ class ItemManager:
         return fitems
 
     def edit_item(self, item) -> None:
-        '''
+        """
         edit item
         :param item: edited item
-        '''
+        """
         # id, bid = "", inventory_num = "", isbn = "", title = "", author = "", catalogation_level = "",
         # material = "", nature = "", type = "", publication_date = "", lang = "", genre = "", inner_state = "",
         # external_state = "", rack = "", shelf = "", position = "", opac_visibility = "", price = "", availability = "",
@@ -51,7 +51,8 @@ class ItemManager:
         item.position = pos
         self.dbms.edit_item(item)
 
-    def __convert_dbitem(self, dbitem) -> Item:
+    @staticmethod
+    def __convert_dbitem(dbitem) -> Item:
         """
         This method converts a DatabaseManager obj into a Item obj
         :param dbitem: DatabaseManager object

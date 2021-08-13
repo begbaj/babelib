@@ -2,11 +2,10 @@ from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem
 from PyQt5.uic import loadUi
 from PyQt5.uic.properties import QtWidgets, QtCore
 from datetime import datetime
-
 from src.Items.Controllers.ItemManager import ItemManager
 
-class ItemView(QMainWindow):
 
+class InventoryView(QMainWindow):
     itmManager = ItemManager()
 
     def __init__(self, widget):
@@ -22,7 +21,7 @@ class ItemView(QMainWindow):
         row = 0
         items = self.itmManager.get_items(self.searchField.text(),self.searchMode.currentIndex(),
                                           self.quarantineCheckBox.isChecked(),self.discardedCheckBox.isChecked())
-        self.itemTable.clearContents()
+        self.__remove_rows()
         for item in items:
             row = self.itemTable.rowCount()
             self.itemTable.insertRow(row)
@@ -51,3 +50,12 @@ class ItemView(QMainWindow):
 
     def delete_button(self):
         pass
+
+    def __remove_rows(self):
+        """
+        Remove all rows from table
+        :return:
+        """
+        for i in reversed(range(0, self.itemTable.rowCount())):
+            self.itemTable.removeRow(i)
+
