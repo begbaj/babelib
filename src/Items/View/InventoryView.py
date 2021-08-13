@@ -3,6 +3,7 @@ from PyQt5.uic import loadUi
 from PyQt5.uic.properties import QtWidgets, QtCore
 from datetime import datetime
 from src.Items.Controllers.ItemManager import ItemManager
+from src.Items.View.CatalogingView import CatalogingView
 
 
 class InventoryView(QMainWindow):
@@ -14,6 +15,10 @@ class InventoryView(QMainWindow):
         self.widget = widget
         try:
             self.searchButton.clicked.connect(lambda: self.get_items())
+        except Exception as err:
+            print(err)
+        try:
+            self.addButton.clicked.connect(lambda: self.__go_to_cataloging_view())
         except Exception as err:
             print(err)
 
