@@ -11,22 +11,23 @@ class UserCardView(QMainWindow):
     userM = UserManager()
 
     def __init__(self, widget, user):
-        super(UserCardView, self).__init__()
-        loadUi("../designer/SchedaUtenteView/SchedaUtenteView.ui", self)
-        # Variabili di Istanza
-        self.widget = widget
-        self.user = user
-        self.pop = ''
-        # Metodi iniziali
-        self.setup()
+        if user is not None:
+            super(UserCardView, self).__init__()
+            loadUi("../designer/SchedaUtenteView/SchedaUtenteView.ui", self)
+            # Variabili di Istanza
+            self.widget = widget
+            self.user = user
+            self.pop = ''
+            # Metodi iniziali
+            self.setup()
+        else:
+            super(UserCardView, self).__init__()
+            loadUi("../designer/New User View/NewUserView.ui", self)
+            # Variabili di Istanza
+            self.pop = ''
+            # Metodi iniziali
+            self.setup_new()
 
-    def __init__(self):
-        super(UserCardView, self).__init__()
-        loadUi("../designer/New User View/NewUserView.ui", self)
-        # Variabili di Istanza
-        self.pop = ''
-        # Metodi iniziali
-        self.setup_new()
 
     def setup(self):
         # Button

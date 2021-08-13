@@ -63,7 +63,8 @@ class UserView(QMainWindow):
         self.pop.show()
 
     def __go_new_user(self):
-        self.view = UserCardView()
+        user = None
+        self.view = UserCardView(self.widget, user)
         self.view.show()
 
 class Popup(QDialog):
