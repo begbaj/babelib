@@ -354,6 +354,7 @@ class DatabaseManager:
 
         if not quarantined:
             query += " AND quarantine_end_date <= CURRENT_DATE"
+
         if not discarded:
             query += " AND discarded = 0"
 
