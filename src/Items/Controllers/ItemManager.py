@@ -2,6 +2,7 @@ from src.Database.DatabaseManager import DatabaseManager
 from src.Items.Models import ItemEnumerators
 from src.Items.Models.Item import Item
 from datetime import datetime
+from src.Items.Models.ItemEnumerators import AvailabilityEnum
 
 
 class ItemManager:
@@ -9,20 +10,20 @@ class ItemManager:
     def __init__(self):
         self.dbms = DatabaseManager()
 
-    def add_item(self, item) -> None:
+    def add_item(self, item: Item) -> None:
         self.dbms.insert_item(item)
         pass
 
-    def get_item(self, id) -> Item:
-        return self.__convert_dbitem(self.dbms.get_item(id))
+    def get_item(self, item_id: int) -> Item:
+        return self.__convert_dbitem(self.dbms.get_item(item_id))
 
-    def get_items(self,search_field, search_mode, quarantined=False, discarded=False) -> [Item]:
+    def get_items(self, search_field: str, search_mode: int, quarantined=False, discarded=False) -> [Item]:
         fitems = []
         for dbitem in self.dbms.get_items(search_field, search_mode, quarantined, discarded):
             fitems.append(self.__convert_dbitem(dbitem))
         return fitems
 
-    def edit_item(self, item) -> None:
+    def edit_item(self, item: Item) -> None:
         """
         edit item
         :param item: edited item
@@ -33,11 +34,11 @@ class ItemManager:
         # quarantine_start_date = "", quarantine_end_date = "", discarded = "", discarded_date = "", note = 0
         self.dbms.edit_item(item)
 
-    def edit_availability (self,item, availability) -> None:
+    def edit_availability (self, item: Item, availability: AvailabilityEnum) -> None:
         item.availability = availability
         self.dbms.edit_item(item)
 
-    def edit_position(self, item, rack, shelf, pos) -> None:
+    def edit_position(self, item: Item, rack: int, shelf: str, pos: int) -> None:
         """
         This method edits the rack, the shelf of the item
         :param item: Item
@@ -50,6 +51,10 @@ class ItemManager:
         item.shelf = shelf
         item.position = pos
         self.dbms.edit_item(item)
+
+    def delete_item(self, item):
+        self.dbms.remove_item()
+
 
     @staticmethod
     def __convert_dbitem(dbitem) -> Item:

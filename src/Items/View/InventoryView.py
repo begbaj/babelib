@@ -53,9 +53,6 @@ class InventoryView(QMainWindow):
     def add_item(self):
         pass
 
-    def delete_button(self):
-        pass
-
     def __remove_rows(self):
         """
         Remove all rows from table
@@ -63,4 +60,11 @@ class InventoryView(QMainWindow):
         """
         for i in reversed(range(0, self.itemTable.rowCount())):
             self.itemTable.removeRow(i)
+
+    def __go_to_cataloging_view(self):
+        self.catalogingview = CatalogingView(self.widget)
+        self.catalogingview.show()
+
+    def remove_button(self):
+        pass
 
