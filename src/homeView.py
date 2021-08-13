@@ -3,7 +3,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QWidget
 from PyQt5.uic import loadUi
 from Users.View.UserView import UserView
-from src.Items.View.ItemView import ItemView
+from src.Items.View.InventoryView import InventoryView
 
 
 class HomeView(QMainWindow):
@@ -45,7 +45,7 @@ class HomeView(QMainWindow):
         pass
 
     def __go_inventory_view(self):
-        self.itemview = ItemView(self.widget)
+        self.itemview = InventoryView(self.widget)
         self.itemview.show()
 
         #self.widget.addWidget(view)

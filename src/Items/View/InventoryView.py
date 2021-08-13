@@ -10,7 +10,7 @@ class ItemView(QMainWindow):
     itmManager = ItemManager()
 
     def __init__(self, widget):
-        super(ItemView, self).__init__()
+        super(InventoryView, self).__init__()
         loadUi("../designer/Inventory view/InventoryView.ui", self)
         self.widget = widget
         try:
