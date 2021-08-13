@@ -4,9 +4,9 @@ from PyQt5.uic import loadUi
 from src.Database.DatabaseManager import DatabaseManager
 from src.homeView import HomeView
 
-class LoginView(QMainWindow):
-    db = DatabaseManager()
 
+class LoginView(QMainWindow):
+    __db = None
     # def __init__(self):
     #     super(LoginView, self).__init__()
     #     loadUi("../designer/Login view/login.ui",self)
@@ -16,12 +16,15 @@ class LoginView(QMainWindow):
 
     def __init__(self, widget):
         super(LoginView, self).__init__()
-        loadUi("../designer/Login view/login.ui",self)
-        self.LoginButton.clicked.connect(self.loginfunction)
+        __db = DatabaseManager()
+
+        loadUi("../designer/Login view/login.ui", self)
+
+        self.LoginButton.clicked.connect(self.login)
         self.PasswordField.setEchoMode(QtWidgets.QLineEdit.Password)
         self.widget = widget
 
-    def passwcompare(self, password, result):
+    def pass_compare(self, password, result):
         try:
             if password == result.password:
                 self.error_label.setText("")
@@ -30,17 +33,17 @@ class LoginView(QMainWindow):
         except Exception as err:
             self.error_label.setText(err)
 
-    def loginfunction(self):
+    def login(self):
         username = self.UsernameField.text()
         password = self.PasswordField.text()
         if len(username) == 0 or len(password) == 0:
             self.error_label.setText("Inserisci tutti i campi")
         else:
-            result = self.db.login(username)
-            self.passwcompare(password, result)
-            self.goHomeView()
+            result = self.__db.login(username)
+            self.pass_compare(password, result)
+            self.__go_home_view()
 
-    def goHomeView(self):
-        homeView = HomeView(self.widget)
-        self.widget.addWidget(homeView)
+    def __go_home_view(self):
+        home_view = HomeView(self.widget)
+        self.widget.addWidget(home_view)
         self.widget.setCurrentIndex(self.widget.currentIndex() + 1)

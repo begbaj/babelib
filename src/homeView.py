@@ -17,8 +17,8 @@ class HomeView(QMainWindow):
 
     def setup(self):
         # Menu Button
-        self.userButton.clicked.connect(lambda: self.gouserview())
-        self.catolgingButton.clicked.connect(lambda: self.goinventoryview())
+        self.userButton.clicked.connect(lambda: self.__go_user_view())
+        self.catolgingButton.clicked.connect(lambda: self.__go_inventory_view())
         # self.statsButton.clicked.connect(self.gostatsview())
         # self.reportButton.clicked.connect(self.goreportview())
         # self.serviceButton.clicked.connect(self.goserviceview())
@@ -32,46 +32,47 @@ class HomeView(QMainWindow):
         # self.settingButton.clicked.connect(self.setting())
         pass
 
-    # region Collegamenti View
-    def gouserview(self):
+    # region View links
+
+    def __go_user_view(self):
         self.userview = UserView(self.widget)
         self.userview.show()
 
         #self.widget.addWidget(view)
         #self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
 
-    def gostatsview(self):
+    def __go_stats_view(self):
         pass
 
-    def goinventoryview(self):
+    def __go_inventory_view(self):
         self.itemview = ItemView(self.widget)
         self.itemview.show()
 
         #self.widget.addWidget(view)
         #self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
 
-    def goreportview(self):
+    def __go_report_view(self):
         pass
 
-    def goserviceview(self):
+    def __go_service_view(self):
         pass
 
-    def gomovemetview(self):
+    def __go_movement_view(self):
         pass
 
-    def gocomunicationview(self):
+    def __go_communication_view(self):
         pass
 
     # endregion
 
-    # region Shortcut function
-    def newloan(self):
+    # region Shortcut functions
+    def new_loan(self):
         pass
 
-    def newreservation(self):
+    def new_reservation(self):
         pass
 
-    def newuser(self):
+    def new_user(self):
         pass
 
     def setting(self):
