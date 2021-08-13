@@ -1,11 +1,8 @@
-from time import strptime
-
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
 from PyQt5.uic import loadUi
-from datetime import datetime
+from mariadb import Date
 
-#from src.Users.View.UserView import UserView
 from src.Users.controllers.UserManager import UserManager
 
 
@@ -16,47 +13,55 @@ class UserCardView(QMainWindow):
     def __init__(self, widget, user):
         super(UserCardView, self).__init__()
         loadUi("../designer/SchedaUtenteView/SchedaUtenteView.ui", self)
-
+        # Variabili di Istanza
         self.widget = widget
         self.user = user
-
+        self.pop = ''
+        # Metodi iniziali
         self.setup()
-        self.fillcard()
+        self.loaduser()
 
-    def fillcard(self):
-        # Line Edit
-        self.nameField.setText(self.user.name)
-        self.surnameField.setText(self.user.surname)
-        self.fiscalcodeField.setText(self.user.fiscal_code)
-        self.addressField.setText(self.user.address)
-        self.cityField.setText(self.user.city)
-        self.capField.setText(self.user.postal_code)
-        self.cellField.setText(self.user.first_cellphone)
-        self.emailField.setText(self.user.email)
-        self.telephonField.setText(self.user.telephone)
-        # Combo Box
-        self.genderBox.setCurrentText(self.user.gender)
-        self.nationBox.setCurrentText(self.user.Nationality_S.code)
-        #self.usertypeBox.setText(self.user.userType.description)
-        # Date Edit
-        self.dateEdit.setDate(self.user.birthdate)
+    def __init__(self):
+        super(UserCardView, self).__init__()
+        loadUi("../designer/New User View/NewUserView.ui", self)
+        # Variabili di Istanza
+        self.pop = ''
+        # Metodi iniziali
+        self.setupnew()
 
     def setup(self):
         # Button
+        self.editButton.setEnabled(True)
         self.returnButton.clicked.connect(self.back)
         self.editButton.clicked.connect(self.enablefiled)
         self.saveButton.clicked.connect(self.save)
-
+        # Disable Field
         self.disablefield()
 
+    def setupnew(self):
+        # Button
+        self.returnButton.clicked.connect(self.close)
+        self.saveButton.clicked.connect(self.save)
+
     def disablefield(self):
-        # Box
+        # Line Edit disabled
+        self.nameField.setReadOnly(True)
+        self.surnameField.setReadOnly(True)
+        self.fiscalcodeField.setReadOnly(True)
+        self.addressField.setReadOnly(True)
+        self.cityField.setReadOnly(True)
+        self.capField.setReadOnly(True)
+        self.cellField.setReadOnly(True)
+        self.emailField.setReadOnly(True)
+        self.telephonField.setReadOnly(True)
+        # Box disabled
         self.genderBox.setDisabled(True)
         self.nationBox.setDisabled(True)
         self.usertypeBox.setDisabled(True)
         self.districtBox.setDisabled(True)
         self.stateBox.setDisabled(True)
-        # Date
+        # Date disabled
+        self.dateEdit.setReadOnly(True)
         self.dateEdit.setDisabled(True)
 
     def enablefiled(self):
@@ -76,16 +81,33 @@ class UserCardView(QMainWindow):
         self.nationBox.setDisabled(False)
         self.usertypeBox.setDisabled(False)
         self.districtBox.setDisabled(False)
-        # Date Enable
+        # Date enable
+        self.dateEdit.setReadOnly(False)
         self.dateEdit.setDisabled(False)
+        self.editButton.setEnabled(False)
 
     def loaduser(self):
-        # metodo che fa una query al database e riempe i campi con
-        # quelli dell'utente selezionato dalla vista precedente
-        pass
+        # Line Edit
+        self.nameField.setText(self.user.name)
+        self.surnameField.setText(self.user.surname)
+        self.fiscalcodeField.setText(self.user.fiscal_code)
+        self.addressField.setText(self.user.address)
+        self.cityField.setText(self.user.city)
+        self.capField.setText(self.user.postal_code)
+        self.cellField.setText(self.user.first_cellphone)
+        self.emailField.setText(self.user.email)
+        self.telephonField.setText(self.user.telephone)
+        # Combo Box
+        self.genderBox.setCurrentText(self.user.gender)
+        self.nationBox.setCurrentText(self.user.Nationality_S.code)
+        # self.usertypeBox.setText(self.user.userType.description)
+        # Date Edit
+        self.dateEdit.setDate(self.user.birthdate)
 
+    # TODO implementare contatto preferenziale e privacy agreement
+    # Update dell'utente
     def save(self):
-        ## aggiornare campi
+        # Line edit update
         self.user.name = self.nameField.text()
         self.user.surname = self.surnameField.text()
         self.user.fiscal_code = self.fiscalcodeField.text()
@@ -95,23 +117,45 @@ class UserCardView(QMainWindow):
         self.user.first_cellphone = self.cellField.text()
         self.user.email = self.emailField.text()
         self.user.telephone = self.telephonField.text()
-
-        #TODO implementare contatto preferenziale e privacy agreement
-        #self.user.contect_mode =
+        # Combo Box Update
+        self.user.gender = self.genderBox.currentText()
+        # self.user.contect_mode =
         # f", u.contect_mode = {user.contect_mode}"
         # f", u.privacy_agreement = {user.privacy_agreement}"
+        # Date update
+        self.user.birthdate = self.dateEdit.date().toPyDate()
+        # PopUp per la conferma
+        self.showpopup(self.userM, self.user)
 
-
-        self.userM.set(self.user)
+    def savenew(self):
+        pass
 
     def back(self):
-        #self.widget.setCurrentIndex(self.widget.currentIndex() - 1)
-        #self.widget.add(UserCardView)
-        #self.close()
-
-        #view = UserView(self.widget)
-        #view.show()
-
-
         self.close()
 
+    def showpopup(self, userM, user):
+        self.pop = SavePopUp(userM, user)
+        self.pop.show()
+
+
+class SavePopUp(QDialog):
+
+    def __init__(self, userM, user):
+        super(SavePopUp, self).__init__()
+        loadUi("../designer/SavePopUp/savepopup.ui", self)
+        self.setWindowTitle('Conferma')
+        self.setModal(True)
+        self.setup()
+        self.userM = userM
+        self.user = user
+
+    def setup(self):
+        self.confirmButton.clicked.connect(self.confirm)
+        self.cancelButton.clicked.connect(self.cancel)
+
+    def cancel(self):
+        self.close()
+
+    def confirm(self):
+        self.userM.set(self.user)
+        self.close()

@@ -109,7 +109,7 @@ class DatabaseManager:
                 f"set u.nationality_id = {user.nationality_id}"
                 f", u.state_id = {user.state_id}"
                 f", u.user_type_id = {user.user_type_id}"
-                f", u.username = {user.username}"
+                f", u.username = '{user.username}'"
                 f", u.registration_date = '{user.registration_date}'"
                 f", u.name = '{user.name}'"
                 f", u.surname = '{user.surname}'"

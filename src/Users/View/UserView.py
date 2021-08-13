@@ -18,9 +18,16 @@ class UserView(QMainWindow):
         loadUi("../designer/User view/UserView.ui", self)
         self.users = self.userM.list()
         self.widget = widget
+        self.pop = ''
         self.loadData()
         self.setup()
 
+    def setup(self):
+        self.userButton.clicked.connect(self.newuser)
+        self.backButton.clicked.connect(self.back)
+        self.schedaButton.clicked.connect(self.gousercard)
+        self.deleteButton.clicked.connect(self.delete)
+        self.refreshButton.clicked.connect(self.loadData)
 
     def loadData(self):
         row = 0
@@ -31,36 +38,34 @@ class UserView(QMainWindow):
             self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.city))
             row = row + 1
 
-    def setup(self):
-        self.backButton.clicked.connect(self.back)
-        self.schedaButton.clicked.connect(self.gousercard)
-        self.deleteButton.clicked.connect(self.delete)
-
     def back(self):
         self.close()
 
     def gousercard(self):
-        rowTable = self.userTable.currentRow()
+        rowtable = self.userTable.currentRow()
 
-        if rowTable == -1:
+        if rowtable == -1:
             self.showpopup()
         else:
-            user = self.users[rowTable]
+            user = self.users[rowtable]
             self.view = UserCardView(self.widget, user)
             self.view.show()
+
+    def delete(self):
+        rowtable = self.userTable.currentRow()
+        self.userM.delete(self.users[rowtable].id)
+        # self.users[rowTable].remove()
+        self.users.remove(self.users[rowtable])
+        self.userTable.removeRow(rowtable)
+        # self.loadData()
 
     def showpopup(self):
         self.pop = Popup()
         self.pop.show()
 
-    def delete(self):
-        rowTable = self.userTable.currentRow()
-        self.userM.delete(self.users[rowTable].id)
-        #self.users[rowTable].remove()
-        self.users.remove(self.users[rowTable])
-        self.userTable.removeRow(rowTable)
-        #self.loadData()
-
+    def newuser(self):
+        self.view = UserCardView()
+        self.view.show()
 
 class Popup(QDialog):
     def __init__(self):
