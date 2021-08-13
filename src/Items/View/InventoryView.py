@@ -62,8 +62,8 @@ class InventoryView(QMainWindow):
             self.itemTable.removeRow(i)
 
     def __go_to_cataloging_view(self):
-        self.catalogingview = CatalogingView(self.widget)
-        self.catalogingview.show()
+        self.cataloging_view = CatalogingView(self.widget)
+        self.cataloging_view.show()
 
     def discard_item(self):
         self.itmManager.discard_item(self.__items[self.itemTable.currentRow()])
