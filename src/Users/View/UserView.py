@@ -47,7 +47,7 @@ class UserView(QMainWindow):
             self.show_popup()
         else:
             user = self.users[rowtable]
-            self.view = UserCardView(self.widget, user)
+            self.view = UserCardView(self.widget, user, self.load_data)
             self.view.show()
 
     def delete(self):
@@ -64,7 +64,7 @@ class UserView(QMainWindow):
 
     def __go_new_user(self):
         user = None
-        self.view = UserCardView(self.widget, user)
+        self.view = UserCardView(self.widget, user, self.load_data)
         self.view.show()
 
 class Popup(QDialog):
