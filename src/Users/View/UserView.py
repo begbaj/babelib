@@ -22,14 +22,54 @@ class UserView(QMainWindow):
         self.load_data()
         self.setup()
 
+        #self.a = self.userM.findName(self.nameField.text())
+
+        #self.t = self.load_data_research(self.a)
+
+        #self.nameField.textChanged.connect(self.t)
+
+        self.nameField.textChanged.connect(lambda: self.load_data_research(self.userM.findName(self.nameField.text())))
+        self.surnameField.textChanged.connect(lambda: self.load_data_research(self.userM.findSurname(self.surnameField.text())))
+
+
+
     def setup(self):
         self.userButton.clicked.connect(self.__go_new_user)
         self.backButton.clicked.connect(self.back)
         self.schedaButton.clicked.connect(self.__go_user_card)
         self.deleteButton.clicked.connect(self.delete)
         self.refreshButton.clicked.connect(self.load_data)
+        self.searchButton.clicked.connect(self.search)
 
     def load_data(self):
+        row = 0
+        self.users = self.userM.list()
+        self.userTable.setRowCount(len(self.users))
+        for user in self.users:
+            self.userTable.setItem(row, 0, QtWidgets.QTableWidgetItem(user.name))
+            self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
+            self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.city))
+            row = row + 1
+
+    def search(self):
+        if (self.nameField.text() == '') and (self.surnameField.text() == ''):
+            self.load_data()
+
+        elif (self.nameField.text() != '') and (self.surnameField.text() == ''):
+            self.load_data_research(self.userM.findName(self.nameField.text()))
+
+        elif (self.nameField.text() == '') and (self.surnameField.text() != ''):
+            self.load_data_research(self.userM.findSurname(self.surnameField.text()))
+
+        elif (self.nameField.text() != '') and (self.surnameField.text() != ''):
+            self.load_data_research(self.userM.findNameSurname(self.nameField.text(), self.surnameField.text()))
+
+
+
+
+    def load_data_research(self, users):
+        self.users = users
+
         row = 0
         self.userTable.setRowCount(len(self.users))
         for user in self.users:
