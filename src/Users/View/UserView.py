@@ -5,7 +5,6 @@ from PyQt5.uic import loadUi
 import sys
 #sys.path.append('C:\\Users\\DanieleB\\PycharmProjects\\babelib\\src\\homeView.py')
 #from src.homeView import HomeView
-from src.Users.View.NewUserView import NewUserView
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
 
@@ -65,7 +64,7 @@ class UserView(QMainWindow):
         self.pop.show()
 
     def newuser(self):
-        self.view = NewUserView()
+        self.view = UserCardView()
         self.view.show()
 
 class Popup(QDialog):

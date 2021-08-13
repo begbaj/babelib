@@ -21,6 +21,14 @@ class UserCardView(QMainWindow):
         self.setup()
         self.loaduser()
 
+    def __init__(self):
+        super(UserCardView, self).__init__()
+        loadUi("../designer/New User View/NewUserView.ui", self)
+        # Variabili di Istanza
+        self.pop = ''
+        # Metodi iniziali
+        self.setupnew()
+
     def setup(self):
         # Button
         self.editButton.setEnabled(True)
@@ -29,6 +37,11 @@ class UserCardView(QMainWindow):
         self.saveButton.clicked.connect(self.save)
         # Disable Field
         self.disablefield()
+
+    def setupnew(self):
+        # Button
+        self.returnButton.clicked.connect(self.close)
+        self.saveButton.clicked.connect(self.save)
 
     def disablefield(self):
         # Line Edit disabled
@@ -113,6 +126,9 @@ class UserCardView(QMainWindow):
         self.user.birthdate = self.dateEdit.date().toPyDate()
         # PopUp per la conferma
         self.showpopup(self.userM, self.user)
+
+    def savenew(self):
+        pass
 
     def back(self):
         self.close()
