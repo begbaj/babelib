@@ -65,7 +65,7 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
       <enum>Qt::RichText</enum>
      </property>
      <property name="pixmap">
-      <pixmap>../../src/Home View/images/Babelib.icns</pixmap>
+      <pixmap>../img/Babelib.icns</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -195,7 +195,7 @@ background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx
      <enum>Qt::RichText</enum>
     </property>
     <property name="pixmap">
-     <pixmap>../../src/Home View/images/Sfondo.png</pixmap>
+     <pixmap>../img/background_blur.jpg</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -231,7 +231,7 @@ background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../../src/Home View/images/Icona Catalogazione.png</pixmap>
+     <pixmap>../img/Icona Catalogazione.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>

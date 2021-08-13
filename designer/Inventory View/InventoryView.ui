@@ -120,6 +120,9 @@ border-radius:10px;</string>
      <property name="alternatingRowColors">
       <bool>true</bool>
      </property>
+     <property name="showGrid">
+      <bool>false</bool>
+     </property>
      <property name="gridStyle">
       <enum>Qt::SolidLine</enum>
      </property>
@@ -127,7 +130,7 @@ border-radius:10px;</string>
       <bool>true</bool>
      </property>
      <property name="rowCount">
-      <number>0</number>
+      <number>3</number>
      </property>
      <attribute name="horizontalHeaderVisible">
       <bool>true</bool>
@@ -165,6 +168,21 @@ border-radius:10px;</string>
      <attribute name="verticalHeaderStretchLastSection">
       <bool>false</bool>
      </attribute>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>New Row</string>
+      </property>
+     </row>
      <column>
       <property name="text">
        <string>Titolo</string>
@@ -302,7 +320,7 @@ border-radius:16px;</string>
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="removeButton">
+    <widget class="QPushButton" name="discardButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -316,7 +334,7 @@ border-radius:16px;</string>
 border-radius:16px;</string>
      </property>
      <property name="text">
-      <string>Elimina Documento</string>
+      <string>Scarta Documento</string>
      </property>
      <property name="icon">
       <iconset>

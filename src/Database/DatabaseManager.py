@@ -216,7 +216,7 @@ class DatabaseManager:
                     f" {item.material}, {item.nature}, {item.type}, {item.lang}, {item.availability}, {item.bid},"\
                     f" {item.inventory_num}, {item.isbn}, {item.title}, {item.author}, {item.cataloging_level}, {item.publication_date}," \
                     f" {item.rack}, {item.shelf}, {item.position},"\
-                    f" {item.opac_visibility},{item.price},{item.quaratine_start_date},{item.quarantine_end_date},{item.discarded},"\
+                    f" {item.opac_visibility},{item.price},{item.quarantine_start_date},{item.quarantine_end_date},{item.discarded},"\
                     f" {item.discarded_date},{item.note});"
 
             for genre in item.genre:
@@ -234,7 +234,7 @@ class DatabaseManager:
 
         self.query(query)
 
-    def get_items(self,search_field, search_mode,quarantined = False, discarded = False) -> [tuple]:
+    def get_items(self,search_field, search_mode,quarantined=False, discarded=False) -> [tuple]:
         # id=None, material_id=None, nature_id=None, type_id=None, lang_id=None, availability=None, bid=None,
         # inventory_num=None, isbn=None, title=None, author=None, cataloging_level=None, publication_date=None,
         # publication_state=None, rack=None, shelf=None, position=None, opac_visibility=None, price=None,
@@ -263,9 +263,9 @@ class DatabaseManager:
             raise Exception("invalid search_mode")
 
         if not quarantined:
-            query += " AND quarantine_end_date <= CURRENT_DATE "
+            query += " AND quarantine_end_date <= CURRENT_DATE"
         if not discarded:
-            query += " AND discarded <> 1"
+            query += " AND discarded = 0"
 
         return self.query(query, returns=True)
 
@@ -275,15 +275,36 @@ class DatabaseManager:
 
     def edit_item(self,item) -> None:
         query = f"update items set " \
-                f"material_id = {item.material}, nature_id = {item.nature}, type_id = {item.type}, "\
-                f"lang_id = {item.lang}, availability = {item.availability}, bid = {item.bid}, "\
-                f"inventory_num={item.inventory_num}, isbn={item.isbn}, title={item.title}, author={item.author}, "\
-                f"cataloging_level={item.cataloging_level}, publication_date={item.publication_date}, "\
-                f"publication_state={item.publication_state}, rack={item.rack}, shelf={item.shelf}, position={item.position}, "\
-                f"opac_visibility={item.opac_visibility}, price={item.price}, quarantine_start_date={item.quaratine_start_date}, "\
-                f"quarantine_end_date={item.quarantine_end_date}, discarded={item.discarded}, discarded_date={item.discarded_date}, "\
-                f"note={item.note} "\
-                f"where id = {item.id}"
+                f"material_id = {item.material.value}, nature_id = {item.nature.value}, type_id = {item.type.value}, "\
+                f"lang_id = {item.lang.value}, availability = {item.availability.value}, bid = '{item.bid}', "\
+                f"inventory_num={item.inventory_num}, isbn={item.isbn}, title= '{item.title}', author= '{item.author}', "\
+                f"cataloging_level={item.cataloging_level.value},"\
+                f"pubblication_state='{item.publication_state}', rack={item.rack}, shelf={item.shelf}, position={item.position}, " \
+                f"opac_visibility={item.opac_visibility}, price={item.price}, " \
+                f"discarded={item.discarded}, " \
+                f"note= '{item.note}', "
+
+        if item.discarded_date is not None:
+            query += f"discarded_date='{item.discarded_date}', "
+        else:
+            query += f"discarded_date=null, "
+
+        if item.publication_date is not None:
+            query += f"publication_date='{item.publication_date}', "
+        else:
+            query += f"publication_date=null, "
+
+        if item.quarantine_start_date is not None:
+            query += f"quarantine_start_date = '{item.quarantine_start_date}', "
+        else:
+            query += f"quarantine_start_date=null, "
+
+        if item.quarantine_end_date is not None:
+            query += f"quarantine_end_date = '{item.quarantine_start_date}' "
+        else:
+            query += f"quarantine_end_date=null "
+
+        query += f"where id = {item.id};"
         self.query(query)
 
     def remove_item(self, item) -> None:

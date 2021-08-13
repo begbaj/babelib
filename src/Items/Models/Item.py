@@ -35,7 +35,7 @@ class Item:
         self.price = 0
 
         self.availability = AvailabilityEnum.unavailable
-        self.quaratine_start_date = datetime.datetime.now()
+        self.quarantine_start_date = datetime.datetime.now()
         self.quarantine_end_date = datetime.datetime.now()
         self.discarded = False
         self.discarded_date = datetime.datetime.now()

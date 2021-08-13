@@ -55,6 +55,9 @@ class ItemManager:
     def delete_item(self, item):
         self.dbms.remove_item()
 
+    def discard_item(self, item):
+        item.discarded = True
+        self.dbms.edit_item(item)
 
     @staticmethod
     def __convert_dbitem(dbitem) -> Item:
