@@ -1,5 +1,4 @@
 import datetime
-
 from src.Items.Models.ItemEnumerators import *
 
 
@@ -7,7 +6,7 @@ class Item:
     """
     Model for Item objects
     """
-    def __init__(self, id=0, bid="", inventory_num=0, isbn=0, title="", author="", cataloging_level=RankEnum.min):
+    def __init__(self, id=0, bid="", inventory_num=0, isbn=0, title="", author="", cataloging_level=CatalogingLevel.min):
         self.id = id
         self.bid = bid
         self.inventory_num = inventory_num

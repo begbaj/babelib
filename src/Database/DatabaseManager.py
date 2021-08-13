@@ -1,10 +1,10 @@
-import mariadb
-
-from src.Items.Models.ItemEnumerators import RankEnum
+from src.Items.Models.ItemEnumerators import CatalogingLevel
 from src.Users.models.Nationality import Nationality
 from src.Users.models.User import User
+import mariadb
 import json
 import os
+
 
 class DatabaseManager:
     """
@@ -14,10 +14,10 @@ class DatabaseManager:
     ----
     Methods:
     """
-
-    _conn = ""
+    __conn = ""
 
     #def __init__(self, user, password, host, port, database):
+
     def __init__(self):
         """
         Initialize Database manager
@@ -42,13 +42,32 @@ class DatabaseManager:
         )
         self.cur = _conn.cursor(named_tuple=True)
         _conn.autocommit = True
-        self._conn = _conn
+        self.__conn = _conn
 
-    def query(self, query: str) -> bool:
-        pass
+
+    def query(self, query: str, returns=False) -> list:
+        """
+        Executes the given query, returns the result, if any, and commits
+        :param query: sql query
+        :param returns: set True if a return value is expected
+        :return: list of objects
+        """
+
+        try:
+            a = []
+            self.cur.execute(query)
+            if returns:
+                a = self.cur.fetchall()
+            self.cur.commit()
+            return a
+        except mariadb.Error as e:
+            #TODO: Gestire l'eccezione
+            print(f"Error: {e}")
+
 
     def loginQuery(self, username):
         self.cur.execute(f"SELECT password FROM administrator WHERE username = '{username}'")
+        #codice insicuro, ritorna la password in chiaro.
         return self.cur.fetchone()
 
     # region Users
@@ -187,10 +206,8 @@ class DatabaseManager:
 
     # region Items
 
-
-##########################################
-    def insert_item(self,item):
-        if item.cataloging_level == RankEnum.max:
+    def insert_item(self,item) -> None:
+        if item.cataloging_level == CatalogingLevel.max:
             query = f"INSERT INTO items"\
                     f" (material_id, nature_id, type_id, lang_id, availability, bid, inventory_num, isbn,"\
                     f" title, author, cataloging_level, publication_date, publication_state, rack, shelf, position," \
@@ -211,20 +228,14 @@ class DatabaseManager:
 
             for state in item.external_state:
                 query += f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({item.id,state});"
-
-
         else:
             ##TODO: aggiungere min level cataloging
             ##TODO: SISTEMARE CATALOGATION IN CATALOGING
             raise Exception("min level cataloging is not supported yet")
 
-        try:
-            self.cur.execute(query)
-            self.cur.commit()
-        except mariadb.Error as e:
-            print(f"Error: {e}")
+        self.query(query)
 
-    def get_items(self,search_field, search_mode,quarantined = False, discarded = False):
+    def get_items(self,search_field, search_mode,quarantined = False, discarded = False) -> [tuple]:
         # id=None, material_id=None, nature_id=None, type_id=None, lang_id=None, availability=None, bid=None,
         # inventory_num=None, isbn=None, title=None, author=None, cataloging_level=None, publication_date=None,
         # publication_state=None, rack=None, shelf=None, position=None, opac_visibility=None, price=None,
@@ -257,21 +268,13 @@ class DatabaseManager:
         if not discarded:
             query += " AND discarded <> 1"
 
-        try:
-            self.cur.execute(query)
-            return self.cur.fetchall()
-        except mariadb.Error as e:
-            print(f"Error: {e}")
+        return self.query(query, returns=True)
 
+    def get_item(self, id) -> tuple:
+        query = f"SELECT * FROM items WHERE id = {id}"
+        return self.query(query, returns=True)[0]
 
-
-    def get_item(self, id):
-        query = f"SELECT * FROM items WHERE id = '%{id}%'"
-
-    def edit_availability (self, availability):
-        pass
-
-    def edit_item(self,item):
+    def edit_item(self,item) -> None:
         query = f"update items set " \
                 f"material_id = {item.material}, nature_id = {item.nature}, type_id = {item.type}, "\
                 f"lang_id = {item.lang}, availability = {item.availability}, bid = {item.bid}, "\
@@ -282,15 +285,15 @@ class DatabaseManager:
                 f"quarantine_end_date={item.quarantine_end_date}, discarded={item.discarded}, discarded_date={item.discarded_date}, "\
                 f"note={item.note} "\
                 f"where id = {item.id}"
-        try:
-            self.cur.execute(query)
-            self.cur.commit()
-        except mariadb.Error as e:
-            print(f"Error: {e}")
+        self.query(query)
 
-
-
-
+    def remove_item(self, item) -> None:
+        """
+        remove an item from the table
+        :param item: item to remove
+        """
+        query = f"DELETE FROM items WHERE Id = {item.id};"
+        self.query(query)
 
     # endregion
 
