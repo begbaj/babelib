@@ -1,6 +1,7 @@
 from src.Database.DatabaseManager import DatabaseManager
 from src.Items.Models import ItemEnumerators
 from src.Items.Models.Item import Item
+from datetime import datetime
 
 
 class ItemManager:
@@ -65,15 +66,15 @@ class ItemManager:
         item.title = dbitem.title
         item.author = dbitem.author
         item.cataloging_level = ItemEnumerators.CatalogingLevel(int.from_bytes(dbitem.cataloging_level, 'big')) #serve per convertire un byte in int ('big' = big endian)
-        item.publication_date = dbitem.publication_date
+        item.publication_date = datetime.combine(dbitem.publication_date, datetime.min.time())
         item.publication_state = dbitem.pubblication_state
         item.rack = dbitem.rack
         item.shelf = dbitem.shelf
         item.position = dbitem.position
         item.opac_visibility = dbitem.opac_visibility
         item.price = dbitem.price
-        item.quaratine_start_date = dbitem.quarantine_start_date
-        item.quarantine_end_date = dbitem.quarantine_end_date
+        item.quaratine_start_date = datetime.combine(dbitem.quarantine_start_date, datetime.min.time())
+        item.quarantine_end_date = datetime.combine(dbitem.quarantine_end_date, datetime.min.time())
         item.discarded = dbitem.discarded
         item.discarded_date = dbitem.discarded_date
         item.note = dbitem.note

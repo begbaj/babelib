@@ -14,11 +14,11 @@ class ItemView(QMainWindow):
         loadUi("../designer/Inventory view/InventoryView.ui", self)
         self.widget = widget
         try:
-            self.searchButton.clicked.connect(lambda: self.getItems())
+            self.searchButton.clicked.connect(lambda: self.get_items())
         except Exception as err:
             print(err)
 
-    def getItems(self):
+    def get_items(self):
         row = 0
         items = self.itmManager.get_items(self.searchField.text(),self.searchMode.currentIndex(),
                                           self.quarantineCheckBox.isChecked(),self.discardedCheckBox.isChecked())
@@ -43,11 +43,11 @@ class ItemView(QMainWindow):
             self.itemTable.setItem(row, 7, QTableWidgetItem(item.note))
             row = row + 1
 
-    def goBack(self):
+    def go_back(self):
         self.widget.setCurrentIndex(self.widget.currentIndex() - 1)
 
-    def addItem(self):
+    def add_item(self):
         pass
 
-    def deleteButton(self):
+    def delete_button(self):
         pass

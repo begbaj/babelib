@@ -57,7 +57,7 @@ class DatabaseManager:
             self.cur.execute(query)
             if returns:
                 a = self.cur.fetchall()
-            self.cur.commit()
+            self.__conn.commit()
             return a
         except mariadb.Error as e:
             #TODO: Gestire l'eccezione
