@@ -5,6 +5,7 @@ from PyQt5.uic import loadUi
 import sys
 #sys.path.append('C:\\Users\\DanieleB\\PycharmProjects\\babelib\\src\\homeView.py')
 #from src.homeView import HomeView
+from src.Users.View.NewUserView import NewUserView
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
 
@@ -23,9 +24,11 @@ class UserView(QMainWindow):
         self.setup()
 
     def setup(self):
+        self.userButton.clicked.connect(self.newuser)
         self.backButton.clicked.connect(self.back)
         self.schedaButton.clicked.connect(self.gousercard)
         self.deleteButton.clicked.connect(self.delete)
+        self.refreshButton.clicked.connect(self.loadData)
 
     def loadData(self):
         row = 0
@@ -61,6 +64,9 @@ class UserView(QMainWindow):
         self.pop = Popup()
         self.pop.show()
 
+    def newuser(self):
+        self.view = NewUserView()
+        self.view.show()
 
 class Popup(QDialog):
     def __init__(self):

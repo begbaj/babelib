@@ -1,6 +1,8 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
 from PyQt5.uic import loadUi
+from mariadb import Date
+
 from src.Users.controllers.UserManager import UserManager
 
 
@@ -11,11 +13,11 @@ class UserCardView(QMainWindow):
     def __init__(self, widget, user):
         super(UserCardView, self).__init__()
         loadUi("../designer/SchedaUtenteView/SchedaUtenteView.ui", self)
-
+        # Variabili di Istanza
         self.widget = widget
         self.user = user
         self.pop = ''
-
+        # Metodi iniziali
         self.setup()
         self.loaduser()
 
@@ -29,7 +31,7 @@ class UserCardView(QMainWindow):
         self.disablefield()
 
     def disablefield(self):
-        # Line Edit enable
+        # Line Edit disabled
         self.nameField.setReadOnly(True)
         self.surnameField.setReadOnly(True)
         self.fiscalcodeField.setReadOnly(True)
@@ -39,32 +41,15 @@ class UserCardView(QMainWindow):
         self.cellField.setReadOnly(True)
         self.emailField.setReadOnly(True)
         self.telephonField.setReadOnly(True)
-        # Box
+        # Box disabled
         self.genderBox.setDisabled(True)
         self.nationBox.setDisabled(True)
         self.usertypeBox.setDisabled(True)
         self.districtBox.setDisabled(True)
         self.stateBox.setDisabled(True)
-        # Date
+        # Date disabled
+        self.dateEdit.setReadOnly(True)
         self.dateEdit.setDisabled(True)
-
-    def loaduser(self):
-        # Line Edit
-        self.nameField.setText(self.user.name)
-        self.surnameField.setText(self.user.surname)
-        self.fiscalcodeField.setText(self.user.fiscal_code)
-        self.addressField.setText(self.user.address)
-        self.cityField.setText(self.user.city)
-        self.capField.setText(self.user.postal_code)
-        self.cellField.setText(self.user.first_cellphone)
-        self.emailField.setText(self.user.email)
-        self.telephonField.setText(self.user.telephone)
-        # Combo Box
-        self.genderBox.setCurrentText(self.user.gender)
-        self.nationBox.setCurrentText(self.user.Nationality_S.code)
-        # Date Edit
-        self.dateEdit.setDate(self.user.birthdate)
-        # self.usertypeBox.setText(self.user.userType.description)
 
     def enablefiled(self):
         # Line Edit enable
@@ -83,13 +68,33 @@ class UserCardView(QMainWindow):
         self.nationBox.setDisabled(False)
         self.usertypeBox.setDisabled(False)
         self.districtBox.setDisabled(False)
-        # Date Enable
+        # Date enable
+        self.dateEdit.setReadOnly(False)
         self.dateEdit.setDisabled(False)
         self.editButton.setEnabled(False)
 
+    def loaduser(self):
+        # Line Edit
+        self.nameField.setText(self.user.name)
+        self.surnameField.setText(self.user.surname)
+        self.fiscalcodeField.setText(self.user.fiscal_code)
+        self.addressField.setText(self.user.address)
+        self.cityField.setText(self.user.city)
+        self.capField.setText(self.user.postal_code)
+        self.cellField.setText(self.user.first_cellphone)
+        self.emailField.setText(self.user.email)
+        self.telephonField.setText(self.user.telephone)
+        # Combo Box
+        self.genderBox.setCurrentText(self.user.gender)
+        self.nationBox.setCurrentText(self.user.Nationality_S.code)
+        # self.usertypeBox.setText(self.user.userType.description)
+        # Date Edit
+        self.dateEdit.setDate(self.user.birthdate)
+
     # TODO implementare contatto preferenziale e privacy agreement
+    # Update dell'utente
     def save(self):
-        # Update dell'utente
+        # Line edit update
         self.user.name = self.nameField.text()
         self.user.surname = self.surnameField.text()
         self.user.fiscal_code = self.fiscalcodeField.text()
@@ -99,11 +104,15 @@ class UserCardView(QMainWindow):
         self.user.first_cellphone = self.cellField.text()
         self.user.email = self.emailField.text()
         self.user.telephone = self.telephonField.text()
-        self.showpopup(self.userM, self.user)
-        # self.pop.close()
+        # Combo Box Update
+        self.user.gender = self.genderBox.currentText()
         # self.user.contect_mode =
         # f", u.contect_mode = {user.contect_mode}"
         # f", u.privacy_agreement = {user.privacy_agreement}"
+        # Date update
+        self.user.birthdate = self.dateEdit.date().toPyDate()
+        # PopUp per la conferma
+        self.showpopup(self.userM, self.user)
 
     def back(self):
         self.close()

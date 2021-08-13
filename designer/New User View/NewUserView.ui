@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Scheda Utente</string>
+   <string>Registra Utente</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="frame_2">
@@ -22,6 +22,11 @@
       <width>211</width>
       <height>1281</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>1</pointsize>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">border:none;
@@ -53,7 +58,7 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
       <enum>Qt::RichText</enum>
      </property>
      <property name="pixmap">
-      <pixmap>images/Icona Dettaglio.png</pixmap>
+      <pixmap>images/Icona User.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -85,38 +90,11 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="editButton">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>160</y>
-       <width>141</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius:16px;
-background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));</string>
-     </property>
-     <property name="text">
-      <string>Modifica Campi</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>images/Icona Modifica.png</normaloff>images/Icona Modifica.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>30</width>
-       <height>30</height>
-      </size>
-     </property>
-    </widget>
     <widget class="QPushButton" name="saveButton">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>230</y>
+       <y>160</y>
        <width>141</width>
        <height>51</height>
       </rect>
@@ -276,6 +254,11 @@ border:none;</string>
      </property>
      <item>
       <property name="text">
+       <string/>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>M</string>
       </property>
      </item>
@@ -307,7 +290,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
       <string/>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="placeholderText">
       <string/>
@@ -332,7 +315,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="placeholderText">
       <string/>
@@ -357,7 +340,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="placeholderText">
       <string/>
@@ -418,7 +401,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="placeholderText">
       <string/>
@@ -443,7 +426,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="placeholderText">
       <string/>
@@ -520,6 +503,11 @@ border:none;</string>
      <property name="editable">
       <bool>true</bool>
      </property>
+     <item>
+      <property name="text">
+       <string/>
+      </property>
+     </item>
      <item>
       <property name="text">
        <string>ITA</string>
@@ -609,7 +597,7 @@ border:none</string>
      </property>
      <item>
       <property name="text">
-       <string>pippo</string>
+       <string/>
       </property>
      </item>
     </widget>
@@ -691,7 +679,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="placeholderText">
       <string/>
@@ -734,7 +722,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="placeholderText">
       <string/>
@@ -777,7 +765,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="placeholderText">
       <string/>
@@ -816,7 +804,7 @@ border:none;</string>
      </property>
      <item>
       <property name="text">
-       <string>pippo</string>
+       <string/>
       </property>
      </item>
     </widget>
@@ -893,7 +881,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="placeholderText">
       <string/>
@@ -918,7 +906,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="placeholderText">
       <string/>
@@ -943,7 +931,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="placeholderText">
       <string/>
@@ -1042,7 +1030,7 @@ border:none;</string>
      </property>
      <item>
       <property name="text">
-       <string>pippo</string>
+       <string/>
       </property>
      </item>
     </widget>
