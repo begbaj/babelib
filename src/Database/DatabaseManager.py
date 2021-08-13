@@ -324,19 +324,19 @@ class DatabaseManager:
 
         self.query(query)
 
-    def get_items(self,search_field, search_mode,quarantined=False, discarded=False) -> [tuple]:
+    def get_items(self, search_field, search_mode, show_quarantined=False, show_discarded=False) -> [tuple]:
         # id=None, material_id=None, nature_id=None, type_id=None, lang_id=None, availability=None, bid=None,
         # inventory_num=None, isbn=None, title=None, author=None, cataloging_level=None, publication_date=None,
         # publication_state=None, rack=None, shelf=None, position=None, opac_visibility=None, price=None,
         # quarantine_start_date=None, quarantine_end_date=None, discarded=None, discarded_date=None, note=None
         query = ""
         if search_mode == 0:
-            query += f"SELECT * FROM items where bid like '%{search_field}%'" \
+            query += f"SELECT * FROM items where (bid like '%{search_field}%'" \
                     f"or inventory_num like '%{search_field}%'" \
                     f"or isbn like '%{search_field}%'" \
                     f"or title like '%{search_field}%'" \
                     f"or author like '%{search_field}%'" \
-                    f"or note like '%{search_field}%'"
+                    f"or note like '%{search_field}%')"
         elif search_mode == 1: #Title
             query += f"SELECT * FROM items WHERE title LIKE '%{search_field}%'"
         elif search_mode == 2: #Author
@@ -352,10 +352,10 @@ class DatabaseManager:
         else:
             raise Exception("invalid search_mode")
 
-        if not quarantined:
+        if not show_quarantined:
             query += " AND quarantine_end_date <= CURRENT_DATE"
 
-        if not discarded:
+        if not show_discarded:
             query += " AND discarded = 0"
 
         return self.query(query, returns=True)

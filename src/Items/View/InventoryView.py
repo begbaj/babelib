@@ -24,6 +24,7 @@ class InventoryView(QMainWindow):
             print(err)
 
     def get_items(self):
+        self.__items = []
         self.__items = self.itmManager.get_items(self.searchField.text(),self.searchMode.currentIndex(),
                                           self.quarantineCheckBox.isChecked(),self.discardedCheckBox.isChecked())
         self.__remove_rows()
