@@ -44,7 +44,6 @@ class DatabaseManager:
         _conn.autocommit = True
         self.__conn = _conn
 
-
     def query(self, query: str, returns=False) -> list:
         """
         Executes the given query, returns the result, if any, and commits
@@ -64,13 +63,13 @@ class DatabaseManager:
             #TODO: Gestire l'eccezione
             print(f"Error: {e}")
 
-
-    def loginQuery(self, username):
+    def login(self, username):
         self.cur.execute(f"SELECT password FROM administrator WHERE username = '{username}'")
         #codice insicuro, ritorna la password in chiaro.
         return self.cur.fetchone()
 
     # region Users
+
     def get_users(self):
         """Retrieves the list of contacts from the Database and prints to stdout"""
 

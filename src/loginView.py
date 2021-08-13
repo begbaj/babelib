@@ -36,7 +36,7 @@ class LoginView(QMainWindow):
         if len(username) == 0 or len(password) == 0:
             self.error_label.setText("Inserisci tutti i campi")
         else:
-            result = self.db.loginQuery(username)
+            result = self.db.login(username)
             self.passwcompare(password, result)
             self.goHomeView()
 
