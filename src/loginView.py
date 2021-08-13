@@ -6,7 +6,7 @@ from src.homeView import HomeView
 
 
 class LoginView(QMainWindow):
-    __db = None
+    __db = DatabaseManager()
     # def __init__(self):
     #     super(LoginView, self).__init__()
     #     loadUi("../designer/Login view/login.ui",self)
@@ -16,8 +16,6 @@ class LoginView(QMainWindow):
 
     def __init__(self, widget):
         super(LoginView, self).__init__()
-        __db = DatabaseManager()
-
         loadUi("../designer/Login view/login.ui", self)
 
         self.LoginButton.clicked.connect(self.login)
