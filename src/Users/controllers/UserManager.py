@@ -16,6 +16,18 @@ class UserManager:
         user = self.db.find_user_by_id(id)
         return user
 
+    def findName(self, name):
+        users = self.db.find_user_by_name(name)
+        return users
+
+    def findSurname(self, surname):
+        users = self.db.find_user_by_surname(surname)
+        return users
+
+    def findNameSurname(self, name, surname):
+        users = self.db.find_user_by_name_and_surname(name, surname)
+        return users
+
     def set(self, user):
         self.db.set_user(user)
 

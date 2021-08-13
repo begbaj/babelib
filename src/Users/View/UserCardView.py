@@ -10,7 +10,10 @@ class UserCardView(QMainWindow):
 
     userM = UserManager()
 
-    def __init__(self, widget, user):
+    def __init__(self, widget, user, callback):
+
+        self.callback = callback
+
         if user is not None:
             super(UserCardView, self).__init__()
             loadUi("../designer/SchedaUtenteView/SchedaUtenteView.ui", self)
@@ -133,6 +136,7 @@ class UserCardView(QMainWindow):
         pass
 
     def back(self):
+        self.callback()
         self.close()
 
     def show_popup(self, userM, user):
