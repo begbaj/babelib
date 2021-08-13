@@ -82,8 +82,24 @@ class ItemManager:
         item.position = dbitem.position
         item.opac_visibility = dbitem.opac_visibility
         item.price = dbitem.price
-        item.quaratine_start_date = datetime.combine(dbitem.quarantine_start_date, datetime.min.time())
-        item.quarantine_end_date = datetime.combine(dbitem.quarantine_end_date, datetime.min.time())
+
+        try:
+            if dbitem.quarantine_start_date is not None:
+                item.quarantine_start_date =  datetime.combine(dbitem.quarantine_start_date, datetime.min.time())
+            else:
+                item.quarantine_start_date = None
+        except:
+            item.quarantine_start_date = None
+
+        try:
+            if dbitem.quarantine_end_date is not None:
+                item.quarantine_end_date = datetime.combine(dbitem.quarantine_end_date, datetime.min.time())
+            else:
+                item.quarantine_end_date = None
+        except:
+            item.quarantine_start_date = None
+
+
         item.discarded = dbitem.discarded
         item.discarded_date = dbitem.discarded_date
         item.note = dbitem.note
