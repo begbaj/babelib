@@ -3,13 +3,13 @@ from PyQt5.uic import loadUi
 from PyQt5.uic.properties import QtWidgets, QtCore
 from datetime import datetime
 from src.Items.Controllers.ItemManager import ItemManager
+from src.Items.Models.Item import Item
 from src.Items.View.CatalogingView import CatalogingView
 
 
 class InventoryView(QMainWindow):
     itmManager = ItemManager()
     __items = []
-
 
     def __init__(self, widget):
         super(InventoryView, self).__init__()
@@ -20,13 +20,16 @@ class InventoryView(QMainWindow):
             self.addButton.clicked.connect(lambda: self.__go_to_cataloging_view())
             self.discardButton.clicked.connect(lambda: self.discard_item())
             self.itemTable.setSelectionBehavior(QTableView.SelectRows)
+            self.returnButton.clicked.connect(lambda: self.return_button())
+            self.showItemButton.clicked.connect(lambda: self.go_to_show_item())
         except Exception as err:
             print(err)
 
     def get_items(self):
         self.__items = []
-        self.__items = self.itmManager.get_items(self.searchField.text(),self.searchMode.currentIndex(),
-                                          self.quarantineCheckBox.isChecked(),self.discardedCheckBox.isChecked())
+        self.__items = self.itmManager.get_items(self.searchField.text(), self.searchMode.currentIndex(),
+                                                 self.quarantineCheckBox.isChecked(),
+                                                 self.discardedCheckBox.isChecked())
         self.__remove_rows()
         for item in self.__items:
             row = self.itemTable.rowCount()
@@ -69,3 +72,14 @@ class InventoryView(QMainWindow):
     def discard_item(self):
         self.itmManager.discard_item(self.__items[self.itemTable.currentRow()])
 
+    def return_button(self):
+        self.close()
+
+    def add_item(self):
+        pass
+
+    def show_item(self):
+        pass
+
+    def get_selected_item(self):
+        return self.__items[self.itemTable.currentRow()]
