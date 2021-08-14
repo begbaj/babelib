@@ -277,7 +277,7 @@ background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx
      <rect>
       <x>230</x>
       <y>130</y>
-      <width>551</width>
+      <width>461</width>
       <height>421</height>
      </rect>
     </property>
@@ -300,122 +300,6 @@ background-color:rgba(0, 192, 225, 85)</string>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QFrame" name="titleFrame">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>20</y>
-       <width>321</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>1</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius: 20px;
-border-style: outset;
-border-width: 2px;
-border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-    </widget>
-    <widget class="QFrame" name="authorFrame">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>70</y>
-       <width>321</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>1</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius: 20px;
-border-style: outset;
-border-width: 2px;
-border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-    </widget>
-    <widget class="QFrame" name="ISBNFrame">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>320</y>
-       <width>321</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>1</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius: 20px;
-border-style: outset;
-border-width: 2px;
-border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-    </widget>
-    <widget class="QFrame" name="ninventaryFrame">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>370</y>
-       <width>321</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>1</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius: 20px;
-border-style: outset;
-border-width: 2px;
-border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-    </widget>
     <widget class="QLabel" name="titleLabel">
      <property name="geometry">
       <rect>
@@ -560,84 +444,85 @@ background-color:none;</string>
       <string>Numero di Inventario</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="genreBox">
+    <widget class="QLineEdit" name="title">
      <property name="geometry">
       <rect>
        <x>190</x>
-       <y>220</y>
-       <width>321</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: italic 10pt &quot;Arial&quot;;</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>Fantasy</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Storico</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Narrativa</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>pippo</string>
-      </property>
-     </item>
-    </widget>
-    <widget class="QDateEdit" name="DateScroll">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>270</y>
-       <width>321</width>
-       <height>31</height>
+       <y>30</y>
+       <width>251</width>
+       <height>20</height>
       </rect>
      </property>
     </widget>
-    <widget class="QComboBox" name="genreBox_2">
+    <widget class="QLineEdit" name="author">
      <property name="geometry">
       <rect>
        <x>190</x>
-       <y>120</y>
-       <width>321</width>
-       <height>31</height>
+       <y>80</y>
+       <width>251</width>
+       <height>20</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true">font: italic 10pt &quot;Arial&quot;;</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>pippo</string>
-      </property>
-     </item>
     </widget>
-    <widget class="QComboBox" name="genreBox_3">
+    <widget class="QComboBox" name="nature">
      <property name="geometry">
       <rect>
        <x>190</x>
-       <y>170</y>
-       <width>321</width>
-       <height>31</height>
+       <y>130</y>
+       <width>251</width>
+       <height>21</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true">font: italic 10pt &quot;Arial&quot;;</string>
+    </widget>
+    <widget class="QComboBox" name="type">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>180</y>
+       <width>251</width>
+       <height>21</height>
+      </rect>
      </property>
-     <item>
-      <property name="text">
-       <string>pippo</string>
-      </property>
-     </item>
+    </widget>
+    <widget class="QComboBox" name="gnre">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>230</y>
+       <width>251</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QDateEdit" name="publicationDate">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>280</y>
+       <width>251</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="ISBN">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>330</y>
+       <width>251</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="InventoryNum">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>380</y>
+       <width>251</width>
+       <height>20</height>
+      </rect>
+     </property>
     </widget>
    </widget>
    <widget class="QFrame" name="frame_12">
@@ -645,7 +530,7 @@ background-color:none;</string>
      <rect>
       <x>230</x>
       <y>620</y>
-      <width>551</width>
+      <width>461</width>
       <height>181</height>
      </rect>
     </property>
@@ -668,64 +553,6 @@ background-color:rgba(0, 192, 225, 85)</string>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QFrame" name="scaffaleFrame">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>20</y>
-       <width>321</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>1</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius: 20px;
-border-style: outset;
-border-width: 2px;
-border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-    </widget>
-    <widget class="QFrame" name="palchettoFrame">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>70</y>
-       <width>321</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>1</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius: 20px;
-border-style: outset;
-border-width: 2px;
-border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-    </widget>
     <widget class="QFrame" name="frame_13">
      <property name="geometry">
       <rect>
@@ -881,13 +708,33 @@ background-color:none;</string>
       </rect>
      </property>
     </widget>
-    <widget class="QSpinBox" name="positionSpinBox">
+    <widget class="QLineEdit" name="rack">
      <property name="geometry">
       <rect>
        <x>190</x>
-       <y>120</y>
-       <width>321</width>
-       <height>31</height>
+       <y>80</y>
+       <width>251</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="shelf">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>30</y>
+       <width>251</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="position">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>130</y>
+       <width>251</width>
+       <height>21</height>
       </rect>
      </property>
     </widget>
@@ -1154,64 +1001,6 @@ background-color:none;</string>
       <string>Torna disponibile il: </string>
      </property>
     </widget>
-    <widget class="QFrame" name="titleFrame_2">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>290</y>
-       <width>241</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>1</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius: 20px;
-border-style: outset;
-border-width: 2px;
-border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-    </widget>
-    <widget class="QFrame" name="titleFrame_3">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>340</y>
-       <width>241</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>1</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius: 20px;
-border-style: outset;
-border-width: 2px;
-border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-    </widget>
     <widget class="QLabel" name="natureLabel_4">
      <property name="geometry">
       <rect>
@@ -1228,6 +1017,26 @@ background-color:none;</string>
      </property>
      <property name="text">
       <string>Quarantena</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="author_2">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>350</y>
+       <width>251</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="title_2">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>300</y>
+       <width>251</width>
+       <height>20</height>
+      </rect>
      </property>
     </widget>
    </widget>
