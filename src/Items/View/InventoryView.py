@@ -17,7 +17,8 @@ class InventoryView(QMainWindow):
         self.widget = widget
         try:
             self.searchButton.clicked.connect(lambda: self.get_items())
-            self.addButton.clicked.connect(lambda: self.__go_to_cataloging_view())
+            self.addButton.clicked.connect(lambda: self.__go_to_cataloging_view(0))
+            self.modifyButton.clicked.connect(lambda: self.__go_to_cataloging_view(1))
             self.discardButton.clicked.connect(lambda: self.discard_item())
             self.itemTable.setSelectionBehavior(QTableView.SelectRows)
             self.returnButton.clicked.connect(lambda: self.return_button())
@@ -65,12 +66,15 @@ class InventoryView(QMainWindow):
         for i in reversed(range(0, self.itemTable.rowCount())):
             self.itemTable.removeRow(i)
 
-    def __go_to_cataloging_view(self):
-        self.cataloging_view = CatalogingView(self.widget)
+    def __go_to_cataloging_view(self, mode):
+        if mode == 0:
+            self.cataloging_view = CatalogingView(self.widget)
+        elif mode == 1:
+            self.cataloging_view = CatalogingView(self.widget, self.get_selected_item())
         self.cataloging_view.show()
 
     def discard_item(self):
-        self.itmManager.discard_item(self.__items[self.itemTable.currentRow()])
+        self.itmManager.discard_item(self.get_selected_item())
 
     def return_button(self):
         self.close()
