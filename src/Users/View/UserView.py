@@ -3,8 +3,6 @@ from PyQt5 import QtWidgets, Qt
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QPushButton, QWidget, QLabel
 from PyQt5.uic import loadUi
 import sys
-#sys.path.append('C:\\Users\\DanieleB\\PycharmProjects\\babelib\\src\\homeView.py')
-#from src.homeView import HomeView
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
 
@@ -24,6 +22,12 @@ class UserView(QMainWindow):
 
         self.nameField.textChanged.connect(lambda: self.search())
         self.surnameField.textChanged.connect(lambda: self.search())
+
+        #self.nameField.setStyleSheet(open("../designer/style/davtheme.qss", "r").read())
+        #self.nameField.setStyleSheet('background-color: orange')
+
+        #TODO sto effettuando test con il qss
+        self.schedaButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
 
 
 
@@ -76,6 +80,8 @@ class UserView(QMainWindow):
         self.close()
 
     def __go_user_card(self):
+
+
         rowtable = self.userTable.currentRow()
         if rowtable == -1:
             self.show_popup()
@@ -86,11 +92,15 @@ class UserView(QMainWindow):
 
     def delete(self):
         rowtable = self.userTable.currentRow()
-        self.userM.delete(self.users[rowtable].id)
-        # self.users[rowTable].remove()
-        self.users.remove(self.users[rowtable])
-        self.userTable.removeRow(rowtable)
-        # self.loadData()
+
+        if rowtable == -1:
+            self.show_popup()
+        else:
+            self.userM.delete(self.users[rowtable].id)
+            # self.users[rowTable].remove()
+            self.users.remove(self.users[rowtable])
+            self.userTable.removeRow(rowtable)
+            # self.loadData()
 
     def show_popup(self):
         self.pop = Popup()
@@ -107,3 +117,4 @@ class Popup(QDialog):
         loadUi("../designer/PopUp/Popup.ui", self)
         self.setWindowTitle('Errore')
         self.setModal(True)
+        self.okButton.clicked.connect(self.close)

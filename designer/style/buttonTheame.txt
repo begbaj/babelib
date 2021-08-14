@@ -1,0 +1,9 @@
+QPushButton
+{
+	background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, 		fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));
+	border-radius:16px;
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}

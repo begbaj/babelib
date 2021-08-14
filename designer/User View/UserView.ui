@@ -139,8 +139,15 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border:none;
-background-color:transparent</string>
+      <string notr="true">QPushButton 
+{
+	border:none;
+	background-color:transparent
+}
+QPushButton::pressed
+{
+	background-color:rgb(48, 175, 230)
+}</string>
      </property>
      <property name="text">
       <string/>
@@ -353,8 +360,15 @@ border-radius:10px;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border:none;
-background-color:transparent</string>
+      <string notr="true">QPushButton 
+{
+	border:none;
+	background-color:transparent
+}
+QPushButton::pressed
+{
+	background-color:rgb(48, 175, 230)
+}</string>
      </property>
      <property name="text">
       <string/>
@@ -401,8 +415,15 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));
-border-radius:16px;</string>
+      <string notr="true">QPushButton 
+{
+	background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:			0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 				241, 241));
+	border-radius:16px;
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
      </property>
      <property name="text">
       <string>Registra Utente</string>
@@ -428,8 +449,7 @@ border-radius:16px;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));
-border-radius:16px;</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Scheda Utente</string>
@@ -455,8 +475,15 @@ border-radius:16px;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));
-border-radius:16px;</string>
+      <string notr="true">QPushButton 
+{
+	background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, 		fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));
+	border-radius:16px;
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
      </property>
      <property name="text">
       <string>Elimina Utene</string>
@@ -507,8 +534,15 @@ border-radius:16px;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-radius:16px;
-background-color: rgb(24, 22, 29);</string>
+      <string notr="true">QPushButton 
+{
+	border-radius:16px;
+	background-color: rgb(24, 22, 29);
+}
+QPushButton::pressed
+{
+	background-color:rgb(95, 95, 95)
+}</string>
      </property>
      <property name="text">
       <string/>
