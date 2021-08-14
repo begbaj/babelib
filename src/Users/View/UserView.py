@@ -22,14 +22,8 @@ class UserView(QMainWindow):
         self.load_data()
         self.setup()
 
-        #self.a = self.userM.findName(self.nameField.text())
-
-        #self.t = self.load_data_research(self.a)
-
-        #self.nameField.textChanged.connect(self.t)
-
-        self.nameField.textChanged.connect(lambda: self.load_data_research(self.userM.findName(self.nameField.text())))
-        self.surnameField.textChanged.connect(lambda: self.load_data_research(self.userM.findSurname(self.surnameField.text())))
+        self.nameField.textChanged.connect(lambda: self.search())
+        self.surnameField.textChanged.connect(lambda: self.search())
 
 
 
