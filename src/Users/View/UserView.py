@@ -1,8 +1,6 @@
-import mariadb
-from PyQt5 import QtWidgets, Qt
-from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QPushButton, QWidget, QLabel
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QDialog, QMainWindow
 from PyQt5.uic import loadUi
-import sys
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
 
@@ -14,35 +12,47 @@ class UserView(QMainWindow):
     def __init__(self, widget):
         super(UserView, self).__init__()
         loadUi("../designer/User view/UserView.ui", self)
+        # Variabili di Istanza
         self.users = self.userM.list()
         self.widget = widget
         self.pop = ''
+        # Metodi Iniziali
         self.load_data()
         self.setup()
 
-        self.nameField.textChanged.connect(lambda: self.search())
-        self.surnameField.textChanged.connect(lambda: self.search())
-
-        #self.nameField.setStyleSheet(open("../designer/style/davtheme.qss", "r").read())
-        #self.nameField.setStyleSheet('background-color: orange')
-
-        #TODO sto effettuando test con il qss
-    def style(self):
-        self.schedaButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
-        self.userButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
-        self.backButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
-
     def setup(self):
+        # Funzionalità dei Bottoni
         self.userButton.clicked.connect(self.__go_new_user)
         self.backButton.clicked.connect(self.close)
         self.schedaButton.clicked.connect(self.__go_user_card)
         self.deleteButton.clicked.connect(self.delete)
         self.refreshButton.clicked.connect(self.load_data)
         self.searchButton.clicked.connect(self.search)
+        # Ricerca Dinamica
+        self.nameField.textChanged.connect(lambda: self.search())
+        self.surnameField.textChanged.connect(lambda: self.search())
+        # Metodo per Settare lo stile
         self.style()
 
-    def load_data(self):
+    # TODO sto effettuando test con il qss
+    def style(self):
+        self.schedaButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
+        self.userButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
+        self.backButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
+        # self.nameField.setStyleSheet(open("../designer/style/davtheme.qss", "r").read())
+        # self.nameField.setStyleSheet('background-color: orange')
+
+    # Metodo per visualizzare gli utenti nella tabella
+    def load_table(self, users):
         row = 0
+        self.userTable.setRowCount(len(users))
+        for user in self.users:
+            self.userTable.setItem(row, 0, QtWidgets.QTableWidgetItem(user.name))
+            self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
+            self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.city))
+            row = row + 1
+
+    def load_data(self):
         self.users = self.userM.list()
         self.load_table(self.users)
         '''
@@ -54,6 +64,7 @@ class UserView(QMainWindow):
             row = row + 1
         '''
 
+    # Metodo per la ricerca degli utenti all'interno del sistema
     def search(self):
         # Reload all the Users
         if (self.nameField.text() == '') and (self.surnameField.text() == ''):
@@ -80,14 +91,6 @@ class UserView(QMainWindow):
             self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.city))
             row = row + 1
         '''
-    def __go_user_card(self):
-        rowtable = self.userTable.currentRow()
-        if rowtable == -1:
-            self.show_popup()
-        else:
-            user = self.users[rowtable]
-            self.view = UserCardView(self.widget, user, self.load_data)
-            self.view.show()
 
     def delete(self):
         rowtable = self.userTable.currentRow()
@@ -100,29 +103,32 @@ class UserView(QMainWindow):
             self.users.remove(self.users[rowtable])
             self.userTable.removeRow(rowtable)
 
-    def load_table(self, users):
-        row = 0
-        self.userTable.setRowCount(len(users))
-        for user in self.users:
-            self.userTable.setItem(row, 0, QtWidgets.QTableWidgetItem(user.name))
-            self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
-            self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.city))
-            row = row + 1
-
     def show_popup(self):
         self.pop = Popup()
         self.pop.show()
 
+    # Metodi per andare nelle altre view
     def __go_new_user(self):
         user = None
         self.view = UserCardView(self.widget, user, self.load_data)
         self.view.show()
 
+    def __go_user_card(self):
+        rowtable = self.userTable.currentRow()
+        if rowtable == -1:
+            self.show_popup()
+        else:
+            user = self.users[rowtable]
+            self.view = UserCardView(self.widget, user, self.load_data)
+            self.view.show()
 
+
+# Classi per i POP UP
+# TODO mettere insieme tutti i pop up
 class Popup(QDialog):
     def __init__(self):
         super(Popup, self).__init__()
-        loadUi("../designer/PopUp/Popup.ui", self)
+        loadUi("../designer/Pop-Up/Message Pop-Up/Popup.ui", self)
         self.setWindowTitle('Errore')
         self.setModal(True)
         self.okButton.clicked.connect(self.close)
@@ -131,7 +137,7 @@ class Popup(QDialog):
 class DeletePopup(QDialog):
     def __init__(self):
         super(DeletePopup, self).__init__()
-        loadUi("../designer/Delete PopUp/deletepopup.ui", self)
+        loadUi("../designer/Pop-Up/Delete Pop-Up/deletepopup.ui", self)
         self.setWindowTitle('Attenzione')
         self.setModal(True)
         # self.confirmButton.clicked.connect(self.delete)

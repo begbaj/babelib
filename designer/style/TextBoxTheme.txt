@@ -1,0 +1,9 @@
+QLineEdit
+{
+    border:none;
+    background-color: rgba(23, 28, 78, 17);
+    color:rgb(255, 255, 255);
+    font: 14pt "Source Code Pro for Powerline";
+    border-bottom: 1px solid rgba(255, 255, 255, 100);
+
+}

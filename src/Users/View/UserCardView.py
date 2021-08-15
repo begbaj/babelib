@@ -1,9 +1,8 @@
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
+from PyQt5.QtWidgets import QDialog, QMainWindow
 from PyQt5.uic import loadUi
-from mariadb import Date
-
+# from datetime import datetime
 from src.Users.controllers.UserManager import UserManager
+# from src.Users.models.User import User
 
 
 class UserCardView(QMainWindow):
@@ -15,6 +14,7 @@ class UserCardView(QMainWindow):
         self.callback = callback
 
         if user is not None:
+            # Se l'utente non è un oggetto nullo allora visualizzo le sue informazioni
             super(UserCardView, self).__init__()
             loadUi("../designer/SchedaUtenteView/SchedaUtenteView.ui", self)
             # Variabili di Istanza
@@ -24,6 +24,7 @@ class UserCardView(QMainWindow):
             # Metodi iniziali
             self.setup()
         else:
+            # Se l'utente è nullo allora visualizzo la schermata per crearne uno nuovo
             super(UserCardView, self).__init__()
             loadUi("../designer/New User View/NewUserView.ui", self)
             # Variabili di Istanza
@@ -32,6 +33,11 @@ class UserCardView(QMainWindow):
             self.setup_new()
 
     def setup(self):
+        """
+        Questa funzione consente di settare la view
+        :param: None
+        :return: None
+        """
         # Button
         self.editButton.setEnabled(True)
         self.returnButton.clicked.connect(self.back)
@@ -41,6 +47,10 @@ class UserCardView(QMainWindow):
         self.disable_field()
         # Load User
         self.load_user()
+        self.style()
+
+    def style(self):
+        self.nameField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
 
     def setup_new(self):
         # Button
@@ -48,6 +58,11 @@ class UserCardView(QMainWindow):
         self.saveButton.clicked.connect(self.save_new)
 
     def disable_field(self):
+        """
+        Questa funzione setta tutti i campi presenti nella view in solo lettura
+        :param: None
+        :return: None
+        """
         # Line Edit disabled
         self.nameField.setReadOnly(True)
         self.surnameField.setReadOnly(True)
@@ -69,6 +84,11 @@ class UserCardView(QMainWindow):
         self.dateEdit.setDisabled(True)
 
     def enable_filed(self):
+        """
+        Questa funzione setta tutti i campi presenti nella view come editabili
+        :param: None
+        :return: None
+        """
         # Line Edit enable
         self.nameField.setReadOnly(False)
         self.surnameField.setReadOnly(False)
@@ -91,6 +111,12 @@ class UserCardView(QMainWindow):
         self.editButton.setEnabled(False)
 
     def load_user(self):
+        """
+        Questa funzione riempe i campi della view con le informazioni dell'utente
+        di cui si vuole consultare la scheda
+        :param: None
+        :return: None
+        """
         # Line Edit
         self.nameField.setText(self.user.name)
         self.surnameField.setText(self.user.surname)
@@ -108,9 +134,13 @@ class UserCardView(QMainWindow):
         # Date Edit
         self.dateEdit.setDate(self.user.birthdate)
 
-    # TODO implementare contatto preferenziale e privacy agreement
-    # Update dell'utente
     def save(self):
+        """
+        Questa funzione permette di effettuare l'Update dell'utente con le informazioni modificate
+        :param: None
+        :return: None
+        """
+        # TODO implementare contatto preferenziale e privacy agreement
         # Line edit update
         self.user.name = self.nameField.text()
         self.user.surname = self.surnameField.text()
@@ -129,38 +159,59 @@ class UserCardView(QMainWindow):
         # Date update
         self.user.birthdate = self.dateEdit.date().toPyDate()
         # PopUp per la conferma
-        self.show_popup(self.userM, self.user)
+        self.show_popup()
 
     def save_new(self):
+        # TODO inserire tutti gli attributi dell'utente
+        '''
+        user = User(# id
+                    self.nationBox.currentText(),
+                    self.stateBox.currentText(),
+                    self.usertypeBox.currentText(),
+                    #username , non so quale campo
+                    datetime.now().strftime("%d/%m/%Y %H:%M:%S"), # data di registrazione
+                    self.nameField.text(),
+                    self.surnameField.text(),
+                    self.genderBox.currentText(),
+                    # Luogo di Nascita
+                    self.dateEdit.date().toPyDate() # Data di nascita
+                    self.cityField.text(),
+                    self.addressField.text(),
+                    self.capField.text(),
+                    self.districtBox.currentText(),
+                    self.cellField.text(),
+                    self.telephoneField.text(),
+                    self.emailField.text(),
+                    self.fiscalcodeField.text(),
+                    # Contatto Preferenziale
+                    # Privacy
+                    )
+        '''
         pass
 
     def back(self):
         self.callback()
         self.close()
 
-    def show_popup(self, userM, user):
-        self.pop = SavePopUp(userM, user)
+    def show_popup(self):
+        self.pop = SavePopUp()
         self.pop.show()
 
 
 class SavePopUp(QDialog):
 
-    def __init__(self, userM, user):
+    def __init__(self):
         super(SavePopUp, self).__init__()
-        loadUi("../designer/Save PopUp/savepopup.ui", self)
-        self.setWindowTitle('Conferma')
-        self.setModal(True)
+        loadUi("../designer/Pop-Up/Save Pop-Up/savepopup.ui", self)
         self.setup()
-        self.userM = userM
-        self.user = user
 
     def setup(self):
+        # Button
         self.confirmButton.clicked.connect(self.confirm)
-        self.cancelButton.clicked.connect(self.cancel)
-
-    def cancel(self):
-        self.close()
+        self.cancelButton.clicked.connect(self.close)
+        # Proprietà Finestra
+        self.setModal(True)
+        self.setWindowTitle('Conferma')
 
     def confirm(self):
-        self.userM.set(self.user)
-        self.close()
+        pass

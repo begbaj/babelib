@@ -1,6 +1,4 @@
-import mariadb
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QWidget
+from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
 from Users.View.UserView import UserView
 from src.Items.View.InventoryView import InventoryView
@@ -10,9 +8,10 @@ class HomeView(QMainWindow):
 
     def __init__(self, widget):
         super(HomeView, self).__init__()
-        self.setFixedSize(660, 500)
         loadUi("../designer/Home view/HomeView.ui", self)
+        # Variabili di Istanza
         self.widget = widget
+        # Metodi Iniziali
         self.setup()
 
     def setup(self):
@@ -35,26 +34,20 @@ class HomeView(QMainWindow):
     def style(self):
         self.userButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
         self.catalogingButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
+        self.frame.setStyleSheet(open("../designer/style/FrameTheme.txt", "r").read())
         pass
 
     # region View links
-
     def __go_user_view(self):
         self.userview = UserView(self.widget)
         self.userview.show()
-
-        #self.widget.addWidget(view)
-        #self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
-
-    def __go_stats_view(self):
-        pass
 
     def __go_inventory_view(self):
         self.itemview = InventoryView(self.widget)
         self.itemview.show()
 
-        #self.widget.addWidget(view)
-        #self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
+    def __go_stats_view(self):
+        pass
 
     def __go_report_view(self):
         pass
