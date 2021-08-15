@@ -18,7 +18,7 @@ class HomeView(QMainWindow):
     def setup(self):
         # Menu Button
         self.userButton.clicked.connect(lambda: self.__go_user_view())
-        self.catolgingButton.clicked.connect(lambda: self.__go_inventory_view())
+        self.catalogingButton.clicked.connect(lambda: self.__go_inventory_view())
         # self.statsButton.clicked.connect(self.gostatsview())
         # self.reportButton.clicked.connect(self.goreportview())
         # self.serviceButton.clicked.connect(self.goserviceview())
@@ -30,6 +30,11 @@ class HomeView(QMainWindow):
         # self.newuserButton.clicked.connect(self.newuser())
         # Setting Button
         # self.settingButton.clicked.connect(self.setting())
+        self.style()
+
+    def style(self):
+        self.userButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
+        self.catalogingButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
         pass
 
     # region View links

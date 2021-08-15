@@ -250,14 +250,14 @@ border-radius:10px;</string>
        <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>false</bool>
        </attribute>
-       <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>30</number>
-       </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>120</number>
        </attribute>
        <attribute name="horizontalHeaderHighlightSections">
         <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>30</number>
        </attribute>
        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
         <bool>false</bool>
@@ -496,14 +496,14 @@ border-radius:10px;</string>
        <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>false</bool>
        </attribute>
-       <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>30</number>
-       </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>120</number>
        </attribute>
        <attribute name="horizontalHeaderHighlightSections">
         <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>30</number>
        </attribute>
        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
         <bool>false</bool>
@@ -666,14 +666,14 @@ border-radius:10px;</string>
        <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>false</bool>
        </attribute>
-       <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>30</number>
-       </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>120</number>
        </attribute>
        <attribute name="horizontalHeaderHighlightSections">
         <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>30</number>
        </attribute>
        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
         <bool>false</bool>
@@ -969,7 +969,7 @@ border-radius:16px;</string>
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="catolgingButton">
+    <widget class="QPushButton" name="catalogingButton">
      <property name="geometry">
       <rect>
        <x>50</x>

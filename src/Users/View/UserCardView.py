@@ -31,7 +31,6 @@ class UserCardView(QMainWindow):
             # Metodi iniziali
             self.setup_new()
 
-
     def setup(self):
         # Button
         self.editButton.setEnabled(True)
@@ -148,7 +147,7 @@ class SavePopUp(QDialog):
 
     def __init__(self, userM, user):
         super(SavePopUp, self).__init__()
-        loadUi("../designer/SavePopUp/savepopup.ui", self)
+        loadUi("../designer/Save PopUp/savepopup.ui", self)
         self.setWindowTitle('Conferma')
         self.setModal(True)
         self.setup()

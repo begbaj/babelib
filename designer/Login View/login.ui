@@ -118,12 +118,17 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);</string>
        <height>41</height>
       </rect>
      </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
      <property name="styleSheet">
-      <string notr="true">font-size:24pt;
-background-color: rgb(27, 25, 39);
-color:rgb(255, 255, 255);
-font: 22pt &quot;Source Code Pro for Powerline&quot;;
-border-radius:15px;</string>
+      <string notr="true">
+	font-size:24pt;
+	ba	ckground-color: rgb(27, 25, 39);
+	color:rgb(255, 255, 255);
+	font: 22pt &quot;Source Code Pro for Powerline&quot;;
+	border-radius:15px;
+</string>
      </property>
      <property name="text">
       <string>Log In</string>
