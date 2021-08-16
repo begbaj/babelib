@@ -7,24 +7,34 @@ class CatalogingLevel(Enum):
 
 
 class TypeEnum(Enum):
-    printed_cartography = 1
-    handwritten_cartography = 2
-    booklet = 3
-    printed_modern_text = 4
-    #anche altri
+    cartografia_a_stampa = 1
+    cartografia_manoscritta = 2
+    libretto = 3
+    test_a_stampa = 4
+    materiale_grafico = 5
+    materiale_multimediale = 6
+    musica_manoscritta = 7
+    musica_a_stampa = 8
+    materiale_video = 9
+    nota_illustrativa = 10
+    oggetto_tred = 11
+    risorsa_elettronica = 12
+    registrazione_non_musicale = 13
+    registrazione_musicale = 14
+    testo_manoscritto = 15
 
 
 class AvailabilityEnum(Enum):
     available = 1
     unavailable = 2
-    quarantine = 3
-    maintainance = 4
-    #anche altri
+    quarantined = 3
+    discarded = 4
+    on_loan = 5
 
 
 class NatureEnum(Enum):
-    monography = 1
-    analitic = 2
+    monograph = 1
+    analytic = 2
     periodic = 3
 
 
@@ -38,30 +48,37 @@ class SMUSIEnum(Enum):
 
 
 class MaterialEnum(Enum):
-    modern_book = 1
-    graphic_book = 2
-    audiovideo = 3
-    e_resource = 4
-    music = 5
-
-
-class ItemGenreEnum(Enum):
-    #TODO: forse meglio rimuovere, troppo lungo
-    fantasy = 1
-    sci_fi = 2
-    historic = 3
-    #anche altri
+    cartografia = 1
+    libro_analitico = 2
+    grafica = 3
+    audio_video = 4
+    risorsa_elettronica = 5
+    libro_moderno = 6
+    musica = 7
 
 
 class ExternalStateEnum(Enum):
-    #TODO: da completare
-    evidenziato = 1
-    strappato = 2
-    #anche altri
+    strappato = 1
+    evidenziato = 2
+    deteriorato = 3
+    sottolineato = 4
+    scarabocchiato = 5
+    pagine_mancanti = 6
+    attesa_scarto = 7
+    rovinato = 8
+    buono = 9
+    discreto = 10
+    ottimo = 11
+    nuovo = 12
 
 
 class LangEnum(Enum):
-    #TODO: forse meglio rimuovere, troppo lungo
     italian = 1
     english = 2
-    #etc
+    german = 3
+    french = 4
+    spanish = 5
+    chinese = 6
+    japanese = 7
+    hindi = 8
+    other = 9
