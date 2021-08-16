@@ -17,7 +17,7 @@ class ItemManager:
     def get_item(self, item_id: int) -> Item:
         return self.__convert_dbitem(self.dbms.get_item(item_id))
 
-    def get_items(self, search_field: str, search_mode: int, quarantined=False, discarded=False) -> [Item]:
+    def get_items(self, search_field: str, search_mode: int, quarantined=False, discarded=-1) -> [Item]:
         fitems = []
         for dbitem in self.dbms.get_items(search_field, search_mode, quarantined, discarded):
             fitems.append(self.__convert_dbitem(dbitem))

@@ -10,12 +10,12 @@ class CatalogingView(QMainWindow):
         super(CatalogingView, self).__init__()
         loadUi("../designer/Cataloging View/CatalogingView.ui", self)
         self.widget = widget
-        if item is None:
-            __mode = 0 #inserimento
-            self.show_item(item)
-        else:
-            __mode = 1 #modifica/visualizzazione
-            self.load_item(item)
+        #if item is None:
+        #    __mode = 0 #inserimento
+        #    self.show_item(item)
+        #else:
+        #    __mode = 1 #modifica/visualizzazione
+        #    self.load_item(item)
 
     def load_item(self, item):
         self.title.setText(item.title)
@@ -25,9 +25,8 @@ class CatalogingView(QMainWindow):
         #self.genre
         self.publicationDate.setDate(item.publication_date)
         self.ISBN.setText(str(item.isbn))
-        self.InventoryNum.setText(str(item.inventory_num))
         self.shelf.setText(str(item.shelf))
-        self.rack.setText(str(item.rack))
+        self.rack.setText(item.rack)
         self.position.setText(item.position)
         #TODO finire
 
