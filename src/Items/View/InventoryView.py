@@ -1,11 +1,8 @@
 from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QTableView, QDialog
 from PyQt5.uic import loadUi
-from PyQt5.uic.properties import QtWidgets, QtCore
 from datetime import datetime
 from src.Items.Controllers.ItemManager import ItemManager
-from src.Items.Models.Item import Item
 from src.Items.View.CatalogingView import CatalogingView
-from src.Users.View.UserView import Popup
 
 
 class InventoryView(QMainWindow):
@@ -89,19 +86,19 @@ class InventoryView(QMainWindow):
         pass
 
     def get_selected_item(self):
-        if self.itemTable.currentRow() == 0:
+        if self.itemTable.currentRow() != -1:
             return self.__items[self.itemTable.currentRow()]
         else:
             self.show_popup()
 
-    class Popup(QDialog):
-        def __init__(self):
-            super(Popup, self).__init__()
-            loadUi("../designer/Inventory View/PopUpDiscard.ui", self)
-            self.setWindowTitle('Error')
-            self.setModal(True)
-
-
     def show_popup(self):
-        self.pop = Popup()
-        self.pop.show()
+        pop = PopupDialog()
+        pop.show()
+
+
+class PopupDialog(QDialog):
+    def __init__(self):
+        super(PopupDialog, self).__init__()
+        loadUi("../designer/Pop-Up/Discard Pop-Up/DiscardPopUp.ui", self)
+        self.setWindowTitle('Error')
+        self.setModal(True)
