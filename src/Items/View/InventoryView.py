@@ -26,6 +26,9 @@ class InventoryView(QMainWindow):
         except Exception as err:
             print(err)
 
+        self.itemTable.clearSelection()
+        self.__remove_rows()
+
     def get_items(self):
         self.__items = []
         self.__items = self.itmManager.get_items(self.searchField.text(), self.searchMode.currentIndex(),
@@ -78,9 +81,6 @@ class InventoryView(QMainWindow):
 
     def return_button(self):
         self.close()
-
-    def add_item(self):
-        pass
 
     def show_item(self):
         pass
