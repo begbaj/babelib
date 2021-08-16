@@ -141,6 +141,7 @@ class Popup(QDialog):
 
 
 class DeletePopup(QDialog):
+
     def __init__(self, funct):
         super(DeletePopup, self).__init__()
         loadUi("../designer/Pop-Up/Delete Pop-Up/deletepopup.ui", self)

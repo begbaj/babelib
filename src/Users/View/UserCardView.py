@@ -203,17 +203,18 @@ class UserCardView(QMainWindow):
         self.close()
 
     def show_popup(self):
-        self.pop = SavePopUp(self.update_user)
+        self.pop = SavePopUp(self.userM, self.user)
         self.pop.show()
 
 
 class SavePopUp(QDialog):
 
-    def __init__(self, funct):
+    def __init__(self, userM, user):
         super(SavePopUp, self).__init__()
         loadUi("../designer/Pop-Up/Save Pop-Up/savepopup.ui", self)
         self.setup()
-        self.save = funct
+        self.userM = userM
+        self.user = user
 
     def setup(self):
         # Button
@@ -224,7 +225,7 @@ class SavePopUp(QDialog):
         self.setWindowTitle('Conferma')
 
     def confirm(self):
-        self.save()
+        self.userM.set(self.user)
         self.close()
 
 
