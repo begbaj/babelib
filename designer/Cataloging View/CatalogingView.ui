@@ -728,13 +728,13 @@ background-color:none;</string>
       </rect>
      </property>
     </widget>
-    <widget class="QComboBox" name="position">
+    <widget class="QLineEdit" name="lineEdit">
      <property name="geometry">
       <rect>
        <x>190</x>
        <y>130</y>
        <width>251</width>
-       <height>21</height>
+       <height>20</height>
       </rect>
      </property>
     </widget>

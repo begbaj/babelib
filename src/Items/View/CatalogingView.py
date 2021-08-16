@@ -12,6 +12,7 @@ class CatalogingView(QMainWindow):
         self.widget = widget
         if item is None:
             __mode = 0 #inserimento
+            self.show_item(item)
         else:
             __mode = 1 #modifica/visualizzazione
             self.load_item(item)
@@ -27,6 +28,8 @@ class CatalogingView(QMainWindow):
         self.InventoryNum.setText(str(item.inventory_num))
         self.shelf.setText(str(item.shelf))
         self.rack.setText(str(item.rack))
-        #self.position.setCurrentText(str(item.position))
+        self.position.setText(item.position)
         #TODO finire
 
+    def show_item(self, item):
+        pass
