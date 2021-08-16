@@ -289,11 +289,17 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
      <property name="text">
       <string/>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
      <property name="readOnly">
       <bool>false</bool>
      </property>
      <property name="placeholderText">
-      <string/>
+      <string extracomment="Campi Obbligatorio">*</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="surnameField">
@@ -314,11 +320,14 @@ border:none;
 border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
      <property name="readOnly">
       <bool>false</bool>
      </property>
      <property name="placeholderText">
-      <string/>
+      <string>*</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="fiscalcodeField">
@@ -339,11 +348,14 @@ border:none;
 border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
      <property name="readOnly">
       <bool>false</bool>
      </property>
      <property name="placeholderText">
-      <string/>
+      <string>*</string>
      </property>
     </widget>
     <widget class="QLabel" name="typeLabel_2">
@@ -678,11 +690,14 @@ border:none;
 border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
      <property name="readOnly">
       <bool>false</bool>
      </property>
      <property name="placeholderText">
-      <string/>
+      <string>*</string>
      </property>
     </widget>
     <widget class="QLabel" name="ISBNLabel_2">
@@ -721,11 +736,14 @@ border:none;
 border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
      <property name="readOnly">
       <bool>false</bool>
      </property>
      <property name="placeholderText">
-      <string/>
+      <string>*</string>
      </property>
     </widget>
     <widget class="QLabel" name="palchettoLabel_2">
@@ -880,11 +898,14 @@ border:none;
 border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
      <property name="readOnly">
       <bool>false</bool>
      </property>
      <property name="placeholderText">
-      <string/>
+      <string>*</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="emailField">

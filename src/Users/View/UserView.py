@@ -97,11 +97,17 @@ class UserView(QMainWindow):
         if rowtable == -1:
             self.show_popup()
         else:
-            self.pop = DeletePopup()
+            self.pop = DeletePopup(self.delete_user)
             self.pop.show()
-            self.userM.delete(self.users[rowtable].id)
-            self.users.remove(self.users[rowtable])
-            self.userTable.removeRow(rowtable)
+            # self.userM.delete(self.users[rowtable].id)
+            #self.users.remove(self.users[rowtable])
+            #self.userTable.removeRow(rowtable)
+
+    def delete_user(self):
+        row = self.userTable.currentRow()
+        self.userM.delete(self.users[row].id)
+        self.users.remove(self.users[row])
+        self.userTable.removeRow(row)
 
     def show_popup(self):
         self.pop = Popup()
@@ -135,9 +141,15 @@ class Popup(QDialog):
 
 
 class DeletePopup(QDialog):
-    def __init__(self):
+    def __init__(self, funct):
         super(DeletePopup, self).__init__()
         loadUi("../designer/Pop-Up/Delete Pop-Up/deletepopup.ui", self)
         self.setWindowTitle('Attenzione')
         self.setModal(True)
-        # self.confirmButton.clicked.connect(self.delete)
+        self.funct = funct
+        self.confirmButton.clicked.connect(self.confirm)
+        self.cancelButton.clicked.connect(self.close)
+
+    def confirm(self):
+        self.funct()
+        self.close()

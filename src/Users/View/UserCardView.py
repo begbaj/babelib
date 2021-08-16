@@ -134,13 +134,7 @@ class UserCardView(QMainWindow):
         # Date Edit
         self.dateEdit.setDate(self.user.birthdate)
 
-    def save(self):
-        """
-        Questa funzione permette di effettuare l'Update dell'utente con le informazioni modificate
-        :param: None
-        :return: None
-        """
-        # TODO implementare contatto preferenziale e privacy agreement
+    def update_user(self):
         # Line edit update
         self.user.name = self.nameField.text()
         self.user.surname = self.surnameField.text()
@@ -158,11 +152,26 @@ class UserCardView(QMainWindow):
         # f", u.privacy_agreement = {user.privacy_agreement}"
         # Date update
         self.user.birthdate = self.dateEdit.date().toPyDate()
+
+    def save(self):
+        """
+        Questa funzione permette di effettuare l'Update dell'utente con le informazioni modificate
+        :param: None
+        :return: None
+        """
+        # TODO implementare contatto preferenziale e privacy agreement
+        self.update_user()
         # PopUp per la conferma
         self.show_popup()
 
     def save_new(self):
         # TODO inserire tutti gli attributi dell'utente
+        # Controllo per i campi obbligaroi
+        if self.nameField.text() == '' or self.surnameField.text() == '': # mettere altri condizioni
+            self.pop = Popup()
+            self.pop.label.setText("Inserire tutti i campi obbligatori")
+            self.pop.show()
+
         '''
         user = User(# id
                     self.nationBox.currentText(),
@@ -194,24 +203,35 @@ class UserCardView(QMainWindow):
         self.close()
 
     def show_popup(self):
-        self.pop = SavePopUp()
+        self.pop = SavePopUp(self.update_user)
         self.pop.show()
 
 
 class SavePopUp(QDialog):
 
-    def __init__(self):
+    def __init__(self, funct):
         super(SavePopUp, self).__init__()
         loadUi("../designer/Pop-Up/Save Pop-Up/savepopup.ui", self)
         self.setup()
+        self.save = funct
 
     def setup(self):
         # Button
         self.confirmButton.clicked.connect(self.confirm)
-        self.cancelButton.clicked.connect(self.close)
+        self.cancelButton.clicked.connect(lambda: self.close())
         # Proprietà Finestra
         self.setModal(True)
         self.setWindowTitle('Conferma')
 
     def confirm(self):
-        pass
+        self.save()
+        self.close()
+
+
+class Popup(QDialog):
+    def __init__(self):
+        super(Popup, self).__init__()
+        loadUi("../designer/Pop-Up/Message Pop-Up/Popup.ui", self)
+        self.setWindowTitle('Errore')
+        self.setModal(True)
+        self.okButton.clicked.connect(self.close)
