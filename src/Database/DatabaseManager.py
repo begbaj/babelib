@@ -288,9 +288,6 @@ class DatabaseManager:
 
         return users
 
-
-
-
     # endregion
 
     # region Items
@@ -409,5 +406,6 @@ class DatabaseManager:
     # endregion
 
     # region Movements
+
     # endregion
 

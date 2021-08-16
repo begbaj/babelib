@@ -16,7 +16,7 @@ class Item:
         self.author = author
         self.cataloging_level = cataloging_level
         self.material = MaterialEnum.graphic_book
-        self.nature = NatureEnum.analitic
+        self.nature = NatureEnum.analytic
         self.type = TypeEnum.booklet
 
         self.publication_date = datetime.datetime.now()
