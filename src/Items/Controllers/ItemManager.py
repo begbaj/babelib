@@ -53,10 +53,10 @@ class ItemManager:
         self.dbms.edit_item(item)
 
     def delete_item(self, item):
-        self.dbms.remove_item()
+        self.dbms.remove_item(item.id)
 
     def discard_item(self, item):
-        item.discarded = True
+        item.availability = ItemEnumerators.AvailabilityEnum.discarded
         self.dbms.edit_item(item)
 
     @staticmethod
@@ -67,20 +67,20 @@ class ItemManager:
         :return: an Item object
         """
         item = Item()
-        item.id = dbitem.Id
+        item.id = dbitem.id
         item.availability = ItemEnumerators.AvailabilityEnum(int(dbitem.availability))
         item.bid = dbitem.bid
-        item.inventory_num = dbitem.inventory_num
         item.isbn = dbitem.isbn
         item.title = dbitem.title
         item.author = dbitem.author
+        item.lang = ItemEnumerators.LangEnum(int(dbitem.lang_id))
         item.cataloging_level = ItemEnumerators.CatalogingLevel(int.from_bytes(dbitem.cataloging_level, 'big')) #serve per convertire un byte in int ('big' = big endian)
         item.publication_date = datetime.combine(dbitem.publication_date, datetime.min.time())
-        item.publication_state = dbitem.pubblication_state
+        item.publication_state = int.from_bytes(dbitem.publication_state, 'big')
         item.rack = dbitem.rack
         item.shelf = dbitem.shelf
         item.position = dbitem.position
-        item.opac_visibility = dbitem.opac_visibility
+        item.opac_visibility =  int.from_bytes(dbitem.opac_visibility, 'big')
         item.price = dbitem.price
 
         try:
@@ -99,8 +99,6 @@ class ItemManager:
         except:
             item.quarantine_start_date = None
 
-
-        item.discarded = dbitem.discarded
         item.discarded_date = dbitem.discarded_date
         item.note = dbitem.note
         # TODO: dobbiamo fare il get dei generi del libro, cosi anche per material nature type lang
