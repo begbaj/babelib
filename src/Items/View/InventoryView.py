@@ -3,6 +3,7 @@ from PyQt5.uic import loadUi
 from datetime import datetime
 from src.Items.Controllers.ItemManager import ItemManager
 from src.Items.View.CatalogingView import CatalogingView
+from src.Items.View.ShowItemView import ShowItemView
 
 
 class InventoryView(QMainWindow):
@@ -26,7 +27,7 @@ class InventoryView(QMainWindow):
             self.modifyButton.clicked.connect(lambda: self.__go_to_cataloging_view(1))
             self.discardButton.clicked.connect(lambda: self.discard_item())
             self.returnButton.clicked.connect(lambda: self.__go_back_button())
-            self.showItemButton.clicked.connect(lambda: self.go_to_show_item())
+            self.showItemButton.clicked.connect(lambda: self.__go_to_showitem_view())
         except Exception as err:
             print(err)
 
@@ -100,6 +101,13 @@ class InventoryView(QMainWindow):
         elif mode == 1:
             self.cataloging_view = CatalogingView(self.widget, self.__get_selected_item())
         self.cataloging_view.show()
+
+    def __go_to_showitem_view(self):
+        if self.__get_selected_item() is None:
+            #printa errore ed esci
+            pass
+        self.showitem_view = ShowItemView(self.widget, self.__get_selected_item())
+        self.showitem_view.show()
 
 
 class DiscardModalDialog(QDialog):

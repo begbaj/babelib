@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1300</width>
+    <width>760</width>
     <height>850</height>
    </rect>
   </property>
@@ -122,49 +122,13 @@ background-color: rgb(32, 30, 39)</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="catalogingViewLabel">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>20</y>
-      <width>141</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: bold 13pt &quot;&quot;;
-</string>
-    </property>
-    <property name="text">
-     <string>Cataloging View</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="catalogingViewImage">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>10</y>
-      <width>51</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../img/Icona Catalogazione.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QFrame" name="frame_11">
     <property name="geometry">
      <rect>
       <x>138</x>
-      <y>84</y>
-      <width>461</width>
-      <height>421</height>
+      <y>34</y>
+      <width>611</width>
+      <height>791</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -178,7 +142,7 @@ background-color: rgb(32, 30, 39)</string>
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
+background-color:rgba(0, 190, 220, 240)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -186,415 +150,46 @@ background-color:rgba(0, 192, 225, 85)</string>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="itemInfo">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>20</y>
+       <y>30</y>
        <width>431</width>
-       <height>391</height>
+       <height>671</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>13</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border: none</string>
+     </property>
      <property name="text">
-      <string>#</string>
+      <string>**Titolo**: valore
+
+**Autore**: valore</string>
      </property>
      <property name="textFormat">
       <enum>Qt::MarkdownText</enum>
      </property>
-    </widget>
-   </widget>
-   <widget class="QFrame" name="frame_12">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>530</y>
-      <width>461</width>
-      <height>171</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>0</width>
-      <height>1</height>
-     </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius: 20px;
-border-style: outset;
-border-width: 2px;
-border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QFrame" name="frame_13">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>320</y>
-       <width>321</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>1</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius: 20px;
-border-style: outset;
-border-width: 2px;
-border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
      </property>
     </widget>
-    <widget class="QFrame" name="frame_14">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>370</y>
-       <width>321</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>1</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius: 20px;
-border-style: outset;
-border-width: 2px;
-border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="scaffaleLabel">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>30</y>
-       <width>101</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
-border:none;
-background-color:none;</string>
-     </property>
-     <property name="text">
-      <string>Scaffale</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="palchettoLabel">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>80</y>
-       <width>71</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
-border:none;
-background-color:none;</string>
-     </property>
-     <property name="text">
-      <string>Palchetto</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="positionLabel">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>130</y>
-       <width>81</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
-border:none;
-background-color:none;</string>
-     </property>
-     <property name="text">
-      <string>Posizione</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="filterBox_2">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>220</y>
-       <width>321</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: italic 10pt &quot;Arial&quot;;</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>Fantasy</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Storico</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Narrativa</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>pippo</string>
-      </property>
-     </item>
-    </widget>
-    <widget class="QDateEdit" name="dateEdit_2">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>270</y>
-       <width>321</width>
-       <height>31</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QLabel" name="collocationImage_2">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>517</y>
-      <width>31</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../img/inventory.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QFrame" name="frame_15">
-    <property name="geometry">
-     <rect>
-      <x>617</x>
-      <y>85</y>
-      <width>481</width>
-      <height>671</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>0</width>
-      <height>1</height>
-     </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius: 20px;
-border-style: outset;
-border-width: 2px;
-border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QLabel" name="titleLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>30</y>
-       <width>101</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
-border:none;
-background-color:none;</string>
-     </property>
-     <property name="text">
-      <string>Stato Interno</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="authorLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>80</y>
-       <width>101</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
-border:none;
-background-color:none;</string>
-     </property>
-     <property name="text">
-      <string>Stato Esterno</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="natureLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>130</y>
-       <width>101</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
-border:none;
-background-color:none;</string>
-     </property>
-     <property name="text">
-      <string>Disponibilità</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="typeLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>410</y>
-       <width>47</width>
-       <height>13</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
-border:none;
-background-color:none;</string>
-     </property>
-     <property name="text">
-      <string>Note</string>
-     </property>
-    </widget>
-    <widget class="QTextEdit" name="textEdit">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>440</y>
-       <width>401</width>
-       <height>221</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="typeLabel_5">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>300</y>
-       <width>131</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
-border:none;
-background-color:none;</string>
-     </property>
-     <property name="text">
-      <string>Giorni rimanenti:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="typeLabel_6">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>350</y>
-       <width>201</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
-border:none;
-background-color:none;</string>
-     </property>
-     <property name="text">
-      <string>Torna disponibile il: </string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="natureLabel_4">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>234</y>
-       <width>111</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
-border:none;
-background-color:none;</string>
-     </property>
-     <property name="text">
-      <string>Quarantena</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QLabel" name="inventaryImage_2">
-    <property name="geometry">
-     <rect>
-      <x>640</x>
-      <y>70</y>
-      <width>31</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../img/maintenance.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
    </widget>
    <widget class="QLabel" name="inventaryImage">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>70</y>
+      <x>150</x>
+      <y>20</y>
       <width>31</width>
       <height>31</height>
      </rect>
@@ -611,13 +206,7 @@ background-color:none;</string>
    </widget>
    <zorder>background</zorder>
    <zorder>frame_2</zorder>
-   <zorder>catalogingViewLabel</zorder>
-   <zorder>catalogingViewImage</zorder>
    <zorder>frame_11</zorder>
-   <zorder>frame_12</zorder>
-   <zorder>collocationImage_2</zorder>
-   <zorder>frame_15</zorder>
-   <zorder>inventaryImage_2</zorder>
    <zorder>inventaryImage</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

@@ -54,10 +54,10 @@
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>56</x>
       <y>194</y>
       <width>361</width>
-      <height>301</height>
+      <height>311</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -73,7 +73,7 @@ border-color:rgb(27,25,39);</string>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLineEdit" name="UsernameField">
+    <widget class="QLineEdit" name="usernameField">
      <property name="geometry">
       <rect>
        <x>15</x>
@@ -88,13 +88,14 @@ background-color:rgba(23, 28, 78, 50);
 color:rgb(255, 255, 255);
 font: 16pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
+padding: 10px;
 </string>
      </property>
      <property name="placeholderText">
       <string notr="true">Username</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="PasswordField">
+    <widget class="QLineEdit" name="passwordField">
      <property name="geometry">
       <rect>
        <x>15</x>
@@ -109,6 +110,7 @@ background-color:rgba(23, 28, 78, 50);
 color:rgb(255, 255, 255);
 font: 16pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
+padding: 10px;
 </string>
      </property>
      <property name="echoMode">
@@ -118,7 +120,7 @@ border:none;
       <string>Password</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="LoginButton">
+    <widget class="QPushButton" name="loginButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -155,12 +157,12 @@ border: none
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLabel" name="error_label">
+    <widget class="QLabel" name="errorLabel">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>384</y>
-       <width>281</width>
+       <x>0</x>
+       <y>230</y>
+       <width>361</width>
        <height>21</height>
       </rect>
      </property>
@@ -197,12 +199,12 @@ border:none;
       <string>Mantieni l'accesso</string>
      </property>
     </widget>
-    <widget class="QLabel" name="changeDatabseLabel">
+    <widget class="QLabel" name="changeDbLabel">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>230</y>
-       <width>321</width>
+       <x>130</x>
+       <y>200</y>
+       <width>101</width>
        <height>16</height>
       </rect>
      </property>
@@ -217,6 +219,12 @@ background-color: transparent;</string>
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
+    <zorder>usernameField</zorder>
+    <zorder>passwordField</zorder>
+    <zorder>loginButton</zorder>
+    <zorder>remember_box</zorder>
+    <zorder>changeDbLabel</zorder>
+    <zorder>errorLabel</zorder>
    </widget>
    <widget class="QLabel" name="background">
     <property name="geometry">
@@ -237,7 +245,7 @@ background-color: transparent;</string>
      <enum>Qt::RichText</enum>
     </property>
     <property name="pixmap">
-     <pixmap>../img/Sfondo.png</pixmap>
+     <pixmap>img/remix.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -246,7 +254,7 @@ background-color: transparent;</string>
    <widget class="QLabel" name="icon">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>160</x>
       <y>120</y>
       <width>151</width>
       <height>151</height>
@@ -268,7 +276,7 @@ background-color: transparent;</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../img/Babelib-removebg-preview.png</pixmap>
+     <pixmap>img/Babelib-removebg-preview.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
