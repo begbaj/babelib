@@ -278,7 +278,7 @@ background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx
       <x>230</x>
       <y>130</y>
       <width>461</width>
-      <height>421</height>
+      <height>381</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -426,24 +426,6 @@ background-color:none;</string>
       <string>ISBN</string>
      </property>
     </widget>
-    <widget class="QLabel" name="ninventaryLabe">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>380</y>
-       <width>151</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
-border:none;
-background-color:none;</string>
-     </property>
-     <property name="text">
-      <string>Numero di Inventario</string>
-     </property>
-    </widget>
     <widget class="QLineEdit" name="title">
      <property name="geometry">
       <rect>
@@ -484,16 +466,6 @@ background-color:none;</string>
       </rect>
      </property>
     </widget>
-    <widget class="QComboBox" name="gnre">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>230</y>
-       <width>251</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QDateEdit" name="publicationDate">
      <property name="geometry">
       <rect>
@@ -504,21 +476,11 @@ background-color:none;</string>
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="ISBN">
+    <widget class="QLineEdit" name="isbn">
      <property name="geometry">
       <rect>
        <x>190</x>
        <y>330</y>
-       <width>251</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="InventoryNum">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>380</y>
        <width>251</width>
        <height>20</height>
       </rect>
@@ -708,7 +670,7 @@ background-color:none;</string>
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="rack">
+    <widget class="QLineEdit" name="shelf">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -718,7 +680,7 @@ background-color:none;</string>
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="shelf">
+    <widget class="QLineEdit" name="rack">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -728,7 +690,7 @@ background-color:none;</string>
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="position">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -874,7 +836,7 @@ background-color:none;</string>
       <string>Note</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="genreBox_5">
+    <widget class="QComboBox" name="availability">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -884,11 +846,31 @@ background-color:none;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: italic 10pt &quot;Arial&quot;;</string>
+      <string notr="true"/>
      </property>
      <item>
       <property name="text">
-       <string>pippo</string>
+       <string>disponibile</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>non disponibile</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>in quarantena</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>scartato</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>in prestito</string>
       </property>
      </item>
     </widget>
@@ -901,42 +883,6 @@ background-color:none;</string>
        <height>221</height>
       </rect>
      </property>
-    </widget>
-    <widget class="QComboBox" name="genreBox_6">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>70</y>
-       <width>241</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: italic 10pt &quot;Arial&quot;;</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>pippo</string>
-      </property>
-     </item>
-    </widget>
-    <widget class="QComboBox" name="genreBox_7">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>20</y>
-       <width>241</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: italic 10pt &quot;Arial&quot;;</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>pippo</string>
-      </property>
-     </item>
     </widget>
     <widget class="QPushButton" name="editButton_2">
      <property name="geometry">

@@ -22,8 +22,8 @@ class InventoryView(QMainWindow):
             self.quarantineCheckBox.stateChanged.connect(lambda: self.search())
             self.discardedCheckBox.stateChanged.connect(lambda: self.search())
 
-            self.addButton.clicked.connect(lambda: self.__go_to_cataloging_view(0))
-            self.modifyButton.clicked.connect(lambda: self.__go_to_cataloging_view(1))
+            # self.addButton.clicked.connect(lambda: self.__go_to_cataloging_view(0))
+            self.modifyButton.clicked.connect(lambda: self.__go_to_cataloging_view())
             self.discardButton.clicked.connect(lambda: self.discard_item())
             self.returnButton.clicked.connect(lambda: self.__go_back_button())
             self.showItemButton.clicked.connect(lambda: self.go_to_show_item())
@@ -94,11 +94,8 @@ class InventoryView(QMainWindow):
         for i in reversed(range(0, self.itemTable.rowCount())):
             self.itemTable.removeRow(i)
 
-    def __go_to_cataloging_view(self, mode):
-        if mode == 0:
-            self.cataloging_view = CatalogingView(self.widget)
-        elif mode == 1:
-            self.cataloging_view = CatalogingView(self.widget, self.__get_selected_item())
+    def __go_to_cataloging_view(self):
+        self.cataloging_view = CatalogingView(self.widget, self.__get_selected_item())
         self.cataloging_view.show()
 
 

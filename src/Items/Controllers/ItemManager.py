@@ -31,7 +31,7 @@ class ItemManager:
                 item.inner_state.append(ItemEnumerators.SMUSIEnum(inner_state.id))
 
             item.external_state = []
-            for external_state in self.dbms.get_item_external_states(item.id):
+            for external_state in  self.dbms.get_item_external_states(item.id):
                 item.external_state.append(ItemEnumerators.ExternalStateEnum(external_state.id))
 
             fitems.append(item)
