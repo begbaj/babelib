@@ -42,37 +42,40 @@ class UserCardView(QMainWindow):
         # Button
         self.editButton.setEnabled(True)
         self.returnButton.clicked.connect(self.back)
-        self.editButton.clicked.connect(self.enable_filed)
+        self.editButton.clicked.connect(self.edit)
         self.saveButton.clicked.connect(self.save)
         # Disable Field
         self.disable_field()
+        #Combo Box
+        self.setup_combo_box()
         # Load User
         self.load_user()
         self.style()
-        self.setup_combo_box()
+
 
     def style(self):
         self.nameField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
 
     def setup_new(self):
         # Button
+        self.enable_field()
         self.returnButton.clicked.connect(self.back)
         self.saveButton.clicked.connect(self.save_new)
         self.setup_combo_box()
 
     def setup_combo_box(self):
 
-        f = open(os.path.abspath("Database/DB Setting/gender.txt"), "r")
+        f = open(os.path.abspath("Database/db_settings/gender.txt"), "r")
         content_list = [line.rstrip('\n') for line in f]
         f.close()
         self.genderBox.addItems(content_list)
 
-        f = open(os.path.abspath("Database/DB Setting/district.txt"), "r")
+        f = open(os.path.abspath("Database/db_settings/district.txt"), "r")
         content_list = [line.rstrip('\n') for line in f]
         f.close()
         self.districtBox.addItems(content_list)
 
-        f = open(os.path.abspath("Database/DB Setting/user_type.txt"), "r")
+        f = open(os.path.abspath("Database/db_settings/user_type.txt"), "r")
         content_list = [line.rstrip('\n') for line in f]
         f.close()
         self.usertypeBox.addItems(content_list)
@@ -106,7 +109,7 @@ class UserCardView(QMainWindow):
         self.dateEdit.setReadOnly(True)
         self.dateEdit.setDisabled(True)
 
-    def enable_filed(self):
+    def enable_field(self):
         """
         Questa funzione setta tutti i campi presenti nella view come editabili
         :param: None
@@ -131,6 +134,9 @@ class UserCardView(QMainWindow):
         # Date enable
         self.dateEdit.setReadOnly(False)
         self.dateEdit.setDisabled(False)
+
+    def edit(self):
+        self.enable_field()
         self.editButton.setEnabled(False)
 
     def load_user(self):
@@ -152,7 +158,8 @@ class UserCardView(QMainWindow):
         self.telephonField.setText(self.user.telephone)
         # Combo Box
         self.genderBox.setCurrentText(self.user.gender)
-        # self.usertypeBox.setText(self.user.userType.description)
+        self.usertypeBox.setCurrentText(self.user.user_type)
+        self.districtBox.setCurrentText(self.user.district)
         # Date Edit
         self.dateEdit.setDate(self.user.birthdate)
 
@@ -169,6 +176,8 @@ class UserCardView(QMainWindow):
         self.user.telephone = self.telephonField.text()
         # Combo Box Update
         self.user.gender = self.genderBox.currentText()
+        self.user.district = self.districtBox.currentText()
+        self.user.user_type = self.usertypeBox.currentText()
         # self.user.contect_mode =
         # f", u.contect_mode = {user.contect_mode}"
         # f", u.privacy_agreement = {user.privacy_agreement}"
@@ -196,23 +205,23 @@ class UserCardView(QMainWindow):
         #    self.pop.show()
         '''
 
-
+        #self.user.user_type = self.usertypeBox.currentText()
 
         user = User(# id
                     '',#self.nationBox.currentText(),
-                    '',#self.usertypeBox.currentText(),
+                    self.usertypeBox.currentText(),
                     datetime.now().strftime("%Y-%m-%d %H:%M:%S"), # data di registrazione
                     self.nameField.text(),
                     self.surnameField.text(),
-                    '',#self.genderBox.currentText(),
+                    self.genderBox.currentText(),#self.genderBox.currentText(),
                     0,#Luogo di Nascita
                     "2000-01-01 00:00:00",#self.dateEdit.date().toPyDate(), # Data di nascita
                     self.cityField.text(),
                     self.addressField.text(),
                     self.capField.text(),
-                    0,#self.districtBox.currentText(),
+                    self.districtBox.currentText(),#self.districtBox.currentText(),
                     self.cellField.text(),
-                    0,#self.telephoneField.text(),
+                    '',#self.telephoneField.text(),
                     self.emailField.text(),
                     self.fiscalcodeField.text(),
                     0,# Contatto Preferenziale
