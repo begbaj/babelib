@@ -13,6 +13,7 @@ class HomeView(QMainWindow):
         self.widget = widget
         # Metodi Iniziali
         self.setup()
+        self.showMaximized()
 
     def setup(self):
         # Menu Button
@@ -32,8 +33,10 @@ class HomeView(QMainWindow):
         self.style()
 
     def style(self):
-        self.userButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
-        self.catalogingButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
+        # Menu Button Style
+        self.userButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
+        self.catalogingButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
+        # Frame Style
         self.frame.setStyleSheet(open("../designer/style/FrameTheme.txt", "r").read())
         pass
 
@@ -43,7 +46,7 @@ class HomeView(QMainWindow):
         self.userview.show()
 
     def __go_inventory_view(self):
-        self.itemview = InventoryView(self.widget)
+        self.itemview = InventoryView(self.widget, self)
         self.itemview.show()
 
     def __go_stats_view(self):

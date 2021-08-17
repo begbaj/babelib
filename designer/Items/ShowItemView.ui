@@ -37,7 +37,7 @@
     </property>
     <property name="styleSheet">
      <string notr="true">border:none;
-background-color: rgb(32, 30, 39)</string>
+background-color: rgb(26, 25, 39)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -142,7 +142,7 @@ background-color: rgb(32, 30, 39)</string>
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 190, 220, 240)</string>
+background-color:rgba(6, 163, 188,240)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -155,8 +155,8 @@ background-color:rgba(0, 190, 220, 240)</string>
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>431</width>
-       <height>671</height>
+       <width>581</width>
+       <height>751</height>
       </rect>
      </property>
      <property name="font">

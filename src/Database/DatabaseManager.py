@@ -34,11 +34,11 @@ class DatabaseManager:
         data = json.load(open(os.path.abspath("Database/db_settings/db.json")))
 
         _conn = mariadb.connect(
-            user=data["user"],
-            password=data["password"],
-            host=data["host"],
-            port=data["port"],
-            database=data["database"]
+            user=data['user'],
+            password=data['password'],
+            host=data['host'],
+            port=data['port'],
+            database=data['database']
         )
         self.cur = _conn.cursor(named_tuple=True)
         _conn.autocommit = True
@@ -115,7 +115,7 @@ class DatabaseManager:
                 f", u.telephone = '{user.telephone}'"
                 f", u.email = '{user.email}'"
                 f", u.fiscal_code = '{user.fiscal_code}'"
-                #f", u.contect_mode = {user.contect_mode}"
+                f", u.contect_mode = '{user.contect_mode}'"
                 #f", u.privacy_agreement = {user.privacy_agreement}"
                 f" where id = {user.id}")
 
@@ -130,7 +130,7 @@ class DatabaseManager:
                 f"  nationality, user_type"
                 f", registration_date, name, surname, gender, birthplace"
                 f", birthdate, city, address, postal_code, district, first_cellphone"
-                f", telephone, email, fiscal_code"#, contect_mode, privacy_agreement"
+                f", telephone, email, fiscal_code, contect_mode, privacy_agreement"
                 f")"
                 f" values "
                 f"("
@@ -150,8 +150,8 @@ class DatabaseManager:
                 f", '{user.telephone}'"
                 f", '{user.email}'"
                 f", '{user.fiscal_code}'"
-                #f", {user.contect_mode}"
-                #f", {user.privacy_agreement}"
+                f", '{user.contect_mode}'"
+                f", {user.privacy_agreement}"
                 f")"
 
             )
@@ -275,13 +275,13 @@ class DatabaseManager:
                     f" {item.discarded_date},{item.note});"
 
             for genre in item.genre:
-                query += f"INSERT INTO items_genres (item_id, genre_id) VALUES ({item.id, genre});"
+                query += f"INSERT INTO items_genres (item_id, genre_id) VALUES ({item.id, genre.value});"
 
             for state in item.inner_state:
-                query +=f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({item.id, state});"
+                query +=f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({item.id, state.value});"
 
             for state in item.external_state:
-                query += f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({item.id,state});"
+                query += f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({item.id,state.value});"
         else:
             ##TODO: aggiungere min level cataloging
             ##TODO: SISTEMARE CATALOGATION IN CATALOGING
@@ -378,6 +378,11 @@ class DatabaseManager:
                 f"INNER JOIN items_external_states AS ies ON ies.external_state_id = es.id " \
                 f"WHERE ies.item_id = {id};"
         return self.query(query, returns=True)
+
+    def get_genres(self):
+        query = f"SELECT * FROM genres"
+        return self.query(query, returns=True)
+
 
     def get_item_genres(self, id):
         query = f"SELECT * FROM genres AS g " \

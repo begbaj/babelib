@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QTableView, QDialog
+from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QTableView, QDialog, QMessageBox, QDialogButtonBox
 from PyQt5.uic import loadUi
 from datetime import datetime
 from src.Items.Controllers.ItemManager import ItemManager
@@ -11,8 +11,8 @@ class InventoryView(QMainWindow):
     __items = []
 
     # TODO: modifica documento, aggiungi documento, popup per scarta documento
-    def __init__(self, widget):
-        super(InventoryView, self).__init__()
+    def __init__(self, widget, parent):
+        super(InventoryView, self).__init__(parent)
         loadUi("../designer/Items/InventoryView.ui", self)
         self.widget = widget
 
@@ -24,10 +24,10 @@ class InventoryView(QMainWindow):
             self.discardedCheckBox.stateChanged.connect(lambda: self.search())
 
             # self.addButton.clicked.connect(lambda: self.__go_to_cataloging_view(0))
-            self.modifyButton.clicked.connect(lambda: self.__go_to_cataloging_view())
+            self.modifyButton.clicked.connect(lambda: self.edit_item())
             self.discardButton.clicked.connect(lambda: self.discard_item())
-            self.returnButton.clicked.connect(lambda: self.__go_back_button())
-            self.showItemButton.clicked.connect(lambda: self.__go_to_showitem_view())
+            self.returnButton.clicked.connect(lambda: self.__go_back())
+            self.showItemButton.clicked.connect(lambda: self.show_item())
         except Exception as err:
             print(err)
 
@@ -36,6 +36,36 @@ class InventoryView(QMainWindow):
     def search(self):
         self.__get_items()
         self.__update_table()
+
+    def add_item(self):
+        pass
+
+    def discard_item(self):
+        item = self.__get_selected_item()
+        if item is None:
+            ErrorMessage("Selezionare un elemento da scartare!").exec_()
+            return
+
+        discard = Dialog(f"Sei sicuro di voler scartare {item.title} di {item.author}?(Questa azione è irreversibile!)")
+        ok = discard.exec_()
+        if ok:
+            if not self.__get_selected_item().discarded:
+                self.itmManager.discard_item(self.__get_selected_item())
+        self.search()
+
+    def show_item(self):
+        if self.__get_selected_item() is None:
+            ErrorMessage("Selezionare un elemento per visualizzarlo!").exec_()
+        else:
+            self.__go_to_showitem_view()
+
+    def edit_item(self):
+        if self.__get_selected_item() is None:
+            ErrorMessage("Selezionare un elemento da modificare!").exec_()
+            return
+        self.__go_to_cataloging_view()
+
+    # region Private
 
     def __get_items(self):
         self.__items = []
@@ -66,26 +96,11 @@ class InventoryView(QMainWindow):
             self.itemTable.setItem(row, 6, QTableWidgetItem(item.note))
             row = row + 1
 
-    def go_back(self):
-        self.widget.setCurrentIndex(self.widget.currentIndex() - 1)
-
-    def add_item(self):
-        pass
-
-    def discard_item(self):
-        if not self.__get_selected_item().discarded:
-            self.itmManager.discard_item(self.__get_selected_item())
-
-    def show_item(self):
-        pass
-
-    def __go_back_button(self):
-        # TODO: fare in modo che ritorni indietro
-        self.close()
-
     def __get_selected_item(self):
         if self.itemTable.currentRow() != -1:
             return self.__items[self.itemTable.currentRow()]
+        else:
+            return None
 
     def __remove_rows(self):
         """
@@ -95,21 +110,38 @@ class InventoryView(QMainWindow):
         for i in reversed(range(0, self.itemTable.rowCount())):
             self.itemTable.removeRow(i)
 
+    def __go_back(self):
+        # self.widget.setCurrentIndex(self.widget.currentIndex() - 1)
+        self.close()
+
     def __go_to_cataloging_view(self):
         self.cataloging_view = CatalogingView(self.widget, self.__get_selected_item())
         self.cataloging_view.show()
 
     def __go_to_showitem_view(self):
-        if self.__get_selected_item() is None:
-            #printa errore ed esci
-            pass
         self.showitem_view = ShowItemView(self.widget, self.__get_selected_item())
         self.showitem_view.show()
 
+    # endregion
 
-class DiscardModalDialog(QDialog):
-    def __init__(self, item):
-        super(DiscardModalDialog, self).__init__()
-        loadUi("../designer/Pop-Up/DiscardPopUp.ui", self)
-        self.setWindowTitle('Error')
+
+class Dialog(QDialog):
+    def __init__(self, text):
+        super(Dialog, self).__init__()
+        loadUi("../designer/Pop-Up/Dialog.ui", self)
+        self.setWindowTitle('Attenzione')
         self.setModal(True)
+        self.text.setText(text)
+
+
+class ErrorMessage(QDialog):
+    def __init__(self, text, buttons=QDialogButtonBox.Ok):
+        super(ErrorMessage, self).__init__()
+        loadUi("../designer/Pop-up/ErrorMessage.ui", self)
+        self.setModal(True)
+        self.setWindowTitle("Errore")
+        self.buttonBox.setStandardButtons(buttons)
+        self.text.setText(text)
+        self.buttonBox.accepted.connect(super(ErrorMessage, self).accept)
+        self.buttonBox.rejected.connect(super(ErrorMessage, self).reject)
+

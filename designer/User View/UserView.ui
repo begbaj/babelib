@@ -51,7 +51,7 @@ background-color:rgba(0, 192, 225, 105)</string>
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>110</x>
        <y>70</y>
        <width>61</width>
        <height>21</height>
@@ -68,7 +68,7 @@ background-color:transparent;</string>
     <widget class="QLineEdit" name="surnameField">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>200</x>
        <y>70</y>
        <width>251</width>
        <height>21</height>
@@ -93,7 +93,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>110</x>
        <y>30</y>
        <width>51</width>
        <height>21</height>
@@ -110,7 +110,7 @@ background-color:transparent;</string>
     <widget class="QLineEdit" name="nameField">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>200</x>
        <y>30</y>
        <width>251</width>
        <height>21</height>
@@ -127,40 +127,6 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
      </property>
      <property name="placeholderText">
       <string/>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="searchButton">
-     <property name="geometry">
-      <rect>
-       <x>390</x>
-       <y>40</y>
-       <width>61</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton 
-{
-	border:none;
-	background-color:transparent
-}
-QPushButton::pressed
-{
-	background-color:rgb(48, 175, 230)
-}</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>Images/Icona Ricerca.png</normaloff>Images/Icona Ricerca.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>30</width>
-       <height>30</height>
-      </size>
      </property>
     </widget>
     <widget class="QTableWidget" name="userTable">
@@ -349,40 +315,6 @@ border-radius:10px;</string>
        <set>ItemIsEnabled</set>
       </property>
      </item>
-    </widget>
-    <widget class="QPushButton" name="refreshButton">
-     <property name="geometry">
-      <rect>
-       <x>460</x>
-       <y>40</y>
-       <width>61</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton 
-{
-	border:none;
-	background-color:transparent
-}
-QPushButton::pressed
-{
-	background-color:rgb(48, 175, 230)
-}</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>Images/Icona Refresh.png</normaloff>Images/Icona Refresh.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>35</width>
-       <height>35</height>
-      </size>
-     </property>
     </widget>
    </widget>
    <widget class="QFrame" name="frame_3">

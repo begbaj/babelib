@@ -41,17 +41,15 @@ class UserCardView(QMainWindow):
         """
         # Button
         self.editButton.setEnabled(True)
-        self.returnButton.clicked.connect(self.back)
         self.editButton.clicked.connect(self.edit)
         self.saveButton.clicked.connect(self.save)
         # Disable Field
         self.disable_field()
-        #Combo Box
+        # Combo Box
         self.setup_combo_box()
         # Load User
         self.load_user()
         self.style()
-
 
     def style(self):
         self.nameField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
@@ -62,6 +60,7 @@ class UserCardView(QMainWindow):
         self.returnButton.clicked.connect(self.back)
         self.saveButton.clicked.connect(self.save_new)
         self.setup_combo_box()
+        self.setup_radio_button()
 
     def setup_combo_box(self):
 
@@ -80,8 +79,35 @@ class UserCardView(QMainWindow):
         f.close()
         self.usertypeBox.addItems(content_list)
 
+    def setup_radio_button(self):
+        self.cellularRadio.toggled.connect(self.cell_contact)
+        self.emailRadio.toggled.connect(self.email_contact)
+        self.telephoneRadio.toggled.connect(self.telephone_contact)
 
+    def cell_contact(self):
+        if self.cellField.text() == '':
+            self.cellularRadio.setChecked(True)
+            self.cellularRadio.setChecked(False)
+            self.pop = Popup()
+            self.pop.show()
+        else:
+            pass
 
+    def email_contact(self):
+        if self.emailField.text() == '':
+            self.cellularRadio.setChecked(False)
+            self.pop = Popup()
+            self.pop.show()
+        else:
+            pass
+
+    def telephone_contact(self):
+        if self.telephonField.text() == '':
+            self.cellularRadio.setChecked(False)
+            self.pop = Popup()
+            self.pop.show()
+        else:
+            pass
 
     def disable_field(self):
         """
@@ -108,6 +134,10 @@ class UserCardView(QMainWindow):
         # Date disabled
         self.dateEdit.setReadOnly(True)
         self.dateEdit.setDisabled(True)
+        # Radio disabled
+        self.emailRadio.setDisabled(True)
+        self.cellularRadio.setDisabled(True)
+        self.telephoneRadio.setDisabled(True)
 
     def enable_field(self):
         """
@@ -134,6 +164,12 @@ class UserCardView(QMainWindow):
         # Date enable
         self.dateEdit.setReadOnly(False)
         self.dateEdit.setDisabled(False)
+        # Radio Button enable
+        self.emailRadio.setDisabled(False)
+        self.cellularRadio.setDisabled(False)
+        self.telephoneRadio.setDisabled(False)
+        # Box enable
+        self.privacyBox.setDisabled(False)
 
     def edit(self):
         self.enable_field()
@@ -162,6 +198,16 @@ class UserCardView(QMainWindow):
         self.districtBox.setCurrentText(self.user.district)
         # Date Edit
         self.dateEdit.setDate(self.user.birthdate)
+        # Combo box
+        if self.user.contect_mode == self.user.email:
+            self.emailRadio.setChecked(True)
+        elif self.user.contect_mode == self.user.first_cellphone:
+            self.cellularRadio.setChecked(True)
+        elif self.user.contect_mode == self.user.telephone:
+            self.telephoneRadio.setChecked(True)
+        # Privacy Box
+        if self.user.privacy_agreement:
+            self.privacyBox.setChecked(True)
 
     def update_user(self):
         # Line edit update
@@ -174,16 +220,26 @@ class UserCardView(QMainWindow):
         self.user.first_cellphone = self.cellField.text()
         self.user.email = self.emailField.text()
         self.user.telephone = self.telephonField.text()
-        # Combo Box Update
+        # Combo Box update
         self.user.gender = self.genderBox.currentText()
         self.user.district = self.districtBox.currentText()
         self.user.user_type = self.usertypeBox.currentText()
-        # self.user.contect_mode =
-        # f", u.contect_mode = {user.contect_mode}"
-        # f", u.privacy_agreement = {user.privacy_agreement}"
+        # Radio Button update
+        # self.user.contect_mode = self.update_contact()
         # Date update
         self.user.birthdate = self.dateEdit.date().toPyDate()
 
+        if self.privacyBox.isChecked():
+            self.user.privacy_agreement = True
+    '''
+    def update_contact(self):
+        if self.emailRadio.isChecked():
+            return self.user.email
+        elif self.cellularRadio.isChecked():
+            return self.user.first_cellphone
+        elif self.telephoneRadio.isChecked():
+            return self.user.telephone
+    '''
     def save(self):
         """
         Questa funzione permette di effettuare l'Update dell'utente con le informazioni modificate
@@ -196,42 +252,33 @@ class UserCardView(QMainWindow):
         self.show_popup()
 
     def save_new(self):
-        '''
-        #inserire tutti gli attributi dell'utente
-        #Controllo per i campi obbligaroi
-        #if self.nameField.text() == '' or self.surnameField.text() == '': # mettere altri condizioni
-        #    self.pop = Popup()
-        #    self.pop.label.setText("Inserire tutti i campi obbligatori")
-        #    self.pop.show()
-        '''
+        if self.nameField.text() == '' or self.surnameField.text() == '': # mettere altri condizioni
+            self.pop = Popup()
+            self.pop.label.setText("Inserire tutti i campi obbligatori")
+            self.pop.show()
 
-        #self.user.user_type = self.usertypeBox.currentText()
-
-        user = User(# id
-                    '',#self.nationBox.currentText(),
+        user = User('',#self.nationBox.currentText(),
                     self.usertypeBox.currentText(),
-                    datetime.now().strftime("%Y-%m-%d %H:%M:%S"), # data di registrazione
+                    datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                     self.nameField.text(),
                     self.surnameField.text(),
-                    self.genderBox.currentText(),#self.genderBox.currentText(),
+                    self.genderBox.currentText(),
                     0,#Luogo di Nascita
-                    "2000-01-01 00:00:00",#self.dateEdit.date().toPyDate(), # Data di nascita
+                    self.dateEdit.date().toPyDate(),
                     self.cityField.text(),
                     self.addressField.text(),
                     self.capField.text(),
-                    self.districtBox.currentText(),#self.districtBox.currentText(),
+                    self.districtBox.currentText(),
                     self.cellField.text(),
-                    '',#self.telephoneField.text(),
+                    self.telephonField.text(),
                     self.emailField.text(),
                     self.fiscalcodeField.text(),
-                    0,# Contatto Preferenziale
-                    0,# Privacy
+                    0,#self.update_contact(),
+                    self.privacyBox.isChecked(),# Privacy
                     )
-
+        self.saveButton.setEnabled(False)
         self.userM.add(user)
         print("Salvataggio avvenuto correttamente")
-
-
 
     def back(self):
         self.callback()

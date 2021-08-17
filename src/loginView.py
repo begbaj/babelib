@@ -11,31 +11,31 @@ class LoginView(QMainWindow):
     #     super(LoginView, self).__init__()
     #     loadUi("../designer/Login view/login.ui",self)
     #
-    #     self.LoginButton.clicked.connect(self.loginfunction)
-    #     self.PasswordField.setEchoMode(QtWidgets.QLineEdit.Password)
+    #     self.loginButton.clicked.connect(self.loginfunction)
+    #     self.passwordField.setEchoMode(QtWidgets.QLineEdit.Password)
 
     def __init__(self, widget):
         super(LoginView, self).__init__()
-        loadUi("../designer/Login view/login.ui", self)
+        loadUi("../designer/Login View/login.ui", self)
 
-        self.LoginButton.clicked.connect(self.login)
-        self.PasswordField.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.loginButton.clicked.connect(self.login)
+        self.passwordField.setEchoMode(QtWidgets.QLineEdit.Password)
         self.widget = widget
 
     def pass_compare(self, password, result):
         try:
             if password == result.password:
-                self.error_label.setText("")
+                self.errorLabel.setText("")
             else:
-                self.error_label.setText("Username o Password Sbagliati")
+                self.errorLabel.setText("Username o Password Sbagliati")
         except Exception as err:
-            self.error_label.setText(err)
+            self.errorLabel.setText(err)
 
     def login(self):
-        username = self.UsernameField.text()
-        password = self.PasswordField.text()
+        username = self.usernameField.text()
+        password = self.passwordField.text()
         if len(username) == 0 or len(password) == 0:
-            self.error_label.setText("Inserisci tutti i campi")
+            self.errorLabel.setText("Inserisci tutti i campi")
         else:
             result = self.__db.login(username)
             self.pass_compare(password, result)
