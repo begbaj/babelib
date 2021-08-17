@@ -12,11 +12,9 @@ class UserView(QMainWindow):
     def __init__(self, widget):
         super(UserView, self).__init__()
         loadUi("../designer/User view/UserView.ui", self)
-        # Variabili di Istanza
         self.users = self.userM.list()
         self.widget = widget
         self.pop = ''
-        # Metodi Iniziali
         self.load_data()
         self.setup()
 
@@ -26,24 +24,29 @@ class UserView(QMainWindow):
         self.backButton.clicked.connect(self.close)
         self.schedaButton.clicked.connect(self.__go_user_card)
         self.deleteButton.clicked.connect(self.delete)
-        self.refreshButton.clicked.connect(self.load_data)
-        self.searchButton.clicked.connect(self.search)
         # Ricerca Dinamica
         self.nameField.textChanged.connect(lambda: self.search())
         self.surnameField.textChanged.connect(lambda: self.search())
         # Metodo per Settare lo stile
         self.style()
 
-    # TODO sto effettuando test con il qss
     def style(self):
-        self.schedaButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
-        self.userButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
-        self.backButton.setStyleSheet(open("../designer/style/buttonTheame.txt", "r").read())
+        """
+        Questo metodo setta lo stile della view
+        :return:
+        """
+        self.schedaButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
+        self.userButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
+        self.backButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
         # self.nameField.setStyleSheet(open("../designer/style/davtheme.qss", "r").read())
         # self.nameField.setStyleSheet('background-color: orange')
 
-    # Metodo per visualizzare gli utenti nella tabella
     def load_table(self, users):
+        """
+        Questo metodo permette di rimpire la QTableWidget presente nella view con una lista di utenti
+        :param users:
+        :return: None
+        """
         row = 0
         self.userTable.setRowCount(len(users))
         for user in self.users:
@@ -55,17 +58,14 @@ class UserView(QMainWindow):
     def load_data(self):
         self.users = self.userM.list()
         self.load_table(self.users)
-        '''
-        self.userTable.setRowCount(len(self.users))
-        for user in self.users:
-            self.userTable.setItem(row, 0, QtWidgets.QTableWidgetItem(user.name))
-            self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
-            self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.city))
-            row = row + 1
-        '''
 
-    # Metodo per la ricerca degli utenti all'interno del sistema
+    # Region 'User Operation'
+
     def search(self):
+        """
+        Questo metodo consente la ricerca degli utenti all'interno del sistema
+        :return:
+        """
         # Reload all the Users
         if (self.nameField.text() == '') and (self.surnameField.text() == ''):
             self.load_data()
@@ -79,19 +79,6 @@ class UserView(QMainWindow):
         elif (self.nameField.text() != '') and (self.surnameField.text() != ''):
             self.load_data_research(self.userM.findNameSurname(self.nameField.text(), self.surnameField.text()))
 
-    def load_data_research(self, users):
-        self.users = users
-        self.load_table(self.users)
-        '''row = 0
-        sel
-        f.userTable.setRowCount(len(self.users))
-        for user in self.users:
-            self.userTable.setItem(row, 0, QtWidgets.QTableWidgetItem(user.name))
-            self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
-            self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.city))
-            row = row + 1
-        '''
-
     def delete(self):
         rowtable = self.userTable.currentRow()
         if rowtable == -1:
@@ -99,11 +86,23 @@ class UserView(QMainWindow):
         else:
             self.pop = DeletePopup(self.delete_user)
             self.pop.show()
-            # self.userM.delete(self.users[rowtable].id)
-            #self.users.remove(self.users[rowtable])
-            #self.userTable.removeRow(rowtable)
+
+    # endregion
+
+    def load_data_research(self, users):
+        """
+        Questo metodo riempe la tabella con quegli utenti che sono il risultato della ricerca
+        :param users:
+        :return: None
+        """
+        self.users = users
+        self.load_table(self.users)
 
     def delete_user(self):
+        """
+        Questo metodo permette di rimuovere l'utente selezionato dal sistema
+        :return: None
+        """
         row = self.userTable.currentRow()
         self.userM.delete(self.users[row].id)
         self.users.remove(self.users[row])
@@ -113,13 +112,23 @@ class UserView(QMainWindow):
         self.pop = Popup()
         self.pop.show()
 
-    # Metodi per andare nelle altre view
+    # Region 'View Links'
+
     def __go_new_user(self):
+        """
+        Questo metodo consente di andare nella view che permette di creare un nuovo utente
+        :return: None
+        """
         user = None
         self.view = UserCardView(self.widget, user, self.load_data)
         self.view.show()
 
     def __go_user_card(self):
+        """
+        Questo metodo consente di andare nella view che permette di visualizzare le informazioni
+        dell'utente selezionato a schermo
+        :return: None
+        """
         rowtable = self.userTable.currentRow()
         if rowtable == -1:
             self.show_popup()
@@ -128,9 +137,11 @@ class UserView(QMainWindow):
             self.view = UserCardView(self.widget, user, self.load_data)
             self.view.show()
 
+    # endregion
 
-# Classi per i POP UP
-# TODO mettere insieme tutti i pop up
+
+# Region 'Pop-Up'
+
 class Popup(QDialog):
     def __init__(self):
         super(Popup, self).__init__()
@@ -154,3 +165,5 @@ class DeletePopup(QDialog):
     def confirm(self):
         self.funct()
         self.close()
+
+    # endregion
