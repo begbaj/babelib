@@ -33,13 +33,13 @@ class User:
     def __init__(self):
         pass
 
-    def __init__(self,id, nationality_id, state_id, user_type_id, username
+    def __init__(self, nationality_id, state_id, user_type_id, username
                  , registration_date, name, surname, gender, birthplace
                  , birthdate, city, address, postal_code, distrit
                  ,first_cellphone, telephone, email, fiscal_code, contect_mode
                  ,privacy_agreement):
 
-        self.id = id
+        #self.id = id
         self.nationality_id = nationality_id
         self.state_id = state_id
         self.user_type_id = user_type_id
