@@ -78,28 +78,20 @@ class DatabaseManager:
 
         # List users
         try:
-            self.cur.execute(f"Select * from users u "
-                             f"left join nationalities n on n.id = u.nationality_id "
-                             f"left join nationalities n2 on n2.id = u.state_id "
-                             f"left join users_types us on us.id = u.user_type_id")
+            self.cur.execute(f"Select * from users u ")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
 
         for row in self.cur.fetchall():
-            user = User(row.nationality_id, row.state_id, row.user_type_id, row.username
+            user = User(row.nationality, row.user_type
                         , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.distrit
+                        , row.birthdate, row.city, row.address, row.postal_code, row.district
                         , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)  # row[25] è il code per lo stato di appartenenza
-
+                        , row.contect_mode, row.privacy_agreement)
             user.id = row.Id
 
-            user.Nationality_N = Nationality(row.nationality_id, row.code)
-            user.Nationality_S = Nationality(row.state_id, row[25])  # row[25] è il code per lo stato di appartenenza
-
             users.append(user)
-
         return users
 
     def set_user(self, user):
@@ -107,10 +99,8 @@ class DatabaseManager:
         try:
             self.cur.execute(
                 f"Update users u "
-                f"set u.nationality_id = {user.nationality_id}"
-                f", u.state_id = {user.state_id}"
-                f", u.user_type_id = {user.user_type_id}"
-                f", u.username = '{user.username}'"
+                f"set u.nationality = '{user.nationality}'"
+                f", u.user_type = '{user.user_type}'"
                 f", u.registration_date = '{user.registration_date}'"
                 f", u.name = '{user.name}'"
                 f", u.surname = '{user.surname}'"
@@ -120,7 +110,7 @@ class DatabaseManager:
                 f", u.city = '{user.city}'"
                 f", u.address = '{user.address}'"
                 f", u.postal_code = '{user.postal_code}'"
-                f", u.distrit = '{user.distrit}'"
+                f", u.district = '{user.district}'"
                 f", u.first_cellphone = '{user.first_cellphone}'"
                 f", u.telephone = '{user.telephone}'"
                 f", u.email = '{user.email}'"
@@ -137,17 +127,15 @@ class DatabaseManager:
             self.cur.execute(
                 f"Insert into users"
                 f" ("
-                f"  nationality_id, state_id, user_type_id, username"
+                f"  nationality, user_type"
                 f", registration_date, name, surname, gender, birthplace"
-                f", birthdate, city, address, postal_code, distrit, first_cellphone"
+                f", birthdate, city, address, postal_code, district, first_cellphone"
                 f", telephone, email, fiscal_code"#, contect_mode, privacy_agreement"
                 f")"
                 f" values "
                 f"("
-                f" {user.nationality_id}"
-                f", {user.state_id}"
-                f", {user.user_type_id}"
-                f", '{user.username}'"
+                f" '{user.nationality}'"
+                f", '{user.user_type}'"
                 f", '{user.registration_date}'"
                 f", '{user.name}'"
                 f", '{user.surname}'"
@@ -157,7 +145,7 @@ class DatabaseManager:
                 f", '{user.city}'"
                 f", '{user.address}'"
                 f", '{user.postal_code}'"
-                f", '{user.distrit}'"
+                f", '{user.district}'"
                 f", '{user.first_cellphone}'"
                 f", '{user.telephone}'"
                 f", '{user.email}'"
@@ -184,26 +172,18 @@ class DatabaseManager:
 
         try:
             self.cur.execute(f"Select * from users u "
-                             f"left join nationalities n on n.id = u.nationality_id "
-                             f"left join nationalities n2 on n2.id = u.state_id "
-                             f"left join users_types us on us.id = u.user_type_id "
                              f"where u.id = {id}")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
 
         for row in self.cur.fetchall():
-            user = User(row.nationality_id, row.state_id, row.user_type_id, row.username
+            user = User(row.nationality, row.user_type
                         , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.distrit
+                        , row.birthdate, row.city, row.address, row.postal_code, row.district
                         , row.first_cellphone, row.telephone, row.email, row.fiscal_code
                         , row.contect_mode, row.privacy_agreement)
-
             user.id = row.Id
-
-            user.Nationality_N = Nationality(row.nationality_id, row.code)
-            user.Nationality_S = Nationality(row.state_id, row[25])  # row[25] è il code per lo stato di appartenenza
-
         return user
 
     def find_user_by_name(self, name):
@@ -213,28 +193,20 @@ class DatabaseManager:
 
         try:
             self.cur.execute(f"SELECT * FROM users u "
-                             f"LEFT JOIN nationalities n ON n.id = u.nationality_id "
-                             f"LEFT JOIN nationalities n2 ON n2.id = u.state_id "
-                             f"LEFT JOIN users_types us ON us.id = u.user_type_id "
                              f"WHERE u.name LIKE '%{name}%'")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
 
         for row in self.cur.fetchall():
-            user = User(row.nationality_id, row.state_id, row.user_type_id, row.username
+            user = User(row.nationality, row.user_type
                         , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.distrit
+                        , row.birthdate, row.city, row.address, row.postal_code, row.district
                         , row.first_cellphone, row.telephone, row.email, row.fiscal_code
                         , row.contect_mode, row.privacy_agreement)
 
             user.id = row.Id
-
-            user.Nationality_N = Nationality(row.nationality_id, row.code)
-            user.Nationality_S = Nationality(row.state_id, row[25])  # row[25] è il code per lo stato di appartenenza
             users.append(user)
-
-
         return users
 
     def find_user_by_surname(self, surname):
@@ -244,27 +216,20 @@ class DatabaseManager:
 
         try:
             self.cur.execute(f"Select * from users u "
-                             f"left join nationalities n on n.id = u.nationality_id "
-                             f"left join nationalities n2 on n2.id = u.state_id "
-                             f"left join users_types us on us.id = u.user_type_id "
                              f"where u.surname LIKE '%{surname}%'")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
 
         for row in self.cur.fetchall():
-            user = User(row.nationality_id, row.state_id, row.user_type_id, row.username
+            user = User(row.nationality, row.user_type
                         , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.distrit
+                        , row.birthdate, row.city, row.address, row.postal_code, row.district
                         , row.first_cellphone, row.telephone, row.email, row.fiscal_code
                         , row.contect_mode, row.privacy_agreement)
 
             user.id = row.Id
-
-            user.Nationality_N = Nationality(row.nationality_id, row.code)
-            user.Nationality_S = Nationality(row.state_id, row[25])  # row[25] è il code per lo stato di appartenenza
             users.append(user)
-
         return users
 
     def find_user_by_name_and_surname(self, name, surname):
@@ -274,9 +239,6 @@ class DatabaseManager:
 
         try:
             self.cur.execute(f"Select * from users u "
-                             f"left join nationalities n on n.id = u.nationality_id "
-                             f"left join nationalities n2 on n2.id = u.state_id "
-                             f"left join users_types us on us.id = u.user_type_id "
                              f"where u.name LIKE '%{name}%'"
                              f"and u.surname LIKE '%{surname}%'")
 
@@ -284,18 +246,14 @@ class DatabaseManager:
             print(f"Error: {e}")
 
         for row in self.cur.fetchall():
-            user = User(row.nationality_id, row.state_id, row.user_type_id, row.username
+            user = User(row.nationality, row.user_type
                         , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.distrit
+                        , row.birthdate, row.city, row.address, row.postal_code, row.district
                         , row.first_cellphone, row.telephone, row.email, row.fiscal_code
                         , row.contect_mode, row.privacy_agreement)
 
             user.id = row.Id
-
-            user.Nationality_N = Nationality(row.nationality_id, row.code)
-            user.Nationality_S = Nationality(row.state_id, row[25])  # row[25] è il code per lo stato di appartenenza
             users.append(user)
-
         return users
 
     # endregion
