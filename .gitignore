@@ -24,7 +24,7 @@ pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
-src/Database/DB Setting/db.json
+src/Database/db_settings/db.json
 *.egg
 MANIFEST
 

@@ -29,9 +29,9 @@ class DatabaseManager:
         """
 
         #"root", "sa", "localhost", 3306, "babelib_db"
-        #C:\Users\DanieleB\PycharmProjects\babelib\src\Databse\DB Setting\db.json
+        #C:\Users\DanieleB\PycharmProjects\babelib\src\Databse\db_settings\db.json
 
-        data = json.load(open(os.path.abspath("Database/DB Setting/db.json")))
+        data = json.load(open(os.path.abspath("Database/db_settings/db.json")))
 
         _conn = mariadb.connect(
             user=data["user"],
