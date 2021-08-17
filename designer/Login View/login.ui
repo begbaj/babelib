@@ -64,7 +64,7 @@ border-color:rgb(27,25,39);</string>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLineEdit" name="UsernameField">
+    <widget class="QLineEdit" name="usernameField">
      <property name="geometry">
       <rect>
        <x>36</x>
@@ -79,13 +79,14 @@ background-color: rgba(23, 28, 78, 17);
 color:rgb(255, 255, 255);
 font: 16pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);</string>
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+padding: 10px</string>
      </property>
      <property name="placeholderText">
       <string notr="true">Username</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="PasswordField">
+    <widget class="QLineEdit" name="passwordField">
      <property name="geometry">
       <rect>
        <x>36</x>
@@ -100,7 +101,8 @@ background-color: rgba(23, 28, 78, 17);
 color:rgb(255, 255, 255);
 font: 16pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);</string>
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+padding: 10px</string>
      </property>
      <property name="echoMode">
       <enum>QLineEdit::Password</enum>
@@ -109,7 +111,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);</string>
       <string>Password</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="LoginButton">
+    <widget class="QPushButton" name="loginButton">
      <property name="geometry">
       <rect>
        <x>36</x>
@@ -205,7 +207,7 @@ border:null;</string>
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QLabel" name="error_label">
+    <widget class="QLabel" name="errorLabel">
      <property name="geometry">
       <rect>
        <x>40</x>

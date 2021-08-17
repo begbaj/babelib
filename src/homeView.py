@@ -43,7 +43,7 @@ class HomeView(QMainWindow):
         self.userview.show()
 
     def __go_inventory_view(self):
-        self.itemview = InventoryView(self.widget)
+        self.itemview = InventoryView(self.widget, self)
         self.itemview.show()
 
     def __go_stats_view(self):
