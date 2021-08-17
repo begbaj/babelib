@@ -274,16 +274,6 @@ border:none;</string>
      <property name="editable">
       <bool>true</bool>
      </property>
-     <item>
-      <property name="text">
-       <string>M</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>F</string>
-      </property>
-     </item>
     </widget>
     <widget class="QLineEdit" name="nameField">
      <property name="geometry">

@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QDialog, QMainWindow
 from PyQt5.uic import loadUi
 from datetime import datetime
-
+import os
 from src.Users.controllers.UserManager import UserManager
 from src.Users.models.User import User
 
@@ -49,6 +49,7 @@ class UserCardView(QMainWindow):
         # Load User
         self.load_user()
         self.style()
+        self.setup_combo_box()
 
     def style(self):
         self.nameField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
@@ -57,6 +58,26 @@ class UserCardView(QMainWindow):
         # Button
         self.returnButton.clicked.connect(self.back)
         self.saveButton.clicked.connect(self.save_new)
+        self.setup_combo_box()
+
+    def setup_combo_box(self):
+
+        f = open(os.path.abspath("Database/DB Setting/gender.txt"), "r")
+        content_list = [line.rstrip('\n') for line in f]
+        f.close()
+        self.genderBox.addItems(content_list)
+
+        f = open(os.path.abspath("Database/DB Setting/district.txt"), "r")
+        content_list = [line.rstrip('\n') for line in f]
+        f.close()
+        self.districtBox.addItems(content_list)
+
+        f = open(os.path.abspath("Database/DB Setting/user_type.txt"), "r")
+        content_list = [line.rstrip('\n') for line in f]
+        f.close()
+        self.usertypeBox.addItems(content_list)
+
+
 
 
     def disable_field(self):
@@ -131,7 +152,6 @@ class UserCardView(QMainWindow):
         self.telephonField.setText(self.user.telephone)
         # Combo Box
         self.genderBox.setCurrentText(self.user.gender)
-        self.nationBox.setCurrentText(self.user.Nationality_S.code)
         # self.usertypeBox.setText(self.user.userType.description)
         # Date Edit
         self.dateEdit.setDate(self.user.birthdate)
@@ -179,10 +199,8 @@ class UserCardView(QMainWindow):
 
 
         user = User(# id
-                    0,#self.nationBox.currentText(),
-                    0,#self.stateBox.currentText(),
-                    0,#self.usertypeBox.currentText(),
-                    0,#username , non so quale campo
+                    '',#self.nationBox.currentText(),
+                    '',#self.usertypeBox.currentText(),
                     datetime.now().strftime("%Y-%m-%d %H:%M:%S"), # data di registrazione
                     self.nameField.text(),
                     self.surnameField.text(),

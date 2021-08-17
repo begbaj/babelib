@@ -5,10 +5,9 @@ from src.Users.models.UserType import UserType
 class User:
 
     id = 0
-    nationality_id = 0
+    nationality = 0
     state_id = 0
-    user_type_id = 0
-    username = 0
+    user_type = 0
     registration_date = '2000-01-01 00:00:00'
     name = ''
     surname = ''
@@ -18,7 +17,7 @@ class User:
     city = ''
     address = ''
     postal_code = ''
-    distrit = ''
+    district = ''
     first_cellphone = ''
     telephone = ''
     email = ''
@@ -26,24 +25,19 @@ class User:
     contect_mode = ''
     privacy_agreement = 0
 
-    Nationality_N = None
-    Nationality_S = None
-    userType = None
 
     def __init__(self):
         pass
 
-    def __init__(self, nationality_id, state_id, user_type_id, username
+    def __init__(self, nationality, user_type
                  , registration_date, name, surname, gender, birthplace
-                 , birthdate, city, address, postal_code, distrit
+                 , birthdate, city, address, postal_code, district
                  ,first_cellphone, telephone, email, fiscal_code, contect_mode
                  ,privacy_agreement):
 
         #self.id = id
-        self.nationality_id = nationality_id
-        self.state_id = state_id
-        self.user_type_id = user_type_id
-        self.username = username
+        self.nationality = nationality
+        self.user_type = user_type
         self.registration_date = registration_date
         self.name = name
         self.surname = surname
@@ -53,7 +47,7 @@ class User:
         self.city = city
         self.address = address
         self.postal_code = postal_code
-        self.distrit = distrit
+        self.district = district
         self.first_cellphone = first_cellphone
         self.telephone = telephone
         self.email = email
