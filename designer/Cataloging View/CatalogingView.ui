@@ -455,6 +455,21 @@ background-color:none;</string>
        <height>21</height>
       </rect>
      </property>
+     <item>
+      <property name="text">
+       <string>monografia</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>analitico</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>periodico</string>
+      </property>
+     </item>
     </widget>
     <widget class="QComboBox" name="type">
      <property name="geometry">
@@ -465,6 +480,81 @@ background-color:none;</string>
        <height>21</height>
       </rect>
      </property>
+     <item>
+      <property name="text">
+       <string>cartografia a stampa</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>cartografia manoscritta</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>libretto</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>test a stampa</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>materiale grafico</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>materiale multimediale</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>musica manoscritta</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>musica a stampa</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>materiale video</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>nota illustrativa</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>oggetto a tre dimensioni</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>risorsa elettronica</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>registrazione non musicale</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>registrazione musicale</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>testo manoscritto</string>
+      </property>
+     </item>
     </widget>
     <widget class="QDateEdit" name="publicationDate">
      <property name="geometry">

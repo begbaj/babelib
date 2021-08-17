@@ -39,14 +39,24 @@ class CatalogingView(QMainWindow):
         self.shelf.setText(str(self.item.shelf))
         self.rack.setText(str(self.item.rack))
         self.position.setText(str(self.item.position))
+        self.nature.setCurrentIndex(self.item.nature.value-1)
+        self.type.setCurrentIndex(self.item.type.value-1)
+        #self.inner_state.setCurrentIndex(self.item.inner_state)
 
         SMUSIList = []
         for i in range(0, len(SMUSIEnum)):
             SMUSIList.append(SMUSIEnum(i).name)
+            #lista di Id
         for index, element in enumerate(SMUSIList):
             self.inner_state.addItem(element)
             item = self.inner_state.model().item(index, 0)
             item.setCheckState(Qt.Unchecked)
+
+        for index, element in enumerate(SMUSIList):
+            for k in range(0,len(self.item.inner_state)):
+                if element == self.item.inner_state[k].value: #name
+                    item = self.inner_state.model().item(index,0)
+                    item.setCheckState(Qt.Checked)
 
         ExternalStateList = []
         for i in range(1, len(ExternalStateEnum)+1):
@@ -56,6 +66,12 @@ class CatalogingView(QMainWindow):
             item = self.external_state.model().item(index, 0)
             item.setCheckState(Qt.Unchecked)
 
+        for index, element in enumerate(ExternalStateList):
+            for k in range(0,len(self.item.external_state)):
+                if element == self.item.external_state[k].value:
+                    item = self.external_state.model().item(index,0)
+                    item.setCheckState(Qt.Checked)
+
         GenreList = []
         for i in self.dbms.get_genres():
             GenreList.append(i.description)
@@ -63,6 +79,15 @@ class CatalogingView(QMainWindow):
             self.genre.addItem(element)
             item = self.genre.model().item(index, 0)
             item.setCheckState(Qt.Unchecked)
+
+        for index, element in enumerate(GenreList):
+            for k in range(0,len(self.item.genre)):
+                if element == self.item.genre[k]['description']:
+                    item = self.genre.model().item(index,0)
+                    item.setCheckState(Qt.Checked)
+
+        # for i in self.item.genre:
+        #     self.genre.setCurrentIndex(i['id'])
 
 
 class CheckableComboBox(QComboBox):
@@ -78,3 +103,12 @@ class CheckableComboBox(QComboBox):
             item.setCheckState(Qt.Unchecked)
         else:
             item.setCheckState(Qt.Checked)
+
+    def hidePopup(self):
+        pass
+
+    def check(self, index):
+        self.model().itemFromIndex(index).setCheckState(Qt.Checked)
+
+    def uncheck(self, index):
+        self.model().itemFromIndex(index).setCheckState(Qt.Unchecked)
