@@ -20,7 +20,21 @@ class ItemManager:
     def get_items(self, search_field: str, search_mode: int, quarantined=False, discarded=-1) -> [Item]:
         fitems = []
         for dbitem in self.dbms.get_items(search_field, search_mode, quarantined, discarded):
-            fitems.append(self.__convert_dbitem(dbitem))
+            item = self.__convert_dbitem(dbitem)
+
+            item.genre = []
+            for genre in self.dbms.get_item_genres(item.id):
+                item.genre.append({'id': genre.id, 'description': genre.description})
+
+            item.inner_state = []
+            for inner_state in self.dbms.get_item_inner_states(item.id):
+                item.inner_state.append(ItemEnumerators.SMUSIEnum(inner_state.id))
+
+            item.external_state = []
+            for external_state in self.dbms.get_item_external_states(item.id):
+                item.external_state.append(ItemEnumerators.ExternalStateEnum(external_state.id))
+
+            fitems.append(item)
         return fitems
 
     def edit_item(self, item: Item) -> None:
@@ -28,10 +42,6 @@ class ItemManager:
         edit item
         :param item: edited item
         """
-        # id, bid = "", inventory_num = "", isbn = "", title = "", author = "", catalogation_level = "",
-        # material = "", nature = "", type = "", publication_date = "", lang = "", genre = "", inner_state = "",
-        # external_state = "", rack = "", shelf = "", position = "", opac_visibility = "", price = "", availability = "",
-        # quarantine_start_date = "", quarantine_end_date = "", discarded = "", discarded_date = "", note = 0
         self.dbms.edit_item(item)
 
     def edit_availability (self, item: Item, availability: AvailabilityEnum) -> None:

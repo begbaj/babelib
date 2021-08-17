@@ -327,6 +327,7 @@ class DatabaseManager:
         # publication_state=None, rack=None, shelf=None, position=None, opac_visibility=None, price=None,
         # quarantine_start_date=None, quarantine_end_date=None, discarded=None, discarded_date=None, note=None
         query = ""
+
         if search_mode == 0:
             query += f"SELECT * FROM items where (bid like '%{search_field}%'" \
                     f"or isbn like '%{search_field}%'" \
@@ -397,6 +398,26 @@ class DatabaseManager:
         """
         query = f"DELETE FROM items WHERE Id = {item.id};"
         self.query(query)
+
+    def get_item_inner_states(self, id):
+        query = f"SELECT * FROM inner_states AS ins " \
+                f"INNER JOIN items_inner_states AS iis ON iis.inner_state_id = ins.id "\
+                f"WHERE iis.item_id = {id};"
+        return self.query(query, returns=True)
+
+    def get_item_external_states(self, id):
+        query = f"SELECT * FROM external_states AS es " \
+                f"INNER JOIN items_external_states AS ies ON ies.external_state_id = es.id " \
+                f"WHERE ies.item_id = {id};"
+        return self.query(query, returns=True)
+
+    def get_item_genres(self, id):
+        query = f"SELECT * FROM genres AS g " \
+                f"INNER JOIN items_genres AS ig ON ig.genre_id = g.id " \
+                f"WHERE ig.item_id = {id};"
+        return self.query(query, returns=True)
+
+
 
     # endregion
 

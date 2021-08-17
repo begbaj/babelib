@@ -145,7 +145,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);</string>
       <rect>
        <x>70</x>
        <y>160</y>
-       <width>111</width>
+       <width>241</width>
        <height>31</height>
       </rect>
      </property>
@@ -165,7 +165,7 @@ border:null;</string>
       <rect>
        <x>74</x>
        <y>268</y>
-       <width>91</width>
+       <width>241</width>
        <height>31</height>
       </rect>
      </property>
@@ -199,10 +199,10 @@ border:null;</string>
       <enum>Qt::RichText</enum>
      </property>
      <property name="pixmap">
-      <pixmap>Images/profile.png</pixmap>
+      <pixmap>../img/profile.png</pixmap>
      </property>
      <property name="scaledContents">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
     </widget>
     <widget class="QLabel" name="error_label">
@@ -261,7 +261,7 @@ background-color:transparent;</string>
       <enum>Qt::RichText</enum>
      </property>
      <property name="pixmap">
-      <pixmap>Images/lock-icon.png</pixmap>
+      <pixmap>../img/lock-icon.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -287,7 +287,7 @@ background-color:transparent;</string>
       <enum>Qt::RichText</enum>
      </property>
      <property name="pixmap">
-      <pixmap>Images/User_icon.icns</pixmap>
+      <pixmap>../img/User_icon.icns</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -316,7 +316,7 @@ background-color:transparent;</string>
      <pixmap>Images/Babelib-removebg-preview.png</pixmap>
     </property>
     <property name="scaledContents">
-     <bool>true</bool>
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QToolButton" name="toolButton">
@@ -363,7 +363,7 @@ border-style: outset;</string>
      <enum>Qt::RichText</enum>
     </property>
     <property name="pixmap">
-     <pixmap>Images/remix.png</pixmap>
+     <pixmap>../img/remix.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -374,7 +374,6 @@ border-style: outset;</string>
    <zorder>toolButton</zorder>
    <zorder>label_3</zorder>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

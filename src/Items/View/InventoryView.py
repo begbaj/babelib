@@ -12,28 +12,39 @@ class InventoryView(QMainWindow):
     # TODO: modifica documento, aggiungi documento, popup per scarta documento
     def __init__(self, widget):
         super(InventoryView, self).__init__()
-        loadUi("../designer/Inventory view/InventoryView.ui", self)
+        loadUi("../designer/Items/InventoryView.ui", self)
         self.widget = widget
 
         try:
-            self.searchButton.clicked.connect(lambda: self.get_items())
+            self.itemTable.setSelectionBehavior(QTableView.SelectRows)
+
+            self.searchField.textChanged.connect(lambda: self.search())
+            self.quarantineCheckBox.stateChanged.connect(lambda: self.search())
+            self.discardedCheckBox.stateChanged.connect(lambda: self.search())
+
             self.addButton.clicked.connect(lambda: self.__go_to_cataloging_view(0))
             self.modifyButton.clicked.connect(lambda: self.__go_to_cataloging_view(1))
             self.discardButton.clicked.connect(lambda: self.discard_item())
-            self.itemTable.setSelectionBehavior(QTableView.SelectRows)
             self.returnButton.clicked.connect(lambda: self.__go_back_button())
             self.showItemButton.clicked.connect(lambda: self.go_to_show_item())
         except Exception as err:
             print(err)
 
-        self.itemTable.clearSelection()
-        self.__remove_rows()
+        self.search()
 
-    def get_items(self):
+    def search(self):
+        self.__get_items()
+        self.__update_table()
+
+    def __get_items(self):
         self.__items = []
-        self.__items = self.itmManager.get_items(self.searchField.text(), self.searchMode.currentIndex(),
+        self.__items = self.itmManager.get_items(self.searchField.text(),
+                                                 self.searchMode.currentIndex(),
                                                  self.quarantineCheckBox.isChecked(),
                                                  self.discardedCheckBox.isChecked())
+
+    def __update_table(self):
+        self.itemTable.clearSelection()
         self.__remove_rows()
         for item in self.__items:
             row = self.itemTable.rowCount()
@@ -97,4 +108,3 @@ class DiscardModalDialog(QDialog):
         loadUi("../designer/Pop-Up/DiscardPopUp.ui", self)
         self.setWindowTitle('Error')
         self.setModal(True)
-
