@@ -1,8 +1,9 @@
 from PyQt5.QtWidgets import QDialog, QMainWindow
 from PyQt5.uic import loadUi
-# from datetime import datetime
+from datetime import datetime
+
 from src.Users.controllers.UserManager import UserManager
-# from src.Users.models.User import User
+from src.Users.models.User import User
 
 
 class UserCardView(QMainWindow):
@@ -54,8 +55,9 @@ class UserCardView(QMainWindow):
 
     def setup_new(self):
         # Button
-        self.returnButton.clicked.connect(self.close)
+        self.returnButton.clicked.connect(self.back)
         self.saveButton.clicked.connect(self.save_new)
+
 
     def disable_field(self):
         """
@@ -165,38 +167,44 @@ class UserCardView(QMainWindow):
         self.show_popup()
 
     def save_new(self):
-        # TODO inserire tutti gli attributi dell'utente
-        # Controllo per i campi obbligaroi
-        if self.nameField.text() == '' or self.surnameField.text() == '': # mettere altri condizioni
-            self.pop = Popup()
-            self.pop.label.setText("Inserire tutti i campi obbligatori")
-            self.pop.show()
-
         '''
+        #inserire tutti gli attributi dell'utente
+        #Controllo per i campi obbligaroi
+        #if self.nameField.text() == '' or self.surnameField.text() == '': # mettere altri condizioni
+        #    self.pop = Popup()
+        #    self.pop.label.setText("Inserire tutti i campi obbligatori")
+        #    self.pop.show()
+        '''
+
+
+
         user = User(# id
-                    self.nationBox.currentText(),
-                    self.stateBox.currentText(),
-                    self.usertypeBox.currentText(),
-                    #username , non so quale campo
-                    datetime.now().strftime("%d/%m/%Y %H:%M:%S"), # data di registrazione
+                    0,#self.nationBox.currentText(),
+                    0,#self.stateBox.currentText(),
+                    0,#self.usertypeBox.currentText(),
+                    0,#username , non so quale campo
+                    datetime.now().strftime("%Y-%m-%d %H:%M:%S"), # data di registrazione
                     self.nameField.text(),
                     self.surnameField.text(),
-                    self.genderBox.currentText(),
-                    # Luogo di Nascita
-                    self.dateEdit.date().toPyDate() # Data di nascita
+                    '',#self.genderBox.currentText(),
+                    0,#Luogo di Nascita
+                    "2000-01-01 00:00:00",#self.dateEdit.date().toPyDate(), # Data di nascita
                     self.cityField.text(),
                     self.addressField.text(),
                     self.capField.text(),
-                    self.districtBox.currentText(),
+                    0,#self.districtBox.currentText(),
                     self.cellField.text(),
-                    self.telephoneField.text(),
+                    0,#self.telephoneField.text(),
                     self.emailField.text(),
                     self.fiscalcodeField.text(),
-                    # Contatto Preferenziale
-                    # Privacy
+                    0,# Contatto Preferenziale
+                    0,# Privacy
                     )
-        '''
-        pass
+
+        self.userM.add(user)
+        print("Salvataggio avvenuto correttamente")
+
+
 
     def back(self):
         self.callback()

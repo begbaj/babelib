@@ -87,11 +87,13 @@ class DatabaseManager:
             print(f"Error: {e}")
 
         for row in self.cur.fetchall():
-            user = User(row.Id, row.nationality_id, row.state_id, row.user_type_id, row.username
+            user = User(row.nationality_id, row.state_id, row.user_type_id, row.username
                         , row.registration_date, row.name, row.surname, row.gender, row.birthplace
                         , row.birthdate, row.city, row.address, row.postal_code, row.distrit
                         , row.first_cellphone, row.telephone, row.email, row.fiscal_code
                         , row.contect_mode, row.privacy_agreement)  # row[25] è il code per lo stato di appartenenza
+
+            user.id = row.Id
 
             user.Nationality_N = Nationality(row.nationality_id, row.code)
             user.Nationality_S = Nationality(row.state_id, row[25])  # row[25] è il code per lo stato di appartenenza
@@ -126,7 +128,7 @@ class DatabaseManager:
                 #f", u.contect_mode = {user.contect_mode}"
                 #f", u.privacy_agreement = {user.privacy_agreement}"
                 f" where id = {user.id}")
-            self.f = 0
+
         except mariadb.Error as e:
             print(f"Error: {e}")
 
@@ -138,35 +140,35 @@ class DatabaseManager:
                 f"  nationality_id, state_id, user_type_id, username"
                 f", registration_date, name, surname, gender, birthplace"
                 f", birthdate, city, address, postal_code, distrit, first_cellphone"
-                f", telephone, email, fiscal_code, contect_mode, privacy_agreement"
+                f", telephone, email, fiscal_code"#, contect_mode, privacy_agreement"
                 f")"
                 f" values "
                 f"("
                 f" {user.nationality_id}"
                 f", {user.state_id}"
                 f", {user.user_type_id}"
-                f", {user.username}"
-                f", {user.registration_date}"
-                f", {user.name}"
-                f", {user.surname}"
-                f", {user.gender}"
-                f", {user.birthplace}"
-                f", {user.birthdate}"
-                f", {user.city}"
-                f", {user.address}"
-                f", {user.postal_code}"
-                f", {user.distrit}"
-                f", {user.first_cellphone}"
-                f", {user.telephone}"
-                f", {user.email}"
-                f", {user.fiscal_code}"
-                f", {user.contect_mode}"
-                f", {user.privacy_agreement}"
+                f", '{user.username}'"
+                f", '{user.registration_date}'"
+                f", '{user.name}'"
+                f", '{user.surname}'"
+                f", '{user.gender}'"
+                f", '{user.birthplace}'"
+                f", '{user.birthdate}'"
+                f", '{user.city}'"
+                f", '{user.address}'"
+                f", '{user.postal_code}'"
+                f", '{user.distrit}'"
+                f", '{user.first_cellphone}'"
+                f", '{user.telephone}'"
+                f", '{user.email}'"
+                f", '{user.fiscal_code}'"
+                #f", {user.contect_mode}"
+                #f", {user.privacy_agreement}"
                 f")"
 
             )
 
-            self.cur.commit()
+            #self.cur.commit()
 
         except mariadb.Error as e:
             print(f"Error: {e}")
@@ -191,11 +193,13 @@ class DatabaseManager:
             print(f"Error: {e}")
 
         for row in self.cur.fetchall():
-            user = User(row.Id, row.nationality_id, row.state_id, row.user_type_id, row.username
+            user = User(row.nationality_id, row.state_id, row.user_type_id, row.username
                         , row.registration_date, row.name, row.surname, row.gender, row.birthplace
                         , row.birthdate, row.city, row.address, row.postal_code, row.distrit
                         , row.first_cellphone, row.telephone, row.email, row.fiscal_code
                         , row.contect_mode, row.privacy_agreement)
+
+            user.id = row.Id
 
             user.Nationality_N = Nationality(row.nationality_id, row.code)
             user.Nationality_S = Nationality(row.state_id, row[25])  # row[25] è il code per lo stato di appartenenza
@@ -218,11 +222,13 @@ class DatabaseManager:
             print(f"Error: {e}")
 
         for row in self.cur.fetchall():
-            user = User(row.Id, row.nationality_id, row.state_id, row.user_type_id, row.username
+            user = User(row.nationality_id, row.state_id, row.user_type_id, row.username
                         , row.registration_date, row.name, row.surname, row.gender, row.birthplace
                         , row.birthdate, row.city, row.address, row.postal_code, row.distrit
                         , row.first_cellphone, row.telephone, row.email, row.fiscal_code
                         , row.contect_mode, row.privacy_agreement)
+
+            user.id = row.Id
 
             user.Nationality_N = Nationality(row.nationality_id, row.code)
             user.Nationality_S = Nationality(row.state_id, row[25])  # row[25] è il code per lo stato di appartenenza
@@ -247,11 +253,13 @@ class DatabaseManager:
             print(f"Error: {e}")
 
         for row in self.cur.fetchall():
-            user = User(row.Id, row.nationality_id, row.state_id, row.user_type_id, row.username
+            user = User(row.nationality_id, row.state_id, row.user_type_id, row.username
                         , row.registration_date, row.name, row.surname, row.gender, row.birthplace
                         , row.birthdate, row.city, row.address, row.postal_code, row.distrit
                         , row.first_cellphone, row.telephone, row.email, row.fiscal_code
                         , row.contect_mode, row.privacy_agreement)
+
+            user.id = row.Id
 
             user.Nationality_N = Nationality(row.nationality_id, row.code)
             user.Nationality_S = Nationality(row.state_id, row[25])  # row[25] è il code per lo stato di appartenenza
@@ -276,11 +284,13 @@ class DatabaseManager:
             print(f"Error: {e}")
 
         for row in self.cur.fetchall():
-            user = User(row.Id, row.nationality_id, row.state_id, row.user_type_id, row.username
+            user = User(row.nationality_id, row.state_id, row.user_type_id, row.username
                         , row.registration_date, row.name, row.surname, row.gender, row.birthplace
                         , row.birthdate, row.city, row.address, row.postal_code, row.distrit
                         , row.first_cellphone, row.telephone, row.email, row.fiscal_code
                         , row.contect_mode, row.privacy_agreement)
+
+            user.id = row.Id
 
             user.Nationality_N = Nationality(row.nationality_id, row.code)
             user.Nationality_S = Nationality(row.state_id, row[25])  # row[25] è il code per lo stato di appartenenza
