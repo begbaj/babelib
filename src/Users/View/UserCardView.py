@@ -206,7 +206,7 @@ class UserCardView(QMainWindow):
         elif self.user.contect_mode == self.user.telephone:
             self.telephoneRadio.setChecked(True)
         # Privacy Box
-        if self.user.privacy_agreement == True:
+        if self.user.privacy_agreement:
             self.privacyBox.setChecked(True)
 
     def update_user(self):
@@ -225,13 +225,13 @@ class UserCardView(QMainWindow):
         self.user.district = self.districtBox.currentText()
         self.user.user_type = self.usertypeBox.currentText()
         # Radio Button update
-        self.user.contect_mode = self.update_contact()
+        # self.user.contect_mode = self.update_contact()
         # Date update
         self.user.birthdate = self.dateEdit.date().toPyDate()
 
         if self.privacyBox.isChecked():
             self.user.privacy_agreement = True
-
+    '''
     def update_contact(self):
         if self.emailRadio.isChecked():
             return self.user.email
@@ -239,7 +239,7 @@ class UserCardView(QMainWindow):
             return self.user.first_cellphone
         elif self.telephoneRadio.isChecked():
             return self.user.telephone
-
+    '''
     def save(self):
         """
         Questa funzione permette di effettuare l'Update dell'utente con le informazioni modificate
@@ -273,10 +273,10 @@ class UserCardView(QMainWindow):
                     self.telephonField.text(),
                     self.emailField.text(),
                     self.fiscalcodeField.text(),
-                    self.update_contact(),
-                    0,# Privacy
+                    0,#self.update_contact(),
+                    self.privacyBox.isChecked(),# Privacy
                     )
-
+        self.saveButton.setEnabled(False)
         self.userM.add(user)
         print("Salvataggio avvenuto correttamente")
 
