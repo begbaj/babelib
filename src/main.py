@@ -11,6 +11,7 @@ from loginView import LoginView
 ## TODO: usare qss e qrc per i temi e le icone
 ## TODO: refactoring del database (molti campi non contengono il tipo giusto e alcuni sono anche scritti male)
 ## TODO: inserire asterischi nei campi obbligatori e sengalare utente nel caso di mancata compilazione
+## TODO: DOCUMENTAZIONE
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = QtWidgets.QStackedWidget()

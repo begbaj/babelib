@@ -305,15 +305,15 @@ class DatabaseManager:
     def insert_item(self,item) -> None:
         if item.cataloging_level == CatalogingLevel.max:
             query = f"INSERT INTO items"\
-                    f" (material_id, nature_id, type_id, lang_id, availability, bid, inventory_num, isbn,"\
+                    f" (material_id, nature_id, type_id, lang_id, availability, bid, isbn,"\
                     f" title, author, cataloging_level, publication_date, publication_state, rack, shelf, position," \
-                    f" opac_visibility, price, quarantine_start_date, quarantine_end_date, discarded, discarded_date, note)"\
+                    f" opac_visibility, price, quarantine_start_date, quarantine_end_date, discarded_date, note)"\
                     f" VALUES "\
                     f" (" \
                     f" {item.material}, {item.nature}, {item.type}, {item.lang}, {item.availability}, {item.bid},"\
-                    f" {item.inventory_num}, {item.isbn}, {item.title}, {item.author}, {item.cataloging_level}, {item.publication_date}," \
+                    f" {item.isbn}, {item.title}, {item.author}, {item.cataloging_level}, {item.publication_date}," \
                     f" {item.rack}, {item.shelf}, {item.position},"\
-                    f" {item.opac_visibility},{item.price},{item.quarantine_start_date},{item.quarantine_end_date},{item.discarded},"\
+                    f" {item.opac_visibility},{item.price},{item.quarantine_start_date},{item.quarantine_end_date},"\
                     f" {item.discarded_date},{item.note});"
 
             for genre in item.genre:
@@ -339,7 +339,6 @@ class DatabaseManager:
         query = ""
         if search_mode == 0:
             query += f"SELECT * FROM items where (bid like '%{search_field}%'" \
-                    f"or inventory_num like '%{search_field}%'" \
                     f"or isbn like '%{search_field}%'" \
                     f"or title like '%{search_field}%'" \
                     f"or author like '%{search_field}%'" \
@@ -352,18 +351,16 @@ class DatabaseManager:
             query += f"SELECT * FROM items WHERE isbn LIKE '%{search_field}%'"
         elif search_mode == 4: #BID
             query += f"SELECT * FROM items WHERE bid LIKE '%{search_field}%'"
-        elif search_mode == 5: #Inventory number
-            query += f"SELECT * FROM items WHERE inventory_num LIKE '%{search_field}%'"
-        elif search_mode == 6: #Note
+        elif search_mode == 5: #Note
             query += f"SELECT * FROM items WHERE note LIKE '%{search_field}%'"
         else:
             raise Exception("invalid search_mode")
 
         if not show_quarantined:
-            query += " AND quarantine_end_date <= CURRENT_DATE"
+            query += " AND (availability <> 3  or quarantine_end_date <= CURRENT_DATE )"
 
         if not show_discarded:
-            query += " AND discarded = 0"
+            query += " AND availability <> 4"
 
         return self.query(query, returns=True)
 
@@ -375,12 +372,10 @@ class DatabaseManager:
         query = f"update items set " \
                 f"material_id = {item.material.value}, nature_id = {item.nature.value}, type_id = {item.type.value}, "\
                 f"lang_id = {item.lang.value}, availability = {item.availability.value}, bid = '{item.bid}', "\
-                f"inventory_num={item.inventory_num}, isbn={item.isbn}, title= '{item.title}', author= '{item.author}', "\
-                f"cataloging_level={item.cataloging_level.value},"\
-                f"pubblication_state='{item.publication_state}', rack={item.rack}, shelf={item.shelf}, position={item.position}, " \
-                f"opac_visibility={item.opac_visibility}, price={item.price}, " \
-                f"discarded={item.discarded}, " \
-                f"note= '{item.note}', "
+                f"isbn= '{item.isbn}', title= '{item.title}', author= '{item.author}', "\
+                f"cataloging_level={item.cataloging_level.value}, publication_state = {item.publication_state}, " \
+                f"rack={item.rack}, shelf='{item.shelf}', position={item.position}," \
+                f"opac_visibility={item.opac_visibility}, price={item.price}, note= '{item.note}', "
 
         if item.discarded_date is not None:
             query += f"discarded_date='{item.discarded_date}', "
@@ -388,7 +383,7 @@ class DatabaseManager:
             query += f"discarded_date=null, "
 
         if item.publication_date is not None:
-            query += f"publication_date='{item.publication_date}', "
+            query += f"publication_date=\"{item.publication_date}\", "
         else:
             query += f"publication_date=null, "
 
@@ -418,4 +413,3 @@ class DatabaseManager:
     # region Movements
 
     # endregion
-

@@ -6,37 +6,36 @@ class Item:
     """
     Model for Item objects
     """
-    def __init__(self, id=0, bid="", inventory_num=0, isbn=0, title="", author="", cataloging_level=CatalogingLevel.min):
+    def __init__(self, id=None, bid='A123456789', isbn='AAA123456789', title='', author='', cataloging_level=CatalogingLevel.min):
         self.id = id
         self.bid = bid
-        self.inventory_num = inventory_num
         self.isbn = isbn
 
         self.title = title
         self.author = author
         self.cataloging_level = cataloging_level
-        self.material = MaterialEnum.graphic_book
+        self.material = MaterialEnum.libro_moderno
         self.nature = NatureEnum.analytic
-        self.type = TypeEnum.booklet
+        self.type = TypeEnum.libretto
 
         self.publication_date = datetime.datetime.now()
         self.publication_state = ""
-        self.lang = LangEnum.italian
+        self.lang = 1
 
-        self.genre = [ItemGenreEnum.fantasy]
-        self.inner_state = [SMUSIEnum.used]
-        self.external_state = [ExternalStateEnum.evidenziato]
+        self.genre = []
+        self.inner_state = [SMUSIEnum.none]
+        self.external_state = [ExternalStateEnum.ottimo]
 
-        self.rack = 0
-        self.shelf = ''
-        self.position = 0
+        self.rack = None
+        self.shelf = None
+        self.position = None
 
         self.opac_visibility = False
         self.price = 0
 
-        self.availability = AvailabilityEnum.unavailable
-        self.quarantine_start_date = datetime.datetime.now()
-        self.quarantine_end_date = datetime.datetime.now()
+        self.availability = AvailabilityEnum.available
+        self.quarantine_start_date = None
+        self.quarantine_end_date = None
         self.discarded = False
         self.discarded_date = datetime.datetime.now()
 
