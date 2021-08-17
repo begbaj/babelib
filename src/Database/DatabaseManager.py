@@ -115,7 +115,7 @@ class DatabaseManager:
                 f", u.telephone = '{user.telephone}'"
                 f", u.email = '{user.email}'"
                 f", u.fiscal_code = '{user.fiscal_code}'"
-                #f", u.contect_mode = {user.contect_mode}"
+                f", u.contect_mode = '{user.contect_mode}'"
                 #f", u.privacy_agreement = {user.privacy_agreement}"
                 f" where id = {user.id}")
 
@@ -130,7 +130,7 @@ class DatabaseManager:
                 f"  nationality, user_type"
                 f", registration_date, name, surname, gender, birthplace"
                 f", birthdate, city, address, postal_code, district, first_cellphone"
-                f", telephone, email, fiscal_code"#, contect_mode, privacy_agreement"
+                f", telephone, email, fiscal_code, contect_mode, privacy_agreement"
                 f")"
                 f" values "
                 f"("
@@ -150,8 +150,8 @@ class DatabaseManager:
                 f", '{user.telephone}'"
                 f", '{user.email}'"
                 f", '{user.fiscal_code}'"
-                #f", {user.contect_mode}"
-                #f", {user.privacy_agreement}"
+                f", '{user.contect_mode}'"
+                f", {user.privacy_agreement}"
                 f")"
 
             )
