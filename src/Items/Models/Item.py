@@ -23,7 +23,7 @@ class Item:
         self.lang = 1
 
         self.genre = []
-        self.inner_state = [SMUSIEnum.none]
+        self.inner_state = [SMUSIEnum.nessuno]
         self.external_state = [ExternalStateEnum.ottimo]
 
         self.rack = None

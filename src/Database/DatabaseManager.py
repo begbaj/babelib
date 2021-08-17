@@ -385,6 +385,10 @@ class DatabaseManager:
                 f"WHERE ig.item_id = {id};"
         return self.query(query, returns=True)
 
+    def get_genres(self):
+        query = f"SELECT * FROM genres"
+        return self.query(query, returns=True)
+
 
 
     # endregion

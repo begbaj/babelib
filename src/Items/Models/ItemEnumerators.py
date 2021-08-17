@@ -39,12 +39,12 @@ class NatureEnum(Enum):
 
 
 class SMUSIEnum(Enum):
-    none = 0
-    incorrect = 1
+    nessuno = 0
+    scorretto = 1
     mediocre = 2
-    used = 3
-    outmoded = 4
-    inappropriate = 5
+    usato = 3
+    superato = 4
+    inappropriato = 5
 
 
 class MaterialEnum(Enum):
