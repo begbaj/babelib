@@ -2,7 +2,7 @@ from src.Database.DatabaseManager import DatabaseManager
 from src.Items.Models import ItemEnumerators
 from src.Items.Models.Item import Item
 from datetime import datetime
-from src.Items.Models.ItemEnumerators import AvailabilityEnum
+from src.Items.Models.ItemEnumerators import *
 
 
 class ItemManager:
@@ -15,7 +15,48 @@ class ItemManager:
         pass
 
     def get_item(self, item_id: int) -> Item:
-        return self.__convert_dbitem(self.dbms.get_item(item_id))
+        dbitem = self.dbms.get_items(search_field, search_mode, quarantined, discarded)
+        item = self.__convert_dbitem(dbitem)
+
+        item.genre = []
+        for genre in self.dbms.get_item_genres(item.id):
+            item.genre.append({'id': genre.id, 'description': genre.description})
+
+        item.inner_state = []
+        for inner_state in self.dbms.get_item_inner_states(item.id):
+            item.inner_state.append(ItemEnumerators.SMUSIEnum(inner_state.id))
+
+        item.external_state = []
+        for external_state in self.dbms.get_item_external_states(item.id):
+            item.external_state.append(ItemEnumerators.ExternalStateEnum(external_state.id))
+
+        return item
+
+    def get_item_genres(self, item_id: int) -> []:
+        new_genres = []
+        for genre in self.dbms.get_item_genres(item_id):
+            new_genres.append({'id': genre.id, 'description': genre.description})
+        return new_genres
+
+    def get_genres(self, genres_ids: [int]):
+        new_genres = []
+        for genre in self.dbms.get_genres(genres_ids):
+            new_genres.append({'id': genre.id, 'description': genre.description})
+        return new_genres
+
+    def get_inner_states(self, states_id: [int]):
+        new_states = []
+        for state in self.dbms.get_inner_states(states_id):
+            new_states.append(SMUSIEnum(state.id))
+        return new_states
+
+    def get_external_states(self, states_id: [int]):
+        new_states = []
+        states = self.dbms.get_external_states(states_id)
+        if states is not None:
+            for state in states:
+                new_states.append(ExternalStateEnum(state.id))
+        return new_states
 
     def get_items(self, search_field: str, search_mode: int, quarantined=False, discarded=-1) -> [Item]:
         fitems = []
@@ -62,10 +103,10 @@ class ItemManager:
         item.position = pos
         self.dbms.edit_item(item)
 
-    def delete_item(self, item):
+    def delete_item(self, item: Item):
         self.dbms.remove_item(item.id)
 
-    def discard_item(self, item):
+    def discard_item(self, item: Item):
         item.availability = ItemEnumerators.AvailabilityEnum.discarded
         self.dbms.edit_item(item)
 

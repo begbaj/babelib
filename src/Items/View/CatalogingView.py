@@ -8,14 +8,15 @@ from PyQt5.QtWidgets import QWidget, QMainWindow, QComboBox
 from PyQt5.uic import loadUi
 
 from src.Database.DatabaseManager import DatabaseManager
-from src.Items.Models.ItemEnumerators import SMUSIEnum, ExternalStateEnum, NatureEnum, TypeEnum
+from src.Items.Models.ItemEnumerators import *
+from src.Items.Controllers.ItemManager import ItemManager
 
 
 class CatalogingView(QMainWindow):
 
     def __init__(self, widget, item):
-        
         self.dbms = DatabaseManager()
+        self.itemManager = ItemManager()
         
         super(CatalogingView, self).__init__()
         loadUi("../designer/Cataloging View/CatalogingView.ui", self)
@@ -103,6 +104,29 @@ class CatalogingView(QMainWindow):
         # for i in self.item.genre:
         #     self.genre.setCurrentIndex(i['id'])
 
+    def get_from_view(self):
+        new_item = self.item
+        new_item.title = self.title.text()
+        new_item.author = self.author.text()
+
+        new_item.type = NatureEnum(self.nature.currentIndex()+1)
+        new_item.type = TypeEnum(self.type.currentIndex()+1)
+        new_item.material = MaterialEnum(self.material.currentIndex()+1)
+
+        new_item.publication_date = self.publicationDate.dateTime().toString("yyyy-MM-dd")
+        #quarantena
+
+        new_item.isbn = self.isbn.text()
+        new_item.rack = self.rack.text()
+        new_item.isbn = self.shelf.text()
+        new_item.isbn = self.position.text()
+        new_item.note = self.note.toPlainText()
+
+        new_item.genre = self.itemManager.get_genres(self.genre.checkedItems())
+        new_item.inner_state = self.itemManager.get_inner_states(self.inner_state.checkedItems())
+        new_item.external_state = self.itemManager.get_external_states(self.external_state.checkedItems())
+        return new_item
+
     def start_quarantine(self):
         self.item.quarantine_start_date = date.today()
         self.item.quarantine_end_date = self.item.quarantine_start_date + timedelta(days=20)
@@ -110,24 +134,8 @@ class CatalogingView(QMainWindow):
         self.availableOn.setText(str(self.item.quarantine_end_date))
 
     def save_button(self):
-        self.item.title = self.title.text()
-        self.item.author = self.author.text()
-        self.item.nature = NatureEnum(self.nature.currentIndex()+1)
-        self.item.type = TypeEnum(self.type.currentIndex()+1)
-
-        new_genres = []
-        for i in self.genre.checkedItems():
-            genre = self.dbms.get_genre_value(i)
-            new_genres.append({'id': genre.id, 'description': genre.description})
-        self.item.genre = new_genres
-
-        self.item.publication_date = self.publicationDate.dateTime().toString("yyyy-MM-dd")
-        self.item.isbn = self.isbn.text()
-        self.item.rack = self.rack.text()
-        self.shelf.isbn = self.shelf.text()
-        self.position.isbn = self.position.text()
-
-        self.dbms.edit_item(self.item)
+        self.dbms.edit_item(self.get_from_view())
+        self.close()
 
 
 class CheckableComboBox(QComboBox):

@@ -291,9 +291,7 @@ class DatabaseManager:
 
     def get_genre_value(self, genre_id):
         query = f"SELECT * FROM genres WHERE id={genre_id}"
-        return self.query(query, returns=True)[0]
-
-
+        return self.query(query, returns=True)
 
     def get_items(self, search_field, search_mode, show_quarantined=False, show_discarded=False) -> [tuple]:
         # id=None, material_id=None, nature_id=None, type_id=None, lang_id=None, availability=None, bid=None,
@@ -364,37 +362,39 @@ class DatabaseManager:
         else:
             query += f"quarantine_end_date=null "
 
-        query += f"where id = {item.id};"
-
-        query += self.edit_genre(item, return_query=True)
-        query += self.edit_external_states(item, return_query=True)
-        query += self.edit_inner_states(item, return_query=True)
-
+        query += f"where id = {item.id};\n"
         self.query(query)
+
+        self.edit_genre(item)
+        self.edit_external_states(item)
+        self.edit_inner_states(item)
 
     def edit_genre(self, item, return_query=False):
-        query = f"DELETE FROM items_genres WHERE item_id = {item.id};"
+        query = f"DELETE FROM items_genres WHERE item_id = {item.id};\n"
+        self.query(query)
         for genre in item.genre:
-            query += f"INSERT INTO items_genres (item_id, genre_id) VALUES ({item.id, genre['id']});"
+            query = f"INSERT INTO items_genres (item_id, genre_id) VALUES ({item.id}, {genre['id']});\n"
+            self.query(query)
         if return_query:
             return query
-        self.query(query)
 
     def edit_inner_states(self, item, return_query=False):
         query = f"DELETE FROM items_inner_states WHERE item_id = {item.id};"
+        self.query(query)
         for state in item.inner_state:
-            query += f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({item.id, state.value});"
+            query = f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({item.id}, {state.value}); "
+            self.query(query)
         if return_query:
             return query
-        self.query(query)
 
     def edit_external_states(self, item, return_query=False):
-        query = f"DELETE FROM items_external_states WHERE item_id = {item.id};"
+        query = f"DELETE FROM items_external_states WHERE item_id = {item.id}; "
+        self.query(query)
         for state in item.external_state:
-            query += f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({item.id, state.value});"
+            query = f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({item.id}, {state.value}); "
+            self.query(query)
         if return_query:
             return query
-        self.query(query)
 
     def remove_item(self, item) -> None:
         """
@@ -416,8 +416,45 @@ class DatabaseManager:
                 f"WHERE ies.item_id = {item_id};"
         return self.query(query, returns=True)
 
-    def get_genres(self):
-        query = f"SELECT * FROM genres;"
+    def get_genres(self, genre_ids = None):
+        if genre_ids is None:
+            query = f"SELECT * FROM genres;"
+        else:
+            query = "SELECT * FROM genres WHERE "
+            first = True
+            for gid in genre_ids:
+                if not first:
+                    query += " OR "
+                else:
+                    first = False
+                query += f"id = {gid}"
+            query += ";"
+        return self.query(query, returns=True)
+
+    def get_inner_states(self, states_id: [int]):
+        query = "SELECT * FROM inner_states WHERE "
+        first = True
+        for sid in states_id:
+            if not first:
+                query += " OR "
+            else:
+                first = False
+            query += f"id = {sid}"
+        query += ";"
+        return self.query(query, returns=True)
+
+    def get_external_states(self, states_id: [int]):
+        if len(states_id) == 0:
+            return None
+        query = "SELECT * FROM external_states WHERE "
+        first = True
+        for sid in states_id:
+            if not first:
+                query += " OR "
+            else:
+                first = False
+            query += f"id = {sid}"
+        query += ";"
         return self.query(query, returns=True)
 
     def get_item_genres(self, item_id):
