@@ -350,7 +350,7 @@ background-color:none;</string>
       <rect>
        <x>90</x>
        <y>30</y>
-       <width>201</width>
+       <width>181</width>
        <height>31</height>
       </rect>
      </property>
@@ -373,7 +373,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
     <widget class="QLabel" name="ISBNLabel_6">
      <property name="geometry">
       <rect>
-       <x>300</x>
+       <x>280</x>
        <y>30</y>
        <width>31</width>
        <height>31</height>
@@ -391,9 +391,9 @@ background-color:none;</string>
     <widget class="QLineEdit" name="cityField">
      <property name="geometry">
       <rect>
-       <x>340</x>
+       <x>310</x>
        <y>30</y>
-       <width>91</width>
+       <width>151</width>
        <height>31</height>
       </rect>
      </property>
@@ -416,7 +416,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
     <widget class="QLabel" name="palchettoLabel_4">
      <property name="geometry">
       <rect>
-       <x>440</x>
+       <x>470</x>
        <y>30</y>
        <width>41</width>
        <height>31</height>
@@ -434,9 +434,9 @@ background-color:none;</string>
     <widget class="QLineEdit" name="capField">
      <property name="geometry">
       <rect>
-       <x>480</x>
+       <x>510</x>
        <y>30</y>
-       <width>101</width>
+       <width>71</width>
        <height>31</height>
       </rect>
      </property>
@@ -496,7 +496,7 @@ border:none;</string>
     <widget class="QLabel" name="positionLabel_6">
      <property name="geometry">
       <rect>
-       <x>300</x>
+       <x>320</x>
        <y>70</y>
        <width>41</width>
        <height>31</height>
@@ -514,9 +514,9 @@ background-color:none;</string>
     <widget class="QComboBox" name="stateBox">
      <property name="geometry">
       <rect>
-       <x>340</x>
+       <x>360</x>
        <y>70</y>
-       <width>241</width>
+       <width>221</width>
        <height>31</height>
       </rect>
      </property>
@@ -1065,6 +1065,8 @@ border:none</string>
      <property name="font">
       <font>
        <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
@@ -1075,7 +1077,7 @@ background-color:transparent</string>
       <string>Luogo di Nascita</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="fiscalcodeField_4">
+    <widget class="QLineEdit" name="birthplaceField">
      <property name="geometry">
       <rect>
        <x>120</x>
