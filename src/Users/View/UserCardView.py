@@ -52,6 +52,7 @@ class UserCardView(QMainWindow):
         self.disable_field()
         self.regular_exp_field()
         self.setup_combo_box()
+        #self.setup_radio_button()
         # Load User
         self.load_user()
         self.style()
@@ -68,7 +69,8 @@ class UserCardView(QMainWindow):
         self.setup_radio_button()
         self.regular_exp_field()
 
-# Region 'Field Function'
+
+# region Field Function
 
     def setup_combo_box(self):
         # Import Gender item
@@ -86,11 +88,16 @@ class UserCardView(QMainWindow):
         content_list = [line.rstrip('\n') for line in f]
         f.close()
         self.usertypeBox.addItems(content_list)
+        # Import Nationality item
+        f = open(os.path.abspath("Database/db_settings/nationality.txt"), "r")
+        content_list = [line.rstrip('\n') for line in f]
+        f.close()
+        self.nationBox.addItems(content_list)
+
 
     def setup_radio_button(self):
-        self.cellularRadio.toggled.connect(self.cell_contact)
-        self.emailRadio.toggled.connect(self.email_contact)
-        self.telephoneRadio.toggled.connect(self.telephone_contact)
+        self.cellularRadio.setChecked(True)
+
 
     def disable_field(self):
         """
@@ -171,7 +178,7 @@ class UserCardView(QMainWindow):
 
 # endregion
 
-# Region 'Button Function'
+# region Button Function
 
     def save(self):
         """
@@ -179,6 +186,19 @@ class UserCardView(QMainWindow):
         :param: None
         :return: None
         """
+        if self.nameField.text() == '' or self.surnameField.text() == '' or self.fiscalcodeField.text() == '' or self.privacyBox.isChecked() == False:
+            self.pop = Popup()
+            self.pop.label.setText("Inserire tutti i campi obbligatori.")
+            self.pop.show()
+            return
+
+        if self.cellularRadio.isChecked() and self.cellField.text() == '' or self.emailRadio.isChecked() and self.emailField.text() == '' or self.telephoneRadio.isChecked() and self.telephonField.text() == '':
+            self.pop = Popup()
+            self.pop.label.setText("Inserire contatto.")
+            self.pop.show()
+            return
+
+
         self.update_user()
         self.show_popup()
 
@@ -191,12 +211,20 @@ class UserCardView(QMainWindow):
         self.close()
 
     def save_new(self):
-        if self.nameField.text() == '' or self.surnameField.text() == '': # mettere altri condizioni
-            self.pop = Popup()
-            self.pop.label.setText("Inserire tutti i campi obbligatori")
-            self.pop.show()
 
-        user = User('',#self.nationBox.currentText(),
+        if self.nameField.text() == '' or self.surnameField.text() == '' or self.fiscalcodeField.text() == '' or self.privacyBox.isChecked() == False:
+            self.pop = Popup()
+            self.pop.label.setText("Inserire tutti i campi obbligatori.")
+            self.pop.show()
+            return
+
+        if self.cellularRadio.isChecked() and self.cellField.text() == '' or self.emailRadio.isChecked() and self.emailField.text() == '' or self.telephoneRadio.isChecked() and self.telephonField.text() == '':
+            self.pop = Popup()
+            self.pop.label.setText("Inserire contatto.")
+            self.pop.show()
+            return
+
+        user = User(self.nationBox.currentText(),
                     self.usertypeBox.currentText(),
                     datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                     self.nameField.text(),
@@ -212,12 +240,12 @@ class UserCardView(QMainWindow):
                     self.telephonField.text(),
                     self.emailField.text(),
                     self.fiscalcodeField.text(),
-                    0,#self.update_contact(),
+                    self.update_contact(),
                     self.privacyBox.isChecked(),
                     )
         self.saveButton.setEnabled(False)
         self.userM.add(user)
-        print("Salvataggio avvenuto correttamente")
+        self.back()
 
     def cell_contact(self):
         if self.cellField.text() == '':
@@ -240,14 +268,15 @@ class UserCardView(QMainWindow):
 
     def telephone_contact(self):
         if self.telephonField.text() == '':
-            self.cellularRadio.setChecked(False)
             self.pop = Popup()
             self.pop.label.setText("Prima inserisci il recapito")
             self.pop.show()
+            self.cellularRadio.setChecked(False)
         else:
             pass
+# endregion
 
-# Region 'View Function'
+# region View Function
 
     def load_user(self):
         """
@@ -268,6 +297,7 @@ class UserCardView(QMainWindow):
         self.telephonField.setText(self.user.telephone)
         self.birthplaceField.setText(self.user.birthplace)
         # Combo Box
+        self.nationBox.setCurrentText(self.user.nationality)
         self.genderBox.setCurrentText(self.user.gender)
         self.usertypeBox.setCurrentText(self.user.user_type)
         self.districtBox.setCurrentText(self.user.district)
@@ -297,25 +327,26 @@ class UserCardView(QMainWindow):
         self.user.telephone = self.telephonField.text()
         self.user.birthplace = self.birthplaceField.text()
         # Combo Box update
+        self.user.nationality = self.nationBox.currentText()
         self.user.gender = self.genderBox.currentText()
         self.user.district = self.districtBox.currentText()
         self.user.user_type = self.usertypeBox.currentText()
         # Radio Button update
-        # self.user.contect_mode = self.update_contact()
+        self.user.contect_mode = self.update_contact()
         # Date update
         self.user.birthdate = self.dateEdit.date().toPyDate()
 
         if self.privacyBox.isChecked():
             self.user.privacy_agreement = True
-    '''
+
     def update_contact(self):
         if self.emailRadio.isChecked():
-            return self.user.email
+            return self.emailField.text()
         elif self.cellularRadio.isChecked():
-            return self.user.first_cellphone
+            return self.cellField.text()
         elif self.telephoneRadio.isChecked():
-            return self.user.telephone
-    '''
+            return self.telephonField.text()
+
 
     def show_popup(self):
         self.pop = SavePopUp(self.userM, self.user)
@@ -324,7 +355,7 @@ class UserCardView(QMainWindow):
 # endregion
 
 
-# Region 'Pop-Up'
+# region Pop-Up
 
 class SavePopUp(QDialog):
 
