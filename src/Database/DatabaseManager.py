@@ -289,6 +289,8 @@ class DatabaseManager:
 
         self.query(query)
 
+
+
     def get_items(self, search_field, search_mode, show_quarantined=False, show_discarded=False) -> [tuple]:
         # id=None, material_id=None, nature_id=None, type_id=None, lang_id=None, availability=None, bid=None,
         # inventory_num=None, isbn=None, title=None, author=None, cataloging_level=None, publication_date=None,
@@ -359,6 +361,35 @@ class DatabaseManager:
             query += f"quarantine_end_date=null "
 
         query += f"where id = {item.id};"
+
+        query += self.edit_genre(item, return_query=True)
+        query += self.edit_external_states(item, return_query=True)
+        query += self.edit_inner_states(item, return_query=True)
+
+        self.query(query)
+
+    def edit_genre(self, item, return_query=False):
+        query = f"DELETE FROM items_genres WHERE item_id = {item.id};"
+        for genre in item.genre:
+            query += f"INSERT INTO items_genres (item_id, genre_id) VALUES ({item.id, genre.value});"
+        if return_query:
+            return query
+        self.query(query)
+
+    def edit_inner_states(self, item, return_query=False):
+        query = f"DELETE FROM items_inner_states WHERE item_id = {item.id};"
+        for state in item.inner_state:
+            query += f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({item.id, state.value});"
+        if return_query:
+            return query
+        self.query(query)
+
+    def edit_external_states(self, item, return_query=False):
+        query = f"DELETE FROM items_external_states WHERE item_id = {item.id};"
+        for state in item.external_state:
+            query += f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({item.id, state.value});"
+        if return_query:
+            return query
         self.query(query)
 
     def remove_item(self, item) -> None:
