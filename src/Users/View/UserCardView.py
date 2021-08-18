@@ -1,3 +1,4 @@
+from PyQt5 import QtCore
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from PyQt5.QtWidgets import QDialog, QMainWindow
@@ -26,6 +27,7 @@ class UserCardView(QMainWindow):
             self.pop = ''
             # Metodi iniziali
             self.setup()
+            self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)
         else:
             # Se l'utente è nullo allora visualizzo la schermata per crearne uno nuovo
             super(UserCardView, self).__init__()
@@ -34,6 +36,8 @@ class UserCardView(QMainWindow):
             self.pop = ''
             # Metodi iniziali
             self.setup_new()
+            self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)
+
 
     def setup(self):
         """

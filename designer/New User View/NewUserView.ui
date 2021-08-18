@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>892</width>
-    <height>893</height>
+    <width>881</width>
+    <height>885</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -528,7 +528,8 @@ background-color:none;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">font: italic 10pt &quot;Arial&quot;;
-border:none;</string>
+border:none;
+</string>
      </property>
      <property name="editable">
       <bool>true</bool>
@@ -654,13 +655,25 @@ background-color:none;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border:none;</string>
+      <string notr="true">border:none;
+color: black;
+background-color:rgb(45, 206, 229)</string>
      </property>
      <property name="readOnly">
       <bool>false</bool>
      </property>
+     <property name="dateTime">
+      <datetime>
+       <hour>0</hour>
+       <minute>0</minute>
+       <second>0</second>
+       <year>2000</year>
+       <month>1</month>
+       <day>1</day>
+      </datetime>
+     </property>
      <property name="calendarPopup">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QLabel" name="dateLabel_2">
@@ -710,7 +723,8 @@ background-color:none;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">font: italic 10pt &quot;Arial&quot;;
-border:none</string>
+border:none;
+</string>
      </property>
      <item>
       <property name="text">
@@ -742,7 +756,7 @@ background-color:transparent</string>
       <string>Luogo di Nascita</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="fiscalcodeField_2">
+    <widget class="QLineEdit" name="birthplaceField">
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -778,7 +792,8 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
      </property>
      <property name="styleSheet">
       <string notr="true">font: italic 10pt &quot;Arial&quot;;
-border:none;</string>
+border:none;
+</string>
      </property>
      <property name="editable">
       <bool>true</bool>

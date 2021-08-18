@@ -989,13 +989,15 @@ background-color:none;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border:none;</string>
+      <string notr="true">border:none;
+color: black;
+background-color:rgb(45, 206, 229)</string>
      </property>
      <property name="readOnly">
       <bool>false</bool>
      </property>
      <property name="calendarPopup">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QLabel" name="dateLabel_6">
