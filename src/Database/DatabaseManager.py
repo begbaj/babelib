@@ -275,7 +275,7 @@ class DatabaseManager:
                     f" {item.discarded_date},{item.note});"
 
             for genre in item.genre:
-                query += f"INSERT INTO items_genres (item_id, genre_id) VALUES ({item.id, genre.value});"
+                query += f"INSERT INTO items_genres (item_id, genre_id) VALUES ({item.id, genre['id']});"
 
             for state in item.inner_state:
                 query +=f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({item.id, state.value});"
@@ -371,7 +371,7 @@ class DatabaseManager:
     def edit_genre(self, item, return_query=False):
         query = f"DELETE FROM items_genres WHERE item_id = {item.id};"
         for genre in item.genre:
-            query += f"INSERT INTO items_genres (item_id, genre_id) VALUES ({item.id, genre.value});"
+            query += f"INSERT INTO items_genres (item_id, genre_id) VALUES ({item.id, genre['id']});"
         if return_query:
             return query
         self.query(query)
