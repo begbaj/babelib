@@ -399,6 +399,23 @@ background-color:none;</string>
       <string>Contatto preferenziale:</string>
      </property>
     </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>73</x>
+       <y>32</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color:transparent</string>
+     </property>
+     <property name="text">
+      <string>*</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QFrame" name="frame_11">
     <property name="geometry">
@@ -543,6 +560,9 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
      <property name="text">
       <string/>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
      <property name="readOnly">
       <bool>true</bool>
      </property>
@@ -568,6 +588,9 @@ border:none;
 border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
      <property name="readOnly">
       <bool>true</bool>
      </property>
@@ -592,6 +615,9 @@ font: 14pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
 border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
      <property name="readOnly">
       <bool>true</bool>
@@ -704,6 +730,8 @@ border:none</string>
      <property name="font">
       <font>
        <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
@@ -761,11 +789,62 @@ border:none;</string>
       </property>
      </item>
     </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>95</x>
+       <y>110</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color:transparent</string>
+     </property>
+     <property name="text">
+      <string>*</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>70</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color:transparent</string>
+     </property>
+     <property name="text">
+      <string>*</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>52</x>
+       <y>32</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color:transparent</string>
+     </property>
+     <property name="text">
+      <string>*</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QFrame" name="frame_3">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>229</x>
       <y>740</y>
       <width>621</width>
       <height>101</height>
@@ -827,6 +906,23 @@ background-color:transparent
      </property>
      <property name="checkable">
       <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>202</x>
+       <y>25</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color:transparent</string>
+     </property>
+     <property name="text">
+      <string>*</string>
      </property>
     </widget>
    </widget>
@@ -907,7 +1003,7 @@ background-color:none;</string>
       <rect>
        <x>90</x>
        <y>30</y>
-       <width>201</width>
+       <width>181</width>
        <height>31</height>
       </rect>
      </property>
@@ -920,6 +1016,12 @@ border:none;
 border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
      <property name="readOnly">
       <bool>true</bool>
      </property>
@@ -930,7 +1032,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
     <widget class="QLabel" name="ISBNLabel_2">
      <property name="geometry">
       <rect>
-       <x>300</x>
+       <x>280</x>
        <y>30</y>
        <width>31</width>
        <height>31</height>
@@ -945,35 +1047,10 @@ background-color:none;</string>
       <string>Città</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="cityField">
-     <property name="geometry">
-      <rect>
-       <x>340</x>
-       <y>30</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
-color:rgb(255, 255, 255);
-font: 14pt &quot;Source Code Pro for Powerline&quot;;
-border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-     <property name="placeholderText">
-      <string/>
-     </property>
-    </widget>
     <widget class="QLabel" name="palchettoLabel_2">
      <property name="geometry">
       <rect>
-       <x>440</x>
+       <x>470</x>
        <y>30</y>
        <width>41</width>
        <height>31</height>
@@ -991,9 +1068,9 @@ background-color:none;</string>
     <widget class="QLineEdit" name="capField">
      <property name="geometry">
       <rect>
-       <x>480</x>
+       <x>510</x>
        <y>30</y>
-       <width>101</width>
+       <width>71</width>
        <height>31</height>
       </rect>
      </property>
@@ -1053,7 +1130,7 @@ border:none;</string>
     <widget class="QLabel" name="positionLabel_2">
      <property name="geometry">
       <rect>
-       <x>300</x>
+       <x>320</x>
        <y>70</y>
        <width>41</width>
        <height>31</height>
@@ -1071,9 +1148,9 @@ background-color:none;</string>
     <widget class="QComboBox" name="stateBox">
      <property name="geometry">
       <rect>
-       <x>340</x>
+       <x>360</x>
        <y>70</y>
-       <width>241</width>
+       <width>221</width>
        <height>31</height>
       </rect>
      </property>
@@ -1086,6 +1163,31 @@ border:none;</string>
        <string/>
       </property>
      </item>
+    </widget>
+    <widget class="QLineEdit" name="cityField">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>30</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
     </widget>
    </widget>
    <widget class="QLabel" name="label_7">

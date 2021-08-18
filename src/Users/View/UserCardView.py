@@ -1,3 +1,5 @@
+from PyQt5.QtCore import QRegExp
+from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from PyQt5.QtWidgets import QDialog, QMainWindow
 from PyQt5.uic import loadUi
 from datetime import datetime
@@ -43,6 +45,22 @@ class UserCardView(QMainWindow):
         self.editButton.setEnabled(True)
         self.editButton.clicked.connect(self.edit)
         self.saveButton.clicked.connect(self.save)
+        self.returnButton.clicked.connect(self.back)
+        # Line Edit
+        self.cellField.setValidator(QIntValidator())
+        self.telephonField.setValidator(QIntValidator())
+        self.capField.setValidator(QIntValidator())
+
+        self.nameField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z]*$')))
+        self.surnameField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " "]*$')))
+        self.fiscalcodeField.setValidator(QRegExpValidator(QRegExp('^[A-Z 0-9]*$')))
+        self.cityField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " "]*$')))
+        self.addressField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " " à è ò 0-9]*$')))
+        self.emailField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " " @ . 0-9]*$')))
+
+
+
+
         # Disable Field
         self.disable_field()
         # Combo Box
@@ -89,6 +107,7 @@ class UserCardView(QMainWindow):
             self.cellularRadio.setChecked(True)
             self.cellularRadio.setChecked(False)
             self.pop = Popup()
+            self.pop.label.setText("Prima inserisci il recapito")
             self.pop.show()
         else:
             pass
@@ -97,6 +116,7 @@ class UserCardView(QMainWindow):
         if self.emailField.text() == '':
             self.cellularRadio.setChecked(False)
             self.pop = Popup()
+            self.pop.label.setText("Prima inserisci il recapito")
             self.pop.show()
         else:
             pass
@@ -105,6 +125,7 @@ class UserCardView(QMainWindow):
         if self.telephonField.text() == '':
             self.cellularRadio.setChecked(False)
             self.pop = Popup()
+            self.pop.label.setText("Prima inserisci il recapito")
             self.pop.show()
         else:
             pass
@@ -125,6 +146,7 @@ class UserCardView(QMainWindow):
         self.cellField.setReadOnly(True)
         self.emailField.setReadOnly(True)
         self.telephonField.setReadOnly(True)
+        self.birthplaceField.setReadOnly(True)
         # Box disabled
         self.genderBox.setDisabled(True)
         self.nationBox.setDisabled(True)
@@ -155,6 +177,7 @@ class UserCardView(QMainWindow):
         self.cellField.setReadOnly(False)
         self.emailField.setReadOnly(False)
         self.telephonField.setReadOnly(False)
+        self.birthplaceField.setReadOnly(False)
         # Combo Box enable
         self.stateBox.setDisabled(False)
         self.genderBox.setDisabled(False)
