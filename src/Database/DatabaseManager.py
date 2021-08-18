@@ -65,7 +65,7 @@ class DatabaseManager:
 
     def login(self, username):
         self.cur.execute(f"SELECT password FROM administrator WHERE username = '{username}'")
-        #codice insicuro, ritorna la password in chiaro.
+        # codice insicuro, ritorna la password in chiaro.
         return self.cur.fetchone()
 
     # region Users
@@ -296,21 +296,23 @@ class DatabaseManager:
         # quarantine_start_date=None, quarantine_end_date=None, discarded=None, discarded_date=None, note=None
         query = ""
 
-        if search_mode == 0:
+        if search_mode == 0: # eccetto numero di inventario
             query += f"SELECT * FROM items where (bid like '%{search_field}%'" \
                     f"or isbn like '%{search_field}%'" \
                     f"or title like '%{search_field}%'" \
                     f"or author like '%{search_field}%'" \
                     f"or note like '%{search_field}%')"
-        elif search_mode == 1: #Title
+        elif search_mode == 1: # Title
             query += f"SELECT * FROM items WHERE title LIKE '%{search_field}%'"
-        elif search_mode == 2: #Author
+        elif search_mode == 2: # Author
             query += f"SELECT * FROM items WHERE author LIKE '%{search_field}%'"
-        elif search_mode == 3: #ISBN
+        elif search_mode == 3: # ISBN
             query += f"SELECT * FROM items WHERE isbn LIKE '%{search_field}%'"
-        elif search_mode == 4: #BID
+        elif search_mode == 4: # BID
             query += f"SELECT * FROM items WHERE bid LIKE '%{search_field}%'"
-        elif search_mode == 5: #Note
+        elif search_mode == 5: # id / numero di inventario
+            query += f"SELECT * FROM items WHERE id LIKE '%{search_field}%'"
+        elif search_mode == 6: # Note
             query += f"SELECT * FROM items WHERE note LIKE '%{search_field}%'"
         else:
             raise Exception("invalid search_mode")
@@ -323,8 +325,8 @@ class DatabaseManager:
 
         return self.query(query, returns=True)
 
-    def get_item(self, id) -> tuple:
-        query = f"SELECT * FROM items WHERE id = {id}"
+    def get_item(self, item_id) -> tuple:
+        query = f"SELECT * FROM items WHERE id = {item_id}"
         return self.query(query, returns=True)[0]
 
     def edit_item(self,item) -> None:
@@ -367,34 +369,27 @@ class DatabaseManager:
         query = f"DELETE FROM items WHERE Id = {item.id};"
         self.query(query)
 
-    def get_item_inner_states(self, id):
+    def get_item_inner_states(self, item_id):
         query = f"SELECT * FROM inner_states AS ins " \
                 f"INNER JOIN items_inner_states AS iis ON iis.inner_state_id = ins.id "\
-                f"WHERE iis.item_id = {id};"
+                f"WHERE iis.item_id = {item_id};"
         return self.query(query, returns=True)
 
-    def get_item_external_states(self, id):
+    def get_item_external_states(self, item_id):
         query = f"SELECT * FROM external_states AS es " \
                 f"INNER JOIN items_external_states AS ies ON ies.external_state_id = es.id " \
-                f"WHERE ies.item_id = {id};"
+                f"WHERE ies.item_id = {item_id};"
         return self.query(query, returns=True)
 
     def get_genres(self):
-        query = f"SELECT * FROM genres"
+        query = f"SELECT * FROM genres;"
         return self.query(query, returns=True)
 
-
-    def get_item_genres(self, id):
+    def get_item_genres(self, item_id):
         query = f"SELECT * FROM genres AS g " \
                 f"INNER JOIN items_genres AS ig ON ig.genre_id = g.id " \
-                f"WHERE ig.item_id = {id};"
+                f"WHERE ig.item_id = {item_id};"
         return self.query(query, returns=True)
-
-    def get_genres(self):
-        query = f"SELECT * FROM genres"
-        return self.query(query, returns=True)
-
-
 
     # endregion
 

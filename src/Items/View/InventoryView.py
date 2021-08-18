@@ -10,7 +10,7 @@ class InventoryView(QMainWindow):
     itmManager = ItemManager()
     __items = []
 
-    # TODO: modifica documento, aggiungi documento, popup per scarta documento
+    # TODO: aggiungi documento
     def __init__(self, widget, parent):
         super(InventoryView, self).__init__(parent)
         loadUi("../designer/Items/InventoryView.ui", self)
@@ -28,6 +28,8 @@ class InventoryView(QMainWindow):
             self.discardButton.clicked.connect(lambda: self.discard_item())
             self.returnButton.clicked.connect(lambda: self.__go_back())
             self.showItemButton.clicked.connect(lambda: self.show_item())
+
+            self.searchMode.currentIndexChanged.connect(lambda: self.search())
         except Exception as err:
             print(err)
 
