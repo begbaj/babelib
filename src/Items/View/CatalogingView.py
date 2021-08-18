@@ -1,4 +1,6 @@
 import sys
+from datetime import date, datetime, timedelta
+
 import PyQt5
 from PyQt5.QtCore import Qt, QRect
 from PyQt5.QtGui import QStandardItemModel
@@ -6,11 +8,11 @@ from PyQt5.QtWidgets import QWidget, QMainWindow, QComboBox
 from PyQt5.uic import loadUi
 
 from src.Database.DatabaseManager import DatabaseManager
-from src.Items.Models.ItemEnumerators import SMUSIEnum, ExternalStateEnum
+from src.Items.Models.ItemEnumerators import SMUSIEnum, ExternalStateEnum, NatureEnum, TypeEnum
 
 
 class CatalogingView(QMainWindow):
-      
+
     def __init__(self, widget, item):
         
         self.dbms = DatabaseManager()
@@ -31,6 +33,11 @@ class CatalogingView(QMainWindow):
 
         self.load_item()
 
+        self.startQuarantine.clicked.connect(lambda: self.start_quarantine())
+        self.saveButton.clicked.connect(lambda: self.save_button())
+
+
+    # TODO: add inventory_num, quarantina readonly showitem, go back button, asterischi, controllo campi vuoti
     def load_item(self):
         self.title.setText(self.item.title)
         self.author.setText(self.item.author)
@@ -41,35 +48,42 @@ class CatalogingView(QMainWindow):
         self.position.setText(str(self.item.position))
         self.nature.setCurrentIndex(self.item.nature.value-1)
         self.type.setCurrentIndex(self.item.type.value-1)
-        #self.inner_state.setCurrentIndex(self.item.inner_state)
+        self.note.setText(self.item.note)
+        if self.item.quarantine_start_date is not None:
+            if self.item.quarantine_end_date is not None:
+                self.leftDays.setText(str(self.item.quarantine_end_date-self.item.quarantine_start_date))
+                self.availableOn.setText(str(self.item.quarantine_end_date))
 
         SMUSIList = []
+        SMUSIId = []
         for i in range(0, len(SMUSIEnum)):
             SMUSIList.append(SMUSIEnum(i).name)
-            #lista di Id
+            SMUSIId.append(SMUSIEnum(i).value)
         for index, element in enumerate(SMUSIList):
             self.inner_state.addItem(element)
             item = self.inner_state.model().item(index, 0)
             item.setCheckState(Qt.Unchecked)
 
-        for index, element in enumerate(SMUSIList):
-            for k in range(0,len(self.item.inner_state)):
-                if element == self.item.inner_state[k].value: #name
-                    item = self.inner_state.model().item(index,0)
+        for index, element in enumerate(SMUSIId):
+            for k in range(0, len(self.item.inner_state)):
+                if element+1 == self.item.inner_state[k].value:
+                    item = self.inner_state.model().item(index, 0)
                     item.setCheckState(Qt.Checked)
 
         ExternalStateList = []
+        ExternalStateId = []
         for i in range(1, len(ExternalStateEnum)+1):
             ExternalStateList.append(ExternalStateEnum(i).name)
+            ExternalStateId.append(ExternalStateEnum(i).value)
         for index, element in enumerate(ExternalStateList):
             self.external_state.addItem(element)
             item = self.external_state.model().item(index, 0)
             item.setCheckState(Qt.Unchecked)
 
-        for index, element in enumerate(ExternalStateList):
-            for k in range(0,len(self.item.external_state)):
-                if element == self.item.external_state[k].value:
-                    item = self.external_state.model().item(index,0)
+        for index, element in enumerate(ExternalStateId):
+            for k in range(0, len(self.item.external_state)):
+                if element+1 == self.item.external_state[k].value:
+                    item = self.external_state.model().item(index, 0)
                     item.setCheckState(Qt.Checked)
 
         GenreList = []
@@ -81,13 +95,39 @@ class CatalogingView(QMainWindow):
             item.setCheckState(Qt.Unchecked)
 
         for index, element in enumerate(GenreList):
-            for k in range(0,len(self.item.genre)):
+            for k in range(0, len(self.item.genre)):
                 if element == self.item.genre[k]['description']:
-                    item = self.genre.model().item(index,0)
+                    item = self.genre.model().item(index, 0)
                     item.setCheckState(Qt.Checked)
 
         # for i in self.item.genre:
         #     self.genre.setCurrentIndex(i['id'])
+
+    def start_quarantine(self):
+        self.item.quarantine_start_date = date.today()
+        self.item.quarantine_end_date = self.item.quarantine_start_date + timedelta(days=20)
+        self.leftDays.setText(str(self.item.quarantine_end_date - self.item.quarantine_start_date))
+        self.availableOn.setText(str(self.item.quarantine_end_date))
+
+    def save_button(self):
+        self.item.title = self.title.text()
+        self.item.author = self.author.text()
+        self.item.nature = NatureEnum(self.nature.currentIndex()+1)
+        self.item.type = TypeEnum(self.type.currentIndex()+1)
+
+        new_genres = []
+        for i in self.genre.checkedItems():
+            genre = self.dbms.get_genre_value(i)
+            new_genres.append({'id': genre.id, 'description': genre.description})
+        self.item.genre = new_genres
+
+        self.item.publication_date = self.publicationDate.dateTime().toString("yyyy-MM-dd")
+        self.item.isbn = self.isbn.text()
+        self.item.rack = self.rack.text()
+        self.shelf.isbn = self.shelf.text()
+        self.position.isbn = self.position.text()
+
+        self.dbms.edit_item(self.item)
 
 
 class CheckableComboBox(QComboBox):
@@ -104,11 +144,13 @@ class CheckableComboBox(QComboBox):
         else:
             item.setCheckState(Qt.Checked)
 
+    def checkedItems(self):
+        checkedItems = []
+        for index in range(self.count()):
+            item = self.model().item(index)
+            if item.checkState() == Qt.Checked:
+                checkedItems.append(index)
+        return checkedItems
+
     def hidePopup(self):
         pass
-
-    def check(self, index):
-        self.model().itemFromIndex(index).setCheckState(Qt.Checked)
-
-    def uncheck(self, index):
-        self.model().itemFromIndex(index).setCheckState(Qt.Unchecked)

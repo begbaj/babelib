@@ -97,38 +97,11 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="editButton">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>160</y>
-       <width>141</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius:16px;
-background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));</string>
-     </property>
-     <property name="text">
-      <string>Modifica Campi</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../img/edit.png</normaloff>../img/edit.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>30</width>
-       <height>30</height>
-      </size>
-     </property>
-    </widget>
     <widget class="QPushButton" name="saveButton">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>230</y>
+       <y>150</y>
        <width>141</width>
        <height>51</height>
       </rect>
@@ -143,33 +116,6 @@ background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx
      <property name="icon">
       <iconset>
        <normaloff>../img/save.png</normaloff>../img/save.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>30</width>
-       <height>30</height>
-      </size>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="saveButton_2">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>650</y>
-       <width>141</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-radius:16px;
-background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));</string>
-     </property>
-     <property name="text">
-      <string>Scarta</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -964,7 +910,7 @@ background-color:none;</string>
       </property>
      </item>
     </widget>
-    <widget class="QTextEdit" name="textEdit">
+    <widget class="QTextEdit" name="note">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -974,7 +920,7 @@ background-color:none;</string>
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="editButton_2">
+    <widget class="QPushButton" name="startQuarantine">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -1055,7 +1001,7 @@ background-color:none;</string>
       <string>Quarantena</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="author_2">
+    <widget class="QLineEdit" name="availableOn">
      <property name="geometry">
       <rect>
        <x>200</x>
@@ -1065,7 +1011,7 @@ background-color:none;</string>
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="title_2">
+    <widget class="QLineEdit" name="leftDays">
      <property name="geometry">
       <rect>
        <x>200</x>

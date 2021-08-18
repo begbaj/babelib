@@ -289,6 +289,10 @@ class DatabaseManager:
 
         self.query(query)
 
+    def get_genre_value(self, genre_id):
+        query = f"SELECT * FROM genres WHERE id={genre_id}"
+        return self.query(query, returns=True)[0]
+
 
 
     def get_items(self, search_field, search_mode, show_quarantined=False, show_discarded=False) -> [tuple]:
