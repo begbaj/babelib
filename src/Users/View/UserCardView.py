@@ -41,29 +41,12 @@ class UserCardView(QMainWindow):
         :param: None
         :return: None
         """
-        # Button
         self.editButton.setEnabled(True)
         self.editButton.clicked.connect(self.edit)
         self.saveButton.clicked.connect(self.save)
         self.returnButton.clicked.connect(self.back)
-        # Line Edit
-        self.cellField.setValidator(QIntValidator())
-        self.telephonField.setValidator(QIntValidator())
-        self.capField.setValidator(QIntValidator())
-
-        self.nameField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z]*$')))
-        self.surnameField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " "]*$')))
-        self.fiscalcodeField.setValidator(QRegExpValidator(QRegExp('^[A-Z 0-9]*$')))
-        self.cityField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " "]*$')))
-        self.addressField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " " à è ò 0-9]*$')))
-        self.emailField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " " @ . 0-9]*$')))
-
-
-
-
-        # Disable Field
         self.disable_field()
-        # Combo Box
+        self.regular_exp_field()
         self.setup_combo_box()
         # Load User
         self.load_user()
@@ -71,27 +54,30 @@ class UserCardView(QMainWindow):
 
     def style(self):
         self.nameField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        # varie cose
 
     def setup_new(self):
-        # Button
-        self.enable_field()
         self.returnButton.clicked.connect(self.back)
         self.saveButton.clicked.connect(self.save_new)
+        self.enable_field()
         self.setup_combo_box()
         self.setup_radio_button()
+        self.regular_exp_field()
+
+# Region 'Field Function'
 
     def setup_combo_box(self):
-
+        # Import Gender item
         f = open(os.path.abspath("Database/db_settings/gender.txt"), "r")
         content_list = [line.rstrip('\n') for line in f]
         f.close()
         self.genderBox.addItems(content_list)
-
+        # Import District item
         f = open(os.path.abspath("Database/db_settings/district.txt"), "r")
         content_list = [line.rstrip('\n') for line in f]
         f.close()
         self.districtBox.addItems(content_list)
-
+        # Import UserType item
         f = open(os.path.abspath("Database/db_settings/user_type.txt"), "r")
         content_list = [line.rstrip('\n') for line in f]
         f.close()
@@ -101,34 +87,6 @@ class UserCardView(QMainWindow):
         self.cellularRadio.toggled.connect(self.cell_contact)
         self.emailRadio.toggled.connect(self.email_contact)
         self.telephoneRadio.toggled.connect(self.telephone_contact)
-
-    def cell_contact(self):
-        if self.cellField.text() == '':
-            self.cellularRadio.setChecked(True)
-            self.cellularRadio.setChecked(False)
-            self.pop = Popup()
-            self.pop.label.setText("Prima inserisci il recapito")
-            self.pop.show()
-        else:
-            pass
-
-    def email_contact(self):
-        if self.emailField.text() == '':
-            self.cellularRadio.setChecked(False)
-            self.pop = Popup()
-            self.pop.label.setText("Prima inserisci il recapito")
-            self.pop.show()
-        else:
-            pass
-
-    def telephone_contact(self):
-        if self.telephonField.text() == '':
-            self.cellularRadio.setChecked(False)
-            self.pop = Popup()
-            self.pop.label.setText("Prima inserisci il recapito")
-            self.pop.show()
-        else:
-            pass
 
     def disable_field(self):
         """
@@ -194,9 +152,98 @@ class UserCardView(QMainWindow):
         # Box enable
         self.privacyBox.setDisabled(False)
 
+    def regular_exp_field(self):
+        # Strings Field
+        self.nameField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z]*$')))
+        self.surnameField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " "]*$')))
+        self.fiscalcodeField.setValidator(QRegExpValidator(QRegExp('^[A-Z 0-9]*$')))
+        self.cityField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " "]*$')))
+        self.addressField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " " à è ò 0-9]*$')))
+        self.emailField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " " @ . 0-9]*$')))
+        # Digits Field
+        self.cellField.setValidator(QIntValidator())
+        self.telephonField.setValidator(QIntValidator())
+        self.capField.setValidator(QIntValidator())
+
+# endregion
+
+# Region 'Button Function'
+
+    def save(self):
+        """
+        Questa funzione permette di effettuare l'Update dell'utente con le informazioni modificate
+        :param: None
+        :return: None
+        """
+        self.update_user()
+        self.show_popup()
+
     def edit(self):
         self.enable_field()
         self.editButton.setEnabled(False)
+
+    def back(self):
+        self.callback()
+        self.close()
+
+    def save_new(self):
+        if self.nameField.text() == '' or self.surnameField.text() == '': # mettere altri condizioni
+            self.pop = Popup()
+            self.pop.label.setText("Inserire tutti i campi obbligatori")
+            self.pop.show()
+
+        user = User('',#self.nationBox.currentText(),
+                    self.usertypeBox.currentText(),
+                    datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    self.nameField.text(),
+                    self.surnameField.text(),
+                    self.genderBox.currentText(),
+                    self.birthplaceField.text(),
+                    self.dateEdit.date().toPyDate(),
+                    self.cityField.text(),
+                    self.addressField.text(),
+                    self.capField.text(),
+                    self.districtBox.currentText(),
+                    self.cellField.text(),
+                    self.telephonField.text(),
+                    self.emailField.text(),
+                    self.fiscalcodeField.text(),
+                    0,#self.update_contact(),
+                    self.privacyBox.isChecked(),
+                    )
+        self.saveButton.setEnabled(False)
+        self.userM.add(user)
+        print("Salvataggio avvenuto correttamente")
+
+    def cell_contact(self):
+        if self.cellField.text() == '':
+            self.cellularRadio.setChecked(True)
+            self.cellularRadio.setChecked(False)
+            self.pop = Popup()
+            self.pop.label.setText("Prima inserisci il recapito")
+            self.pop.show()
+        else:
+            pass
+
+    def email_contact(self):
+        if self.emailField.text() == '':
+            self.cellularRadio.setChecked(False)
+            self.pop = Popup()
+            self.pop.label.setText("Prima inserisci il recapito")
+            self.pop.show()
+        else:
+            pass
+
+    def telephone_contact(self):
+        if self.telephonField.text() == '':
+            self.cellularRadio.setChecked(False)
+            self.pop = Popup()
+            self.pop.label.setText("Prima inserisci il recapito")
+            self.pop.show()
+        else:
+            pass
+
+# Region 'View Function'
 
     def load_user(self):
         """
@@ -215,6 +262,7 @@ class UserCardView(QMainWindow):
         self.cellField.setText(self.user.first_cellphone)
         self.emailField.setText(self.user.email)
         self.telephonField.setText(self.user.telephone)
+        self.birthplaceField.setText(self.user.birthplace)
         # Combo Box
         self.genderBox.setCurrentText(self.user.gender)
         self.usertypeBox.setCurrentText(self.user.user_type)
@@ -243,6 +291,7 @@ class UserCardView(QMainWindow):
         self.user.first_cellphone = self.cellField.text()
         self.user.email = self.emailField.text()
         self.user.telephone = self.telephonField.text()
+        self.user.birthplace = self.birthplaceField.text()
         # Combo Box update
         self.user.gender = self.genderBox.currentText()
         self.user.district = self.districtBox.currentText()
@@ -263,62 +312,23 @@ class UserCardView(QMainWindow):
         elif self.telephoneRadio.isChecked():
             return self.user.telephone
     '''
-    def save(self):
-        """
-        Questa funzione permette di effettuare l'Update dell'utente con le informazioni modificate
-        :param: None
-        :return: None
-        """
-        # TODO implementare contatto preferenziale e privacy agreement
-        self.update_user()
-        # PopUp per la conferma
-        self.show_popup()
-
-    def save_new(self):
-        if self.nameField.text() == '' or self.surnameField.text() == '': # mettere altri condizioni
-            self.pop = Popup()
-            self.pop.label.setText("Inserire tutti i campi obbligatori")
-            self.pop.show()
-
-        user = User('',#self.nationBox.currentText(),
-                    self.usertypeBox.currentText(),
-                    datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    self.nameField.text(),
-                    self.surnameField.text(),
-                    self.genderBox.currentText(),
-                    0,#Luogo di Nascita
-                    self.dateEdit.date().toPyDate(),
-                    self.cityField.text(),
-                    self.addressField.text(),
-                    self.capField.text(),
-                    self.districtBox.currentText(),
-                    self.cellField.text(),
-                    self.telephonField.text(),
-                    self.emailField.text(),
-                    self.fiscalcodeField.text(),
-                    0,#self.update_contact(),
-                    self.privacyBox.isChecked(),# Privacy
-                    )
-        self.saveButton.setEnabled(False)
-        self.userM.add(user)
-        print("Salvataggio avvenuto correttamente")
-
-    def back(self):
-        self.callback()
-        self.close()
 
     def show_popup(self):
         self.pop = SavePopUp(self.userM, self.user)
         self.pop.show()
 
+# endregion
+
+
+# Region 'Pop-Up'
 
 class SavePopUp(QDialog):
 
-    def __init__(self, userM, user):
+    def __init__(self, userm, user):
         super(SavePopUp, self).__init__()
         loadUi("../designer/Pop-Up/Save Pop-Up/savepopup.ui", self)
         self.setup()
-        self.userM = userM
+        self.userM = userm
         self.user = user
 
     def setup(self):
@@ -341,3 +351,5 @@ class Popup(QDialog):
         self.setWindowTitle('Errore')
         self.setModal(True)
         self.okButton.clicked.connect(self.close)
+
+# endregion
