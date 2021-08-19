@@ -84,7 +84,7 @@ class ItemManager:
         """
         self.dbms.edit_item(item)
 
-    def edit_availability (self, item: Item, availability: AvailabilityEnum) -> None:
+    def edit_availability(self, item: Item, availability: AvailabilityEnum) -> None:
         item.availability = availability
         self.dbms.edit_item(item)
 
@@ -106,7 +106,7 @@ class ItemManager:
         self.dbms.remove_item(item.id)
 
     def discard_item(self, item: Item):
-        item.availability = ItemEnumerators.AvailabilityEnum.discarded
+        item.availability = ItemEnumerators.AvailabilityEnum.scartato
         self.dbms.edit_item(item)
 
     @staticmethod

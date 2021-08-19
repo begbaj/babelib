@@ -44,8 +44,9 @@ class CatalogingView(QMainWindow):
 
         self.quarantine_start_button.clicked.connect(lambda: self.__start_quarantine())
         self.save_button.clicked.connect(lambda: self.__save_button())
+        self.go_back_button.clicked.connect(lambda: self.close())
 
-    # TODO: add inventory_num, quarantina readonly showitem, go back button, asterischi, controllo campi vuoti
+    # TODO: add inventory_num, go back button, asterischi, controllo campi vuoti
     def load_item(self, item) -> None:
         self.id.setText(str(item.id))
         self.bid.setText(str(item.bid))
@@ -118,7 +119,7 @@ class CatalogingView(QMainWindow):
         en_list = []
         en_id = []
         for i in range(starts_at, len(enum)+starts_at):
-            en_list.append(enum(i).name)
+            en_list.append(enum(i).name.capitalize().replace("_", " "))
             en_id.append(enum(i).value)
         for index, element in enumerate(en_list):
             obj.addItem(element)
@@ -189,6 +190,7 @@ class CatalogingView(QMainWindow):
     def close(self) -> bool:
         self.item = None
         return super(CatalogingView, self).close()
+
 
 
 class CheckableComboBox(QComboBox):

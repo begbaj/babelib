@@ -25,17 +25,17 @@ class TypeEnum(Enum):
 
 
 class AvailabilityEnum(Enum):
-    available = 1
-    unavailable = 2
-    quarantined = 3
-    discarded = 4
-    on_loan = 5
+    disponibile = 1
+    non_disponibile = 2
+    in_quarantena = 3
+    scartato = 4
+    in_prestito = 5
 
 
 class NatureEnum(Enum):
-    monograph = 1
-    analytic = 2
-    periodic = 3
+    monografia = 1
+    analitico = 2
+    periodico = 3
 
 
 class SMUSIEnum(Enum):
@@ -73,12 +73,12 @@ class ExternalStateEnum(Enum):
 
 
 class LangEnum(Enum):
-    italian = 1
-    english = 2
-    german = 3
-    french = 4
-    spanish = 5
-    chinese = 6
-    japanese = 7
+    italiano = 1
+    inglese = 2
+    tedesco = 3
+    francese = 4
+    spagnolo = 5
+    cinese = 6
+    giapponese = 7
     hindi = 8
-    other = 9
+    altro = 9

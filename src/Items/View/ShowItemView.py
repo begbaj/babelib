@@ -43,12 +43,12 @@ class ShowItemView(QMainWindow):
                 f"**Tipo**: {item.type.name}\n\n" \
                 f"**Prezzo**: {item.price}€\n\n"
 
-        if item.availability == ItemEnumerators.AvailabilityEnum.quarantined:
+        if item.availability == ItemEnumerators.AvailabilityEnum.in_quarantena:
             text += f"### Stato Quarantena\n\n" \
                     f"**Data inizio qurantena**: {item.quarantine_start_date}\n\n" \
                     f"**Data fine quarantena**: {item.quarantine_end_date}\n\n"
 
-        if item.availability == ItemEnumerators.AvailabilityEnum.discarded:
+        if item.availability == ItemEnumerators.AvailabilityEnum.scartato:
             text += f"### Informazioni sullo scarto \n\n" \
                     f"**Data di scarto**: {item.discarded_date}\n\n"
 
