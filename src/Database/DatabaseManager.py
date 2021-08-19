@@ -1,4 +1,3 @@
-from src.Items.Controllers.ItemManager import ItemManager
 from src.Items.Models.ItemEnumerators import CatalogingLevel
 from src.Movements.Models.Movement import Movement
 from src.Users.models.Nationality import Nationality
@@ -499,7 +498,7 @@ class DatabaseManager:
         # Initialize Variables
         movements = []
 
-        itemM = ItemManager()
+        #itemM = ItemManager()
 
         # List movements
         try:
@@ -511,7 +510,7 @@ class DatabaseManager:
         for row in self.cur.fetchall():
             movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
             movement.id = row.Id
-            movement.item = itemM.get_item(row.item)
+            #movement.item = itemM.get_item(row.item)
             movement.user = self.find_user_by_id(row.user_id)
             movements.append(movement)
 
@@ -565,7 +564,7 @@ class DatabaseManager:
     #timestamp
 
     def find_movement(self, search_field, search_mode):
-        itemM = ItemManager()
+        #itemM = ItemManager()
 
         # List movements
         try:
@@ -606,13 +605,13 @@ class DatabaseManager:
         for row in self.cur.fetchall():
             movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
             movement.id = row.Id
-            movement.item = itemM.get_item(row.item)
+            #movement.item = itemM.get_item(row.item)
             movement.user = self.find_user_by_id(row.user_id)
         return movement
 
     def find_movement_by_id(self, id):
 
-        itemM = ItemManager()
+        #itemM = ItemManager()
 
         # List movements
         try:
@@ -624,7 +623,7 @@ class DatabaseManager:
         for row in self.cur.fetchall():
             movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
             movement.id = row.Id
-            movement.item = itemM.get_item(row.item)
+            #movement.item = itemM.get_item(row.item)
             movement.user = self.find_user_by_id(row.user_id)
         return movement
 

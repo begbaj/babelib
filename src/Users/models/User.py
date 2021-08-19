@@ -29,11 +29,11 @@ class User:
     def __init__(self):
         pass
 
-    def __init__(self, nationality, user_type
-                 , registration_date, name, surname, gender, birthplace
-                 , birthdate, city, address, postal_code, district
-                 ,first_cellphone, telephone, email, fiscal_code, contect_mode
-                 ,privacy_agreement):
+    def __init__(self, nationality = None, user_type = None
+                 , registration_date = None, name = None, surname = None, gender = None, birthplace = None
+                 , birthdate = None, city = None, address = None, postal_code = None, district = None
+                 ,first_cellphone = None, telephone = None, email = None, fiscal_code = None, contect_mode = None
+                 ,privacy_agreement = None):
 
         #self.id = id
         self.nationality = nationality
