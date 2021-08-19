@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QTableView, QDialog, 
 from PyQt5.uic import loadUi
 from datetime import datetime
 from src.Items.Controllers.ItemManager import ItemManager
+from src.Items.Models.ItemEnumerators import AvailabilityEnum
+from src.Items.Models import Item
 from src.Items.View.CatalogingView import CatalogingView
 from src.Items.View.ShowItemView import ShowItemView
 
@@ -23,7 +25,7 @@ class InventoryView(QMainWindow):
             self.quarantineCheckBox.stateChanged.connect(lambda: self.search())
             self.discardedCheckBox.stateChanged.connect(lambda: self.search())
 
-            # self.addButton.clicked.connect(lambda: self.__go_to_cataloging_view(0))
+            self.add_button.clicked.connect(lambda: self.add_item())
             self.modifyButton.clicked.connect(lambda: self.edit_item())
             self.discardButton.clicked.connect(lambda: self.discard_item())
             self.returnButton.clicked.connect(lambda: self.__go_back())
@@ -40,7 +42,7 @@ class InventoryView(QMainWindow):
         self.__update_table()
 
     def add_item(self):
-        pass
+        self.__go_to_cataloging_view(new=True)
 
     def discard_item(self):
         item = self.__get_selected_item()
@@ -51,7 +53,7 @@ class InventoryView(QMainWindow):
         discard = Dialog(f"Sei sicuro di voler scartare {item.title} di {item.author}?(Questa azione è irreversibile!)")
         ok = discard.exec_()
         if ok:
-            if not self.__get_selected_item().discarded:
+            if not self.__get_selected_item().availability == AvailabilityEnum.discarded:
                 self.itmManager.discard_item(self.__get_selected_item())
         self.search()
 
@@ -116,8 +118,11 @@ class InventoryView(QMainWindow):
         # self.widget.setCurrentIndex(self.widget.currentIndex() - 1)
         self.close()
 
-    def __go_to_cataloging_view(self):
-        self.cataloging_view = CatalogingView(self.widget, self.__get_selected_item())
+    def __go_to_cataloging_view(self, new=False):
+        if new:
+            self.cataloging_view = CatalogingView(self.widget, Item.Item())
+        else:
+            self.cataloging_view = CatalogingView(self.widget, self.__get_selected_item())
         self.cataloging_view.show()
 
     def __go_to_showitem_view(self):

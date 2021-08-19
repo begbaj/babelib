@@ -18,7 +18,7 @@ class DatabaseManager:
 
     #def __init__(self, user, password, host, port, database):
 
-    def __init__(self):
+    def __init__(self, directory="Database/db_settings/db.json"):
         """
         Initialize Database manager
         :param user_: username for db access
@@ -31,7 +31,7 @@ class DatabaseManager:
         #"root", "sa", "localhost", 3306, "babelib_db"
         #C:\Users\DanieleB\PycharmProjects\babelib\src\Databse\db_settings\db.json
 
-        data = json.load(open(os.path.abspath("Database/db_settings/db.json")))
+        data = json.load(open(os.path.abspath(directory)))
 
         _conn = mariadb.connect(
             user=data['user'],
@@ -268,20 +268,40 @@ class DatabaseManager:
                     f" opac_visibility, price, quarantine_start_date, quarantine_end_date, discarded_date, note)"\
                     f" VALUES "\
                     f" (" \
-                    f" {item.material}, {item.nature}, {item.type}, {item.lang}, {item.availability}, {item.bid},"\
-                    f" {item.isbn}, {item.title}, {item.author}, {item.cataloging_level}, {item.publication_date}," \
-                    f" {item.rack}, {item.shelf}, {item.position},"\
-                    f" {item.opac_visibility},{item.price},{item.quarantine_start_date},{item.quarantine_end_date},"\
-                    f" {item.discarded_date},{item.note});"
+                    f" {item.material.value}, {item.nature.value}, {item.type.value}, {item.lang.value}," \
+                    f" {item.availability.value}, '{item.bid}', '{item.isbn}', '{item.title}', '{item.author}', " \
+                    f" {item.cataloging_level.value}, '{item.publication_date}', {item.publication_state}, " \
+                    f" {item.rack}, '{item.shelf}', {item.position}, {item.opac_visibility},{item.price}, "
+
+            if item.quarantine_start_date is not None:
+                query += f"'{item.quarantine_start_date}', "
+            else:
+                query += f"null, "
+            if item.quarantine_end_date is not None:
+                query += f"'{item.quarantine_end_date}', "
+            else:
+                query += f"null, "
+            if item.discarded_date is not None:
+                query += f"'{item.discarded_date}', "
+            else:
+                query += f"null, "
+
+            query += f"'{item.note}');"
+            self.query(query)
+            query = f"SELECT id FROM items ORDER BY id DESC LIMIT 1;"
+            nid = self.query(query, returns=True)[0].id
 
             for genre in item.genre:
-                query += f"INSERT INTO items_genres (item_id, genre_id) VALUES ({item.id, genre['id']});"
+                query = f"INSERT INTO items_genres (item_id, genre_id) VALUES ({nid}, {genre['id']});"
+                self.query(query)
 
             for state in item.inner_state:
-                query +=f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({item.id, state.value});"
+                query =f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({nid}, {state.value});"
+                self.query(query)
 
             for state in item.external_state:
-                query += f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({item.id,state.value});"
+                query =f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({nid},{state.value});"
+                self.query(query)
         else:
             ##TODO: aggiungere min level cataloging
             ##TODO: SISTEMARE CATALOGATION IN CATALOGING

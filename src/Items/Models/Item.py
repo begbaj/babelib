@@ -2,6 +2,9 @@ import datetime
 from src.Items.Models.ItemEnumerators import *
 
 
+# TODO: disponibilità, quarantena, aggiorna liste dinamicamente (le drop down devono essere agiornate a seconda dei valori presenti nel db), bottone per tornare indietro, aggiungi documento
+# TODO: controlli nella view, constraints nel database, gestione eccezioni
+
 class Item:
     """
     Model for Item objects
@@ -15,16 +18,16 @@ class Item:
         self.author = author
         self.cataloging_level = cataloging_level
         self.material = MaterialEnum.libro_moderno
-        self.nature = NatureEnum.analytic
-        self.type = TypeEnum.libretto
+        self.nature = NatureEnum.monograph
+        self.type = TypeEnum.cartografia_a_stampa
 
         self.publication_date = datetime.datetime.now()
-        self.publication_state = ""
-        self.lang = 1
+        self.publication_state = 0
+        self.lang = LangEnum.other
 
         self.genre = []
         self.inner_state = [SMUSIEnum.nessuno]
-        self.external_state = [ExternalStateEnum.ottimo]
+        self.external_state = [ExternalStateEnum.nuovo]
 
         self.rack = None
         self.shelf = None
@@ -36,8 +39,7 @@ class Item:
         self.availability = AvailabilityEnum.available
         self.quarantine_start_date = None
         self.quarantine_end_date = None
-        self.discarded = False
-        self.discarded_date = datetime.datetime.now()
+        self.discarded_date = None
 
         self.note = ""
 

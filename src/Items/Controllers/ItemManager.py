@@ -12,7 +12,6 @@ class ItemManager:
 
     def add_item(self, item: Item) -> None:
         self.dbms.insert_item(item)
-        pass
 
     def get_item(self, item_id: int) -> Item:
         dbitem = self.dbms.get_items(search_field, search_mode, quarantined, discarded)
@@ -155,6 +154,11 @@ class ItemManager:
         # TODO: dobbiamo fare il get dei generi del libro, cosi anche per material nature type lang
         return item
 
-    # def print_label(self, item):
-    #     pass
+    def print_label(self, item):
+        '''
+        Print item label
+        :param item: item to print
+        '''
+
+        pass
 

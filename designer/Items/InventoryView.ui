@@ -417,7 +417,7 @@ border-radius:16px;</string>
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="addButton">
+    <widget class="QPushButton" name="add_button">
      <property name="geometry">
       <rect>
        <x>10</x>
