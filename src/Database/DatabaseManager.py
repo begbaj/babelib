@@ -1,4 +1,6 @@
+from src.Items.Controllers.ItemManager import ItemManager
 from src.Items.Models.ItemEnumerators import CatalogingLevel
+from src.Movements.Models.Movement import Movement
 from src.Users.models.Nationality import Nationality
 from src.Users.models.User import User
 import mariadb
@@ -490,5 +492,140 @@ class DatabaseManager:
     # endregion
 
     # region Movements
+
+    def get_movements(self):
+        """Retrieves the list of contacts from the Database and prints to stdout"""
+
+        # Initialize Variables
+        movements = []
+
+        itemM = ItemManager()
+
+        # List movements
+        try:
+            self.cur.execute(f"Select * from movements m ")
+
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
+        for row in self.cur.fetchall():
+            movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
+            movement.id = row.Id
+            movement.item = itemM.get_item(row.item)
+            movement.user = self.find_user_by_id(row.user_id)
+            movements.append(movement)
+
+        return movements
+
+    def set_movement(self, movement):
+
+        try:
+            self.cur.execute(
+                f"Update movements m "
+                f"set m.mov_type = '{movement.mov_type}'"
+                f", m.timestamp = '{movement.timestamp}'"                
+                f" where id = {movement.id}")
+
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
+    def insert_movement(self, movement):
+        try:
+            self.cur.execute(
+                f"Insert into movemets"
+                f" ("
+                f"  item_id, user_id"
+                f", mov_type, timestamp"
+                f")"
+                f" values "
+                f"("
+                f" {movement.item_id}"
+                f", {movement.user_id}"
+                f", '{movement.mov_type}'"
+                f", '{movement.timestamp}'"                
+                f")"
+            )
+
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
+    def delete_movement(self, id):
+        try:
+            self.cur.execute(f"delete from movements where id = {id}")
+
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
+    #search:
+    #nome utente
+    #cognome utente
+    #(insieme i primi due)
+    #titolo documento
+    #isbn
+    #timestamp
+
+    def find_movement(self, search_field, search_mode):
+        itemM = ItemManager()
+
+        # List movements
+        try:
+            if search_mode == 0:
+                self.cur.execute(f"Select * from movements m "
+                                 f"left join users u on u.id = m.user_id "
+                                 f"left join itmes i on i.id = m.item_id "  
+                                 f"where u.name like '%{search_field}%' "
+                                 f"or u.surname like '%{search_field}%' "
+                                 f"or i.title like '%{search_field}%' "
+                                 f"or i.isbn like '%{search_field}%' "
+                                 f"or m.timestamp like '%{search_field}%' ")
+            elif search_mode == 1:
+                self.cur.execute(f"Select * from movements m "
+                                 f"left join users u on u.id = m.user_id "
+                                 f"left join itmes i on i.id = m.item_id "
+                                 f"where u.name like '%{search_field}%' "
+                                 f"or u.surname like '%{search_field}%' ")
+            elif search_mode == 2:
+                self.cur.execute(f"Select * from movements m "
+                                 f"left join users u on u.id = m.user_id "
+                                 f"left join itmes i on i.id = m.item_id "
+                                 f"where i.title like '%{search_field}%' ")
+            elif search_mode == 3:
+                self.cur.execute(f"Select * from movements m "
+                                 f"left join users u on u.id = m.user_id "
+                                 f"left join itmes i on i.id = m.item_id "
+                                 f"where i.isbn like '%{search_field}%' ")
+            elif search_mode == 4:
+                self.cur.execute(f"Select * from movements m "
+                                 f"left join users u on u.id = m.user_id "
+                                 f"left join itmes i on i.id = m.item_id "
+                                 f"where m.timestamp like '%{search_field}%' ")
+
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
+        for row in self.cur.fetchall():
+            movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
+            movement.id = row.Id
+            movement.item = itemM.get_item(row.item)
+            movement.user = self.find_user_by_id(row.user_id)
+        return movement
+
+    def find_movement_by_id(self, id):
+
+        itemM = ItemManager()
+
+        # List movements
+        try:
+            self.cur.execute(f"Select * from movements m where id = {id}")
+
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
+        for row in self.cur.fetchall():
+            movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
+            movement.id = row.Id
+            movement.item = itemM.get_item(row.item)
+            movement.user = self.find_user_by_id(row.user_id)
+        return movement
 
     # endregion
