@@ -11,7 +11,7 @@ class UserView(QMainWindow):
 
     def __init__(self, widget):
         super(UserView, self).__init__()
-        loadUi("../designer/User view/UserView.ui", self)
+        loadUi("../designer/Users/UserView.ui", self)
         self.users = self.userM.list()
         self.widget = widget
         self.pop = ''

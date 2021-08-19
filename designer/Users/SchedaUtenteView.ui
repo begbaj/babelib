@@ -25,8 +25,7 @@
     </property>
     <property name="styleSheet">
      <string notr="true">border:none;
-background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:0 rgba(32, 30, 39, 255), stop:0.571429 rgba(0, 178, 210, 48));
-</string>
+background-color:rgb(20, 18, 29)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -37,7 +36,7 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
     <widget class="QLabel" name="logoImage">
      <property name="geometry">
       <rect>
-       <x>57</x>
+       <x>70</x>
        <y>40</y>
        <width>71</width>
        <height>71</height>
@@ -53,7 +52,7 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
       <enum>Qt::RichText</enum>
      </property>
      <property name="pixmap">
-      <pixmap>images/Icona Dettaglio.png</pixmap>
+      <pixmap>../img/Icona Dettaglio.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -62,7 +61,7 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
     <widget class="QPushButton" name="returnButton">
      <property name="geometry">
       <rect>
-       <x>60</x>
+       <x>70</x>
        <y>870</y>
        <width>71</width>
        <height>51</height>
@@ -76,7 +75,7 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/Icona Close.png</normaloff>images/Icona Close.png</iconset>
+       <normaloff>../img/Icona Close.png</normaloff>../img/Icona Close.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -88,22 +87,30 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
     <widget class="QPushButton" name="editButton">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>40</x>
        <y>160</y>
        <width>141</width>
        <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-radius:16px;
-background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));</string>
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
      </property>
      <property name="text">
       <string>Modifica Campi</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/Icona Modifica.png</normaloff>images/Icona Modifica.png</iconset>
+       <normaloff>../img/Icona Modifica.png</normaloff>../img/Icona Modifica.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -115,22 +122,30 @@ background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx
     <widget class="QPushButton" name="saveButton">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>230</y>
+       <x>40</x>
+       <y>240</y>
        <width>141</width>
        <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-radius:16px;
-background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));</string>
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
      </property>
      <property name="text">
       <string>Salva</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/Icona Salva.png</normaloff>images/Icona Salva.png</iconset>
+       <normaloff>../img/Icona Salva.png</normaloff>../img/Icona Salva.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -293,7 +308,7 @@ background-color: transparent</string>
      <enum>Qt::RichText</enum>
     </property>
     <property name="pixmap">
-     <pixmap>images/id.png</pixmap>
+     <pixmap>../img/Icona id.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1147,7 +1162,7 @@ background-color: transparent</string>
      <enum>Qt::RichText</enum>
     </property>
     <property name="pixmap">
-     <pixmap>../New User View/images/Icona Dati Personali.png</pixmap>
+     <pixmap>../img/Icona Dati Personali.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1241,7 +1256,7 @@ background-color: transparent</string>
      <enum>Qt::RichText</enum>
     </property>
     <property name="pixmap">
-     <pixmap>../New User View/images/Icona Casa.png</pixmap>
+     <pixmap>../img/Icona Casa.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1267,7 +1282,7 @@ background-color: transparent</string>
      <enum>Qt::RichText</enum>
     </property>
     <property name="pixmap">
-     <pixmap>../New User View/images/Icona Recapiti.png</pixmap>
+     <pixmap>../img/Icona Recapiti.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1293,7 +1308,7 @@ background-color:transparent</string>
      <enum>Qt::RichText</enum>
     </property>
     <property name="pixmap">
-     <pixmap>../New User View/images/Icona Consensi.png</pixmap>
+     <pixmap>../img/Icona Consensi.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>

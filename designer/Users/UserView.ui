@@ -176,8 +176,8 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
 font: 14pt &quot;Source Code Pro for Powerline&quot;;
 background-color:qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(56, 54, 65, 255), stop:1 rgba(56, 54, 65, 130));
 qproperty-alignment: 'AlignLeft';
-background-color: rgba(56, 54, 65, 255);
-alternate-background-color: rgb(11, 11, 13, 100);
+background-color: rgb(16, 14, 23,220);
+alternate-background-color: rgb(38, 35, 63);
 color: white;
 border:none;
 border-radius:10px;</string>
@@ -324,14 +324,13 @@ border-radius:10px;</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>291</width>
+      <width>251</width>
       <height>831</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">border:none;
-background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:0 rgba(32, 30, 39, 255), stop:0.571429 rgba(0, 178, 210, 48));
-</string>
+background-color:rgb(20, 18, 29)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -351,8 +350,9 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
      <property name="styleSheet">
       <string notr="true">QPushButton 
 {
-	background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:			0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 				241, 241));
-	border-radius:16px;
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
 }
 QPushButton::pressed
 {
@@ -364,7 +364,7 @@ QPushButton::pressed
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>Images/Icona User.png</normaloff>Images/Icona User.png</iconset>
+       <normaloff>../img/Icona User.png</normaloff>../img/Icona User.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -383,14 +383,23 @@ QPushButton::pressed
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
      </property>
      <property name="text">
       <string>Scheda Utente</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>Images/Icona Dettaglio.png</normaloff>Images/Icona Dettaglio.png</iconset>
+       <normaloff>../img/Icona Dettaglio.png</normaloff>../img/Icona Dettaglio.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -411,8 +420,9 @@ QPushButton::pressed
      <property name="styleSheet">
       <string notr="true">QPushButton 
 {
-	background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, 		fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));
-	border-radius:16px;
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
 }
 QPushButton::pressed
 {
@@ -424,7 +434,7 @@ QPushButton::pressed
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>Images/Icona Scarta.png</normaloff>Images/Icona Scarta.png</iconset>
+       <normaloff>../img/Icona Scarta.png</normaloff>../img/Icona Scarta.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -452,7 +462,7 @@ QPushButton::pressed
       <enum>Qt::RichText</enum>
      </property>
      <property name="pixmap">
-      <pixmap>Images/Babelib.icns</pixmap>
+      <pixmap>../img/Babelib-removebg-preview.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -483,7 +493,7 @@ QPushButton::pressed
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>Images/Icona Indietro.png</normaloff>Images/Icona Indietro.png</iconset>
+       <normaloff>../img/Icona Indietro.png</normaloff>../img/Icona Indietro.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -513,7 +523,7 @@ background-color:transparent;</string>
      <enum>Qt::RichText</enum>
     </property>
     <property name="pixmap">
-     <pixmap>Images/Icona Utenti.png</pixmap>
+     <pixmap>../img/Icona Utenti.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>

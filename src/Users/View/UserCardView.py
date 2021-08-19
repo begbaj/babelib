@@ -20,7 +20,7 @@ class UserCardView(QMainWindow):
         if user is not None:
             # Se l'utente non è un oggetto nullo allora visualizzo le sue informazioni
             super(UserCardView, self).__init__()
-            loadUi("../designer/SchedaUtenteView/SchedaUtenteView.ui", self)
+            loadUi("../designer/Users/SchedaUtenteView.ui", self)
             # Variabili di Istanza
             self.widget = widget
             self.user = user
@@ -31,13 +31,12 @@ class UserCardView(QMainWindow):
         else:
             # Se l'utente è nullo allora visualizzo la schermata per crearne uno nuovo
             super(UserCardView, self).__init__()
-            loadUi("../designer/New User View/NewUserView.ui", self)
+            loadUi("../designer/Users/NewUserView.ui", self)
             # Variabili di Istanza
             self.pop = ''
             # Metodi iniziali
             self.setup_new()
             self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)
-
 
     def setup(self):
         """
@@ -58,8 +57,18 @@ class UserCardView(QMainWindow):
         self.style()
 
     def style(self):
+        # Line Edit
         self.nameField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
-        # varie cose
+        self.surnameField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        self.fiscalcodeField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        self.addressField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        self.cityField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        self.capField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        self.cellField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        self.emailField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        self.telephonField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        self.birthplaceField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        # Table
 
     def setup_new(self):
         self.returnButton.clicked.connect(self.back)
@@ -68,7 +77,6 @@ class UserCardView(QMainWindow):
         self.setup_combo_box()
         self.setup_radio_button()
         self.regular_exp_field()
-
 
 # region Field Function
 
@@ -94,10 +102,8 @@ class UserCardView(QMainWindow):
         f.close()
         self.nationBox.addItems(content_list)
 
-
     def setup_radio_button(self):
         self.cellularRadio.setChecked(True)
-
 
     def disable_field(self):
         """
@@ -197,8 +203,6 @@ class UserCardView(QMainWindow):
             self.pop.label.setText("Inserire contatto.")
             self.pop.show()
             return
-
-
         self.update_user()
         self.show_popup()
 
@@ -346,7 +350,6 @@ class UserCardView(QMainWindow):
             return self.cellField.text()
         elif self.telephoneRadio.isChecked():
             return self.telephonField.text()
-
 
     def show_popup(self):
         self.pop = SavePopUp(self.userM, self.user)
