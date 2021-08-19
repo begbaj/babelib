@@ -53,7 +53,7 @@ class InventoryView(QMainWindow):
         discard = Dialog(f"Sei sicuro di voler scartare {item.title} di {item.author}?(Questa azione è irreversibile!)")
         ok = discard.exec_()
         if ok:
-            if not self.__get_selected_item().availability == AvailabilityEnum.discarded:
+            if not self.__get_selected_item().availability == AvailabilityEnum.scartato:
                 self.itmManager.discard_item(self.__get_selected_item())
         self.search()
 
