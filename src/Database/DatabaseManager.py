@@ -483,6 +483,10 @@ class DatabaseManager:
                 f"WHERE ig.item_id = {item_id};"
         return self.query(query, returns=True)
 
+    def check_bid(self, bid):
+        query = f"SELECT id FROM items WHERE bid = {bid}"
+        return self.query(query, returns=True)
+
     # endregion
 
     # region Movements

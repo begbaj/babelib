@@ -108,6 +108,19 @@ class ItemManager:
         item.availability = ItemEnumerators.AvailabilityEnum.scartato
         self.dbms.edit_item(item)
 
+    def check_bid(self, bid) -> bool:
+        '''
+        Check if the bid is unique in the database
+        :param bid:
+        :return: True if it is unique
+        '''
+
+        qr = self.dbms.check_bid(bid)
+        if len(qr) == 0:
+            return True
+        else:
+            return False
+
     @staticmethod
     def __convert_dbitem(dbitem) -> Item:
         """

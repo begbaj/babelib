@@ -179,7 +179,7 @@ class CatalogingView(QMainWindow):
         self.__qed = self.__qsd + timedelta(days=4)
         self.quarantine_due_time.setText(str(self.__qed - self.__qsd))
         self.quarantine_end_date.setText(str(self.__qed))
-        self.availability.setCurrentIndex(AvailabilityEnum.quarantined.value - 1)
+        self.availability.setCurrentIndex(AvailabilityEnum.in_quarantena.value - 1)
 
     def __save_button(self) -> None:
         if self.item.id is None:
