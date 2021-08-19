@@ -89,15 +89,7 @@ class InventoryView(QMainWindow):
             self.itemTable.setItem(row, 2, QTableWidgetItem(item.isbn))
             self.itemTable.setItem(row, 3, QTableWidgetItem(item.bid))
             self.itemTable.setItem(row, 4, QTableWidgetItem(str(item.availability.name)))
-            if item.quarantine_end_date is not None:
-                if item.quarantine_end_date >= datetime.now():
-                    self.itemTable.setItem(row, 5, QTableWidgetItem('Si'))
-                else:
-                    self.itemTable.setItem(row, 5, QTableWidgetItem('No'))
-            else:
-                self.itemTable.setItem(row, 5, QTableWidgetItem('No'))
-
-            self.itemTable.setItem(row, 6, QTableWidgetItem(item.note))
+            self.itemTable.setItem(row, 5, QTableWidgetItem(item.note))
             row = row + 1
 
     def __get_selected_item(self):

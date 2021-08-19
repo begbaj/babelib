@@ -9,6 +9,7 @@ from PyQt5.uic import loadUi
 
 from src.Database.DatabaseManager import DatabaseManager
 from src.Items.Models.ItemEnumerators import *
+from src.Items.Models.Item import Item
 from src.Items.Controllers.ItemManager import ItemManager
 
 
@@ -31,6 +32,8 @@ class CatalogingView(QMainWindow):
 
         self.widget = widget
         self.item = item
+        self.__qsd = None #data inizio quarantena
+        self.__qed = None #data fine quarantena
 
         self.inner_state = CheckableComboBox(self.admin_frame) #make ComboBox a CheckableComboBox
         self.external_state = CheckableComboBox(self.admin_frame)
@@ -50,38 +53,17 @@ class CatalogingView(QMainWindow):
         self.id.setText(str(item.id))
         self.bid.setText(str(item.bid))
         self.isbn.setText(str(item.isbn))
-
         self.title.setText(item.title)
         self.author.setText(item.author)
-        self.cataloging_level.setCurrentIndex(item.cataloging_level.value)
-        self.material.setCurrentIndex(item.material.value)
-        self.nature.setCurrentIndex(item.nature.value - 1)
-        self.type.setCurrentIndex(item.type.value - 1)
-
         self.publication_date.setDate(item.publication_date)
-        self.publication_state.setCurrentIndex(item.publication_state)
-        self.lang.setCurrentIndex(item.lang.value - 1)
-
-        if len(item.genre) > 0:
-            self.genre.setCurrentIndex(item.genre[0]['id'] - 1)
-        if len(item.inner_state) > 0:
-            self.inner_state.setCurrentIndex(item.inner_state[0].value - 1)
-        if len(item.external_state) > 0:
-            self.external_state.setCurrentIndex(item.external_state[0].value - 1)
-
         self.shelf.setText(str(item.shelf))
         self.rack.setText(str(item.rack))
         self.position.setText(str(item.position))
-
-        self.opac_visibility.setCurrentIndex(item.opac_visibility)
         self.price.setText(str(item.price))
-
-        self.availability.setCurrentIndex(item.availability.value - 1)
-
         self.note.setText(item.note)
 
-        if self.item.quarantine_start_date is not None:
-            if self.item.quarantine_end_date is not None:
+        if item.quarantine_start_date is not None:
+            if item.quarantine_end_date is not None:
                 self.quarantine_due_time.setText(str(item.quarantine_end_date-item.quarantine_start_date))
                 self.quarantine_end_date.setText(str(item.quarantine_end_date))
 
@@ -92,8 +74,8 @@ class CatalogingView(QMainWindow):
             self.genre.addItem(element)
             nitem = self.genre.model().item(index, 0)
             nitem.setCheckState(Qt.Unchecked)
-        for index, element in enumerate(genre_list):
-            for k in range(0, len(self.item.genre)):
+        for k in range(0, len(item.genre)):
+            for index, element in enumerate(genre_list):
                 if element == self.item.genre[k]['description']:
                     nitem = self.genre.model().item(index, 0)
                     nitem.setCheckState(Qt.Checked)
@@ -107,6 +89,22 @@ class CatalogingView(QMainWindow):
         self.__fill_with_enum(CatalogingLevel, self.cataloging_level, starts_at=0)
         self.__fill_with_enum(AvailabilityEnum, self.availability)
 
+        self.cataloging_level.setCurrentIndex(item.cataloging_level.value)
+        self.material.setCurrentIndex(item.material.value)
+        self.nature.setCurrentIndex(item.nature.value - 1)
+        self.type.setCurrentIndex(item.type.value - 1)
+        self.opac_visibility.setCurrentIndex(item.opac_visibility)
+        self.availability.setCurrentIndex(item.availability.value - 1)
+        self.publication_state.setCurrentIndex(item.publication_state)
+        self.lang.setCurrentIndex(item.lang.value - 1)
+
+        if len(item.genre) > 0:
+            self.genre.setCurrentIndex(item.genre[0]['id'] - 1)
+        if len(item.inner_state) > 0:
+            self.inner_state.setCurrentIndex(item.inner_state[0].value)
+        if len(item.external_state) > 0:
+            self.external_state.setCurrentIndex(item.external_state[0].value - 1)
+
         self.opac_visibility.addItem("Non Visibile")
         self.opac_visibility.addItem("Visibile")
 
@@ -114,7 +112,7 @@ class CatalogingView(QMainWindow):
         self.publication_state.addItem("Pubblicato")
 
     @staticmethod
-    def __fill_with_enum(enum, obj, starts_at=1) -> None:
+    def __fill_with_enum(enum, obj, starts_at=1, selected_index=None) -> None:
         en_list = []
         en_id = []
         for i in range(starts_at, len(enum)+starts_at):
@@ -136,8 +134,8 @@ class CatalogingView(QMainWindow):
 
         if len(item_list) > 0:
             for index, element in enumerate(en_id):
-                for k in range(0, len(item_list)):
-                    if element + starts_at == item_list[k].value:
+                for k in item_list:
+                    if element - starts_at == k.value:
                         obj.model().item(index, 0).setCheckState(Qt.Checked)
 
     def __get_from_view(self):
@@ -154,7 +152,9 @@ class CatalogingView(QMainWindow):
         new_item.bid = self.bid.text()
         new_item.price = self.price.text()
         new_item.lang = LangEnum(self.lang.currentIndex()+1)
-        #quarantena
+
+        new_item.quarantine_start_date = self.__qsd
+        new_item.quarantine_end_date = self.__qed
 
         new_item.rack = self.rack.text()
         new_item.shelf = self.shelf.text()
@@ -174,10 +174,11 @@ class CatalogingView(QMainWindow):
         return new_item
 
     def __start_quarantine(self) -> None:
-        self.item.quarantine_start_date = date.today()
-        self.item.quarantine_end_date = self.item.quarantine_start_date + timedelta(days=4)
-        self.quarantine_due_time.setText(str(self.item.quarantine_end_date - self.item.quarantine_start_date))
-        self.quarantine_end_date.setText(str(self.item.quarantine_end_date))
+        self.__qsd = datetime.today().date()
+        self.__qed = self.__qsd + timedelta(days=4)
+        self.quarantine_due_time.setText(str(self.__qed - self.__qsd))
+        self.quarantine_end_date.setText(str(self.__qed))
+        self.availability.setCurrentIndex(AvailabilityEnum.quarantined.value - 1)
 
     def __save_button(self) -> None:
         if self.item.id is None:

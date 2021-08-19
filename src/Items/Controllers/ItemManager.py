@@ -14,8 +14,7 @@ class ItemManager:
         self.dbms.insert_item(item)
 
     def get_item(self, item_id: int) -> Item:
-        dbitem = self.dbms.get_items(search_field, search_mode, quarantined, discarded)
-        item = self.__convert_dbitem(dbitem)
+        item = self.__convert_dbitem(self.dbms.get_item(item_id))
 
         item.genre = []
         for genre in self.dbms.get_item_genres(item.id):
@@ -135,7 +134,7 @@ class ItemManager:
 
         try:
             if dbitem.quarantine_start_date is not None:
-                item.quarantine_start_date =  datetime.combine(dbitem.quarantine_start_date, datetime.min.time())
+                item.quarantine_start_date = dbitem.quarantine_start_date
             else:
                 item.quarantine_start_date = None
         except:
@@ -143,7 +142,7 @@ class ItemManager:
 
         try:
             if dbitem.quarantine_end_date is not None:
-                item.quarantine_end_date = datetime.combine(dbitem.quarantine_end_date, datetime.min.time())
+                item.quarantine_end_date = dbitem.quarantine_end_date
             else:
                 item.quarantine_end_date = None
         except:

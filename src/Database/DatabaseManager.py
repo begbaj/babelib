@@ -342,7 +342,7 @@ class DatabaseManager:
             raise Exception("invalid search_mode")
 
         if not show_quarantined:
-            query += " AND (availability <> 3  or quarantine_end_date <= CURRENT_DATE )"
+            query += " AND (availability <> 3)"
 
         if not show_discarded:
             query += " AND availability <> 4"
@@ -378,7 +378,7 @@ class DatabaseManager:
             query += f"quarantine_start_date=null, "
 
         if item.quarantine_end_date is not None:
-            query += f"quarantine_end_date = '{item.quarantine_start_date}' "
+            query += f"quarantine_end_date = '{item.quarantine_end_date}' "
         else:
             query += f"quarantine_end_date=null "
 
