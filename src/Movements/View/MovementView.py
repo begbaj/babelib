@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QMainWindow, QWidget, QDialog
 from PyQt5.uic import loadUi
 
 
-class MovementView(QDialog):
+class MovementView(QMainWindow):
 
     def __int__(self):
         super(MovementView, self).__init__()
