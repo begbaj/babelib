@@ -2,8 +2,7 @@ from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
 from Users.View.UserView import UserView
 from src.Items.View.InventoryView import InventoryView
-from src.Movements.View.MovementView import MovementView
-from Users.View.UserCardView import Popup
+
 
 class HomeView(QMainWindow):
 
@@ -30,6 +29,7 @@ class HomeView(QMainWindow):
         # self.newreservButton.clicked.connect(self.newreservation())
         # self.newuserButton.clicked.connect(self.newuser())
         # Setting Button
+        # self.settingButton.clicked.connect(self.setting())
         self.style()
 
     def style(self):
@@ -51,8 +51,6 @@ class HomeView(QMainWindow):
         self.itemview.show()
 
     def __go_movement_view(self):
-        self.moveview = MovementView()
-        self.moveview.show()
         pass
 
     def __go_stats_view(self):
@@ -77,5 +75,8 @@ class HomeView(QMainWindow):
         pass
 
     def new_user(self):
+        pass
+
+    def setting(self):
         pass
     # end region

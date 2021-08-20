@@ -261,55 +261,51 @@ class DatabaseManager:
 
     # region Items
 
-    def insert_item(self,item) -> None:
-        if item.cataloging_level == CatalogingLevel.max:
-            query = f"INSERT INTO items"\
-                    f" (material_id, nature_id, type_id, lang_id, availability, bid, isbn,"\
-                    f" title, author, cataloging_level, publication_date, publication_state, rack, shelf, position," \
-                    f" opac_visibility, price, quarantine_start_date, quarantine_end_date, discarded_date, note)"\
-                    f" VALUES "\
-                    f" (" \
-                    f" {item.material.value}, {item.nature.value}, {item.type.value}, {item.lang.value}," \
-                    f" {item.availability.value}, '{item.bid}', '{item.isbn}', '{item.title}', '{item.author}', " \
-                    f" {item.cataloging_level.value}, '{item.publication_date}', {item.publication_state}, " \
-                    f" {item.rack}, '{item.shelf}', {item.position}, {item.opac_visibility},{item.price}, "
+    def insert_item(self,item) -> int:
+        query = f"INSERT INTO items"\
+                f" (material_id, nature_id, type_id, lang_id, availability, bid, isbn,"\
+                f" title, author, cataloging_level, publication_date, publication_state, rack, shelf, position," \
+                f" opac_visibility, price, quarantine_start_date, quarantine_end_date, discarded_date, note)"\
+                f" VALUES "\
+                f" (" \
+                f" {item.material.value}, {item.nature.value}, {item.type.value}, {item.lang.value}," \
+                f" {item.availability.value}, '{item.bid}', '{item.isbn}', '{item.title}', '{item.author}', " \
+                f" {item.cataloging_level.value}, '{item.publication_date}', {item.publication_state}, " \
+                f" {item.rack}, '{item.shelf}', {item.position}, {item.opac_visibility},{item.price}, "
 
-            if item.quarantine_start_date is not None:
-                query += f"'{item.quarantine_start_date}', "
-            else:
-                query += f"null, "
-            if item.quarantine_end_date is not None:
-                query += f"'{item.quarantine_end_date}', "
-            else:
-                query += f"null, "
-            if item.discarded_date is not None:
-                query += f"'{item.discarded_date}', "
-            else:
-                query += f"null, "
+        if item.quarantine_start_date is not None:
+            query += f"'{item.quarantine_start_date}', "
+        else:
+            query += f"null, "
+        if item.quarantine_end_date is not None:
+            query += f"'{item.quarantine_end_date}', "
+        else:
+            query += f"null, "
+        if item.discarded_date is not None:
+            query += f"'{item.discarded_date}', "
+        else:
+            query += f"null, "
 
-            query += f"'{item.note}');"
+        query += f"'{item.note}');"
+        self.query(query)
+
+        query = f"SELECT id FROM items ORDER BY id DESC LIMIT 1;"
+        nid = self.query(query, returns=True)[0].id
+
+        for genre in item.genre:
+            query = f"INSERT INTO items_genres (item_id, genre_id) VALUES ({nid}, {genre['id']});"
             self.query(query)
 
-            query = f"SELECT id FROM items ORDER BY id DESC LIMIT 1;"
-            nid = self.query(query, returns=True)[0].id
+        for state in item.inner_state:
+            query =f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({nid}, {state.value});"
+            self.query(query)
 
-            for genre in item.genre:
-                query = f"INSERT INTO items_genres (item_id, genre_id) VALUES ({nid}, {genre['id']});"
-                self.query(query)
-
-            for state in item.inner_state:
-                query =f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({nid}, {state.value});"
-                self.query(query)
-
-            for state in item.external_state:
-                query =f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({nid},{state.value});"
-                self.query(query)
-        else:
-            ##TODO: aggiungere min level cataloging
-            ##TODO: SISTEMARE CATALOGATION IN CATALOGING
-            raise Exception("min level cataloging is not supported yet")
-
+        for state in item.external_state:
+            query =f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({nid},{state.value});"
+            self.query(query)
         self.query(query)
+
+        return nid
 
     def get_genre_value(self, genre_id):
         query = f"SELECT * FROM genres WHERE id={genre_id}"
@@ -354,9 +350,7 @@ class DatabaseManager:
     def get_item(self, item_id) -> tuple:
         query = f"SELECT * FROM items WHERE id = {item_id}"
         dbitem = self.query(query, returns=True)
-        if len(dbitem) > 1:
-            return dbitem[0]
-        return dbitem
+        return dbitem[0]
 
     def edit_item(self,item) -> None:
         query = f"update items set " \
@@ -456,16 +450,19 @@ class DatabaseManager:
             query += ";"
         return self.query(query, returns=True)
 
-    def get_inner_states(self, states_id: [int]):
-        query = "SELECT * FROM inner_states WHERE "
-        first = True
-        for sid in states_id:
-            if not first:
-                query += " OR "
-            else:
-                first = False
-            query += f"id = {sid}"
-        query += ";"
+    def get_inner_states(self, states_id=None):
+        if states_id is None:
+            query = f"SELECT * FROM inner_states"
+        else:
+            query = "SELECT * FROM inner_states WHERE "
+            first = True
+            for sid in states_id:
+                if not first:
+                    query += " OR "
+                else:
+                    first = False
+                query += f"id = {sid}"
+            query += ";"
         return self.query(query, returns=True)
 
     def get_external_states(self, states_id: [int]):
@@ -494,6 +491,14 @@ class DatabaseManager:
 
     def check_isbn(self, isbn):
         query = f"SELECT id FROM items WHERE isbn = '{isbn}' "
+        return self.query(query, returns=True)
+
+    def check_for_isbn(self, id, isbn):
+        query = f"SELECT id FROM items WHERE id <> {id} and isbn = '{isbn}' "
+        return self.query(query, returns=True)
+
+    def check_for_bid(self, id, bid):
+        query = f"SELECT id FROM items WHERE id <> {id} and isbn = '{bid}' "
         return self.query(query, returns=True)
 
     # endregion
@@ -525,7 +530,6 @@ class DatabaseManager:
         return movements
 
     def set_movement(self, movement):
-
         try:
             self.cur.execute(
                 f"Update movements m "
