@@ -2,6 +2,7 @@ import sys
 from datetime import date, datetime, timedelta
 
 import PyQt5
+import mariadb
 from PyQt5.QtCore import Qt, QRect
 from PyQt5.QtGui import QStandardItemModel
 from PyQt5.QtWidgets import QWidget, QMainWindow, QComboBox
@@ -11,6 +12,7 @@ from src.Database.DatabaseManager import DatabaseManager
 from src.Items.Models.ItemEnumerators import *
 from src.Items.Models.Item import Item
 from src.Items.Controllers.ItemManager import ItemManager
+
 
 
 class CatalogingView(QMainWindow):
@@ -51,15 +53,31 @@ class CatalogingView(QMainWindow):
 
     # TODO: add inventory_num, go back button, asterischi, controllo campi vuoti
     def load_item(self, item) -> None:
-        self.id.setText(str(item.id))
+
         self.bid.setText(str(item.bid))
         self.isbn.setText(str(item.isbn))
         self.title.setText(item.title)
         self.author.setText(item.author)
         self.publication_date.setDate(item.publication_date)
-        self.shelf.setText(str(item.shelf))
-        self.rack.setText(str(item.rack))
-        self.position.setText(str(item.position))
+        if item.id is None:
+            self.id.setText('')
+        else:
+            self.id.setText(str(item.id))
+
+        if item.shelf is None:
+            self.shelf.setText('')
+        else:
+            self.shelf.setText(str(item.shelf))
+
+        if item.rack is None:
+            self.rack.setText('')
+        else:
+            self.rack.setText(str(item.rack))
+
+        if item.position is None:
+            self.position.setText('')
+        else:
+            self.position.setText(str(item.position))
         self.price.setText(str(item.price))
         self.note.setText(item.note)
 
@@ -143,14 +161,31 @@ class CatalogingView(QMainWindow):
         new_item = self.item
         new_item.title = self.title.text()
         new_item.author = self.author.text()
+        # if len(new_item.title) == 0 or len(new_item.author) == 0:
+        #     self.title.setStyleSheet('border-color:rgb(255,0,0)')
+        #     self.author.setStyleSheet('border-color:rgb(255,0,0)')
 
         new_item.material = MaterialEnum(self.material.currentIndex()+1)
+        # if self.material.currentIndex() < 0:
+        #     self.material.setStyleSheet('border-color:rgb(255,0,0)')
+
         new_item.type = TypeEnum(self.type.currentIndex()+1)
+        # if self.type.currentIndex() < 0:
+        #     self.material.setStyleSheet('border-color:rgb(255,0,0)')
+
         new_item.nature = NatureEnum(self.nature.currentIndex()+1)
+        # if self.nature.currentIndex() < 0:
+        #     self.nature.setStyleSheet('border-color:rgb(255,0,0)')
 
         new_item.publication_date = self.publication_date.dateTime().toString("yyyy-MM-dd")
+
         new_item.isbn = self.isbn.text()
+
+        # if len(new_item.isbn) != 13:
+        #     self.isbn.setStyleSheet('border-color:rgb(255,0,0')
+
         new_item.bid = self.bid.text()
+
         new_item.price = self.price.text()
         new_item.lang = LangEnum(self.lang.currentIndex()+1)
 
@@ -169,6 +204,10 @@ class CatalogingView(QMainWindow):
         new_item.note = self.note.toPlainText()
 
         new_item.genre = self.__im.get_genres(self.genre.checkedItems())
+
+        # if self.genre.checkedItems() == []:
+        #     self.genre.setStyleSheet('border-color:rgb(255,0,0)')
+
         new_item.inner_state = self.__im.get_inner_states(self.inner_state.checkedItems())
         new_item.external_state = self.__im.get_external_states(self.external_state.checkedItems())
 
@@ -182,11 +221,20 @@ class CatalogingView(QMainWindow):
         self.availability.setCurrentIndex(AvailabilityEnum.in_quarantena.value - 1)
 
     def __save_button(self) -> None:
-        if self.item.id is None:
-            self.__im.add_item(self.__get_from_view())
+        # try:
+        if self.__im.check_isbn(self.isbn.text()) and self.__im.check_bid(self.bid.text()):
+            if self.item.id is None:
+                self.__im.add_item(self.__get_from_view())
+            else:
+                self.__im.edit_item(self.__get_from_view())
+            self.close()
         else:
-            self.__im.edit_item(self.__get_from_view())
-        self.close()
+            self.isbn.setStyleSheet('border-color:rgb(255,0,0)')
+            self.bid.setStyleSheet('border-color:rgb(255,0,0)')
+
+        # except mariadb.Error as e:
+        #         print(f"Error: {e}")
+
 
     def close(self) -> bool:
         self.item = None

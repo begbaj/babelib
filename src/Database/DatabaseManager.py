@@ -289,6 +289,7 @@ class DatabaseManager:
 
             query += f"'{item.note}');"
             self.query(query)
+
             query = f"SELECT id FROM items ORDER BY id DESC LIMIT 1;"
             nid = self.query(query, returns=True)[0].id
 
@@ -352,7 +353,10 @@ class DatabaseManager:
 
     def get_item(self, item_id) -> tuple:
         query = f"SELECT * FROM items WHERE id = {item_id}"
-        return self.query(query, returns=True)[0]
+        dbitem = self.query(query, returns=True)
+        if len(dbitem) > 1:
+            return dbitem[0]
+        return dbitem
 
     def edit_item(self,item) -> None:
         query = f"update items set " \
@@ -485,7 +489,11 @@ class DatabaseManager:
         return self.query(query, returns=True)
 
     def check_bid(self, bid):
-        query = f"SELECT id FROM items WHERE bid = {bid}"
+        query = f"SELECT id FROM items WHERE bid = '{bid}' "
+        return self.query(query, returns=True)
+
+    def check_isbn(self, isbn):
+        query = f"SELECT id FROM items WHERE isbn = '{isbn}' "
         return self.query(query, returns=True)
 
     # endregion

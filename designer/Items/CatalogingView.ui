@@ -218,7 +218,7 @@ border:none;
 background-color:none;</string>
      </property>
      <property name="text">
-      <string>Titolo</string>
+      <string>Titolo *</string>
      </property>
     </widget>
     <widget class="QLabel" name="author_label">
@@ -236,7 +236,7 @@ border:none;
 background-color:none;</string>
      </property>
      <property name="text">
-      <string>Autore</string>
+      <string>Autore *</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="title">
@@ -383,7 +383,7 @@ border:none;
 background-color:none;</string>
      </property>
      <property name="text">
-      <string>Materiale</string>
+      <string>Materiale *</string>
      </property>
     </widget>
     <widget class="QLabel" name="type_label">
@@ -401,7 +401,7 @@ border:none;
 background-color:none;</string>
      </property>
      <property name="text">
-      <string>Tipo</string>
+      <string>Tipo *</string>
      </property>
     </widget>
     <widget class="QLabel" name="genre_label">
@@ -473,7 +473,7 @@ border:none;
 background-color:none;</string>
      </property>
      <property name="text">
-      <string>Numero di inventario(ID)</string>
+      <string>Numero di inventario (ID) *</string>
      </property>
     </widget>
     <widget class="QLabel" name="bid_label">
@@ -563,7 +563,7 @@ border:none;
 background-color:none;</string>
      </property>
      <property name="text">
-      <string>Lingua</string>
+      <string>Lingua *</string>
      </property>
     </widget>
     <widget class="QComboBox" name="lang">
@@ -599,7 +599,7 @@ border:none;
 background-color:none;</string>
      </property>
      <property name="text">
-      <string>Natura</string>
+      <string>Natura *</string>
      </property>
     </widget>
     <widget class="QComboBox" name="nature">
@@ -820,7 +820,7 @@ border:none;
 background-color:none;</string>
      </property>
      <property name="text">
-      <string>Stato Esterno</string>
+      <string>Stato Esterno *</string>
      </property>
     </widget>
     <widget class="QLabel" name="availability_label">
@@ -838,7 +838,7 @@ border:none;
 background-color:none;</string>
      </property>
      <property name="text">
-      <string>Disponibilità</string>
+      <string>Disponibilità *</string>
      </property>
     </widget>
     <widget class="QComboBox" name="availability">
@@ -874,7 +874,7 @@ border:none;
 background-color:none;</string>
      </property>
      <property name="text">
-      <string>Livello di catalogazione</string>
+      <string>Livello di catalogazione *</string>
      </property>
     </widget>
     <widget class="QLabel" name="inner_state_label">
@@ -892,7 +892,7 @@ border:none;
 background-color:none;</string>
      </property>
      <property name="text">
-      <string>Stato Interno</string>
+      <string>Stato Interno *</string>
      </property>
     </widget>
     <widget class="QComboBox" name="cataloging_level">
@@ -928,7 +928,7 @@ border:none;
 background-color:none;</string>
      </property>
      <property name="text">
-      <string>Stato pubblicazione</string>
+      <string>Stato pubblicazione *</string>
      </property>
     </widget>
     <widget class="QLabel" name="opac_visibility_label">

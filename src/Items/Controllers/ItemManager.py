@@ -38,8 +38,9 @@ class ItemManager:
 
     def get_genres(self, genres_ids: [int]):
         new_genres = []
-        for genre in self.dbms.get_genres(genres_ids):
-            new_genres.append({'id': genre.id, 'description': genre.description})
+        if self.dbms.get_genres(genres_ids) is not None:
+            for genre in self.dbms.get_genres(genres_ids):
+                new_genres.append({'id': genre.id, 'description': genre.description})
         return new_genres
 
     def get_inner_states(self, states_id: [int]):
@@ -121,6 +122,14 @@ class ItemManager:
         else:
             return False
 
+    def check_isbn(self, isbn) -> bool:
+        qr = self.dbms.check_isbn(isbn)
+        if len(qr) == 0:
+            return True
+        else:
+            return False
+
+
     @staticmethod
     def __convert_dbitem(dbitem) -> Item:
         """
@@ -165,6 +174,7 @@ class ItemManager:
         item.note = dbitem.note
         # TODO: dobbiamo fare il get dei generi del libro, cosi anche per material nature type lang
         return item
+
 
     def print_label(self, item):
         '''
