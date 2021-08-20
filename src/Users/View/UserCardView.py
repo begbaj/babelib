@@ -30,7 +30,7 @@ class UserCardView(QMainWindow):
             self.pop = ''
             # Metodi iniziali
             self.setup()
-            self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)
+            # self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)
         else:
             # Se l'utente è nullo allora visualizzo la schermata per crearne uno nuovo
             super(UserCardView, self).__init__()
@@ -39,7 +39,7 @@ class UserCardView(QMainWindow):
             self.pop = ''
             # Metodi iniziali
             self.setup_new()
-            self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)
+            # self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)
 
     def setup(self):
         """
@@ -284,6 +284,9 @@ class UserCardView(QMainWindow):
 # endregion
 
 # region View Function
+
+    def closeEvent(self, event):
+        self.callback()
 
     def load_user(self):
         """

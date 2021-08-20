@@ -9,6 +9,6 @@ class MovementsView(QMainWindow):
 
     def __init__(self, widget):
         super(MovementsView, self).__init__()
-        loadUi("../designer/movement.ui", self)
+        loadUi("../designer/Movements/movement.ui", self)
         self.widget = widget
 
