@@ -1,0 +1,9 @@
+background-color: rgb(27, 25, 39);
+font: 14pt "Source Code Pro for Powerline";
+background-color:qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(56, 54, 65, 255), stop:1 rgba(56, 54, 65, 130));
+qproperty-alignment: 'AlignLeft';
+background-color: rgb(16, 14, 23,220);
+alternate-background-color: rgb(38, 35, 63);
+color: white;
+border:none;
+border-radius:10px;

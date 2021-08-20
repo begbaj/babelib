@@ -1,8 +1,5 @@
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QMainWindow
+from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
-from src.Users.View.UserCardView import UserCardView
-from src.Users.controllers.UserManager import UserManager
 
 
 class MovementsView(QMainWindow):
@@ -11,4 +8,33 @@ class MovementsView(QMainWindow):
         super(MovementsView, self).__init__()
         loadUi("../designer/Movements/movement.ui", self)
         self.widget = widget
+        self.setup()
 
+    def setup(self):
+        self.style()
+        self.loanButton.clicked.connect(lambda: self.new_loan())
+        self.consultationButton.clicked.connect(lambda: self.new_consultation())
+        self.infoButton.clicked.connect(lambda: self.movement_info())
+        self.backButton.clicked.connect(lambda: self.close())
+
+    def style(self):
+        # Button Style
+        self.loanButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
+        self.consultationButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
+        self.infoButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
+        # Line Edit Style
+        self.searchField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        # Table Style
+        self.movementTable.setStyleSheet(open("../designer/style/TableTheme.txt", "r").read())
+
+    def new_consultation(self):
+        pass
+
+    def new_loan(self):
+        pass
+
+    def movement_info(self):
+        pass
+
+    def load_table(self):
+        pass

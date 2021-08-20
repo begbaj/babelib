@@ -27,7 +27,6 @@ class UserView(QMainWindow):
         # Ricerca Dinamica
         self.nameField.textChanged.connect(lambda: self.search())
         self.surnameField.textChanged.connect(lambda: self.search())
-        # Metodo per Settare lo stile
         self.style()
 
     def style(self):
@@ -38,8 +37,9 @@ class UserView(QMainWindow):
         self.schedaButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
         self.userButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
         self.backButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
-        # self.nameField.setStyleSheet(open("../designer/style/davtheme.qss", "r").read())
-        # self.nameField.setStyleSheet('background-color: orange')
+        self.userTable.setStyleSheet(open("../designer/style/TableTheme.txt", "r").read())
+        self.nameField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        self.surnameField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
 
     def load_table(self, users):
         """
