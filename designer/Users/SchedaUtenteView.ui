@@ -489,25 +489,6 @@ background-color:none;</string>
       <string>Provincia</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="districtBox">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>70</y>
-       <width>201</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: italic 10pt &quot;Arial&quot;;
-border:none;</string>
-     </property>
-     <item>
-      <property name="text">
-       <string/>
-      </property>
-     </item>
-    </widget>
     <widget class="QLabel" name="positionLabel_6">
      <property name="geometry">
       <rect>
@@ -538,6 +519,28 @@ background-color:none;</string>
      <property name="styleSheet">
       <string notr="true">font: italic 10pt &quot;Arial&quot;;
 border:none;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string/>
+      </property>
+     </item>
+    </widget>
+    <widget class="QComboBox" name="districtBox">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>70</y>
+       <width>201</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 10pt &quot;Arial&quot;;
+border:none;</string>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
      </property>
      <item>
       <property name="text">
@@ -879,7 +882,7 @@ background-color:none;</string>
     <widget class="QComboBox" name="genderBox">
      <property name="geometry">
       <rect>
-       <x>420</x>
+       <x>430</x>
        <y>30</y>
        <width>171</width>
        <height>31</height>
@@ -980,7 +983,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
      <property name="geometry">
       <rect>
        <x>320</x>
-       <y>160</y>
+       <y>150</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -997,8 +1000,8 @@ background-color:none;</string>
     <widget class="QDateEdit" name="dateEdit">
      <property name="geometry">
       <rect>
-       <x>420</x>
-       <y>160</y>
+       <x>430</x>
+       <y>150</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -1018,8 +1021,8 @@ background-color:rgb(45, 206, 229)</string>
     <widget class="QLabel" name="dateLabel_6">
      <property name="geometry">
       <rect>
-       <x>320</x>
-       <y>70</y>
+       <x>20</x>
+       <y>150</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -1037,9 +1040,9 @@ background-color:none;</string>
      <property name="geometry">
       <rect>
        <x>320</x>
-       <y>115</y>
+       <y>70</y>
        <width>91</width>
-       <height>21</height>
+       <height>31</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -1054,8 +1057,8 @@ background-color:none;</string>
     <widget class="QComboBox" name="usertypeBox">
      <property name="geometry">
       <rect>
-       <x>420</x>
-       <y>110</y>
+       <x>430</x>
+       <y>70</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -1070,35 +1073,11 @@ border:none</string>
       </property>
      </item>
     </widget>
-    <widget class="QLabel" name="label_6">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>160</y>
-       <width>101</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border:none;
-background-color:transparent</string>
-     </property>
-     <property name="text">
-      <string>Luogo di Nascita</string>
-     </property>
-    </widget>
     <widget class="QLineEdit" name="birthplaceField">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>160</y>
+       <x>430</x>
+       <y>110</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -1122,8 +1101,8 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
     <widget class="QComboBox" name="nationBox">
      <property name="geometry">
       <rect>
-       <x>420</x>
-       <y>70</y>
+       <x>120</x>
+       <y>150</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -1140,6 +1119,30 @@ border:none;</string>
        <string/>
       </property>
      </item>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>110</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color:transparent</string>
+     </property>
+     <property name="text">
+      <string>Luogo di Nascita</string>
+     </property>
     </widget>
    </widget>
    <widget class="QLabel" name="label_7">

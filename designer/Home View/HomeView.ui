@@ -29,8 +29,8 @@
    <widget class="QPushButton" name="newreservButton">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>680</y>
+      <x>800</x>
+      <y>850</y>
       <width>241</width>
       <height>51</height>
      </rect>
@@ -49,7 +49,7 @@ background-color:qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0 
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>images/Icona Prenotazione.png</normaloff>images/Icona Prenotazione.png</iconset>
+      <normaloff>../img/Icona Prenotazione.png</normaloff>../img/Icona Prenotazione.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -61,8 +61,8 @@ background-color:qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0 
    <widget class="QPushButton" name="newuserButton">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>680</y>
+      <x>1150</x>
+      <y>850</y>
       <width>241</width>
       <height>51</height>
      </rect>
@@ -79,7 +79,7 @@ background-color:qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0 
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>images/Icona User.png</normaloff>images/Icona User.png</iconset>
+      <normaloff>../img/Icona User.png</normaloff>../img/Icona User.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -91,10 +91,10 @@ background-color:qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0 
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>570</x>
+      <x>470</x>
       <y>50</y>
-      <width>501</width>
-      <height>621</height>
+      <width>911</width>
+      <height>761</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -113,10 +113,10 @@ background-color:rgba(0, 192, 225, 85)</string>
     <widget class="QCalendarWidget" name="service_reservation_calendar_widget">
      <property name="geometry">
       <rect>
-       <x>24</x>
-       <y>47</y>
-       <width>451</width>
-       <height>241</height>
+       <x>120</x>
+       <y>40</y>
+       <width>671</width>
+       <height>351</height>
       </rect>
      </property>
      <property name="tabletTracking">
@@ -147,9 +147,9 @@ border:none;</string>
     <widget class="QTabWidget" name="main_tab_widget">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>310</y>
-       <width>461</width>
+       <x>210</x>
+       <y>420</y>
+       <width>511</width>
        <height>291</height>
       </rect>
      </property>
@@ -181,7 +181,7 @@ border:none;</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>461</width>
+         <width>511</width>
          <height>271</height>
         </rect>
        </property>
@@ -439,7 +439,7 @@ border-radius:10px;</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>461</width>
+         <width>511</width>
          <height>271</height>
         </rect>
        </property>
@@ -609,7 +609,7 @@ border-radius:10px;</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>461</width>
+         <width>511</width>
          <height>271</height>
         </rect>
        </property>
@@ -794,7 +794,7 @@ border-radius:10px;</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>201</width>
+      <width>211</width>
       <height>981</height>
      </rect>
     </property>
@@ -836,7 +836,7 @@ QPushButton::pressed
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/Icona Servizi.png</normaloff>images/Icona Servizi.png</iconset>
+       <normaloff>../img/Icona Servizi.png</normaloff>../img/Icona Servizi.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -871,7 +871,7 @@ QPushButton::pressed
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/Icona Utenti.png</normaloff>images/Icona Utenti.png</iconset>
+       <normaloff>../img/Icona Utenti.png</normaloff>../img/Icona Utenti.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -906,7 +906,7 @@ QPushButton::pressed
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/Icona Comunicazioni.png</normaloff>images/Icona Comunicazioni.png</iconset>
+       <normaloff>../img/Icona Comunicazioni.png</normaloff>../img/Icona Comunicazioni.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -941,7 +941,7 @@ QPushButton::pressed
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/Icona Statistiche.png</normaloff>images/Icona Statistiche.png</iconset>
+       <normaloff>../img/Icona Statistiche.png</normaloff>../img/Icona Statistiche.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -976,7 +976,7 @@ QPushButton::pressed
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/Icona Catalogazione.png</normaloff>images/Icona Catalogazione.png</iconset>
+       <normaloff>../img/Icona Catalogazione.png</normaloff>../img/Icona Catalogazione.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -988,10 +988,10 @@ QPushButton::pressed
     <widget class="QLabel" name="labelicon">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>40</x>
        <y>20</y>
-       <width>111</width>
-       <height>101</height>
+       <width>121</width>
+       <height>111</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -1036,7 +1036,7 @@ QPushButton::pressed
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/Icona Movimenti.png</normaloff>images/Icona Movimenti.png</iconset>
+       <normaloff>../img/Icona Movimenti.png</normaloff>../img/Icona Movimenti.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -1071,7 +1071,7 @@ QPushButton::pressed
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/Icona Report.png</normaloff>images/Icona Report.png</iconset>
+       <normaloff>../img/Icona Report.png</normaloff>../img/Icona Report.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -1224,8 +1224,8 @@ background-color:transparent;</string>
    <widget class="QPushButton" name="newloanButton">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>750</y>
+      <x>470</x>
+      <y>850</y>
       <width>241</width>
       <height>51</height>
      </rect>
@@ -1244,7 +1244,7 @@ qproperty-wordWrap: true;</string>
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>images/Icona Prestito.png</normaloff>images/Icona Prestito.png</iconset>
+      <normaloff>../img/Icona Prestito.png</normaloff>../img/Icona Prestito.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -1253,13 +1253,35 @@ qproperty-wordWrap: true;</string>
      </size>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>0</y>
+      <width>1481</width>
+      <height>981</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="pixmap">
+     <pixmap>../../../../Desktop/Sfondi/seattle_blackandwhite_bw_white_black_film_monochrome_analog-943787.jpg!d.jpeg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>30</y>
-      <width>51</width>
-      <height>41</height>
+      <x>490</x>
+      <y>20</y>
+      <width>81</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -1273,12 +1295,13 @@ background-color:transparent;</string>
      <enum>Qt::RichText</enum>
     </property>
     <property name="pixmap">
-     <pixmap>images/Calendario.png</pixmap>
+     <pixmap>../img/Calendario.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
+   <zorder>label</zorder>
    <zorder>frame</zorder>
    <zorder>newreservButton</zorder>
    <zorder>newuserButton</zorder>

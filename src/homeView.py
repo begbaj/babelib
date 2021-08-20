@@ -2,9 +2,9 @@ from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
 from Users.View.UserView import UserView
 from src.Items.View.InventoryView import InventoryView
-from src.Movements.View.MovementView import MovementView
 from src.Services.views.ReservationView import ReservationView
 from src.Users.View.UserCardView import UserCardView
+from src.Movements.View.MovementsView import MovementsView
 
 
 class HomeView(QMainWindow):
@@ -54,7 +54,7 @@ class HomeView(QMainWindow):
         self.itemview.show()
 
     def __go_movement_view(self):
-        self.moveview = MovementView()
+        self.moveview = MovementsView(self.widget)
         self.moveview.show()
         pass
 
@@ -82,8 +82,8 @@ class HomeView(QMainWindow):
         pass
 
     def new_user(self):
-        self.user = UserCardView(self.widget, None, None)
-        self.user.show()
+        self.newuser = UserCardView(self.widget, None, None)
+        self.newuser.show()
         pass
 
     def setting(self):
