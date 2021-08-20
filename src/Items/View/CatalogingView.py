@@ -221,20 +221,24 @@ class CatalogingView(QMainWindow):
         self.availability.setCurrentIndex(AvailabilityEnum.in_quarantena.value - 1)
 
     def __save_button(self) -> None:
-        # try:
-        if self.__im.check_isbn(self.isbn.text()) and self.__im.check_bid(self.bid.text()):
-            if self.item.id is None:
+        if self.item.id is None:
+            if self.__im.check_isbn(self.isbn.text()) or self.__im.check_bid(self.bid.text()):
                 self.__im.add_item(self.__get_from_view())
+                self.close()
             else:
-                self.__im.edit_item(self.__get_from_view())
-            self.close()
+                if not self.__im.check_isbn(self.isbn.text()):
+                    self.isbn.setStyleSheet('border-color:rgb(255,0,0)')
+                if not self.__im.check_bid(self.bid.text()):
+                    self.bid.setStyleSheet('border-color:rgb(255,0,0)')
         else:
-            self.isbn.setStyleSheet('border-color:rgb(255,0,0)')
-            self.bid.setStyleSheet('border-color:rgb(255,0,0)')
-
-        # except mariadb.Error as e:
-        #         print(f"Error: {e}")
-
+            if self.__im.check_for_isbn(self.id.text(), self.isbn.text()) or self.__im.check_for_bid(self.id.text(),self.bid.text()):
+                self.__im.edit_item(self.__get_from_view())
+                self.close()
+            else:
+                if not self.__im.check_for_isbn(self.id.text(), self.isbn.text()):
+                    self.isbn.setStyleSheet('border-color:rgb(255,0,0)')
+                if not self.__im.check_for_bid(self.id.text(), self.bid.text()):
+                    self.bid.setStyleSheet('border-color:rgb(255,0,0)')
 
     def close(self) -> bool:
         self.item = None

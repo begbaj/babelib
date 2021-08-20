@@ -254,7 +254,8 @@ color:rgb(255, 255, 255);
 border-radius: 20px;
 border-style: solid;
 border:none;
-text-align: center;</string>
+text-align: center;
+</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="author">
