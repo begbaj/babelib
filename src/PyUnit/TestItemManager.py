@@ -1,6 +1,7 @@
 import random
+import time
 import unittest
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import mariadb
 
@@ -58,6 +59,7 @@ class TestItemManager(unittest.TestCase):
         genres = self.im.get_genres([1, 49])
         self.assertEqual(genres[0]['description'], "Mimo")
         self.assertEqual(genres[1]['description'], "Ucronia")
+        del genres
 
     def test_get_inner_states(self):
         self.assertEqual(len(self.im.get_inner_states()), 5)
@@ -103,14 +105,44 @@ class TestItemManager(unittest.TestCase):
         for i, s in enumerate(self.im.get_items("test", 2)):
             self.assertEqual(s.id, test_items[i].id)
 
-        i = random.randint(0, len(test_items)-1)
-        self.assertNotEqual(len(self.im.get_items(test_items[i].isbn, 3)), 0)
-        self.assertNotEqual(len(self.im.get_items(test_items[i].bid, 4)), 0)
-        self.assertNotEqual(len(self.im.get_items(test_items[i].id, 5)), 0)
-        self.assertNotEqual(len(self.im.get_items(test_items[i].note, 6)), 0)
+        self.assertNotEqual(len(self.im.get_items(test_items[1].isbn, 3)), 0)
+        self.assertNotEqual(len(self.im.get_items(test_items[2].bid, 4)), 0)
+        self.assertNotEqual(len(self.im.get_items(test_items[3].id, 5)), 0)
+        self.assertNotEqual(len(self.im.get_items(test_items[4].note, 6)), 0)
+
+        del i
+        del test_items
 
     def test_edit_item(self):
-        pass
+        self.item.quarantine_start_date = datetime.today().date()
+        self.item.quarantine_end_date = self.item.quarantine_start_date + timedelta(4)
+        self.item.availability = AvailabilityEnum.in_quarantena
+
+        self.im.edit_item(self.item)
+        self.assertEqual(self.item.quarantine_start_date, self.im.get_item(self.item).quarantine_start_date)
+        self.assertEqual(self.item.quarantine_end_date, self.im.get_item(self.item).quarantine_end_date)
+        self.assertEqual(self.item.availability, self.im.get_item(self.item).availability)
+        self.assertEqual(self.item.discarded_date, self.im.get_item(self.item).discarded_date)
+
+        genres = self.im.get_genres()
+        self.item.genre = [genres[random.randint(0,len(genres)-1)], genres[random.randint(0,len(genres)-1)]]
+        self.im.edit_item(self.item)
+        time.sleep(0.05)
+        self.assertEqual(self.im.get_item_genres(self.item.id), self.item.genre)
+
+        self.item.inner_state = [SMUSIEnum(random.randint(0, len(SMUSIEnum)-1)), SMUSIEnum(random.randint(0,len(SMUSIEnum)-1))]
+        self.im.edit_item(self.item)
+        time.sleep(0.05)
+        self.assertEqual(self.im.get_item(self.item).inner_state, self.item.inner_state)
+
+        self.item.external_state = [ExternalStateEnum(random.randint(0,len(ExternalStateEnum)-1)), ExternalStateEnum(random.randint(0,len(ExternalStateEnum)-1))]
+        self.im.edit_item(self.item)
+        time.sleep(0.05)
+        self.assertEqual(self.im.get_item(self.item).external_state, self.item.external_state)
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.dbms.query("DELETE FROM items WHERE title = 'test'")
 
     # def test_edit_availability(self):
     #     pass
@@ -124,9 +156,7 @@ class TestItemManager(unittest.TestCase):
     # def test_discard_item(self):
     #     pass
 
-    @classmethod
-    def tearDownClass(cls) -> None:
-        cls.dbms.query("DELETE FROM items WHERE title = 'test'")
+
 
 
 if __name__ == '__main__':
