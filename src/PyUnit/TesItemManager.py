@@ -41,13 +41,11 @@ class TestItemManager(unittest.TestCase):
         cls.item.quarantine_end_date = None
         cls.item.discarded_date = None
         genres = cls.im.get_genres()
-        cls.item.genre = [genres[random.randint(1, len(genres))]]
+        cls.item.genre = [genres[random.randint(0, len(genres)-1)]]
         cls.item.inner_state = [SMUSIEnum(random.randint(0, len(SMUSIEnum) - 1))]
         cls.item.external_state = [ExternalStateEnum(random.randint(1, len(ExternalStateEnum)))]
         cls.item.note = "ITEM DI PROVA TESTING TESTING TESTING TESTING ADD TI AMO"
-
-    def test_add_item(self):
-        self.item.id = self.im.add_item(self.item)
+        cls.item.id = cls.im.add_item(cls.item)
 
     def test_get_item(self):
         self.assertEqual(self.im.get_item(self.item).id, self.item.id)
@@ -88,33 +86,32 @@ class TestItemManager(unittest.TestCase):
             item.quarantine_end_date = None
             item.discarded_date = None
             genres = self.im.get_genres()
-            item.genre = [genres[random.randint(1, len(genres))]]
+            item.genre = [genres[random.randint(1, len(genres)-1)]]
             item.inner_state = [SMUSIEnum(random.randint(0, len(SMUSIEnum) - 1))]
             item.external_state = [ExternalStateEnum(random.randint(1, len(ExternalStateEnum)))]
             item.note = "ITEM DI PROVA TESTING TESTING TESTING TESTING ADD TI AMO"
-            item.id = self.im.add_item(item)
-            return item
+            return self.im.add_item(item, return_item=True)
 
         test_items = [self.item]
         for i in range(1,10):
             test_items.append(new_test_item())
 
-        self.assertEqual(self.im.get_items("test", 0), test_items)
-        self.assertEqual(self.im.get_items("test", 1), test_items)
-        self.assertEqual(self.im.get_items("test", 2), test_items)
+        for i, s in enumerate(self.im.get_items("test", 0)):
+            self.assertEqual(s.id, test_items[i].id)
+        for i, s in enumerate(self.im.get_items("test", 1)):
+            self.assertEqual(s.id, test_items[i].id)
+        for i, s in enumerate(self.im.get_items("test", 2)):
+            self.assertEqual(s.id, test_items[i].id)
 
-        i = random.randint(1, len(test_items))
-        self.assertEqual(self.im.get_items(test_items[i], 3), test_items[i])
-        i = random.randint(1, len(test_items))
-        self.assertEqual(self.im.get_items(test_items[i], 4), test_items[i])
-        i = random.randint(1, len(test_items))
-        self.assertEqual(self.im.get_items(test_items[i], 5), test_items[i])
-        i = random.randint(1, len(test_items))
-        self.assertEqual(self.im.get_items(test_items[i], 6), test_items[i])
+        i = random.randint(0, len(test_items)-1)
+        self.assertNotEqual(len(self.im.get_items(test_items[i].isbn, 3)), 0)
+        self.assertNotEqual(len(self.im.get_items(test_items[i].bid, 4)), 0)
+        self.assertNotEqual(len(self.im.get_items(test_items[i].id, 5)), 0)
+        self.assertNotEqual(len(self.im.get_items(test_items[i].note, 6)), 0)
 
-    # def test_edit_item(self):
-    #     pass
-    #
+    def test_edit_item(self):
+        pass
+
     # def test_edit_availability(self):
     #     pass
     #

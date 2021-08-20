@@ -10,8 +10,12 @@ class ItemManager:
     def __init__(self):
         self.dbms = DatabaseManager()
 
-    def add_item(self, item_id: Item) -> int:
-        return self.dbms.insert_item(item_id)
+    def add_item(self, item: Item, return_item=None) -> int:
+        item.id = self.dbms.insert_item(item)
+        if return_item:
+            return item
+        else:
+            return item.id
 
     def get_item(self, item):
         item = self.__convert_dbitem(self.dbms.get_item(item.id))
@@ -36,9 +40,9 @@ class ItemManager:
             new_genres.append({'id': genre.id, 'description': genre.description})
         return new_genres
 
-    def get_genres(self, genres_ids=[0]):
+    def get_genres(self, genres_ids=None):
         new_genres = []
-        if genres_ids == [0]:
+        if genres_ids is None:
             for genre in self.dbms.get_genres():
                 new_genres.append({'id': genre.id, 'description': genre.description})
         if self.dbms.get_genres(genres_ids) is not None:
@@ -46,9 +50,9 @@ class ItemManager:
                 new_genres.append({'id': genre.id, 'description': genre.description})
         return new_genres
 
-    def get_inner_states(self, states_id=[0]):
+    def get_inner_states(self, states_id=None):
         new_states = []
-        if states_id == [0]:
+        if states_id is None:
             for state in self.dbms.get_inner_states():
                 new_states.append(SMUSIEnum(state.id))
         if self.dbms.get_inner_states(states_id) is not None:
