@@ -14,7 +14,6 @@ from src.Items.Models.Item import Item
 from src.Items.Controllers.ItemManager import ItemManager
 
 
-
 class CatalogingView(QMainWindow):
     '''
     CatalogingView script

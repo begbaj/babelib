@@ -73,7 +73,7 @@ class HomeView(QMainWindow):
         pass
 
     def new_reservation(self):
-        self.reservation = ReservationView(self.widget, None)
+        self.reservation = ReservationView(self.widget)
         self.reservation.show()
         pass
 
