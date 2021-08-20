@@ -10,11 +10,11 @@ class ItemManager:
     def __init__(self):
         self.dbms = DatabaseManager()
 
-    def add_item(self, item: Item) -> None:
-        self.dbms.insert_item(item)
+    def add_item(self, item_id: Item) -> int:
+        return self.dbms.insert_item(item_id)
 
-    def get_item(self, item_id: int) -> Item:
-        item = self.__convert_dbitem(self.dbms.get_item(item_id))
+    def get_item(self, item):
+        item = self.__convert_dbitem(self.dbms.get_item(item.id))
 
         item.genre = []
         for genre in self.dbms.get_item_genres(item.id):
@@ -36,17 +36,24 @@ class ItemManager:
             new_genres.append({'id': genre.id, 'description': genre.description})
         return new_genres
 
-    def get_genres(self, genres_ids: [int]):
+    def get_genres(self, genres_ids=[0]):
         new_genres = []
+        if genres_ids == [0]:
+            for genre in self.dbms.get_genres():
+                new_genres.append({'id': genre.id, 'description': genre.description})
         if self.dbms.get_genres(genres_ids) is not None:
             for genre in self.dbms.get_genres(genres_ids):
                 new_genres.append({'id': genre.id, 'description': genre.description})
         return new_genres
 
-    def get_inner_states(self, states_id: [int]):
+    def get_inner_states(self, states_id=[0]):
         new_states = []
-        for state in self.dbms.get_inner_states(states_id):
-            new_states.append(SMUSIEnum(state.id))
+        if states_id == [0]:
+            for state in self.dbms.get_inner_states():
+                new_states.append(SMUSIEnum(state.id))
+        if self.dbms.get_inner_states(states_id) is not None:
+            for state in self.dbms.get_inner_states(states_id):
+                new_states.append(SMUSIEnum(state.id))
         return new_states
 
     def get_external_states(self, states_id: [int]):
@@ -129,7 +136,6 @@ class ItemManager:
         else:
             return False
 
-
     @staticmethod
     def __convert_dbitem(dbitem) -> Item:
         """
@@ -174,7 +180,6 @@ class ItemManager:
         item.note = dbitem.note
         # TODO: dobbiamo fare il get dei generi del libro, cosi anche per material nature type lang
         return item
-
 
     def print_label(self, item):
         '''
