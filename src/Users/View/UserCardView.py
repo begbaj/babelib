@@ -1,4 +1,3 @@
-from PyQt5 import QtCore
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from PyQt5.QtWidgets import QDialog, QMainWindow
@@ -13,7 +12,7 @@ class UserCardView(QMainWindow):
 
     userM = UserManager()
 
-    def __init__(self, widget, user, callback = None):
+    def __init__(self, widget, user, callback=None):
 
         if callback is None:
             self.callback = self.close
@@ -30,7 +29,7 @@ class UserCardView(QMainWindow):
             self.pop = ''
             # Metodi iniziali
             self.setup()
-            self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)
+            # self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)
         else:
             # Se l'utente è nullo allora visualizzo la schermata per crearne uno nuovo
             super(UserCardView, self).__init__()
@@ -39,7 +38,7 @@ class UserCardView(QMainWindow):
             self.pop = ''
             # Metodi iniziali
             self.setup_new()
-            self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)
+            # self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)
 
     def setup(self):
         """
@@ -54,7 +53,6 @@ class UserCardView(QMainWindow):
         self.disable_field()
         self.regular_exp_field()
         self.setup_combo_box()
-        #self.setup_radio_button()
         # Load User
         self.load_user()
         self.style()
@@ -284,6 +282,9 @@ class UserCardView(QMainWindow):
 # endregion
 
 # region View Function
+
+    def closeEvent(self, event):
+        self.callback()
 
     def load_user(self):
         """

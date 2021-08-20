@@ -174,7 +174,7 @@ background-color: transparent;
 border:none;</string>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
@@ -227,12 +227,12 @@ border:none;</string>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(27, 25, 39);
-color:rgb(255, 255, 255);
 font: 14pt &quot;Source Code Pro for Powerline&quot;;
 background-color:qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(56, 54, 65, 255), stop:1 rgba(56, 54, 65, 130));
 qproperty-alignment: 'AlignLeft';
-qproperty-wordWrap: true;
-alternate-background-color: rgb(27, 213, 241,190);
+background-color: rgb(16, 14, 23,220);
+alternate-background-color: rgb(38, 35, 63);
+color: white;
 border:none;
 border-radius:10px;</string>
        </property>
@@ -473,12 +473,12 @@ border-radius:10px;</string>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(27, 25, 39);
-color:rgb(255, 255, 255);
 font: 14pt &quot;Source Code Pro for Powerline&quot;;
 background-color:qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(56, 54, 65, 255), stop:1 rgba(56, 54, 65, 130));
 qproperty-alignment: 'AlignLeft';
-qproperty-wordWrap: true;
-alternate-background-color: rgb(27, 213, 241,190);
+background-color: rgb(16, 14, 23,220);
+alternate-background-color: rgb(38, 35, 63);
+color: white;
 border:none;
 border-radius:10px;</string>
        </property>
@@ -643,12 +643,12 @@ border-radius:10px;</string>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(27, 25, 39);
-color:rgb(255, 255, 255);
 font: 14pt &quot;Source Code Pro for Powerline&quot;;
 background-color:qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(56, 54, 65, 255), stop:1 rgba(56, 54, 65, 130));
 qproperty-alignment: 'AlignLeft';
-qproperty-wordWrap: true;
-alternate-background-color: rgb(27, 213, 241,190);
+background-color: rgb(16, 14, 23,220);
+alternate-background-color: rgb(38, 35, 63);
+color: white;
 border:none;
 border-radius:10px;</string>
        </property>
