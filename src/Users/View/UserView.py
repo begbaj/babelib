@@ -9,11 +9,10 @@ class UserView(QMainWindow):
 
     userM = UserManager()
 
-    def __init__(self, widget):
+    def __init__(self):
         super(UserView, self).__init__()
         loadUi("../designer/Users/UserView.ui", self)
         self.users = self.userM.list()
-        self.widget = widget
         self.pop = ''
         self.load_data()
         self.setup()

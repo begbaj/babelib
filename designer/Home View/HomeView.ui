@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>760</width>
-    <height>850</height>
+    <width>1680</width>
+    <height>1000</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>760</width>
-    <height>850</height>
+    <width>1680</width>
+    <height>1000</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>760</width>
-    <height>850</height>
+    <width>1680</width>
+    <height>1000</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -846,12 +846,12 @@ background-color:transparent;</string>
       <x>0</x>
       <y>0</y>
       <width>201</width>
-      <height>831</height>
+      <height>981</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">border:none;
-background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:0 rgba(32, 30, 39, 255), stop:0.571429 rgba(0, 178, 210, 48));
+background-color:rgb(20, 18, 29)
 </string>
     </property>
     <property name="frameShape">
@@ -864,14 +864,22 @@ background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>620</y>
-       <width>81</width>
-       <height>51</height>
+       <y>800</y>
+       <width>101</width>
+       <height>61</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));
-border-radius:16px;
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}
 </string>
      </property>
      <property name="text">
@@ -892,14 +900,22 @@ border-radius:16px;
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>300</y>
-       <width>81</width>
-       <height>51</height>
+       <y>370</y>
+       <width>101</width>
+       <height>61</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));
-border-radius:16px;</string>
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
      </property>
      <property name="text">
       <string/>
@@ -919,14 +935,22 @@ border-radius:16px;</string>
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>380</y>
-       <width>81</width>
-       <height>51</height>
+       <y>480</y>
+       <width>101</width>
+       <height>61</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));
-border-radius:16px;</string>
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
      </property>
      <property name="text">
       <string/>
@@ -946,14 +970,22 @@ border-radius:16px;</string>
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>460</y>
-       <width>81</width>
-       <height>51</height>
+       <y>580</y>
+       <width>101</width>
+       <height>61</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));
-border-radius:16px;</string>
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
      </property>
      <property name="text">
       <string/>
@@ -973,14 +1005,22 @@ border-radius:16px;</string>
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>220</y>
-       <width>81</width>
-       <height>51</height>
+       <y>260</y>
+       <width>101</width>
+       <height>61</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));
-border-radius:16px;</string>
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
      </property>
      <property name="text">
       <string/>
@@ -999,10 +1039,10 @@ border-radius:16px;</string>
     <widget class="QLabel" name="labelicon">
      <property name="geometry">
       <rect>
-       <x>44</x>
+       <x>50</x>
        <y>20</y>
-       <width>91</width>
-       <height>81</height>
+       <width>111</width>
+       <height>101</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -1015,7 +1055,7 @@ border-radius:16px;</string>
       <enum>Qt::RichText</enum>
      </property>
      <property name="pixmap">
-      <pixmap>../img/Babelib.icns</pixmap>
+      <pixmap>../img/Babelib-removebg-preview.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -1025,14 +1065,22 @@ border-radius:16px;</string>
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>140</y>
-       <width>81</width>
-       <height>51</height>
+       <y>150</y>
+       <width>101</width>
+       <height>61</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-radius:16px;
-background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));</string>
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
      </property>
      <property name="text">
       <string/>
@@ -1052,14 +1100,22 @@ background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>540</y>
-       <width>81</width>
-       <height>51</height>
+       <y>690</y>
+       <width>101</width>
+       <height>61</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));
-border-radius:16px;</string>
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
      </property>
      <property name="text">
       <string/>
@@ -1075,37 +1131,11 @@ border-radius:16px;</string>
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="settingButton">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>730</y>
-       <width>81</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:transparent;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>images/Icona Impostazioni.png</normaloff>images/Icona Impostazioni.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>40</width>
-       <height>40</height>
-      </size>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>270</y>
+       <x>20</x>
+       <y>320</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -1124,8 +1154,8 @@ background-color:transparent;</string>
     <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>350</y>
+       <x>20</x>
+       <y>430</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -1144,8 +1174,8 @@ background-color:transparent;</string>
     <widget class="QLabel" name="label_9">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>190</y>
+       <x>20</x>
+       <y>210</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -1164,8 +1194,8 @@ background-color:transparent;</string>
     <widget class="QLabel" name="label_10">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>670</y>
+       <x>20</x>
+       <y>870</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -1184,8 +1214,8 @@ background-color:transparent;</string>
     <widget class="QLabel" name="label_11">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>590</y>
+       <x>20</x>
+       <y>750</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -1204,8 +1234,8 @@ background-color:transparent;</string>
     <widget class="QLabel" name="label_12">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>430</y>
+       <x>20</x>
+       <y>540</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -1224,8 +1254,8 @@ background-color:transparent;</string>
     <widget class="QLabel" name="label_13">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>510</y>
+       <x>20</x>
+       <y>640</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -1279,7 +1309,7 @@ qproperty-wordWrap: true;</string>
      <rect>
       <x>110</x>
       <y>0</y>
-      <width>1201</width>
+      <width>1571</width>
       <height>1001</height>
      </rect>
     </property>
@@ -1288,9 +1318,6 @@ qproperty-wordWrap: true;</string>
     </property>
     <property name="textFormat">
      <enum>Qt::RichText</enum>
-    </property>
-    <property name="pixmap">
-     <pixmap>../img/background_blur.jpg</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>

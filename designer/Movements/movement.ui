@@ -1,44 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Home</class>
- <widget class="QMainWindow" name="Home">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1300</width>
-    <height>850</height>
+    <width>986</width>
+    <height>796</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>760</width>
-    <height>850</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>1300</width>
-    <height>850</height>
-   </size>
-  </property>
   <property name="windowTitle">
-   <string>Babelib</string>
+   <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QFrame" name="frame_2">
+   <widget class="QFrame" name="frame_3">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>191</width>
+      <width>291</width>
       <height>851</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">border:none;
-background-color: rgb(27, 25, 39)
-</string>
+background-color:rgb(20, 18, 29)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -46,75 +33,83 @@ background-color: rgb(27, 25, 39)
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QPushButton" name="modifyButton">
+    <widget class="QPushButton" name="loanButton">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>290</y>
-       <width>171</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(51, 49, 77);
-color:rgb(255, 255, 255);
-font: 10pt;
-border-radius:15px;
-border: none
-</string>
-     </property>
-     <property name="text">
-      <string>Modifica Documento</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../img/modify book.png</normaloff>../img/modify book.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>40</width>
-       <height>40</height>
-      </size>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="discardButton">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>210</y>
-       <width>171</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(51, 49, 77);
-color:rgb(255, 255, 255);
-font: 10pt;
-border-radius:15px;
-border: none
-</string>
-     </property>
-     <property name="text">
-      <string>Scarta Documento</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../img/remove book.png</normaloff>../img/remove book.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>40</width>
-       <height>40</height>
-      </size>
-     </property>
-    </widget>
-    <widget class="QLabel" name="logo">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
+       <x>50</x>
+       <y>150</y>
        <width>191</width>
-       <height>121</height>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
+     </property>
+     <property name="text">
+      <string>Nuovo Prestito</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/Icona Prestito.png</normaloff>../img/Icona Prestito.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="consultationButton">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>240</y>
+       <width>191</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
+     </property>
+     <property name="text">
+      <string>Nuova Consultazione</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/Icona Consultazione.png</normaloff>../img/Icona Consultazione.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelicon">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>20</y>
+       <width>121</width>
+       <height>101</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -130,54 +125,28 @@ border: none
       <pixmap>../img/Babelib-removebg-preview.png</pixmap>
      </property>
      <property name="scaledContents">
-      <bool>false</bool>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <bool>true</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="addButton">
+    <widget class="QPushButton" name="backButton">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>130</y>
-       <width>171</width>
+       <x>110</x>
+       <y>690</y>
+       <width>81</width>
        <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(51, 49, 77);
-color:rgb(255, 255, 255);
-font: 10pt;
-border-radius:15px;
-border: none
-</string>
-     </property>
-     <property name="text">
-      <string>Aggiungi Documento</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../img/add book.png</normaloff>../img/add book.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>40</width>
-       <height>40</height>
-      </size>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="returnButton">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>730</y>
-       <width>191</width>
-       <height>121</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:transparent;</string>
+      <string notr="true">QPushButton 
+{
+	border-radius:16px;
+	background-color: rgb(24, 22, 29);
+}
+QPushButton::pressed
+{
+	background-color:rgb(95, 95, 95)
+}</string>
      </property>
      <property name="text">
       <string/>
@@ -193,29 +162,33 @@ border: none
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="showItemButton">
+    <widget class="QPushButton" name="infoButton">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>370</y>
-       <width>171</width>
+       <x>50</x>
+       <y>330</y>
+       <width>191</width>
        <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(51, 49, 77);
-color:rgb(255, 255, 255);
-font: 10pt;
+      <string notr="true">QPushButton 
+{
 border-radius:15px;
-border: none
-</string>
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
      </property>
      <property name="text">
-      <string>Visualizza Documento</string>
+      <string>Scheda Movimento</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../img/binocolous.png</normaloff>../img/binocolous.png</iconset>
+       <normaloff>../img/Icona Information.png</normaloff>../img/Icona Information.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -225,32 +198,21 @@ border: none
      </property>
     </widget>
    </widget>
-   <widget class="QFrame" name="searchFrame">
+   <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>80</y>
-      <width>1061</width>
-      <height>91</height>
+      <x>320</x>
+      <y>60</y>
+      <width>621</width>
+      <height>171</height>
      </rect>
     </property>
-    <property name="minimumSize">
-     <size>
-      <width>0</width>
-      <height>1</height>
-     </size>
-    </property>
     <property name="styleSheet">
-     <string notr="true">QWidget{
-	border-radius: 20px;
-	border-style: outset;
-	border-width: 2px;
-	border-color:rgb(27,25,39);
-	background-color:rgba(3, 158, 182, 200)
-}
-
-
-</string>
+     <string notr="true">border-radius: 20px;
+border-style: outset;
+border-width: 2px;
+border-color:rgb(27,25,39);
+background-color:rgba(0, 192, 225, 105)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -261,14 +223,21 @@ border: none
     <widget class="QLineEdit" name="searchField">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>1061</width>
-       <height>51</height>
+       <x>50</x>
+       <y>40</y>
+       <width>511</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">padding: 10px</string>
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+
+padding: 10px</string>
      </property>
      <property name="text">
       <string/>
@@ -283,7 +252,7 @@ border: none
       <bool>false</bool>
      </property>
      <property name="placeholderText">
-      <string>Cerca nel catalogo</string>
+      <string>Cerca Movimento</string>
      </property>
      <property name="clearButtonEnabled">
       <bool>false</bool>
@@ -292,10 +261,10 @@ border: none
     <widget class="QComboBox" name="searchMode">
      <property name="geometry">
       <rect>
-       <x>950</x>
-       <y>0</y>
-       <width>101</width>
-       <height>51</height>
+       <x>290</x>
+       <y>100</y>
+       <width>131</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="palette">
@@ -303,28 +272,28 @@ border: none
        <active>
         <colorrole role="Button">
          <brush brushstyle="SolidPattern">
-          <color alpha="0">
+          <color alpha="105">
            <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
+           <green>192</green>
+           <blue>225</blue>
           </color>
          </brush>
         </colorrole>
         <colorrole role="Base">
          <brush brushstyle="SolidPattern">
-          <color alpha="0">
+          <color alpha="105">
            <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
+           <green>192</green>
+           <blue>225</blue>
           </color>
          </brush>
         </colorrole>
         <colorrole role="Window">
          <brush brushstyle="SolidPattern">
-          <color alpha="0">
+          <color alpha="105">
            <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
+           <green>192</green>
+           <blue>225</blue>
           </color>
          </brush>
         </colorrole>
@@ -332,28 +301,28 @@ border: none
        <inactive>
         <colorrole role="Button">
          <brush brushstyle="SolidPattern">
-          <color alpha="0">
+          <color alpha="105">
            <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
+           <green>192</green>
+           <blue>225</blue>
           </color>
          </brush>
         </colorrole>
         <colorrole role="Base">
          <brush brushstyle="SolidPattern">
-          <color alpha="0">
+          <color alpha="105">
            <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
+           <green>192</green>
+           <blue>225</blue>
           </color>
          </brush>
         </colorrole>
         <colorrole role="Window">
          <brush brushstyle="SolidPattern">
-          <color alpha="0">
+          <color alpha="105">
            <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
+           <green>192</green>
+           <blue>225</blue>
           </color>
          </brush>
         </colorrole>
@@ -361,28 +330,28 @@ border: none
        <disabled>
         <colorrole role="Button">
          <brush brushstyle="SolidPattern">
-          <color alpha="0">
+          <color alpha="105">
            <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
+           <green>192</green>
+           <blue>225</blue>
           </color>
          </brush>
         </colorrole>
         <colorrole role="Base">
          <brush brushstyle="SolidPattern">
-          <color alpha="0">
+          <color alpha="105">
            <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
+           <green>192</green>
+           <blue>225</blue>
           </color>
          </brush>
         </colorrole>
         <colorrole role="Window">
          <brush brushstyle="SolidPattern">
-          <color alpha="0">
+          <color alpha="105">
            <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
+           <green>192</green>
+           <blue>225</blue>
           </color>
          </brush>
         </colorrole>
@@ -391,7 +360,6 @@ border: none
      </property>
      <property name="styleSheet">
       <string notr="true">QComboBox{
-	background-color: transparent;
 	border: none;
 }
 
@@ -416,7 +384,7 @@ QWidget{
      </property>
      <item>
       <property name="text">
-       <string>In tutti i campi</string>
+       <string/>
       </property>
      </item>
      <item>
@@ -426,7 +394,12 @@ QWidget{
      </item>
      <item>
       <property name="text">
-       <string>Autore</string>
+       <string>Utente</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Data</string>
       </property>
      </item>
      <item>
@@ -434,124 +407,74 @@ QWidget{
        <string>ISBN</string>
       </property>
      </item>
-     <item>
-      <property name="text">
-       <string>BID</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Numero Inventario</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Note</string>
-      </property>
-     </item>
     </widget>
-    <widget class="QCheckBox" name="discardedCheckBox">
+    <widget class="QRadioButton" name="loanRadio">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>101</width>
-       <height>41</height>
+       <x>60</x>
+       <y>110</y>
+       <width>71</width>
+       <height>20</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">QWidget{
-
-border: none;
-background-color: transparent;
-}</string>
+      <string notr="true">border:none;
+background-color:transparent;</string>
      </property>
      <property name="text">
-      <string>Mostra Scartati</string>
+      <string>Prestiti</string>
      </property>
     </widget>
-    <widget class="QCheckBox" name="quarantineCheckBox">
+    <widget class="QRadioButton" name="consultationRadio">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>50</y>
-       <width>131</width>
-       <height>41</height>
+       <x>150</x>
+       <y>110</y>
+       <width>111</width>
+       <height>20</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: none;
-background-color: transparent;</string>
+      <string notr="true">border:none;
+background-color:transparent;</string>
      </property>
      <property name="text">
-      <string>Mostra in Quarantena</string>
+      <string>Consultazioni</string>
      </property>
     </widget>
    </widget>
-   <widget class="QLabel" name="background">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>-30</x>
-      <y>-10</y>
-      <width>1341</width>
-      <height>891</height>
+      <x>330</x>
+      <y>30</y>
+      <width>61</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
     <property name="pixmap">
-     <pixmap>../img/background_blur.jpg</pixmap>
+     <pixmap>../img/Icona Movimenti.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="catalogingLabel">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>10</y>
-      <width>141</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 75 bold 14pt &quot;Arial&quot;;</string>
-    </property>
-    <property name="text">
-     <string>Catalogazione</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="catalogingImage">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>10</y>
-      <width>47</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../img/Icona Catalogazione.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QTableWidget" name="itemTable">
+   <widget class="QTableWidget" name="movementTable">
     <property name="enabled">
      <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>180</y>
-      <width>1061</width>
-      <height>661</height>
+      <x>330</x>
+      <y>250</y>
+      <width>611</width>
+      <height>471</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -585,24 +508,15 @@ background-color: transparent;</string>
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">QWidget{
-	font: 12pt;
-	color: white;
-	border-radius:10px;
-	background-color: rgba(56, 54, 65, 220);
-	alternate-background-color: rgba(11, 11, 13, 100);
-	qproperty-alignment: 'AlignLeft';
-}
-
-QHeaderView::section{
-	font: 14pt bold;
-	color:rgb(121, 212, 226);
-	background-color:  rgba(11, 11, 13, 50);
-	border-width: 5px;
-
-}
-
-</string>
+     <string notr="true">background-color: rgb(27, 25, 39);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+background-color:qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(56, 54, 65, 255), stop:1 rgba(56, 54, 65, 130));
+qproperty-alignment: 'AlignLeft';
+background-color: rgb(16, 14, 23,220);
+alternate-background-color: rgb(38, 35, 63);
+color: white;
+border:none;
+border-radius:10px;</string>
     </property>
     <property name="lineWidth">
      <number>1</number>
@@ -619,8 +533,8 @@ QHeaderView::section{
     <property name="alternatingRowColors">
      <bool>true</bool>
     </property>
-    <property name="showGrid">
-     <bool>false</bool>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectRows</enum>
     </property>
     <property name="gridStyle">
      <enum>Qt::SolidLine</enum>
@@ -669,27 +583,27 @@ QHeaderView::section{
     </attribute>
     <row>
      <property name="text">
-      <string>asd</string>
+      <string>New Row</string>
      </property>
     </row>
     <row>
      <property name="text">
-      <string>asd</string>
+      <string>New Row</string>
      </property>
     </row>
     <row>
      <property name="text">
-      <string>asd</string>
+      <string>New Row</string>
      </property>
     </row>
     <row>
      <property name="text">
-      <string>asd</string>
+      <string>New Row</string>
      </property>
     </row>
     <column>
      <property name="text">
-      <string>Titolo</string>
+      <string>Nome</string>
      </property>
      <property name="font">
       <font>
@@ -700,7 +614,7 @@ QHeaderView::section{
     </column>
     <column>
      <property name="text">
-      <string>Autore</string>
+      <string>Cognome</string>
      </property>
      <property name="font">
       <font>
@@ -711,7 +625,7 @@ QHeaderView::section{
     </column>
     <column>
      <property name="text">
-      <string>ISBN</string>
+      <string>Città</string>
      </property>
      <property name="font">
       <font>
@@ -722,40 +636,7 @@ QHeaderView::section{
     </column>
     <column>
      <property name="text">
-      <string>BID</string>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Stato</string>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Quarantena</string>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Note</string>
+      <string>Affidabilità</string>
      </property>
      <property name="font">
       <font>
@@ -766,60 +647,16 @@ QHeaderView::section{
     </column>
     <item row="0" column="0">
      <property name="text">
-      <string>asd</string>
+      <string/>
      </property>
-    </item>
-    <item row="0" column="2">
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </item>
-    <item row="1" column="0">
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </item>
-    <item row="1" column="2">
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </item>
-    <item row="2" column="0">
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </item>
-    <item row="2" column="2">
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </item>
-    <item row="3" column="0">
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </item>
-    <item row="3" column="2">
-     <property name="text">
-      <string>asd</string>
+     <property name="flags">
+      <set>ItemIsEnabled</set>
      </property>
     </item>
    </widget>
-   <zorder>background</zorder>
-   <zorder>frame_2</zorder>
-   <zorder>searchFrame</zorder>
-   <zorder>catalogingLabel</zorder>
-   <zorder>catalogingImage</zorder>
-   <zorder>itemTable</zorder>
   </widget>
-  <action name="actionModifica">
-   <property name="text">
-    <string>Modifica</string>
-   </property>
-  </action>
+  <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="../style/icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
