@@ -16,7 +16,6 @@ class HomeView(QMainWindow):
         self.widget = widget
         # Metodi Iniziali
         self.setup()
-        self.showMaximized()
 
     def setup(self):
         # Menu Button

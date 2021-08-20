@@ -25,6 +25,13 @@
   <property name="windowTitle">
    <string>Babelib</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">  MainWindow {
+        background-image: url(&quot;D:/img/Sfondo.jpeg&quot;); 
+        background-repeat: no-repeat; 
+        background-position: center;
+    }</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="newreservButton">
     <property name="geometry">
@@ -795,7 +802,7 @@ border-radius:10px;</string>
       <x>0</x>
       <y>0</y>
       <width>211</width>
-      <height>981</height>
+      <height>1001</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -1253,28 +1260,6 @@ qproperty-wordWrap: true;</string>
      </size>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>0</y>
-      <width>1481</width>
-      <height>981</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="textFormat">
-     <enum>Qt::RichText</enum>
-    </property>
-    <property name="pixmap">
-     <pixmap>../../../../Desktop/Sfondi/seattle_blackandwhite_bw_white_black_film_monochrome_analog-943787.jpg!d.jpeg</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
@@ -1301,6 +1286,28 @@ background-color:transparent;</string>
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1681</width>
+      <height>1001</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="pixmap">
+     <pixmap>img/Sfondo.jpeg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
    <zorder>label</zorder>
    <zorder>frame</zorder>
    <zorder>newreservButton</zorder>
@@ -1309,7 +1316,6 @@ background-color:transparent;</string>
    <zorder>newloanButton</zorder>
    <zorder>label_5</zorder>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionModifica">
    <property name="text">
     <string>Modifica</string>
