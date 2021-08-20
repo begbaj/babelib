@@ -13,9 +13,12 @@ class UserCardView(QMainWindow):
 
     userM = UserManager()
 
-    def __init__(self, widget, user, callback):
+    def __init__(self, widget, user, callback = None):
 
-        self.callback = callback
+        if callback is None:
+            self.callback = self.close
+        else:
+            self.callback = callback
 
         if user is not None:
             # Se l'utente non è un oggetto nullo allora visualizzo le sue informazioni

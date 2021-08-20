@@ -2,6 +2,9 @@ from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
 from Users.View.UserView import UserView
 from src.Items.View.InventoryView import InventoryView
+from src.Movements.View.MovementView import MovementView
+from src.Services.views.ReservationView import ReservationView
+from src.Users.View.UserCardView import UserCardView
 
 
 class HomeView(QMainWindow):
@@ -26,8 +29,8 @@ class HomeView(QMainWindow):
         # self.commButton.clicked.connect(self.gocomunicationview())
         # Shortcut Button
         # self.newloanButton.clicked.connect(self.newloan())
-        # self.newreservButton.clicked.connect(self.newreservation())
-        # self.newuserButton.clicked.connect(self.newuser())
+        self.newreservButton.clicked.connect(lambda: self.new_reservation())
+        self.newuserButton.clicked.connect(lambda: self.new_user())
         # Setting Button
         # self.settingButton.clicked.connect(self.setting())
         self.style()
@@ -51,6 +54,8 @@ class HomeView(QMainWindow):
         self.itemview.show()
 
     def __go_movement_view(self):
+        self.moveview = MovementView()
+        self.moveview.show()
         pass
 
     def __go_stats_view(self):
@@ -72,9 +77,13 @@ class HomeView(QMainWindow):
         pass
 
     def new_reservation(self):
+        self.reservation = ReservationView(self.widget)
+        self.reservation.show()
         pass
 
     def new_user(self):
+        self.user = UserCardView(self.widget, None, None)
+        self.user.show()
         pass
 
     def setting(self):

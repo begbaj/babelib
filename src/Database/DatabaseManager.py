@@ -493,6 +493,14 @@ class DatabaseManager:
         query = f"SELECT id FROM items WHERE isbn = '{isbn}' "
         return self.query(query, returns=True)
 
+    def check_for_isbn(self, id, isbn):
+        query = f"SELECT id FROM items WHERE id <> {id} and isbn = '{isbn}' "
+        return self.query(query, returns=True)
+
+    def check_for_bid(self, id, bid):
+        query = f"SELECT id FROM items WHERE id <> {id} and isbn = '{bid}' "
+        return self.query(query, returns=True)
+
     # endregion
 
     # region Movements
@@ -522,7 +530,6 @@ class DatabaseManager:
         return movements
 
     def set_movement(self, movement):
-
         try:
             self.cur.execute(
                 f"Update movements m "

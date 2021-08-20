@@ -140,6 +140,20 @@ class ItemManager:
         else:
             return False
 
+    def check_for_isbn(self, id, isbn):
+        qr = self.dbms.check_for_isbn(id, isbn)
+        if len(qr) == 0:
+            return True
+        else:
+            return False
+
+    def check_for_bid(self, id, bid):
+        qr = self.dbms.check_for_bid(id, bid)
+        if len(qr) == 0:
+            return True
+        else:
+            return False
+
     @staticmethod
     def __convert_dbitem(dbitem) -> Item:
         """
@@ -192,4 +206,3 @@ class ItemManager:
         '''
 
         pass
-
