@@ -45,6 +45,5 @@ class Item:
 
         self.note = ""
 
-
     def __str__(self):
         return self.title + " " + self.author

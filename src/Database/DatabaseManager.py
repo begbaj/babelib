@@ -261,7 +261,7 @@ class DatabaseManager:
 
     # region Items
 
-    def insert_item(self,item) -> int:
+    def insert_item(self,item):
         query = f"INSERT INTO items"\
                 f" (material_id, nature_id, type_id, lang_id, availability, bid, isbn,"\
                 f" title, author, cataloging_level, publication_date, publication_state, rack, shelf, position," \
@@ -304,7 +304,6 @@ class DatabaseManager:
             query =f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({nid},{state.value});"
             self.query(query)
         self.query(query)
-
         return nid
 
     def get_genre_value(self, genre_id):
