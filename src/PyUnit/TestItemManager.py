@@ -93,7 +93,7 @@ class TestItemManager(unittest.TestCase):
             return self.im.add_item(item, return_item=True)
 
         test_items = [self.item]
-        for i in range(1,10):
+        for i in range(1, 10):
             test_items.append(new_test_item())
 
         for i, s in enumerate(self.im.get_items("test", 0)):

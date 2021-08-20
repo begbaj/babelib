@@ -2,6 +2,11 @@ import sys
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
 from loginView import LoginView
+from homeView import HomeView
+from src.Users.View.UserView import UserView
+from src.Items.View.InventoryView import InventoryView
+from src.Services.views.ReservationView import ReservationView
+from src.Movements.View.MovementsView import MovementsView
 
 # TODO: un view manager per scorrere le varie view senza che rimangano aperte
 # TODO: refactoring delle view (sistemare le icone in un unico punto, mettere i nomi delle form con un formato standard...)
@@ -16,7 +21,11 @@ from loginView import LoginView
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = QtWidgets.QStackedWidget()
-    main_window = LoginView(widget)
-    widget.addWidget(main_window)
-    widget.show()
+    widget.addWidget(LoginView(widget)) #0
+    widget.addWidget(HomeView(widget)) #1
+    widget.addWidget(UserView(widget)) #2
+    widget.addWidget(MovementsView(widget)) #3
+    widget.addWidget(InventoryView(widget)) #4
+    #widget.addWidget(ReservationView(widget)) #5
+    widget.showFullScreen()
     app.exec()  # Lancia l'applicazione

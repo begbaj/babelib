@@ -13,9 +13,9 @@ class InventoryView(QMainWindow):
     __items = []
 
     # TODO: aggiungi documento
-    def __init__(self, widget, parent):
-        super(InventoryView, self).__init__(parent)
-        loadUi("../designer/Items/InventoryView.ui", self)
+    def __init__(self, widget):
+        super(InventoryView, self).__init__()
+        loadUi("../designer/Items/InventoryViewNew.ui", self)
         self.widget = widget
 
         try:
@@ -25,7 +25,7 @@ class InventoryView(QMainWindow):
             self.quarantineCheckBox.stateChanged.connect(lambda: self.search())
             self.discardedCheckBox.stateChanged.connect(lambda: self.search())
 
-            self.add_button.clicked.connect(lambda: self.add_item())
+            self.addButton.clicked.connect(lambda: self.add_item())
             self.modifyButton.clicked.connect(lambda: self.edit_item())
             self.discardButton.clicked.connect(lambda: self.discard_item())
             self.returnButton.clicked.connect(lambda: self.__go_back())

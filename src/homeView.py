@@ -46,17 +46,13 @@ class HomeView(QMainWindow):
 
     # region View links
     def __go_user_view(self):
-        self.userview = UserView(self.widget)
-        self.userview.show()
+        self.widget.setCurrentIndex(2)
 
     def __go_inventory_view(self):
-        self.itemview = InventoryView(self.widget, self)
-        self.itemview.show()
+        self.widget.setCurrentIndex(4)
 
     def __go_movement_view(self):
-        self.moveview = MovementsView(self.widget)
-        self.moveview.show()
-        pass
+        self.widget.setCurrentIndex(3)
 
     def __go_stats_view(self):
         pass
