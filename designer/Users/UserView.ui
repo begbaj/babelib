@@ -532,8 +532,8 @@ background-color:transparent;</string>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>0</y>
+      <x>180</x>
+      <y>-80</y>
       <width>911</width>
       <height>831</height>
      </rect>
@@ -556,7 +556,6 @@ background-color:transparent;</string>
    <zorder>frame_3</zorder>
    <zorder>label_3</zorder>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

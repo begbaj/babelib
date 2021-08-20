@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>881</width>
-    <height>885</height>
+    <height>868</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1275,7 +1275,6 @@ background-color: transparent</string>
    <zorder>label_7</zorder>
    <zorder>label_8</zorder>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

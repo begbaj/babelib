@@ -795,7 +795,7 @@ border-radius:10px;</string>
       <x>0</x>
       <y>0</y>
       <width>211</width>
-      <height>981</height>
+      <height>1001</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -1309,7 +1309,6 @@ background-color:transparent;</string>
    <zorder>newloanButton</zorder>
    <zorder>label_5</zorder>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionModifica">
    <property name="text">
     <string>Modifica</string>
