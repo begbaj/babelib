@@ -19,11 +19,11 @@ class HomeView(QMainWindow):
         # Menu Button
         self.userButton.clicked.connect(lambda: self.__go_user_view())
         self.catalogingButton.clicked.connect(lambda: self.__go_inventory_view())
-        # self.statsButton.clicked.connect(self.gostatsview())
+        self.movementButton.clicked.connect(lambda: self.__go_movement_view())
+        self.statsButton.clicked.connect(lambda: self.__go_stats_view())
         # self.reportButton.clicked.connect(self.goreportview())
         # self.serviceButton.clicked.connect(self.goserviceview())
         # self.commButton.clicked.connect(self.gocomunicationview())
-        # self.movementButton.clicked.connect(self.gomovemetview())
         # Shortcut Button
         # self.newloanButton.clicked.connect(self.newloan())
         # self.newreservButton.clicked.connect(self.newreservation())
@@ -36,6 +36,7 @@ class HomeView(QMainWindow):
         # Menu Button Style
         self.userButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
         self.catalogingButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
+        self.movementButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
         # Frame Style
         self.frame.setStyleSheet(open("../designer/style/FrameTheme.txt", "r").read())
         pass
@@ -49,6 +50,9 @@ class HomeView(QMainWindow):
         self.itemview = InventoryView(self.widget, self)
         self.itemview.show()
 
+    def __go_movement_view(self):
+        pass
+
     def __go_stats_view(self):
         pass
 
@@ -56,9 +60,6 @@ class HomeView(QMainWindow):
         pass
 
     def __go_service_view(self):
-        pass
-
-    def __go_movement_view(self):
         pass
 
     def __go_communication_view(self):
