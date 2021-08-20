@@ -12,7 +12,7 @@ from src.Users.models.User import User
 class UserCardView(QMainWindow):
 
     userM = UserManager()
-
+    
     def __init__(self, widget, user, callback):
 
         self.callback = callback

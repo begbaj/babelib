@@ -91,8 +91,8 @@ background-color:qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0 
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>30</y>
+      <x>570</x>
+      <y>50</y>
       <width>501</width>
       <height>621</height>
      </rect>
@@ -788,57 +788,6 @@ border-radius:10px;</string>
       </widget>
      </widget>
     </widget>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>17</y>
-       <width>111</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>14</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-       <strikeout>false</strikeout>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border:none;
-background-color:transparent;</string>
-     </property>
-     <property name="text">
-      <string>Calendario</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>7</y>
-       <width>41</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border:none;
-background-color:transparent;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::RichText</enum>
-     </property>
-     <property name="pixmap">
-      <pixmap>images/Calendario.png</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
-    </widget>
    </widget>
    <widget class="QFrame" name="frame_2">
     <property name="geometry">
@@ -1304,14 +1253,18 @@ qproperty-wordWrap: true;</string>
      </size>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>0</y>
-      <width>1571</width>
-      <height>1001</height>
+      <x>590</x>
+      <y>30</y>
+      <width>51</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;
+background-color:transparent;</string>
     </property>
     <property name="text">
      <string/>
@@ -1319,16 +1272,19 @@ qproperty-wordWrap: true;</string>
     <property name="textFormat">
      <enum>Qt::RichText</enum>
     </property>
+    <property name="pixmap">
+     <pixmap>images/Calendario.png</pixmap>
+    </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <zorder>label_6</zorder>
    <zorder>frame</zorder>
    <zorder>newreservButton</zorder>
    <zorder>newuserButton</zorder>
    <zorder>frame_2</zorder>
    <zorder>newloanButton</zorder>
+   <zorder>label_5</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionModifica">
