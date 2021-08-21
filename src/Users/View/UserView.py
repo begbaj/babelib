@@ -27,6 +27,7 @@ class UserView(QMainWindow):
         # Ricerca Dinamica
         self.nameField.textChanged.connect(lambda: self.search())
         self.surnameField.textChanged.connect(lambda: self.search())
+        self.selectButton.hide()
         self.style()
 
     def style(self):
@@ -136,6 +137,7 @@ class UserView(QMainWindow):
             user = self.users[rowtable]
             self.view = UserCardView(self.widget, user, self.load_data)
             self.view.show()
+
 
     # endregion
 

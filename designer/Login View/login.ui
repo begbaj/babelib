@@ -140,6 +140,9 @@ QPushButton::pressed
      <property name="text">
       <string>Log In</string>
      </property>
+     <property name="shortcut">
+      <string>Return</string>
+     </property>
      <property name="checkable">
       <bool>true</bool>
      </property>

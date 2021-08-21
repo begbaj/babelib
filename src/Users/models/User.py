@@ -35,7 +35,7 @@ class User:
                  ,first_cellphone = None, telephone = None, email = None, fiscal_code = None, contect_mode = None
                  ,privacy_agreement = None):
 
-        #self.id = id
+        # self.id = id
         self.nationality = nationality
         self.user_type = user_type
         self.registration_date = registration_date

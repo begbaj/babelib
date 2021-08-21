@@ -29,7 +29,7 @@ class LoginView(QMainWindow):
             else:
                 self.errorLabel.setText("Username o Password Sbagliati")
         except Exception as err:
-            self.errorLabel.setText(err)
+            self.errorLabel.setText('err')
 
     def login(self):
         username = self.usernameField.text()

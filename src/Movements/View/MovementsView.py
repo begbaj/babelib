@@ -1,12 +1,13 @@
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
+from src.Movements.View.LoanView import LoanView
 
 
 class MovementsView(QMainWindow):
 
     def __init__(self, widget):
         super(MovementsView, self).__init__()
-        loadUi("../designer/Movements/movement.ui", self)
+        loadUi("../designer/Movements/MovementView.ui", self)
         self.widget = widget
         self.setup()
 
@@ -16,6 +17,7 @@ class MovementsView(QMainWindow):
         self.consultationButton.clicked.connect(lambda: self.new_consultation())
         self.infoButton.clicked.connect(lambda: self.movement_info())
         self.backButton.clicked.connect(lambda: self.close())
+        self.searchField.textChanged.connect(lambda: self.search())
 
     def style(self):
         # Button Style
@@ -31,10 +33,14 @@ class MovementsView(QMainWindow):
         pass
 
     def new_loan(self):
-        pass
+        self.loanview = LoanView(self.widget)
+        self.loanview.show()
 
     def movement_info(self):
         pass
 
     def load_table(self):
+        pass
+
+    def search(self):
         pass

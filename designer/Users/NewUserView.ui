@@ -524,29 +524,6 @@ background-color:none;</string>
       <string>Sesso</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="genderBox">
-     <property name="geometry">
-      <rect>
-       <x>420</x>
-       <y>30</y>
-       <width>171</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: italic 10pt &quot;Arial&quot;;
-border:none;
-</string>
-     </property>
-     <property name="editable">
-      <bool>true</bool>
-     </property>
-     <item>
-      <property name="text">
-       <string/>
-      </property>
-     </item>
-    </widget>
     <widget class="QLineEdit" name="nameField">
      <property name="geometry">
       <rect>
@@ -638,7 +615,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
      <property name="geometry">
       <rect>
        <x>320</x>
-       <y>160</y>
+       <y>150</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -656,7 +633,7 @@ background-color:none;</string>
      <property name="geometry">
       <rect>
        <x>420</x>
-       <y>160</y>
+       <y>150</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -686,8 +663,8 @@ background-color:rgb(45, 206, 229)</string>
     <widget class="QLabel" name="dateLabel_2">
      <property name="geometry">
       <rect>
-       <x>320</x>
-       <y>70</y>
+       <x>20</x>
+       <y>150</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -705,9 +682,9 @@ background-color:none;</string>
      <property name="geometry">
       <rect>
        <x>320</x>
-       <y>115</y>
+       <y>70</y>
        <width>91</width>
-       <height>21</height>
+       <height>31</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -723,7 +700,7 @@ background-color:none;</string>
      <property name="geometry">
       <rect>
        <x>420</x>
-       <y>110</y>
+       <y>70</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -742,8 +719,8 @@ border:none;
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>160</y>
+       <x>320</x>
+       <y>110</y>
        <width>101</width>
        <height>31</height>
       </rect>
@@ -766,8 +743,8 @@ background-color:transparent</string>
     <widget class="QLineEdit" name="birthplaceField">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>160</y>
+       <x>420</x>
+       <y>110</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -787,29 +764,6 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
      <property name="placeholderText">
       <string/>
      </property>
-    </widget>
-    <widget class="QComboBox" name="nationBox">
-     <property name="geometry">
-      <rect>
-       <x>420</x>
-       <y>70</y>
-       <width>171</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: italic 10pt &quot;Arial&quot;;
-border:none;
-</string>
-     </property>
-     <property name="editable">
-      <bool>true</bool>
-     </property>
-     <item>
-      <property name="text">
-       <string/>
-      </property>
-     </item>
     </widget>
     <widget class="QLabel" name="label_9">
      <property name="geometry">
@@ -861,6 +815,47 @@ background-color:transparent</string>
      <property name="text">
       <string>*</string>
      </property>
+    </widget>
+    <widget class="QComboBox" name="genderBox">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>30</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 10pt &quot;Arial&quot;;
+border:none</string>
+     </property>
+     <item>
+      <property name="text">
+       <string/>
+      </property>
+     </item>
+    </widget>
+    <widget class="QComboBox" name="nationBox">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>150</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 10pt &quot;Arial&quot;;
+border:none;</string>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <item>
+      <property name="text">
+       <string/>
+      </property>
+     </item>
     </widget>
    </widget>
    <widget class="QFrame" name="frame_3">
@@ -1130,25 +1125,6 @@ background-color:none;</string>
       <string>Provincia</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="districtBox">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>70</y>
-       <width>201</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: italic 10pt &quot;Arial&quot;;
-border:none;</string>
-     </property>
-     <item>
-      <property name="text">
-       <string/>
-      </property>
-     </item>
-    </widget>
     <widget class="QLabel" name="positionLabel_2">
      <property name="geometry">
       <rect>
@@ -1210,6 +1186,28 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
      <property name="placeholderText">
       <string/>
      </property>
+    </widget>
+    <widget class="QComboBox" name="districtBox">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>70</y>
+       <width>201</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: italic 10pt &quot;Arial&quot;;
+border:none;</string>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <item>
+      <property name="text">
+       <string/>
+      </property>
+     </item>
     </widget>
    </widget>
    <widget class="QLabel" name="label_7">
