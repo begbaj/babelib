@@ -37,4 +37,10 @@ class UserManager:
     def delete(self, id):
         self.db.delete_user(id)
 
+    def get_user_name(self,id):
+        return self.db.get_user_name_by_id(id)
+
+    def get_user_surname(self,id):
+        return self.db.get_user_surname_by_id(id)
+
 

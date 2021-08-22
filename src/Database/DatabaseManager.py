@@ -187,6 +187,17 @@ class DatabaseManager:
             user.id = row.Id
         return user
 
+
+    def get_user_name_by_id(self,id):
+        query=(f"Select name from users where Id = {id}")
+        return self.query(query, returns=True)
+
+
+    def get_user_surname_by_id(self, id):
+        query = (f"Select surname from users where Id = {id}")
+        return self.query(query, returns=True)
+
+
     def find_user_by_name(self, name):
 
         # Initialize Variables
@@ -209,6 +220,8 @@ class DatabaseManager:
             user.id = row.Id
             users.append(user)
         return users
+
+
 
     def find_user_by_surname(self, surname):
 
@@ -638,4 +651,74 @@ class DatabaseManager:
             movement.user = self.find_user_by_id(row.user_id)
         return movement
 
-    # endregion
+    
+    def add_signed_reservation(self, signed_service_reservation):
+        try:
+            self.cur.execute(
+                f"Insert into signed_service_reservation"
+                f" ("
+                f"  reservation_id, user_id"
+                f", start_datetime, end_datetime"
+                f")"
+                f" values "
+                f"("
+                f" {signed_service_reservation.reservation_id}"
+                f", {signed_service_reservation.user_id}"
+                f", '{signed_service_reservation.date_from}'"
+                f", '{signed_service_reservation.date_to}'"
+                f")"
+            )
+
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
+    def add_unsigned_reservation(self, unsigned_service_reservation):
+        try:
+            self.cur.execute(
+                f"Insert into unsigned_service_reservations"
+                f" ("
+                f"  reservation_id, date_from"
+                f", date_to, full_name, cell_phone"
+                f")"
+                f" values "
+                f"("
+                f" {unsigned_service_reservation.reservation_id}"
+                f", '{unsigned_service_reservation.date_from}'"
+                f", '{unsigned_service_reservation.date_to}'"
+                f", '{unsigned_service_reservation.full_name}'"
+                f",'{unsigned_service_reservation.cell_phone}')"
+            )
+
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
+    def get_signed_reservation(self, reservation_id) -> tuple:
+        query = f"SELECT * FROM signed_service_reservation WHERE id = {reservation_id}"
+        res = self.query(query, returns=True)
+        return res[0]
+
+    def get_unsigned_reservation(self, reservation_id) -> tuple:
+        query = f"SELECT * FROM unsigned_service_reservations WHERE id = {reservation_id}"
+        res = self.query(query, returns=True)
+        return res[0]
+
+    def get_unsigned_reservations(self, search_field='') -> [tuple]:
+        query = f"SELECT * FROM unsigned_service_reservations where (fullname like '%{search_field}%')"
+        return self.query(query, returns=True)
+
+    def get_signed_reservation_by_user_id(self, user_id) -> [tuple]:
+        query = f"SELECT * FROM signed_service_reservation where (user_id like '%{user_id}%')"
+        return self.query(query, returns=True)
+
+    def get_all_signed(self):
+        query = f"SELECT * FROM signed_service_reservation"
+        dbsigned = self.query(query, returns=True)
+        return dbsigned
+
+    def get_user_id_in_signed_res(self):
+        query = f"SELECT user_id FROM signed_service_reservation"
+        return self.query(query, returns=True)
+
+    def get_signed_user_reservation(self, search_field):
+        query = f"SELECT ssr.user_id,u.Id,concat(u.name,' ',u.surname)AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.Id = ssr.user_id WHERE concat(u.name,' ',u.surname) LIKE '%{search_field}%'"
+        return self.query(query, returns=True)
