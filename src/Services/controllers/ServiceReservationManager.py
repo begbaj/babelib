@@ -35,3 +35,12 @@ class ServiceReservationManager:
 
     def get_all_signed(self, search_field: str):
         return self.dbms.get_signed_user_reservation(search_field)
+
+    def delete_unsigned(self, id):
+        return self.dbms.delete_unsigned_by_id(id)
+
+    def delete_signed(self, id):
+        if self.dbms.delete_signed_by_id(id) is None:
+            return True
+        else:
+            return False

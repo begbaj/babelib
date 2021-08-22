@@ -722,3 +722,11 @@ class DatabaseManager:
     def get_signed_user_reservation(self, search_field):
         query = f"SELECT ssr.user_id,u.Id,concat(u.name,' ',u.surname)AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.Id = ssr.user_id WHERE concat(u.name,' ',u.surname) LIKE '%{search_field}%'"
         return self.query(query, returns=True)
+
+    def delete_unsigned_by_id(self,id):
+        query = f"DELETE FROM unsigned_service_reservations WHERE id={id};"
+        return self.query(query, returns=True)
+
+    def delete_signed_by_id(self,id):
+        query = f"DELETE FROM signed_service_reservation WHERE id ={id};"
+        self.query(query, returns=True)

@@ -1,7 +1,8 @@
-from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem
+from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QDialog, QDialogButtonBox
 from PyQt5.uic import loadUi
 from datetime import datetime
 
+from src.Items.View.InventoryView import ErrorMessage
 from src.Services.controllers.ServiceReservationManager import ServiceReservationManager
 from src.Services.models.SignedServiceReservation import SignedServiceReservation
 from src.Services.models.UnsignedServiceReservation import UnsignedServiceReservation
@@ -29,6 +30,7 @@ class ReservationView(QMainWindow):
         loadUi("../designer/Reservation/ReservationView.ui", self)
         self.return_button.clicked.connect(lambda: self.close())
         self.add_reservation.clicked.connect(lambda: self.go_new_reservation())
+        self.delete_reservation.clicked.connect(lambda: self.discard_res())
         self.searchField.textChanged.connect(lambda: self.search())
         self.search()
 
@@ -59,6 +61,8 @@ class ReservationView(QMainWindow):
                     res.date_from.strftime("%H:%M:%S") + " - " + res.date_to.strftime("%H:%M:%S")))
                 self.reservationTable.setItem(row, 1, QTableWidgetItem(res.cellphone))
                 row = row + 1
+        if self.__unsigned is not None and self.__signed is not None:
+            self.__reservations = self.__signed + self.__unsigned
 
     # def __get_u_s(self):
     #     self.__unsigned_reservations =
@@ -81,6 +85,52 @@ class ReservationView(QMainWindow):
     def search(self):
         self.__update_table()
 
+    def discard_res(self):
+        res = self.__get_selected_res()
+        if res is None:
+            ErrorMessage("Selezionare un elemento da scartare!").exec_()
+            return
+
+        discard = Dialog(f"Sei sicuro? Questa azione è irreversibile!")
+        ok = discard.exec_()
+        if ok:
+            if res.n_fields == 6:
+                self.resM.delete_signed(res.Id)
+            else:
+                self.resM.delete_unsigned(res.id)
+        self.search()
+
     def __remove_rows(self):
         for i in reversed(range(0, self.reservationTable.rowCount())):
             self.reservationTable.removeRow(i)
+
+    def __get_selected_res(self):
+        if self.reservationTable.currentRow() != -1:
+            for res in self.__reservations:
+                if res.n_fields == 5:
+                    return self.__unsigned[self.reservationTable.currentRow()]
+                if res.n_fields == 6:
+                    return self.__signed[self.reservationTable.currentRow()]
+            else:
+                return None
+
+
+class Dialog(QDialog):
+    def __init__(self, text):
+        super(Dialog, self).__init__()
+        loadUi("../designer/Pop-Up/Dialog.ui", self)
+        self.setWindowTitle('Attenzione')
+        self.setModal(True)
+        self.text.setText(text)
+
+
+class ErrorMessage(QDialog):
+    def __init__(self, text, buttons=QDialogButtonBox.Ok):
+        super(ErrorMessage, self).__init__()
+        loadUi("../designer/Pop-up/ErrorMessage.ui", self)
+        self.setModal(True)
+        self.setWindowTitle("Errore")
+        self.buttonBox.setStandardButtons(buttons)
+        self.text.setText(text)
+        self.buttonBox.accepted.connect(super(ErrorMessage, self).accept)
+        self.buttonBox.rejected.connect(super(ErrorMessage, self).reject)
