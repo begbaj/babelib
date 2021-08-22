@@ -39,13 +39,24 @@ class ReservationView(QMainWindow):
     def __update_table(self):
         self.reservationTable.clearSelection()
         self.__remove_rows()
-        if self.__reservations is not None:
-            for res in self.__reservations:
+        self.__unsigned = self.resM.get_unsigned_(self.searchField.text())
+        self.__signed = self.resM.get_all_signed(self.searchField.text())
+        if self.__unsigned is not None:
+            for res in self.__unsigned:
                 row = self.reservationTable.rowCount()
                 self.reservationTable.insertRow(row)
                 self.reservationTable.setItem(row, 0, QTableWidgetItem(res.fullname))
                 self.reservationTable.setItem(row, 2, QTableWidgetItem(res.date_from.strftime("%m/%d/%Y")))
                 self.reservationTable.setItem(row, 3, QTableWidgetItem(res.date_from.strftime("%H:%M:%S") + " - " + res.date_to.strftime("%H:%M:%S")))
+                self.reservationTable.setItem(row, 1, QTableWidgetItem(res.cellphone))
+        if self.__signed is not None:
+            for res in self.__signed:
+                row = self.reservationTable.rowCount()
+                self.reservationTable.insertRow(row)
+                self.reservationTable.setItem(row, 0, QTableWidgetItem(res.fullname))
+                self.reservationTable.setItem(row, 2, QTableWidgetItem(res.date_from.strftime("%m/%d/%Y")))
+                self.reservationTable.setItem(row, 3, QTableWidgetItem(
+                    res.date_from.strftime("%H:%M:%S") + " - " + res.date_to.strftime("%H:%M:%S")))
                 self.reservationTable.setItem(row, 1, QTableWidgetItem(res.cellphone))
                 row = row + 1
 
@@ -54,6 +65,7 @@ class ReservationView(QMainWindow):
 
 
     def fill_list(self):
+        pass
         # for i in self.resM.get_all_signed():
         #     self.new_signed.reservation_id = i.id
         #     self.new_signed.date_from = i.date_from.strftime("%m/%d/%Y" "%H:%M:%S")
@@ -62,14 +74,11 @@ class ReservationView(QMainWindow):
         #     self.new_signed.surname = self.userM.get_user_surname(i.user_id)[0].surname
         #     self.new_signed.cellphone = self.userM.find(i.user_id).first_cellphone
         #     self.__signed.append(self.new_signed)
-        if self.resM.get_unsigned_(self.searchField.text()) is not None and self.resM.get_all_signed(self.searchField.text()) is not None:
-            self.__unsigned = self.resM.get_unsigned_(self.searchField.text())
-            self.__signed = self.resM.get_all_signed(self.searchField.text())
+        # if self.resM.get_unsigned_(self.searchField.text()) is not None and self.resM.get_all_signed(self.searchField.text()) is not None:
 
-        self.__reservations = self.__unsigned + self.__signed
+        #self.__reservations = self.__unsigned + self.__signed
 
     def search(self):
-        self.fill_list()
         self.__update_table()
 
     def __remove_rows(self):
