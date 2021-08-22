@@ -31,11 +31,11 @@ class UserView(QMainWindow):
         self.style()
 
     def style(self):
+        self.schedaButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
         """
         Questo metodo setta lo stile della view
         :return:
         """
-        self.schedaButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
         self.userButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
         self.backButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
         self.userTable.setStyleSheet(open("../designer/style/TableTheme.txt", "r").read())
@@ -137,7 +137,6 @@ class UserView(QMainWindow):
             user = self.users[rowtable]
             self.view = UserCardView(self.widget, user, self.load_data)
             self.view.show()
-
 
     # endregion
 

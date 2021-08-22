@@ -589,7 +589,7 @@ QHeaderView::section{
     </row>
     <column>
      <property name="text">
-      <string>Nome</string>
+      <string>Utente</string>
      </property>
      <property name="font">
       <font>
@@ -600,7 +600,7 @@ QHeaderView::section{
     </column>
     <column>
      <property name="text">
-      <string>Cognome</string>
+      <string>Documento</string>
      </property>
      <property name="font">
       <font>
