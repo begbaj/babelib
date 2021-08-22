@@ -15,7 +15,10 @@ class LoanView(QDialog):
         super(LoanView, self).__init__()
         loadUi("../designer/Movements/LoanView.ui", self)
         self.widget = widget
-        self.setModal(True)
+        self.users = self.userM.list()
+        self.items = self.itemM.get_items('', 0)
+        self.user = ''
+        # self.setModal(True)
         # self.widget = QtWidgets.QStackedWidget()
         # self.widget.addWidget(self)
         # self.widget.show()
@@ -24,14 +27,15 @@ class LoanView(QDialog):
     def setup(self):
         self.selectuserButton.clicked.connect(lambda: self.select_user())
         self.selectuserButton.setDisabled(False)
-
         self.selectdocButton.clicked.connect(lambda: self.select_item())
         self.selectdocButton.setDisabled(False)
-
         self.newuserButton.clicked.connect(lambda: self.new_user())
+        self.userField.setReadOnly(True)
+        self.fiscalcodeField.setReadOnly(True)
+        self.cellField.setReadOnly(True)
         self.style()
-        self.load_user_table(self.userM.list())
-        self.load_item_table(self.itemM.get_items('', 0))
+        self.load_user_table()
+        self.load_item_table()
 
     def style(self):
         self.userTable.setStyleSheet(open("../designer/style/TableTheme.txt", "r").read())
@@ -41,6 +45,11 @@ class LoanView(QDialog):
         self.itemField.textChanged.connect(lambda: self.search_item())
 
     def select_user(self):
+        row = self.userTable.currentRow()
+        self.user = self.users[row]
+        self.userField.setText(self.user.name + " " + self.user.surname)
+        self.fiscalcodeField.setText(self.user.fiscal_code)
+        self.cellField.setText(self.user.first_cellphone)
         '''
         view = UserView(self.widget)
         # self.widget.addWidget(view)
@@ -53,16 +62,20 @@ class LoanView(QDialog):
         '''
 
     def select_item(self):
-        pass
-
-    def search(self):
+        row = self.userTable.currentRow()
+        item = self.items[row]
+        self.isbnField.setText(item.isbn)
+        self.titleField.setText(item.title)
         pass
 
     def new_user(self):
-        self.view = UserCardView(self.widget, None)
+        self.view = UserCardView(self.widget, None, self.load_user_table)
         self.view.show()
 
-    def load_user_table(self, users):
+# region Table
+
+    def load_user_table(self):
+        users = self.userM.list()
         row = 0
         self.userTable.setRowCount(len(users))
         for user in users:
@@ -71,14 +84,16 @@ class LoanView(QDialog):
             self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.fiscal_code))
             row = row + 1
 
-    def load_item_table(self, items):
+    def load_item_table(self):
         row = 0
-        self.itemTable.setRowCount(len(items))
-        for item in items:
+        self.itemTable.setRowCount(len(self.items))
+        for item in self.items:
             self.itemTable.setItem(row, 0, QtWidgets.QTableWidgetItem(item.title))
             self.itemTable.setItem(row, 1, QtWidgets.QTableWidgetItem(item.author))
             self.itemTable.setItem(row, 2, QtWidgets.QTableWidgetItem(item.isbn))
             row = row + 1
+
+# endregion
 
 # region Search
 
@@ -94,6 +109,5 @@ class LoanView(QDialog):
 
     def search_item(self):
         self.load_item_table(self.itemM.get_items(self.itemField.text(), 1))
-        pass
 
 # endregion
