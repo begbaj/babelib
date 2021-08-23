@@ -652,42 +652,40 @@ class DatabaseManager:
         return movement
 
     
-    def add_signed_reservation(self, signed_service_reservation):
+    def add_signed_reservation(self, user_id, date_from, date_to):
         try:
             self.cur.execute(
                 f"Insert into signed_service_reservation"
-                f" ("
-                f"  reservation_id, user_id"
-                f", start_datetime, end_datetime"
+                f" ( user_id"
+                f", date_from, date_to"
                 f")"
                 f" values "
                 f"("
-                f" {signed_service_reservation.reservation_id}"
-                f", {signed_service_reservation.user_id}"
-                f", '{signed_service_reservation.date_from}'"
-                f", '{signed_service_reservation.date_to}'"
+                f" {user_id}"
+                f", '{date_from}'"
+                f", '{date_to}'"
                 f")"
             )
 
         except mariadb.Error as e:
             print(f"Error: {e}")
 
-    def add_unsigned_reservation(self, unsigned_service_reservation):
+    def add_unsigned_reservation(self, date_from,date_to,cell_phone,full_name):
         try:
             self.cur.execute(
                 f"Insert into unsigned_service_reservations"
                 f" ("
-                f"  reservation_id, date_from"
-                f", date_to, full_name, cell_phone"
+                f"  date_from"
+                f", date_to, fullname, cellphone"
                 f")"
                 f" values "
                 f"("
-                f" {unsigned_service_reservation.reservation_id}"
-                f", '{unsigned_service_reservation.date_from}'"
-                f", '{unsigned_service_reservation.date_to}'"
-                f", '{unsigned_service_reservation.full_name}'"
-                f",'{unsigned_service_reservation.cell_phone}')"
+                f" '{date_from}'"
+                f", '{date_to}'"
+                f", '{full_name}'"
+                f",{cell_phone})"
             )
+
 
         except mariadb.Error as e:
             print(f"Error: {e}")
@@ -730,3 +728,4 @@ class DatabaseManager:
     def delete_signed_by_id(self,id):
         query = f"DELETE FROM signed_service_reservation WHERE id ={id};"
         self.query(query, returns=True)
+
