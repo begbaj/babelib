@@ -69,7 +69,9 @@ class CatalogingView(QMainWindow):
         self.isbn.setText(str(item.isbn))
         self.title.setText(item.title)
         self.author.setText(item.author)
-        self.publication_date.setDate(item.publication_date)
+        if item.publication_date is not None:
+            self.publication_date.setDate(item.publication_date)
+
         if item.id is None:
             self.id.setText('')
         else:
