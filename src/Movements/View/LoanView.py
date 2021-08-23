@@ -73,14 +73,15 @@ class LoanView(QDialog):
 # region Table
 
     def load_user_table(self, users):
-        self.users = users
-        row = 0
-        self.userTable.setRowCount(len(self.users))
-        for user in users:
-            self.userTable.setItem(row, 0, QtWidgets.QTableWidgetItem(user.name))
-            self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
-            self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.fiscal_code))
-            row = row + 1
+        if users is not None:
+            self.users = users
+            row = 0
+            self.userTable.setRowCount(len(self.users))
+            for user in users:
+                self.userTable.setItem(row, 0, QtWidgets.QTableWidgetItem(user.name))
+                self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
+                self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.fiscal_code))
+                row = row + 1
 
     def load_item_table(self, items):
         self.items = items

@@ -28,7 +28,6 @@ class UserCardView(QMainWindow):
             self.pop = ''
             # Metodi iniziali
             self.setup()
-            # self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)
         else:
             # Se l'utente è nullo allora visualizzo la schermata per crearne uno nuovo
             super(UserCardView, self).__init__()
@@ -37,7 +36,6 @@ class UserCardView(QMainWindow):
             self.pop = ''
             # Metodi iniziali
             self.setup_new()
-            # self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)
 
     def setup(self):
         """
@@ -169,7 +167,7 @@ class UserCardView(QMainWindow):
 
     def regular_exp_field(self):
         # Strings Field
-        self.nameField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z]*$')))
+        self.nameField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " "]*$')))
         self.surnameField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " "]*$')))
         self.fiscalcodeField.setValidator(QRegExpValidator(QRegExp('^[A-Z 0-9]*$')))
         self.cityField.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z " "]*$')))
@@ -247,7 +245,9 @@ class UserCardView(QMainWindow):
                     )
         self.saveButton.setEnabled(False)
         self.userM.add(user)
-        self.back()
+        self.callback(self.userM.list())
+        self.close()
+
 
     def cell_contact(self):
         if self.cellField.text() == '':
@@ -281,7 +281,7 @@ class UserCardView(QMainWindow):
 # region View Function
 
     def closeEvent(self, event):
-        self.callback()
+        self.callback(None)
 
     def load_user(self):
         """

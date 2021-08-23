@@ -57,9 +57,12 @@ class UserView(QMainWindow):
             self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.city))
             row = row + 1
 
-    def load_data(self):
-        self.users = self.userM.list()
-        self.load_table(self.users)
+    def load_data(self, users = None):
+        if users is None:
+            self.users = self.userM.list()
+            self.load_table(self.users)
+        else:
+            self.load_table(users)
 
     # Region 'User Operation'
 
