@@ -7,11 +7,11 @@ class ServiceReservationManager:
     def __init__(self):
         self.dbms = DatabaseManager()
 
-    def add_signed_reservation(self, signed_reservation: SignedServiceReservation):
-        signed_reservation.id = self.dbms.add_signed_reservation(signed_reservation)
+    def add_signed_reservation(self, id, d_from, d_to):
+        self.dbms.add_signed_reservation(id, d_from, d_to)
 
-    def add_unsigned_reservation(self, unsigned_reservation: UnsignedServiceReservation):
-        unsigned_reservation.id = self.dbms.add_unsigned_reservation(unsigned_reservation)
+    def add_unsigned_reservation(self, date_from,date_to,cell_phone,full_name):
+        self.dbms.add_unsigned_reservation(date_from,date_to,cell_phone,full_name)
 
     # def convert_db_un_reservation(dbres):
     #     unsigned = UnsignedServiceReservation()

@@ -8,12 +8,11 @@ from src.Services.models.UnsignedServiceReservation import UnsignedServiceReserv
 
 
 class NewReservationView(QMainWindow):
-
     userM = UserManager()
     serviceM = ServiceReservationManager()
     s_s_r = SignedServiceReservation()
     u_s_r = UnsignedServiceReservation()
-    __users = []
+    user = -1
 
     def __init__(self, widget):
         '''
@@ -21,6 +20,7 @@ class NewReservationView(QMainWindow):
         :param widget: QWidget
         :param item: Item to edit
         '''
+        self.__users = []
         super(NewReservationView, self).__init__()
         loadUi("../designer/Reservation/AddReservationView.ui", self)
         self.widget = widget
@@ -31,9 +31,7 @@ class NewReservationView(QMainWindow):
         self.surnameField.textChanged.connect(lambda: self.search())
         self.get_field.clicked.connect(lambda: self.get_fields())
         self.clear_field.clicked.connect(lambda: self.clear_fields())
-        self.save_button.clicked.connect(lambda: self.set_fields(self.users))
-
-
+        self.save_button.clicked.connect(lambda: self.set_fields())
 
     def load_table(self, users):
         """
@@ -75,7 +73,6 @@ class NewReservationView(QMainWindow):
         elif (self.nameField.text() != '') and (self.surnameField.text() != ''):
             self.load_data_research(self.userM.findNameSurname(self.nameField.text(), self.surnameField.text()))
 
-
     # endregion
 
     def load_data_research(self, users):
@@ -98,15 +95,15 @@ class NewReservationView(QMainWindow):
         self.userTable.removeRow(row)
 
     def get_fields(self):
-        if self.__get_selected_item() is not None:
-            self.name.setText(self.__get_selected_item().name)
-            self.surname.setText(self.__get_selected_item().surname)
-            self.telephone.setText(self.__get_selected_item().telephone)
+        if self.__get_selected_user() is not None:
+            self.name.setText(self.__get_selected_user().name)
+            self.surname.setText(self.__get_selected_user().surname)
+            self.telephone.setText(self.__get_selected_user().telephone)
             self.name.setReadOnly(True)
             self.surname.setReadOnly(True)
             self.telephone.setReadOnly(True)
 
-        #else popup
+        # else popup
 
     def clear_fields(self):
         self.name.setReadOnly(False)
@@ -116,28 +113,24 @@ class NewReservationView(QMainWindow):
         self.surname.setText('')
         self.telephone.setText('')
 
-    def set_fields(self, user=None):
-        if user is None:
-            self.u_s_r.fullname = self.name.text()+' '+self.surname.text()
-            self.u_s_r.telephone = self.telephone.text()
-            self.u_s_r.date_from = self.dateEdit.dateTime().toString("yyyy-MM-dd")+' '+self.timeEdit.time().toString()
-            self.u_s_r.date_to = self.timeEdit_2.time().toString()
-            self.serviceM.add_unsigned_reservation(self.u_s_r)
-            self.close()
-        #
-        # else:
-        #
-        #
-        # pass
-
-        #if self.user is None:
-        #else:
-
-
-
-
-    def __get_selected_item(self):
+    def __get_selected_user(self):
         if self.userTable.currentRow() != -1:
             return self.__users[self.userTable.currentRow()]
         else:
             return None
+
+    def set_fields(self):
+        if self.__get_selected_user() is not None:
+            self.serviceM.add_signed_reservation(self.__get_selected_user().id,
+                                                 self.dateEdit.dateTime().toString("yyyy-MM-dd") + ' ' +
+                                                 self.timeEdit.dateTime().toString("hh:mm:ss"),
+                                                 self.dateEdit.dateTime().toString("yyyy-MM-dd") + ' ' +
+                                                 self.timeEdit_2.dateTime().toString("hh:mm:ss"))
+        else:
+            self.serviceM.add_unsigned_reservation(self.dateEdit.dateTime().toString("yyyy-MM-dd") + ' ' +
+                                                   self.timeEdit.dateTime().toString("hh:mm:ss"),
+                                                   self.dateEdit.dateTime().toString("yyyy-MM-dd") + ' ' +
+                                                   self.timeEdit_2.dateTime().toString("hh:mm:ss"), self.telephone.text(), self.name.text()+' '+self.surname.text())
+        self.close()
+
+
