@@ -1,11 +1,12 @@
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QIntValidator, QRegExpValidator
-from PyQt5.QtWidgets import QDialog, QMainWindow
+from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
 from datetime import datetime
 import os
 from src.Users.controllers.UserManager import UserManager
 from src.Users.models.User import User
+from src.Utils.UI import SavePopUp, Popup
 
 
 class UserCardView(QMainWindow):
@@ -13,12 +14,10 @@ class UserCardView(QMainWindow):
     userM = UserManager()
 
     def __init__(self, widget, user, callback=None):
-
         if callback is None:
             self.callback = self.close
         else:
             self.callback = callback
-
         if user is not None:
             # Se l'utente non è un oggetto nullo allora visualizzo le sue informazioni
             super(UserCardView, self).__init__()
@@ -58,7 +57,6 @@ class UserCardView(QMainWindow):
         self.style()
 
     def style(self):
-        # Line Edit
         self.nameField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
         self.surnameField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
         self.fiscalcodeField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
@@ -69,7 +67,6 @@ class UserCardView(QMainWindow):
         self.emailField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
         self.telephonField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
         self.birthplaceField.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
-        # Table
 
     def setup_new(self):
         self.returnButton.clicked.connect(self.back)
@@ -358,40 +355,5 @@ class UserCardView(QMainWindow):
     def show_popup(self):
         self.pop = SavePopUp(self.userM, self.user)
         self.pop.show()
-
-# endregion
-
-
-# region Pop-Up
-
-class SavePopUp(QDialog):
-
-    def __init__(self, userm, user):
-        super(SavePopUp, self).__init__()
-        loadUi("../designer/Pop-Up/Save Pop-Up/savepopup.ui", self)
-        self.setup()
-        self.userM = userm
-        self.user = user
-
-    def setup(self):
-        # Button
-        self.confirmButton.clicked.connect(self.confirm)
-        self.cancelButton.clicked.connect(lambda: self.close())
-        # Proprietà Finestra
-        self.setModal(True)
-        self.setWindowTitle('Conferma')
-
-    def confirm(self):
-        self.userM.set(self.user)
-        self.close()
-
-
-class Popup(QDialog):
-    def __init__(self):
-        super(Popup, self).__init__()
-        loadUi("../designer/Pop-Up/Message Pop-Up/Popup.ui", self)
-        self.setWindowTitle('Errore')
-        self.setModal(True)
-        self.okButton.clicked.connect(self.close)
 
 # endregion

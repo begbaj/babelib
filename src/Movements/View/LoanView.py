@@ -4,6 +4,7 @@ from PyQt5.uic import loadUi
 from src.Items.Controllers.ItemManager import ItemManager
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
+from src.Utils.UI import Popup
 
 
 class LoanView(QDialog):
@@ -34,8 +35,8 @@ class LoanView(QDialog):
         self.fiscalcodeField.setReadOnly(True)
         self.cellField.setReadOnly(True)
         self.style()
-        self.load_user_table()
-        self.load_item_table()
+        self.load_user_table(self.users)
+        self.load_item_table(self.items)
 
     def style(self):
         self.userTable.setStyleSheet(open("../designer/style/TableTheme.txt", "r").read())
@@ -45,28 +46,25 @@ class LoanView(QDialog):
         self.itemField.textChanged.connect(lambda: self.search_item())
 
     def select_user(self):
-        row = self.userTable.currentRow()
-        self.user = self.users[row]
-        self.userField.setText(self.user.name + " " + self.user.surname)
-        self.fiscalcodeField.setText(self.user.fiscal_code)
-        self.cellField.setText(self.user.first_cellphone)
-        '''
-        view = UserView(self.widget)
-        # self.widget.addWidget(view)
-        # self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
-        view.show()
-        view.selectButton.show()
-        view.schedaButton.hide()
-        view.backButton.hide()
-        pass
-        '''
+        if self.userTable.currentRow() == -1:
+            self.pop = Popup("Selezionare un utente")
+            self.pop.show()
+        else:
+            row = self.userTable.currentRow()
+            self.user = self.users[row]
+            self.userField.setText(self.user.name + " " + self.user.surname)
+            self.fiscalcodeField.setText(self.user.fiscal_code)
+            self.cellField.setText(self.user.first_cellphone)
 
     def select_item(self):
-        row = self.userTable.currentRow()
-        item = self.items[row]
-        self.isbnField.setText(item.isbn)
-        self.titleField.setText(item.title)
-        pass
+        if self.itemTable.currentRow() == -1:
+            self.pop = Popup("Selezionare un Documento")
+            self.pop.show()
+        else:
+            row = self.itemTable.currentRow()
+            item = self.items[row]
+            self.isbnField.setText(item.isbn)
+            self.titleField.setText(item.title)
 
     def new_user(self):
         self.view = UserCardView(self.widget, None, self.load_user_table)
@@ -74,17 +72,18 @@ class LoanView(QDialog):
 
 # region Table
 
-    def load_user_table(self):
-        users = self.userM.list()
+    def load_user_table(self, users):
+        self.users = users
         row = 0
-        self.userTable.setRowCount(len(users))
+        self.userTable.setRowCount(len(self.users))
         for user in users:
             self.userTable.setItem(row, 0, QtWidgets.QTableWidgetItem(user.name))
             self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
             self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.fiscal_code))
             row = row + 1
 
-    def load_item_table(self):
+    def load_item_table(self, items):
+        self.items = items
         row = 0
         self.itemTable.setRowCount(len(self.items))
         for item in self.items:
