@@ -22,7 +22,7 @@ class DatabaseManager:
     conn = ""
     cur = ""
 
-    def __init__(self, directory="Database/db_settings/db.json"):
+    def __init__(self, directory="config/db.json"):
         """
         Initialize Database manager
         :param user_: username for db access
@@ -173,18 +173,18 @@ class DatabaseManager:
         except mariadb.Error as e:
             print(f"Error: {e}")
 
-    def delete_user(self, id):
+    def delete_user(self, user_id):
         try:
-            self.cur.execute(f"delete from users where id = {id}")
+            self.cur.execute(f"delete from users where id = {user_id}")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
 
-    def find_user_by_id(self, id):
-
+    def find_user_by_id(self, user_id):
+        user = None
         try:
             self.cur.execute(f"Select * from users u "
-                             f"where u.id = {id}")
+                             f"where u.id = {user_id}")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
@@ -198,12 +198,12 @@ class DatabaseManager:
             user.id = row.Id
         return user
 
-    def get_user_name_by_id(self, id):
-        query = (f"Select name from users where Id = {id}")
+    def get_user_name_by_id(self, user_id):
+        query = f"Select name from users where Id = {user_id}"
         return self.query(query, returns=True)
 
-    def get_user_surname_by_id(self, id):
-        query = (f"Select surname from users where Id = {id}")
+    def get_user_surname_by_id(self, user_id):
+        query = (f"Select surname from users where Id = {user_id}")
         return self.query(query, returns=True)
 
     def find_user_by_name(self, name):
