@@ -62,7 +62,7 @@ class ItemManager:
 
     def get_external_states(self, states_id: [int]):
         """
-
+        Get external states description
         :param states_id:
         :return:
         """
