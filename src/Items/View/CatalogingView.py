@@ -295,6 +295,11 @@ class CatalogingView(QMainWindow):
                         self.bid.setStyleSheet('border-color:rgb(255,0,0)')
         else:
             src.Utils.UI.ErrorMessage("Non sono stati riempiti tutti i campi obbligatori! Ricontrollare.").exec_()
+
     def close(self) -> bool:
         self.item = None
         return super(CatalogingView, self).close()
+
+    def show(self):
+        self.load_item(self.item)
+        super(CatalogingView, self).show()
