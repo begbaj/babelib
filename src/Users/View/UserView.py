@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QDialog, QMainWindow
 from PyQt5.uic import loadUi
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
+from src.Utils.UI import Popup, DeletePopup
 
 
 class UserView(QMainWindow):
@@ -110,7 +111,7 @@ class UserView(QMainWindow):
         self.userTable.removeRow(row)
 
     def show_popup(self):
-        self.pop = Popup()
+        self.pop = Popup("Selezionare un utente")
         self.pop.show()
 
     # Region 'View Links'
@@ -137,34 +138,5 @@ class UserView(QMainWindow):
             user = self.users[rowtable]
             self.view = UserCardView(self.widget, user, self.load_data)
             self.view.show()
-
-    # endregion
-
-
-# Region 'Pop-Up'
-
-class Popup(QDialog):
-    def __init__(self):
-        super(Popup, self).__init__()
-        loadUi("../designer/Pop-Up/Message Pop-Up/Popup.ui", self)
-        self.setWindowTitle('Errore')
-        self.setModal(True)
-        self.okButton.clicked.connect(self.close)
-
-
-class DeletePopup(QDialog):
-
-    def __init__(self, funct):
-        super(DeletePopup, self).__init__()
-        loadUi("../designer/Pop-Up/Delete Pop-Up/deletepopup.ui", self)
-        self.setWindowTitle('Attenzione')
-        self.setModal(True)
-        self.funct = funct
-        self.confirmButton.clicked.connect(self.confirm)
-        self.cancelButton.clicked.connect(self.close)
-
-    def confirm(self):
-        self.funct()
-        self.close()
 
     # endregion

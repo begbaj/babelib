@@ -9,6 +9,7 @@ class MovementsView(QMainWindow):
         super(MovementsView, self).__init__()
         loadUi("../designer/Movements/MovementView.ui", self)
         self.widget = widget
+        self.view = ''
         self.setup()
 
     def setup(self):
@@ -33,8 +34,8 @@ class MovementsView(QMainWindow):
         pass
 
     def new_loan(self):
-        self.loanview = LoanView(self.widget)
-        self.loanview.show()
+        self.view = LoanView(self.widget)
+        self.view.show()
 
     def movement_info(self):
         pass

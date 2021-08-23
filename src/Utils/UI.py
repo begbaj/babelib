@@ -50,3 +50,51 @@ class CheckableComboBox(QComboBox):
 
     def hidePopup(self):
         pass
+
+
+class SavePopUp(QDialog):
+
+    def __init__(self, userm, user):
+        super(SavePopUp, self).__init__()
+        loadUi("../designer/Pop-Up/Save Pop-Up/savepopup.ui", self)
+        self.setup()
+        self.userM = userm
+        self.user = user
+
+    def setup(self):
+        # Button
+        self.confirmButton.clicked.connect(self.confirm)
+        self.cancelButton.clicked.connect(lambda: self.close())
+        # Proprietà Finestra
+        self.setModal(True)
+        self.setWindowTitle('Conferma')
+
+    def confirm(self):
+        self.userM.set(self.user)
+        self.close()
+
+
+class Popup(QDialog):
+    def __init__(self, text = ''):
+        super(Popup, self).__init__()
+        loadUi("../designer/Pop-Up/Message Pop-Up/Popup.ui", self)
+        self.label.setText(text)
+        self.setWindowTitle('Errore')
+        self.setModal(True)
+        self.okButton.clicked.connect(self.close)
+
+
+class DeletePopup(QDialog):
+
+    def __init__(self, funct):
+        super(DeletePopup, self).__init__()
+        loadUi("../designer/Pop-Up/Delete Pop-Up/deletepopup.ui", self)
+        self.setWindowTitle('Attenzione')
+        self.setModal(True)
+        self.funct = funct
+        self.confirmButton.clicked.connect(self.confirm)
+        self.cancelButton.clicked.connect(self.close)
+
+    def confirm(self):
+        self.funct()
+        self.close()
