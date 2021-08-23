@@ -26,7 +26,7 @@
    <string>Babelib</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QFrame" name="frame_2">
+   <widget class="QFrame" name="menu_frame">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -34,6 +34,12 @@
       <width>191</width>
       <height>851</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="styleSheet">
      <string notr="true">border:none;
@@ -106,34 +112,6 @@ border: none
        <width>40</width>
        <height>40</height>
       </size>
-     </property>
-    </widget>
-    <widget class="QLabel" name="logo">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>191</width>
-       <height>121</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:transparent;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::RichText</enum>
-     </property>
-     <property name="pixmap">
-      <pixmap>../img/Babelib-removebg-preview.png</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>false</bool>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QPushButton" name="addButton">
@@ -224,12 +202,31 @@ border: none
       </size>
      </property>
     </widget>
+    <widget class="QLabel" name="catalogingImage">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>20</y>
+       <width>80</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>../img/Icona Catalogazione.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
    <widget class="QFrame" name="searchFrame">
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>80</y>
+      <y>10</y>
       <width>1061</width>
       <height>91</height>
      </rect>
@@ -507,41 +504,6 @@ background-color: transparent;</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="catalogingLabel">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>10</y>
-      <width>141</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 75 bold 14pt &quot;Arial&quot;;</string>
-    </property>
-    <property name="text">
-     <string>Catalogazione</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="catalogingImage">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>10</y>
-      <width>47</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../img/Icona Catalogazione.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QTableWidget" name="itemTable">
     <property name="enabled">
      <bool>true</bool>
@@ -549,9 +511,9 @@ background-color: transparent;</string>
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>180</y>
+      <y>110</y>
       <width>1061</width>
-      <height>661</height>
+      <height>731</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -599,7 +561,6 @@ QHeaderView::section{
 	color:rgb(121, 212, 226);
 	background-color:  rgba(11, 11, 13, 50);
 	border-width: 5px;
-
 }
 
 </string>
@@ -629,7 +590,7 @@ QHeaderView::section{
      <bool>true</bool>
     </property>
     <property name="rowCount">
-     <number>4</number>
+     <number>0</number>
     </property>
     <attribute name="horizontalHeaderVisible">
      <bool>true</bool>
@@ -637,14 +598,14 @@ QHeaderView::section{
     <attribute name="horizontalHeaderCascadingSectionResizes">
      <bool>false</bool>
     </attribute>
+    <attribute name="horizontalHeaderMinimumSectionSize">
+     <number>50</number>
+    </attribute>
     <attribute name="horizontalHeaderDefaultSectionSize">
      <number>130</number>
     </attribute>
     <attribute name="horizontalHeaderHighlightSections">
      <bool>false</bool>
-    </attribute>
-    <attribute name="horizontalHeaderMinimumSectionSize">
-     <number>50</number>
     </attribute>
     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
      <bool>true</bool>
@@ -667,26 +628,6 @@ QHeaderView::section{
     <attribute name="verticalHeaderStretchLastSection">
      <bool>false</bool>
     </attribute>
-    <row>
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </row>
     <column>
      <property name="text">
       <string>Titolo</string>
@@ -744,17 +685,6 @@ QHeaderView::section{
     </column>
     <column>
      <property name="text">
-      <string>Quarantena</string>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-    </column>
-    <column>
-     <property name="text">
       <string>Note</string>
      </property>
      <property name="font">
@@ -764,52 +694,10 @@ QHeaderView::section{
       </font>
      </property>
     </column>
-    <item row="0" column="0">
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </item>
-    <item row="0" column="2">
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </item>
-    <item row="1" column="0">
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </item>
-    <item row="1" column="2">
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </item>
-    <item row="2" column="0">
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </item>
-    <item row="2" column="2">
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </item>
-    <item row="3" column="0">
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </item>
-    <item row="3" column="2">
-     <property name="text">
-      <string>asd</string>
-     </property>
-    </item>
    </widget>
    <zorder>background</zorder>
-   <zorder>frame_2</zorder>
+   <zorder>menu_frame</zorder>
    <zorder>searchFrame</zorder>
-   <zorder>catalogingLabel</zorder>
-   <zorder>catalogingImage</zorder>
    <zorder>itemTable</zorder>
   </widget>
   <action name="actionModifica">
@@ -818,8 +706,6 @@ QHeaderView::section{
    </property>
   </action>
  </widget>
- <resources>
-  <include location="../style/icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

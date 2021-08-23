@@ -1,23 +1,21 @@
+from datetime import datetime
+
 from src.Database.DatabaseManager import DatabaseManager
 from src.Items.Models import ItemEnumerators
 from src.Items.Models.Item import Item
-from datetime import datetime
 from src.Items.Models.ItemEnumerators import *
 
 
 class ItemManager:
 
     def __init__(self):
-        self.dbms = DatabaseManager()
+        self.dbms = DatabaseManager("../config/db.json")
 
-    def add_item(self, item: Item, return_item=None) -> int:
+    def add_item(self, item: Item, return_item=None) -> Item:
         item.id = self.dbms.insert_item(item)
-        if return_item:
-            return item
-        else:
-            return item.id
+        return item
 
-    def get_item(self, item):
+    def get_item(self, item: Item):
         item = self.__convert_dbitem(self.dbms.get_item(item.id))
 
         item.genre = []
@@ -84,7 +82,7 @@ class ItemManager:
                 item.inner_state.append(ItemEnumerators.SMUSIEnum(inner_state.id))
 
             item.external_state = []
-            for external_state in  self.dbms.get_item_external_states(item.id):
+            for external_state in self.dbms.get_item_external_states(item.id):
                 item.external_state.append(ItemEnumerators.ExternalStateEnum(external_state.id))
 
             fitems.append(item)
@@ -116,7 +114,7 @@ class ItemManager:
         self.dbms.edit_item(item)
 
     def delete_item(self, item: Item):
-        self.dbms.remove_item(item.id)
+        self.dbms.remove_item(item)
 
     def discard_item(self, item: Item):
         item.availability = ItemEnumerators.AvailabilityEnum.scartato
@@ -156,8 +154,7 @@ class ItemManager:
         else:
             return False
 
-    @staticmethod
-    def __convert_dbitem(dbitem) -> Item:
+    def __convert_dbitem(self, dbitem) -> Item:
         """
         This method converts a DatabaseManager obj into a Item obj
         :param dbitem: DatabaseManager object
@@ -171,13 +168,14 @@ class ItemManager:
         item.title = dbitem.title
         item.author = dbitem.author
         item.lang = ItemEnumerators.LangEnum(int(dbitem.lang_id))
-        item.cataloging_level = ItemEnumerators.CatalogingLevel(int.from_bytes(dbitem.cataloging_level, 'big')) #serve per convertire un byte in int ('big' = big endian)
+        item.cataloging_level = ItemEnumerators.CatalogingLevel(
+            int.from_bytes(dbitem.cataloging_level, 'big'))  # serve per convertire un byte in int ('big' = big endian)
         item.publication_date = datetime.combine(dbitem.publication_date, datetime.min.time())
         item.publication_state = int.from_bytes(dbitem.publication_state, 'big')
         item.rack = dbitem.rack
         item.shelf = dbitem.shelf
         item.position = dbitem.position
-        item.opac_visibility =  int.from_bytes(dbitem.opac_visibility, 'big')
+        item.opac_visibility = int.from_bytes(dbitem.opac_visibility, 'big')
         item.price = dbitem.price
 
         if dbitem.quarantine_start_date is not None:
@@ -200,5 +198,4 @@ class ItemManager:
         Print item label
         :param item: item to print
         '''
-
         pass

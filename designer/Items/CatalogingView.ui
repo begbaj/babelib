@@ -248,6 +248,30 @@ background-color:none;</string>
        <height>20</height>
       </rect>
      </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777214</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::WheelFocus</enum>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
      <property name="styleSheet">
       <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
@@ -256,6 +280,12 @@ border-style: solid;
 border:none;
 text-align: center;
 </string>
+     </property>
+     <property name="isUpper" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QLineEdit" name="author">
@@ -275,6 +305,12 @@ border-style: solid;
 border:none;
 text-align: center;</string>
      </property>
+     <property name="isUpper" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QComboBox" name="material">
      <property name="geometry">
@@ -292,6 +328,9 @@ border-radius: 20px;
 border-style: solid;
 border:none;
 text-align: center;</string>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QComboBox" name="type">
@@ -311,6 +350,9 @@ border-style: solid;
 border:none;
 text-align: center;</string>
      </property>
+     <property name="isMandatory" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QDateEdit" name="publication_date">
      <property name="geometry">
@@ -329,6 +371,9 @@ border-style: solid;
 border:none;
 text-align: center;</string>
      </property>
+     <property name="isMandatory" stdset="0">
+      <bool>false</bool>
+     </property>
     </widget>
     <widget class="QLineEdit" name="isbn">
      <property name="geometry">
@@ -346,6 +391,12 @@ border-radius: 20px;
 border-style: solid;
 border:none;
 text-align: center;</string>
+     </property>
+     <property name="isUpper" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>false</bool>
      </property>
     </widget>
     <widget class="QLineEdit" name="id">
@@ -367,6 +418,12 @@ border-radius: 20px;
 border-style: solid;
 border:none;
 text-align: center;</string>
+     </property>
+     <property name="isUpper" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>false</bool>
      </property>
     </widget>
     <widget class="QLabel" name="material_label">
@@ -512,6 +569,12 @@ border-style: solid;
 border:none;
 text-align: center;</string>
      </property>
+     <property name="isUpper" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>false</bool>
+     </property>
     </widget>
     <widget class="QLabel" name="price_label">
      <property name="geometry">
@@ -547,6 +610,12 @@ border-radius: 20px;
 border-style: solid;
 border:none;
 text-align: center;</string>
+     </property>
+     <property name="isUpper" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>false</bool>
      </property>
     </widget>
     <widget class="QLabel" name="lang_label">
@@ -584,6 +653,9 @@ border-style: solid;
 border:none;
 text-align: center;</string>
      </property>
+     <property name="isMandatory" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QLabel" name="nature_label">
      <property name="geometry">
@@ -619,6 +691,9 @@ border-radius: 20px;
 border-style: solid;
 border:none;
 text-align: center;</string>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -721,6 +796,12 @@ border-style: solid;
 border:none;
 text-align: center;</string>
      </property>
+     <property name="isUpper" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>false</bool>
+     </property>
     </widget>
     <widget class="QLineEdit" name="rack">
      <property name="geometry">
@@ -739,6 +820,12 @@ border-style: solid;
 border:none;
 text-align: center;</string>
      </property>
+     <property name="isUpper" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>false</bool>
+     </property>
     </widget>
     <widget class="QLineEdit" name="position">
      <property name="geometry">
@@ -756,6 +843,12 @@ border-radius: 20px;
 border-style: solid;
 border:none;
 text-align: center;</string>
+     </property>
+     <property name="isUpper" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>false</bool>
      </property>
     </widget>
    </widget>
@@ -859,6 +952,9 @@ border-style: solid;
 border:none;
 text-align: center;</string>
      </property>
+     <property name="isMandatory" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QLabel" name="cataloging_level_label">
      <property name="geometry">
@@ -912,6 +1008,9 @@ border-radius: 20px;
 border-style: solid;
 border:none;
 text-align: center;</string>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QLabel" name="publication_state_label">
@@ -967,6 +1066,9 @@ border-style: solid;
 border:none;
 text-align: center;</string>
      </property>
+     <property name="isMandatory" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QComboBox" name="opac_visibility">
      <property name="geometry">
@@ -984,6 +1086,9 @@ border-radius: 20px;
 border-style: solid;
 border:none;
 text-align: center;</string>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>false</bool>
      </property>
     </widget>
    </widget>
@@ -1100,6 +1205,12 @@ border-style: solid;
 border:none;
 text-align: center;</string>
      </property>
+     <property name="isUpper" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>false</bool>
+     </property>
     </widget>
     <widget class="QLabel" name="quarantine_end_date_label">
      <property name="geometry">
@@ -1154,6 +1265,12 @@ border-style: solid;
 border:none;
 text-align: center;</string>
      </property>
+     <property name="isUpper" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>false</bool>
+     </property>
     </widget>
    </widget>
    <widget class="QFrame" name="notes_frame">
@@ -1199,7 +1316,14 @@ color:rgb(255, 255, 255);
 border-radius: 20px;
 border-style: solid;
 border:none;
+padding: 10px;
 text-align: center;</string>
+     </property>
+     <property name="placeholderText">
+      <string>Scrivi qui una nota sul documento</string>
+     </property>
+     <property name="isMandatory" stdset="0">
+      <bool>false</bool>
      </property>
     </widget>
     <widget class="QLabel" name="note_label">
