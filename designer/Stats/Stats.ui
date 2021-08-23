@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CatalogingView</class>
+ <widget class="QMainWindow" name="CatalogingView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1040</width>
+    <height>410</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1040</width>
+    <height>410</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1040</width>
+    <height>410</height>
+   </size>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>1200</width>
+    <height>735</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Babelib</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QFrame" name="menu_frame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>171</width>
+      <height>591</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;
+background-color:rgb(26, 25, 39);
+</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="logo_icon">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>171</width>
+       <height>121</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::RichText</enum>
+     </property>
+     <property name="pixmap">
+      <pixmap>../img/Babelib-removebg-preview.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="go_back_button">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>300</y>
+       <width>171</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/go back.png</normaloff>../img/go back.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="user_stats">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>151</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(28, 181, 209, 255), stop:0.454545 rgba(21, 143, 166, 255), stop:0.619318 rgba(15, 103, 120, 255), stop:1 rgba(11, 79, 93, 255));
+color:rgb(255, 255, 255);
+font: 10pt;
+border-radius:15px;
+border: none
+</string>
+     </property>
+     <property name="text">
+      <string>Statiche Utenti</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/registration-form.png</normaloff>../img/registration-form.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="loan_stats">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>200</y>
+       <width>151</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(28, 181, 209, 255), stop:0.454545 rgba(21, 143, 166, 255), stop:0.619318 rgba(15, 103, 120, 255), stop:1 rgba(11, 79, 93, 255));
+color:rgb(255, 255, 255);
+font: 10pt;
+border-radius:15px;
+border: none
+</string>
+     </property>
+     <property name="text">
+      <string>Statistiche Prestiti</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/Icona Prestito.png</normaloff>../img/Icona Prestito.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="cataloging_frame">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>40</y>
+      <width>391</width>
+      <height>331</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>1</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 20px;
+border-style: outset;
+border-width: 2px;
+border-color:rgb(27,25,39);
+background-color:rgba(0, 192, 225, 200)</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="title_label">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Numero Utenti</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="author_label">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Maschi</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="material_label">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>110</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Femmine</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="material_label_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>190</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>0-17</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="material_label_6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>220</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>18-25</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="material_label_7">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>250</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>26-50</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="material_label_8">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>280</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>51+</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="n_users">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>30</y>
+       <width>231</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="foneplus">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>280</y>
+       <width>231</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="zero_seventeen">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>190</y>
+       <width>231</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="male">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>70</y>
+       <width>231</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="tsixfifty">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>250</y>
+       <width>231</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="eighteentfive">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>220</y>
+       <width>231</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="female">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>110</y>
+       <width>231</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="cataloging_frame_2">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>40</y>
+      <width>451</width>
+      <height>331</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>1</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 20px;
+border-style: outset;
+border-width: 2px;
+border-color:rgb(27,25,39);
+background-color:rgba(0, 192, 225, 200)</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="author_label_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>180</y>
+       <width>151</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Generi più richiesti</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="title_label_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Libri più prestati</string>
+     </property>
+    </widget>
+    <widget class="QListView" name="listView">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>30</y>
+       <width>256</width>
+       <height>111</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QListView" name="listView_2">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>180</y>
+       <width>256</width>
+       <height>111</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>-200</y>
+      <width>1321</width>
+      <height>1001</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="pixmap">
+     <pixmap>../img/background_blur.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <zorder>label_6</zorder>
+   <zorder>menu_frame</zorder>
+   <zorder>cataloging_frame</zorder>
+   <zorder>cataloging_frame_2</zorder>
+  </widget>
+  <action name="actionModifica">
+   <property name="text">
+    <string>Modifica</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
