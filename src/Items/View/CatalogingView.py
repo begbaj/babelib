@@ -8,11 +8,11 @@ from PyQt5.QtGui import QIntValidator, QDoubleValidator, QRegExpValidator
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
 
-import src.Utils.UI
+# import src.Utils.UI
 from src.Database.DatabaseManager import DatabaseManager
 from src.Items.Controllers.ItemManager import ItemManager
 from src.Items.Models.ItemEnumerators import *
-from src.Utils.UI import CheckableComboBox
+# from src.Utils.UI import CheckableComboBox
 
 
 class CatalogingView(QMainWindow):
@@ -38,9 +38,9 @@ class CatalogingView(QMainWindow):
         self.__qsd = None  # data inizio quarantena
         self.__qed = None  # data fine quarantena
 
-        self.inner_state = CheckableComboBox(self.admin_frame)  # make ComboBox a CheckableComboBox
-        self.external_state = CheckableComboBox(self.admin_frame)
-        self.genre = CheckableComboBox(self.cataloging_frame)
+        # self.inner_state = CheckableComboBox(self.admin_frame)  # make ComboBox a CheckableComboBox
+        # self.external_state = CheckableComboBox(self.admin_frame)
+        #self.genre = CheckableComboBox(self.cataloging_frame)
 
         self.inner_state.setGeometry(QRect(220, 30, 121, 21))  # position of the combobox
         self.external_state.setGeometry(QRect(220, 60, 121, 21))

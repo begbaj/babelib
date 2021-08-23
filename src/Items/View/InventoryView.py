@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QTableWidgetItem, QTableView
+from PyQt5.QtWidgets import QTableWidgetItem, QTableView, QMainWindow
 from PyQt5.uic import loadUi
 
 from src.Items.Controllers.ItemManager import ItemManager
