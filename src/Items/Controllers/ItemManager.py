@@ -61,6 +61,11 @@ class ItemManager:
             return new_states
 
     def get_external_states(self, states_id: [int]):
+        """
+
+        :param states_id:
+        :return:
+        """
         new_states = []
         states = self.dbms.get_external_states(states_id)
         if states is not None:
@@ -69,6 +74,16 @@ class ItemManager:
         return new_states
 
     def get_items(self, search_field: str, search_mode: int, quarantined=False, discarded=-1) -> [Item]:
+        """
+        Get a list of items that matches the search query.
+        This method will also check for quarantined items if the quarantine has expired, in which case it will turn
+        the item to available.
+        :param search_field: string corresponding to the search query
+        :param search_mode: 0: all the fields; 1: title; 2: author; 3: ISBN; 4: BID; 5: id/inventory; 6: note
+        :param show_quarantined: True: search also for quarantined items
+        :param show_discarded: True: search only discarded items
+        :return: [Item]
+        """
         fitems = []
         for dbitem in self.dbms.get_items(search_field, search_mode, quarantined, discarded):
             item = self.__convert_dbitem(dbitem)
@@ -84,6 +99,13 @@ class ItemManager:
             item.external_state = []
             for external_state in self.dbms.get_item_external_states(item.id):
                 item.external_state.append(ItemEnumerators.ExternalStateEnum(external_state.id))
+
+            if item.availability.value == AvailabilityEnum.in_quarantena.value:
+                if item.quarantine_end_date is None or item.quarantine_end_date < datetime.today().date():
+                    item.quarantine_start_date = None
+                    item.quarantine_end_date = None
+                    item.availability = AvailabilityEnum.disponibile
+                    self.edit_item(item)
 
             fitems.append(item)
         return fitems
