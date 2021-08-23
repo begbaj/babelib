@@ -7,6 +7,9 @@ from src.Users.models.User import User
 from src.Services.controllers.ServiceReservationManager import ServiceReservationManager
 from src.Services.models.SignedServiceReservation import SignedServiceReservation
 from src.Services.models.UnsignedServiceReservation import UnsignedServiceReservation
+from PyQt5.QtCore import QDate, QDateTime
+
+from datetime import date
 
 
 class NewReservationView(QMainWindow):
@@ -17,11 +20,10 @@ class NewReservationView(QMainWindow):
     __users = []
 
     def __init__(self, widget):
-        '''
-        CatalogingView script, handles CatalogingView behaviour which adds/edits an item
-        :param widget: QWidget
-        :param item: Item to edit
-        '''
+        """
+        init method
+        :param widget: widget to open view
+        """
         super(NewReservationView, self).__init__()
         loadUi("../designer/Reservation/AddReservationView.ui", self)
         self.widget = widget
@@ -35,11 +37,14 @@ class NewReservationView(QMainWindow):
         self.clear_field.clicked.connect(lambda: self.clear_fields())
         self.save_button.clicked.connect(lambda: self.set_fields())
         self.telephone.setValidator(QIntValidator())
+        self.name.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z]*$')))
+        self.surname.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z]*$')))
+
 
     def load_table(self, users):
         """
-        Questo metodo permette di rimpire la QTableWidget presente nella view con una lista di utenti
-        :param users:
+        this method allows to fill the user table
+        :param users: list of reservations
         :return: None
         """
         row = 0
@@ -53,6 +58,10 @@ class NewReservationView(QMainWindow):
             self.__users.append(user)
 
     def load_data(self):
+        """
+        this method fill the user table with the data from the user list
+        :return: None
+        """
         self.users = self.userM.list()
         self.load_table(self.users)
 
@@ -60,8 +69,8 @@ class NewReservationView(QMainWindow):
 
     def search(self):
         """
-        Questo metodo consente la ricerca degli utenti all'interno del sistema
-        :return:
+        This method allows to search for users
+        :return: None
         """
         # Reload all the Users
         if (self.nameField.text() == '') and (self.surnameField.text() == ''):
@@ -80,8 +89,8 @@ class NewReservationView(QMainWindow):
 
     def load_data_research(self, users):
         """
-        Questo metodo riempe la tabella con quegli utenti che sono il risultato della ricerca
-        :param users:
+        This method fills the userTable with the searched users
+        :param users: list of users
         :return: None
         """
         self.users = users
@@ -89,7 +98,7 @@ class NewReservationView(QMainWindow):
 
     def delete_user(self):
         """
-        Questo metodo permette di rimuovere l'utente selezionato dal sistema
+        This method allows to remove the user selected by the program
         :return: None
         """
         row = self.userTable.currentRow()
@@ -98,6 +107,10 @@ class NewReservationView(QMainWindow):
         self.userTable.removeRow(row)
 
     def get_fields(self):
+        """
+        this method sets the name, the surname and the telephone from the selected user in the user list
+        :return: None
+        """
         if self.__get_selected_user() is not None:
             self.name.setText(self.__get_selected_user().name)
             self.surname.setText(self.__get_selected_user().surname)
@@ -105,10 +118,17 @@ class NewReservationView(QMainWindow):
             self.name.setReadOnly(True)
             self.surname.setReadOnly(True)
             self.telephone.setReadOnly(True)
+        else:
+            self.pop = Popup()
+            self.pop.label.setText("Selezionare un utente.")
+            self.pop.show()
 
-        # else popup
 
     def clear_fields(self):
+        '''
+        this method allows to clear the name,surname and telephone fields
+        :return: None
+        '''
         self.name.setReadOnly(False)
         self.surname.setReadOnly(False)
         self.telephone.setReadOnly(False)
@@ -117,12 +137,20 @@ class NewReservationView(QMainWindow):
         self.telephone.setText('')
 
     def __get_selected_user(self):
+        """
+        This method allows to get a user from __users list
+        :return: None if there is no user selected, a user if a row in the user table is selected
+        """
         if self.userTable.currentRow() != -1:
             return self.__users[self.userTable.currentRow()]
         else:
             return None
 
     def set_fields(self):
+        """
+        this method gets the name, surname, telephone, date and time of the reservation and makes a query to add the fields to database
+        :return: None
+        """
         if self.__get_selected_user() is not None:
             self.serviceM.add_signed_reservation(self.__get_selected_user().id,
                                                  self.dateEdit.dateTime().toString("yyyy-MM-dd") + ' ' +
@@ -135,6 +163,10 @@ class NewReservationView(QMainWindow):
                 self.pop = Popup()
                 self.pop.label.setText("Inserire tutti i campi obbligatori.")
                 self.pop.show()
+            # elif self.dateEdit.currentDate().toPyDate() < date.today():
+            #     self.pop = Popup()
+            #     self.pop.label.setText("Data non valida.")
+            #     self.pop.show()
             else:
                 self.serviceM.add_unsigned_reservation(self.dateEdit.dateTime().toString("yyyy-MM-dd") + ' ' +
                                                        self.timeEdit.dateTime().toString("hh:mm:ss"),

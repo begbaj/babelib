@@ -77,9 +77,12 @@ class CatalogingView(QMainWindow):
         self.set_validators()
         self.check_validators()
 
-    # TODO: add inventory_num, go back button, asterischi, controllo campi vuoti
     def load_item(self, item) -> None:
-
+        """
+        this method loads item
+        :param item:
+        :return:
+        """
         self.bid.setText(str(item.bid))
         self.isbn.setText(str(item.isbn))
         self.title.setText(item.title)

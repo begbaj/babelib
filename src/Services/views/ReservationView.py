@@ -20,11 +20,10 @@ class ReservationView(QMainWindow):
     userM = UserManager()
 
     def __init__(self, widget):
-        '''
-        CatalogingView script, handles CatalogingView behaviour which adds/edits an item
-        :param widget: QWidget
-        :param item: Item to edit
-        '''
+        """
+        init method
+        :param widget: widget to open view
+        """
         self.widget = widget
         super(ReservationView, self).__init__()
         loadUi("../designer/Reservation/ReservationView.ui", self)
@@ -35,10 +34,18 @@ class ReservationView(QMainWindow):
         self.search()
 
     def go_new_reservation(self):
+        """
+        this method allows to go to reservation view
+        :return:
+        """
         self.new_res = NewReservationView(self.widget)
         self.new_res.show()
 
     def __update_table(self):
+        """
+        this method allows to update the table with all the reservations
+        :return: returns a list with the signed and unsigned reservations
+        """
         self.reservationTable.clearSelection()
         self.__remove_rows()
         self.__unsigned = self.resM.get_unsigned_(self.searchField.text())
@@ -64,28 +71,18 @@ class ReservationView(QMainWindow):
         if self.__unsigned is not None and self.__signed is not None:
             self.__reservations = self.__signed + self.__unsigned
 
-    # def __get_u_s(self):
-    #     self.__unsigned_reservations =
-
-
-    def fill_list(self):
-        pass
-        # for i in self.resM.get_all_signed():
-        #     self.new_signed.reservation_id = i.id
-        #     self.new_signed.date_from = i.date_from.strftime("%m/%d/%Y" "%H:%M:%S")
-        #     self.new_signed.date_to = i.date_to.strftime("%H:%M:%S")
-        #     self.new_signed.name = self.userM.get_user_name(i.user_id)[0].name
-        #     self.new_signed.surname = self.userM.get_user_surname(i.user_id)[0].surname
-        #     self.new_signed.cellphone = self.userM.find(i.user_id).first_cellphone
-        #     self.__signed.append(self.new_signed)
-        # if self.resM.get_unsigned_(self.searchField.text()) is not None and self.resM.get_all_signed(self.searchField.text()) is not None:
-
-        #self.__reservations = self.__unsigned + self.__signed
-
     def search(self):
+        """
+        this method refreshed the table
+        :return: the table with the refreshed rows
+        """
         self.__update_table()
 
     def discard_res(self):
+        """
+        this method allows to discard am unsigned or signed reservation
+        :return: None
+        """
         res = self.__get_selected_res()
         if res is None:
             ErrorMessage("Selezionare un elemento da scartare!").exec_()
@@ -101,10 +98,18 @@ class ReservationView(QMainWindow):
         self.search()
 
     def __remove_rows(self):
+        """
+        this method allows to remove rows from the reservations table
+        :return: None
+        """
         for i in reversed(range(0, self.reservationTable.rowCount())):
             self.reservationTable.removeRow(i)
 
     def __get_selected_res(self):
+        """
+        this method allows to get the selected signed or unsigned reservation
+        :return: None if no line is selected, the reservation corresponding to the index if some row is selected
+        """
         if self.reservationTable.currentRow() != -1:
             for res in self.__reservations:
                 if res.n_fields == 5:
@@ -117,6 +122,10 @@ class ReservationView(QMainWindow):
 
 class Dialog(QDialog):
     def __init__(self, text):
+        """
+        init method of class Dialog
+        :param text: text to set in the Dialog panel
+        """
         super(Dialog, self).__init__()
         loadUi("../designer/Pop-Up/Dialog.ui", self)
         self.setWindowTitle('Attenzione')
@@ -125,6 +134,9 @@ class Dialog(QDialog):
 
 
 class ErrorMessage(QDialog):
+    """
+    init method of the class ErrorMessage
+    """
     def __init__(self, text, buttons=QDialogButtonBox.Ok):
         super(ErrorMessage, self).__init__()
         loadUi("../designer/Pop-up/ErrorMessage.ui", self)
