@@ -1,6 +1,6 @@
 from src.Database.DatabaseManager import DatabaseManager
 
-class UserManager:
+class MovementManager:
 
     db = DatabaseManager()
 

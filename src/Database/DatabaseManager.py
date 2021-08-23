@@ -1,4 +1,5 @@
 import src
+from src.Items.Models.Item import Item
 from src.Items.Models.ItemEnumerators import CatalogingLevel
 from src.Movements.Models.Movement import Movement
 from src.Users.models.Nationality import Nationality
@@ -557,17 +558,16 @@ class DatabaseManager:
 
         # List movements
         try:
-            self.cur.execute(f"Select * from movements m ")
+            self.cur.execute(f"Select * from movements m "
+                             f"left join users u on u.id = m.user_id "
+                             f"left join items i on i.id = m.item_id "
+                             f"")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
 
         for row in self.cur.fetchall():
-            movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
-            movement.id = row.Id
-            # movement.item = itemM.get_item(row.item)
-            movement.user = self.find_user_by_id(row.user_id)
-            movements.append(movement)
+            movements.append(self.set_movement_to_model(row))
 
         return movements
 
@@ -621,11 +621,13 @@ class DatabaseManager:
         # itemM = ItemManager()
 
         # List movements
+        movements = []
+
         try:
             if search_mode == 0:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
-                                 f"left join itmes i on i.id = m.item_id "
+                                 f"left join items i on i.id = m.item_id "
                                  f"where u.name like '%{search_field}%' "
                                  f"or u.surname like '%{search_field}%' "
                                  f"or i.title like '%{search_field}%' "
@@ -634,34 +636,32 @@ class DatabaseManager:
             elif search_mode == 1:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
-                                 f"left join itmes i on i.id = m.item_id "
+                                 f"left join items i on i.id = m.item_id "
                                  f"where u.name like '%{search_field}%' "
                                  f"or u.surname like '%{search_field}%' ")
             elif search_mode == 2:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
-                                 f"left join itmes i on i.id = m.item_id "
+                                 f"left join items i on i.id = m.item_id "
                                  f"where i.title like '%{search_field}%' ")
             elif search_mode == 3:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
-                                 f"left join itmes i on i.id = m.item_id "
+                                 f"left join items i on i.id = m.item_id "
                                  f"where i.isbn like '%{search_field}%' ")
             elif search_mode == 4:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
-                                 f"left join itmes i on i.id = m.item_id "
+                                 f"left join items i on i.id = m.item_id "
                                  f"where m.timestamp like '%{search_field}%' ")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
 
         for row in self.cur.fetchall():
-            movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
-            movement.id = row.Id
-            # movement.item = itemM.get_item(row.item)
-            movement.user = self.find_user_by_id(row.user_id)
-        return movement
+            movements.append(self.set_movement_to_model(row))
+
+        return movements
 
     def find_movement_by_id(self, id):
 
@@ -669,17 +669,62 @@ class DatabaseManager:
 
         # List movements
         try:
-            self.cur.execute(f"Select * from movements m where id = {id}")
+            self.cur.execute(f"Select * from movements m "
+                             f"left join users u on u.id = m.user_id "
+                             f"left join items i on i.id = m.item_id "
+                             f" where id = {id}"                             
+                             f"")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
 
-        for row in self.cur.fetchall():
-            movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
-            movement.id = row.Id
-            # movement.item = itemM.get_item(row.item)
-            movement.user = self.find_user_by_id(row.user_id)
+        return self.set_movement_to_model(self.cur.fetchone())
+
+    def set_movement_to_model(self, row):
+
+        movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
+        movement.id = row.Id
+
+        movement.user = User(row.nationality, row.user_type
+                             , row.registration_date, row.name, row.surname, row.gender, row.birthplace
+                             , row.birthdate, row.city, row.address, row.postal_code, row.district
+                             , row.first_cellphone, row.telephone, row.email, row.fiscal_code
+                             , row.contect_mode, row.privacy_agreement)
+
+        movement.user.id = row.user_id
+
+        movement.item = Item()
+        movement.item.id = row.item_id
+
+        movement.item.isbn = row.isbn
+        movement.item.title = row.title
+        movement.item.note = row.note
+        movement.item.rack = row.rack
+        movement.item.author = row.author
+        movement.item.availability = row.availability
+        movement.item.bid = row.bid
+        movement.item.cataloging_level = row.cataloging_level
+        movement.item.discarded_date = row.discarded_date
+        # movement.item.external_state = row.external_state
+        # movement.item.genre = row.genre
+        # movement.item.inner_state = row.inner_state
+        # movement.item.lang = row.lang
+        # movement.item.material = row.material
+        # movement.item.nature = row.nature
+        movement.item.opac_visibility = row.opac_visibility
+        movement.item.position = row.position
+        movement.item.price = row.price
+        movement.item.publication_date = row.publication_date
+        movement.item.publication_state = row.publication_state
+        movement.item.quarantine_end_date = row.quarantine_end_date
+        movement.item.quarantine_start_date = row.quarantine_start_date
+        movement.item.shelf = row.shelf
+        # movement.item.type = row.type
+
+
         return movement
+
+    #endregion
 
     def add_signed_reservation(self, user_id, date_from, date_to):
         try:

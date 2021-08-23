@@ -2,6 +2,8 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
 from src.Items.Controllers.ItemManager import ItemManager
+from src.Movements.Controllers.MovementManager import MovementManager
+from src.Movements.Models.Movement import Movement
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
 from src.Utils.UI import Popup
@@ -11,6 +13,7 @@ class LoanView(QDialog):
 
     userM = UserManager()
     itemM = ItemManager()
+
 
     def __init__(self, widget):
         super(LoanView, self).__init__()
@@ -24,6 +27,9 @@ class LoanView(QDialog):
         # self.widget.addWidget(self)
         # self.widget.show()
         self.setup()
+        self.movementM = MovementManager()
+        self.movementM.findAll("tu", 1)
+
 
     def setup(self):
         self.selectuserButton.clicked.connect(lambda: self.select_user())
