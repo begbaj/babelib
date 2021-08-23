@@ -76,6 +76,11 @@ class DatabaseManager:
             print(f"Error: {e}")
 
     def login(self, username):
+        """
+        Returns the password of the selected user (this is to AVOID for security reasons)
+        :param username: username od the administrator
+        :return: passowrd
+        """
         self.cur.execute(f"SELECT password FROM administrator WHERE username = '{username}'")
         # codice insicuro, ritorna la password in chiaro.
         return self.cur.fetchone()
@@ -281,6 +286,12 @@ class DatabaseManager:
     # region Items
 
     def insert_item(self, item):
+        """
+        Insert a new item to the database. No id is required since the database is set in AUTO_INCREMENT for that.
+        This method will return the id associated to the item.
+        :param item: new item
+        :return: new item id
+        """
         query = f"INSERT INTO items" \
                 f" (material_id, nature_id, type_id, lang_id, availability, bid, isbn," \
                 f" title, author, cataloging_level, publication_state, rack, shelf, position," \
@@ -331,10 +342,23 @@ class DatabaseManager:
         return nid
 
     def get_genre_value(self, genre_id):
+        """
+        Returns the genre description.
+        :param genre_id: Genre id
+        :return: id and description
+        """
         query = f"SELECT * FROM genres WHERE id={genre_id}"
         return self.query(query, returns=True)
 
     def get_items(self, search_field, search_mode, show_quarantined=False, show_discarded=False) -> [tuple]:
+        """
+        Get a list of items that matches the search query
+        :param search_field: string corresponding to the search query
+        :param search_mode: 0: all the fields; 1: title; 2: author; 3: ISBN; 4: BID; 5: id/inventory; 6: note
+        :param show_quarantined: True: search also for quarantined items
+        :param show_discarded: True: search only discarded items
+        :return:
+        """
         query = ""
 
         if search_mode == 0:  # eccetto numero di inventario
@@ -358,11 +382,12 @@ class DatabaseManager:
         else:
             raise Exception("invalid search_mode")
 
-        if not show_quarantined:
-            query += " AND (availability <> 3)"
-
-        if not show_discarded:
-            query += " AND availability <> 4"
+        if show_discarded:
+            query += " AND availability = 4"
+        else:
+            if not show_quarantined:
+                query += " AND (availability <> 3)"
+            query += " AND availability <> 4 "
 
         return self.query(query, returns=True)
 
