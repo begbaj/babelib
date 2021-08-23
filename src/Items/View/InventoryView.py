@@ -18,26 +18,26 @@ class InventoryView(QMainWindow):
         loadUi("../designer/Items/InventoryViewNew.ui", self)
         self.widget = widget
         self.show_item_view = ShowItemView(self.widget, Item())
-        self.cataloging_view = CatalogingView(self.widget, Item())
+        self.cataloging_view = CatalogingView(self.widget, Item(), self.search)
 
         try:
             self.itemTable.setSelectionBehavior(QTableView.SelectRows)
 
-            self.searchField.textChanged.connect(lambda: self.search())
-            self.quarantineCheckBox.stateChanged.connect(lambda: self.search())
-            self.discardedCheckBox.stateChanged.connect(lambda: self.search())
+            self.searchField.textChanged.connect(self.search)
+            self.quarantineCheckBox.stateChanged.connect(self.search)
+            self.discardedCheckBox.stateChanged.connect(self.search)
 
-            self.addButton.clicked.connect(lambda: self.add_item())
-            self.modifyButton.clicked.connect(lambda: self.edit_item())
-            self.discardButton.clicked.connect(lambda: self.discard_item())
-            self.returnButton.clicked.connect(lambda: self.__go_back())
-            self.showItemButton.clicked.connect(lambda: self.show_item())
+            self.addButton.clicked.connect(self.add_item)
+            self.modifyButton.clicked.connect(self.edit_item)
+            self.discardButton.clicked.connect(self.discard_item)
+            self.returnButton.clicked.connect(self.__go_back)
+            self.showItemButton.clicked.connect(self.show_item)
 
-            self.searchMode.currentIndexChanged.connect(lambda: self.search())
+            self.searchMode.currentIndexChanged.connect(self.search)
 
-            self.cataloging_view.go_back_button.connect(lambda: self.search())
-            self.cataloging_view.save_button.connect(lambda: self.search())
-            self.show_item_view.go_back_button.connect(lambda: self.search())
+            self.cataloging_view.go_back_button.connect(self.search)
+            self.cataloging_view.save_button.connect(self.search)
+            self.show_item_view.go_back_button.connect(self.search)
         except Exception as err:
             print(err)
 
@@ -70,6 +70,7 @@ class InventoryView(QMainWindow):
             self.__go_to_show_item_view()
 
     def edit_item(self):
+        print(self.__get_selected_item())
         if self.__get_selected_item() is None:
             ErrorMessage("Selezionare un elemento da modificare!").exec_()
             return

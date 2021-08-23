@@ -13,6 +13,7 @@ from src.Database.DatabaseManager import DatabaseManager
 from src.Items.Controllers.ItemManager import ItemManager
 from src.Items.Models.ItemEnumerators import *
 from src.Utils.UI import CheckableComboBox
+from src.Utils.UI import ErrorMessage
 
 
 class CatalogingView(QMainWindow):
@@ -20,16 +21,19 @@ class CatalogingView(QMainWindow):
     CatalogingView script
     '''
 
-    def __init__(self, widget, item):
+    def __init__(self, widget, item, update_func):
         '''
         CatalogingView script, handles CatalogingView behaviour which adds/edits an item
         :param widget: QWidget
         :param item: Item to edit
         '''
-        super(CatalogingView, self).__init__(widget)
+        super(CatalogingView, self).__init__()
         loadUi("../designer/Items/CatalogingView.ui", self)
 
+        self.update = update_func
+        self.something_changed = False
         self.validators_status = False
+        self.__field_with_validator = []
         self.__dbms = DatabaseManager()
         self.__im = ItemManager()
 
@@ -51,6 +55,7 @@ class CatalogingView(QMainWindow):
         self.quarantine_start_button.clicked.connect(self.__start_quarantine)
         self.save_button.clicked.connect(self.__save_button)
         self.go_back_button.clicked.connect(self.close)
+
         self.title.textChanged.connect(self.check_qline_state)
         self.author.textChanged.connect(self.check_qline_state)
         self.bid.textChanged.connect(self.check_qline_state)
@@ -60,7 +65,17 @@ class CatalogingView(QMainWindow):
         self.position.textChanged.connect(self.check_qline_state)
         self.price.textChanged.connect(self.check_qline_state)
 
+        self.title.textChanged.connect(self.something_changed_set)
+        self.author.textChanged.connect(self.something_changed_set)
+        self.bid.textChanged.connect(self.something_changed_set)
+        self.isbn.textChanged.connect(self.something_changed_set)
+        self.rack.textChanged.connect(self.something_changed_set)
+        self.shelf.textChanged.connect(self.something_changed_set)
+        self.position.textChanged.connect(self.something_changed_set)
+        self.price.textChanged.connect(self.something_changed_set)
+
         self.set_validators()
+        self.check_validators()
 
     # TODO: add inventory_num, go back button, asterischi, controllo campi vuoti
     def load_item(self, item) -> None:
@@ -100,6 +115,7 @@ class CatalogingView(QMainWindow):
                 self.quarantine_end_date.setText(str(item.quarantine_end_date))
 
         genre_list = []
+        self.genre.clear()
         for i in self.__dbms.get_genres():
             genre_list.append(i.description)
         for index, element in enumerate(genre_list):
@@ -137,11 +153,15 @@ class CatalogingView(QMainWindow):
         if len(item.external_state) > 0:
             self.external_state.setCurrentIndex(item.external_state[0].value - 1)
 
+        self.opac_visibility.clear()
         self.opac_visibility.addItem("Non Visibile")
         self.opac_visibility.addItem("Visibile")
 
+        self.publication_state.clear()
         self.publication_state.addItem("Non Pubblicato")
         self.publication_state.addItem("Pubblicato")
+
+        self.something_changed = False
 
     def check_qline_state(self, *args, **kwargs):
         sender = self.sender()
@@ -168,24 +188,35 @@ class CatalogingView(QMainWindow):
         sender.setStyleSheet('QLineEdit { %s }' % color)
 
     def set_validators(self):
-        self.title.setValidator(QRegExpValidator(QRegExp('^[\\w\\s\'\*\.\-,!`?@"\[\]{}=_+()]{1,150}$')))
-        self.author.setValidator(QRegExpValidator(QRegExp('^[\\w\\s\'\*\.\-,!`?@"\[\]{}=_+()]{1,150}$')))
+        self.__field_with_validator = []
+        self.title.setValidator(QRegExpValidator(QRegExp('^[\\w\\s\'\*\.\-,!`?@"\[\]{}=_+():]{1,150}$')))
+        self.author.setValidator(QRegExpValidator(QRegExp('^[\\w\\s\'\*\.\-,!`?@"\[\]{}=_+():]{1,150}$')))
         self.bid.setValidator(QRegExpValidator(QRegExp('^\\w{10}$')))
         self.isbn.setValidator(QRegExpValidator(QRegExp('^\\w{13}$')))
 
         self.rack.setValidator(QRegExpValidator(QRegExp('^\\d{1,4}$')))
         self.shelf.setValidator(QRegExpValidator(QRegExp('^\\w{1}$')))
-        self.position.setValidator(QRegExpValidator(QRegExp('^\\d{3}$')))
+        self.position.setValidator(QRegExpValidator(QRegExp('^\\d{1,3}$')))
 
-        self.price.setValidator(QDoubleValidator())
-        #
-        # self.quarantine_due_time.setText(str(item.quarantine_end_date-item.quarantine_start_date))
-        # self.quarantine_end_date.setText(str(item.quarantine_end_date))
+        self.price.setValidator(QRegExpValidator(QRegExp('^(\\d+)\.(\\d{0,2})$')))
+
+        self.__field_with_validator.append(self.title)
+        self.__field_with_validator.append(self.author)
+        self.__field_with_validator.append(self.bid)
+        self.__field_with_validator.append(self.isbn)
+        self.__field_with_validator.append(self.rack)
+        self.__field_with_validator.append(self.shelf)
+        self.__field_with_validator.append(self.position)
+        self.__field_with_validator.append(self.price)
+
+        # self.quarantine_due_time.setValidator(QRegExpValidator(QRegExp('^\\d{1,4}$')))
+        # self.quarantine_end_date.setValidator(QRegExpValidator(QRegExp('^\\d{1,4}$')))
 
         #QRegExpValidator(QRegExp('^[a-zA-Z]*$'))
 
     @staticmethod
     def __fill_with_enum(enum, obj, starts_at=1, selected_index=None) -> None:
+        obj.clear()
         en_list = []
         en_id = []
         for i in range(starts_at, len(enum) + starts_at):
@@ -196,6 +227,7 @@ class CatalogingView(QMainWindow):
 
     @staticmethod
     def __fill_checkable_with_enum(enum, obj, item_list, starts_at=1) -> None:
+        obj.clear()
         en_list = []
         en_id = []
         for i in range(starts_at, len(enum) + starts_at):
@@ -276,31 +308,25 @@ class CatalogingView(QMainWindow):
 
     def __save_button(self) -> None:
         if self.validators_status:
-            if self.item.id is None:
-                if self.__im.check_isbn(self.isbn.text()) or self.__im.check_bid(self.bid.text()):
-                    self.__im.add_item(self.__get_from_view())
-                    self.close()
-                else:
-                    if not self.__im.check_isbn(self.isbn.text()):
-                        self.isbn.setStyleSheet('border-color:rgb(255,0,0)')
-                    if not self.__im.check_bid(self.bid.text()):
-                        self.bid.setStyleSheet('border-color:rgb(255,0,0)')
+            if self.item.id is not None:
+                self.__im.edit_item(self.__get_from_view())
             else:
-                if self.__im.check_for_isbn(self.id.text(), self.isbn.text()) or self.__im.check_for_bid(self.id.text(),
-                                                                                                         self.bid.text()):
-                    self.__im.edit_item(self.__get_from_view())
-                    self.close()
-                else:
-                    if not self.__im.check_for_isbn(self.id.text(), self.isbn.text()):
-                        self.isbn.setStyleSheet('border-color:rgb(255,0,0)')
-                    if not self.__im.check_for_bid(self.id.text(), self.bid.text()):
-                        self.bid.setStyleSheet('border-color:rgb(255,0,0)')
+                self.__im.add_item(self.__get_from_view())
+            self.close()
         else:
             src.Utils.UI.ErrorMessage("Non sono stati riempiti tutti i campi obbligatori! Ricontrollare.").exec_()
 
+    def check_validators(self):
+        for validator in self.__field_with_validator:
+            validator.validator().validate(validator.text(), 0)
+
     def close(self) -> bool:
         self.item = None
+        self.update()
         return super(CatalogingView, self).close()
+
+    def something_changed_set(self):
+        self.something_changed = True
 
     def show(self):
         self.load_item(self.item)

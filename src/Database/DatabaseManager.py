@@ -301,7 +301,7 @@ class DatabaseManager:
                 f" '{self.__check_value(item.shelf, str)}'," \
                 f" {self.__check_value(item.position, int)}, " \
                 f" {self.__check_value(item.opac_visibility, int)}," \
-                f" {self.__check_value(str(item.price), decimal.Decimal)}," \
+                f" {round(self.__check_value(item.price, decimal.Decimal), 2)}," \
                 f" {self.__set_date_str(item.publication_date)}," \
                 f" {self.__set_date_str(item.quarantine_start_date)}," \
                 f" {self.__set_date_str(item.quarantine_end_date)}," \
@@ -312,17 +312,20 @@ class DatabaseManager:
         query = f"SELECT id FROM items ORDER BY id DESC LIMIT 1;"
         nid = self.query(query, returns=True)[0].id
 
-        for genre in item.genre:
-            query = f"INSERT INTO items_genres (item_id, genre_id) VALUES ({nid}, {genre['id']});"
-            self.query(query)
+        if item.genre is not None and len(item.genre) > 0:
+            for genre in item.genre:
+                query = f"INSERT INTO items_genres (item_id, genre_id) VALUES ({nid}, {genre['id']});"
+                self.query(query)
 
-        for state in item.inner_state:
-            query = f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({nid}, {state.value});"
-            self.query(query)
+        if item.inner_state is not None and len(item.inner_state) > 0:
+            for state in item.inner_state:
+                query = f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({nid}, {state.value});"
+                self.query(query)
 
-        for state in item.external_state:
-            query = f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({nid},{state.value});"
-            self.query(query)
+        if item.external_state is not None and len(item.external_state) > 0:
+            for state in item.external_state:
+                query = f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({nid},{state.value});"
+                self.query(query)
         self.query(query)
         return nid
 
@@ -399,13 +402,16 @@ class DatabaseManager:
         self.edit_inner_states(item)
 
     def edit_genre(self, item, return_query=False):
-        query = f"DELETE FROM items_genres WHERE item_id = {item.id};\n"
-        self.query(query)
-        for genre in item.genre:
-            query = f"INSERT INTO items_genres (item_id, genre_id) VALUES ({item.id}, {genre['id']});\n"
+        if item.genre is not None:
+            query = f"DELETE FROM items_genres WHERE item_id = {item.id};\n"
             self.query(query)
-        if return_query:
-            return query
+            for genre in item.genre:
+                query = f"INSERT INTO items_genres (item_id, genre_id) VALUES ({item.id}, {genre['id']});\n"
+                self.query(query)
+            if return_query:
+                return query
+        else:
+            return None
 
     def edit_inner_states(self, item, return_query=False):
         query = f"DELETE FROM items_inner_states WHERE item_id = {item.id};"
@@ -495,21 +501,21 @@ class DatabaseManager:
                 f"WHERE ig.item_id = {item_id};"
         return self.query(query, returns=True)
 
-    def check_bid(self, bid):
-        query = f"SELECT id FROM items WHERE bid = '{bid}' "
-        return self.query(query, returns=True)
-
-    def check_isbn(self, isbn):
-        query = f"SELECT id FROM items WHERE isbn = '{isbn}' "
-        return self.query(query, returns=True)
-
-    def check_for_isbn(self, id, isbn):
-        query = f"SELECT id FROM items WHERE id <> {id} and isbn = '{isbn}' "
-        return self.query(query, returns=True)
-
-    def check_for_bid(self, id, bid):
-        query = f"SELECT id FROM items WHERE id <> {id} and isbn = '{bid}' "
-        return self.query(query, returns=True)
+    # def check_bid(self, bid):
+    #     query = f"SELECT id FROM items WHERE bid = '{bid}' "
+    #     return self.query(query, returns=True)
+    #
+    # def check_isbn(self, isbn):
+    #     query = f"SELECT id FROM items WHERE isbn = '{isbn}' "
+    #     return self.query(query, returns=True)
+    #
+    # def check_for_isbn(self, id, isbn):
+    #     query = f"SELECT id FROM items WHERE id <> {id} and isbn = '{isbn}' "
+    #     return self.query(query, returns=True)
+    #
+    # def check_for_bid(self, id, bid):
+    #     query = f"SELECT id FROM items WHERE id <> {id} and isbn = '{bid}' "
+    #     return self.query(query, returns=True)
 
     # endregion
 
