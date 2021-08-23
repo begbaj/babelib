@@ -1,4 +1,6 @@
-from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem
+from PyQt5.QtCore import QRegExp
+from PyQt5.QtGui import QIntValidator, QRegExpValidator
+from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QDialog
 from PyQt5.uic import loadUi
 from src.Users.controllers.UserManager import UserManager
 from src.Users.models.User import User
@@ -12,7 +14,7 @@ class NewReservationView(QMainWindow):
     serviceM = ServiceReservationManager()
     s_s_r = SignedServiceReservation()
     u_s_r = UnsignedServiceReservation()
-    user = -1
+    __users = []
 
     def __init__(self, widget):
         '''
@@ -20,18 +22,19 @@ class NewReservationView(QMainWindow):
         :param widget: QWidget
         :param item: Item to edit
         '''
-        self.__users = []
         super(NewReservationView, self).__init__()
         loadUi("../designer/Reservation/AddReservationView.ui", self)
         self.widget = widget
         self.user = User()
         self.users = self.userM.list()
         self.load_data()
+        self.pop = ''
         self.nameField.textChanged.connect(lambda: self.search())
         self.surnameField.textChanged.connect(lambda: self.search())
         self.get_field.clicked.connect(lambda: self.get_fields())
         self.clear_field.clicked.connect(lambda: self.clear_fields())
         self.save_button.clicked.connect(lambda: self.set_fields())
+        self.telephone.setValidator(QIntValidator())
 
     def load_table(self, users):
         """
@@ -126,11 +129,29 @@ class NewReservationView(QMainWindow):
                                                  self.timeEdit.dateTime().toString("hh:mm:ss"),
                                                  self.dateEdit.dateTime().toString("yyyy-MM-dd") + ' ' +
                                                  self.timeEdit_2.dateTime().toString("hh:mm:ss"))
+            self.close()
         else:
-            self.serviceM.add_unsigned_reservation(self.dateEdit.dateTime().toString("yyyy-MM-dd") + ' ' +
-                                                   self.timeEdit.dateTime().toString("hh:mm:ss"),
-                                                   self.dateEdit.dateTime().toString("yyyy-MM-dd") + ' ' +
-                                                   self.timeEdit_2.dateTime().toString("hh:mm:ss"), self.telephone.text(), self.name.text()+' '+self.surname.text())
-        self.close()
+            if self.telephone.text() == '' or self.name.text() == '' or self.surname.text() == '':
+                self.pop = Popup()
+                self.pop.label.setText("Inserire tutti i campi obbligatori.")
+                self.pop.show()
+            else:
+                self.serviceM.add_unsigned_reservation(self.dateEdit.dateTime().toString("yyyy-MM-dd") + ' ' +
+                                                       self.timeEdit.dateTime().toString("hh:mm:ss"),
+                                                       self.dateEdit.dateTime().toString("yyyy-MM-dd") + ' ' +
+                                                       self.timeEdit_2.dateTime().toString("hh:mm:ss"),
+                                                       self.telephone.text(),
+                                                       self.name.text() + ' ' + self.surname.text())
+                self.close()
+
+
+
+class Popup(QDialog):
+    def __init__(self):
+        super(Popup, self).__init__()
+        loadUi("../designer/Pop-Up/Message Pop-Up/Popup.ui", self)
+        self.setWindowTitle('Errore')
+        self.setModal(True)
+        self.okButton.clicked.connect(self.close)
 
 
