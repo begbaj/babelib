@@ -9,7 +9,7 @@ from src.Items.Models.ItemEnumerators import *
 class ItemManager:
 
     def __init__(self):
-        self.dbms = DatabaseManager("../config/db.json")
+        self.dbms = DatabaseManager("config/db.json")
 
     def add_item(self, item: Item, return_item=None) -> Item:
         item.id = self.dbms.insert_item(item)
@@ -120,39 +120,39 @@ class ItemManager:
         item.availability = ItemEnumerators.AvailabilityEnum.scartato
         self.dbms.edit_item(item)
 
-    def check_bid(self, bid) -> bool:
-        '''
-        Check if the bid is unique in the database
-        :param bid:
-        :return: True if it is unique
-        '''
-
-        qr = self.dbms.check_bid(bid)
-        if len(qr) == 0:
-            return True
-        else:
-            return False
-
-    def check_isbn(self, isbn) -> bool:
-        qr = self.dbms.check_isbn(isbn)
-        if len(qr) == 0:
-            return True
-        else:
-            return False
-
-    def check_for_isbn(self, id, isbn):
-        qr = self.dbms.check_for_isbn(id, isbn)
-        if len(qr) == 0:
-            return True
-        else:
-            return False
-
-    def check_for_bid(self, id, bid):
-        qr = self.dbms.check_for_bid(id, bid)
-        if len(qr) == 0:
-            return True
-        else:
-            return False
+    # def check_bid(self, bid) -> bool:
+    #     '''
+    #     Check if the bid is unique in the database
+    #     :param bid:
+    #     :return: True if it is unique
+    #     '''
+    #
+    #     qr = self.dbms.check_bid(bid)
+    #     if len(qr) == 0:
+    #         return True
+    #     else:
+    #         return False
+    #
+    # def check_isbn(self, isbn) -> bool:
+    #     qr = self.dbms.check_isbn(isbn)
+    #     if len(qr) == 0:
+    #         return True
+    #     else:
+    #         return False
+    #
+    # def check_for_isbn(self, id, isbn):
+    #     qr = self.dbms.check_for_isbn(id, isbn)
+    #     if len(qr) == 0:
+    #         return True
+    #     else:
+    #         return False
+    #
+    # def check_for_bid(self, id, bid):
+    #     qr = self.dbms.check_for_bid(id, bid)
+    #     if len(qr) == 0:
+    #         return True
+    #     else:
+    #         return False
 
     def __convert_dbitem(self, dbitem) -> Item:
         """
@@ -168,9 +168,8 @@ class ItemManager:
         item.title = dbitem.title
         item.author = dbitem.author
         item.lang = ItemEnumerators.LangEnum(int(dbitem.lang_id))
-        item.cataloging_level = ItemEnumerators.CatalogingLevel(
-            int.from_bytes(dbitem.cataloging_level, 'big'))  # serve per convertire un byte in int ('big' = big endian)
-        item.publication_date = datetime.combine(dbitem.publication_date, datetime.min.time())
+        item.cataloging_level = ItemEnumerators.CatalogingLevel(int.from_bytes(dbitem.cataloging_level, 'big'))  # serve per convertire un byte in int ('big' = big endian)
+        item.publication_date = dbitem.publication_date
         item.publication_state = int.from_bytes(dbitem.publication_state, 'big')
         item.rack = dbitem.rack
         item.shelf = dbitem.shelf

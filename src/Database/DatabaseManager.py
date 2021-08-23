@@ -301,7 +301,7 @@ class DatabaseManager:
                 f" '{self.__check_value(item.shelf, str)}'," \
                 f" {self.__check_value(item.position, int)}, " \
                 f" {self.__check_value(item.opac_visibility, int)}," \
-                f" {self.__check_value(item.price, decimal.Decimal)}," \
+                f" {self.__check_value(str(item.price), decimal.Decimal)}," \
                 f" {self.__set_date_str(item.publication_date)}," \
                 f" {self.__set_date_str(item.quarantine_start_date)}," \
                 f" {self.__set_date_str(item.quarantine_end_date)}," \
@@ -743,5 +743,5 @@ class DatabaseManager:
             try:
                 value = type_value(item_value)
             except:
-                raise TypeError(f" {item_value} is not an instance of {type(type_value)}")
+                raise TypeError(f" {item_value} is not an instance of {type_value}")
         return value
