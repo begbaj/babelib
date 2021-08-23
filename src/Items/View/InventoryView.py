@@ -1,22 +1,24 @@
-from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QTableView, QDialog, QMessageBox, QDialogButtonBox
+from PyQt5.QtWidgets import QTableWidgetItem, QTableView
 from PyQt5.uic import loadUi
-from datetime import datetime
+
 from src.Items.Controllers.ItemManager import ItemManager
+from src.Items.Models.Item import Item
 from src.Items.Models.ItemEnumerators import AvailabilityEnum
-from src.Items.Models import Item
 from src.Items.View.CatalogingView import CatalogingView
 from src.Items.View.ShowItemView import ShowItemView
+from src.Utils.UI import *
 
 
 class InventoryView(QMainWindow):
     itmManager = ItemManager()
     __items = []
 
-    # TODO: aggiungi documento
     def __init__(self, widget, parent):
         super(InventoryView, self).__init__(parent)
-        loadUi("../designer/Items/InventoryView.ui", self)
+        loadUi("../designer/Items/InventoryViewNew.ui", self)
         self.widget = widget
+        self.show_item_view = ShowItemView(self.widget, Item())
+        self.cataloging_view = CatalogingView(self.widget, Item())
 
         try:
             self.itemTable.setSelectionBehavior(QTableView.SelectRows)
@@ -25,13 +27,17 @@ class InventoryView(QMainWindow):
             self.quarantineCheckBox.stateChanged.connect(lambda: self.search())
             self.discardedCheckBox.stateChanged.connect(lambda: self.search())
 
-            self.add_button.clicked.connect(lambda: self.add_item())
+            self.addButton.clicked.connect(lambda: self.add_item())
             self.modifyButton.clicked.connect(lambda: self.edit_item())
             self.discardButton.clicked.connect(lambda: self.discard_item())
             self.returnButton.clicked.connect(lambda: self.__go_back())
             self.showItemButton.clicked.connect(lambda: self.show_item())
 
             self.searchMode.currentIndexChanged.connect(lambda: self.search())
+
+            self.cataloging_view.go_back_button.connect(lambda: self.search())
+            self.cataloging_view.save_button.connect(lambda: self.search())
+            self.show_item_view.go_back_button.connect(lambda: self.search())
         except Exception as err:
             print(err)
 
@@ -61,7 +67,7 @@ class InventoryView(QMainWindow):
         if self.__get_selected_item() is None:
             ErrorMessage("Selezionare un elemento per visualizzarlo!").exec_()
         else:
-            self.__go_to_showitem_view()
+            self.__go_to_show_item_view()
 
     def edit_item(self):
         if self.__get_selected_item() is None:
@@ -111,36 +117,15 @@ class InventoryView(QMainWindow):
         self.close()
 
     def __go_to_cataloging_view(self, new=False):
-        if new:
-            self.cataloging_view = CatalogingView(self.widget, Item.Item())
+        if not new:
+            self.cataloging_view.item = self.__get_selected_item()
         else:
-            self.cataloging_view = CatalogingView(self.widget, self.__get_selected_item())
+            self.cataloging_view.item = Item()
         self.cataloging_view.show()
 
-    def __go_to_showitem_view(self):
-        self.showitem_view = ShowItemView(self.widget, self.__get_selected_item())
-        self.showitem_view.show()
+    def __go_to_show_item_view(self):
+        self.show_item_view.item = self.__get_selected_item()
+        self.show_item_view.show()
 
     # endregion
-
-
-class Dialog(QDialog):
-    def __init__(self, text):
-        super(Dialog, self).__init__()
-        loadUi("../designer/Pop-Up/Dialog.ui", self)
-        self.setWindowTitle('Attenzione')
-        self.setModal(True)
-        self.text.setText(text)
-
-
-class ErrorMessage(QDialog):
-    def __init__(self, text, buttons=QDialogButtonBox.Ok):
-        super(ErrorMessage, self).__init__()
-        loadUi("../designer/Pop-up/ErrorMessage.ui", self)
-        self.setModal(True)
-        self.setWindowTitle("Errore")
-        self.buttonBox.setStandardButtons(buttons)
-        self.text.setText(text)
-        self.buttonBox.accepted.connect(super(ErrorMessage, self).accept)
-        self.buttonBox.rejected.connect(super(ErrorMessage, self).reject)
 

@@ -1,12 +1,13 @@
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
+
 from src.Items.Models import ItemEnumerators
 
 
 class ShowItemView(QMainWindow):
 
     def __init__(self, widget, item):
-        super(ShowItemView, self).__init__()
+        super(ShowItemView, self).__init__(widget)
         loadUi("../designer/Items/ShowItemView.ui", self)
         self.widget = widget
 

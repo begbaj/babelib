@@ -5,6 +5,8 @@ from src.Users.models.User import User
 import mariadb
 import json
 import os
+import decimal
+from datetime import date, datetime, timedelta
 
 
 class DatabaseManager:
@@ -15,9 +17,9 @@ class DatabaseManager:
     ----
     Methods:
     """
-    __conn = ""
 
-    #def __init__(self, user, password, host, port, database):
+    conn = ""
+    cur = ""
 
     def __init__(self, directory="Database/db_settings/db.json"):
         """
@@ -29,21 +31,29 @@ class DatabaseManager:
         :param database_: db name
         """
 
-        #"root", "sa", "localhost", 3306, "babelib_db"
-        #C:\Users\DanieleB\PycharmProjects\babelib\src\Databse\db_settings\db.json
+        # "root", "sa", "localhost", 3306, "babelib_db"
+        # C:\Users\DanieleB\PycharmProjects\babelib\src\Databse\db_settings\db.json
 
-        data = json.load(open(os.path.abspath(directory)))
+        with open(os.path.abspath(directory)) as file:
+            data = json.load(file)
 
-        _conn = mariadb.connect(
-            user=data['user'],
-            password=data['password'],
-            host=data['host'],
-            port=data['port'],
-            database=data['database']
-        )
+        _conn = None
+        try:
+            _conn = mariadb.connect(
+                user=data['user'],
+                password=data['password'],
+                host=data['host'],
+                port=data['port'],
+                database=data['database']
+            )
+        except FileNotFoundError as err:
+            src.Utils.UI.ErrorMessage(err).show()
+        except PermissionError as err:
+            src.Utils.UI.ErrorMessage(err).show()
+
         self.cur = _conn.cursor(named_tuple=True)
         _conn.autocommit = True
-        self.__conn = _conn
+        self.conn = _conn
 
     def query(self, query: str, returns=False) -> list:
         """
@@ -58,10 +68,10 @@ class DatabaseManager:
             self.cur.execute(query)
             if returns:
                 a = self.cur.fetchall()
-            self.__conn.commit()
+            self.conn.commit()
             return a
         except mariadb.Error as e:
-            #TODO: Gestire l'eccezione
+            # TODO: Gestire l'eccezione
             print(f"Error: {e}")
 
     def login(self, username):
@@ -117,7 +127,7 @@ class DatabaseManager:
                 f", u.email = '{user.email}'"
                 f", u.fiscal_code = '{user.fiscal_code}'"
                 f", u.contect_mode = '{user.contect_mode}'"
-                #f", u.privacy_agreement = {user.privacy_agreement}"
+                # f", u.privacy_agreement = {user.privacy_agreement}"
                 f" where id = {user.id}")
 
         except mariadb.Error as e:
@@ -157,7 +167,7 @@ class DatabaseManager:
 
             )
 
-            #self.cur.commit()
+            # self.cur.commit()
 
         except mariadb.Error as e:
             print(f"Error: {e}")
@@ -187,16 +197,13 @@ class DatabaseManager:
             user.id = row.Id
         return user
 
-
-    def get_user_name_by_id(self,id):
-        query=(f"Select name from users where Id = {id}")
+    def get_user_name_by_id(self, id):
+        query = (f"Select name from users where Id = {id}")
         return self.query(query, returns=True)
-
 
     def get_user_surname_by_id(self, id):
         query = (f"Select surname from users where Id = {id}")
         return self.query(query, returns=True)
-
 
     def find_user_by_name(self, name):
 
@@ -220,8 +227,6 @@ class DatabaseManager:
             user.id = row.Id
             users.append(user)
         return users
-
-
 
     def find_user_by_surname(self, surname):
 
@@ -274,32 +279,34 @@ class DatabaseManager:
 
     # region Items
 
-    def insert_item(self,item):
-        query = f"INSERT INTO items"\
-                f" (material_id, nature_id, type_id, lang_id, availability, bid, isbn,"\
-                f" title, author, cataloging_level, publication_date, publication_state, rack, shelf, position," \
-                f" opac_visibility, price, quarantine_start_date, quarantine_end_date, discarded_date, note)"\
-                f" VALUES "\
+    def insert_item(self, item):
+        query = f"INSERT INTO items" \
+                f" (material_id, nature_id, type_id, lang_id, availability, bid, isbn," \
+                f" title, author, cataloging_level, publication_state, rack, shelf, position," \
+                f" opac_visibility, price, publication_date, quarantine_start_date, quarantine_end_date, discarded_date, note)" \
+                f" VALUES " \
                 f" (" \
-                f" {item.material.value}, {item.nature.value}, {item.type.value}, {item.lang.value}," \
-                f" {item.availability.value}, '{item.bid}', '{item.isbn}', '{item.title}', '{item.author}', " \
-                f" {item.cataloging_level.value}, '{item.publication_date}', {item.publication_state}, " \
-                f" {item.rack}, '{item.shelf}', {item.position}, {item.opac_visibility},{item.price}, "
-
-        if item.quarantine_start_date is not None:
-            query += f"'{item.quarantine_start_date}', "
-        else:
-            query += f"null, "
-        if item.quarantine_end_date is not None:
-            query += f"'{item.quarantine_end_date}', "
-        else:
-            query += f"null, "
-        if item.discarded_date is not None:
-            query += f"'{item.discarded_date}', "
-        else:
-            query += f"null, "
-
-        query += f"'{item.note}');"
+                f" {self.__check_value(item.material.value, int)}," \
+                f" {self.__check_value(item.nature.value, int)}," \
+                f" {self.__check_value(item.type.value, int)}," \
+                f" {self.__check_value(item.lang.value, int)}," \
+                f" {self.__check_value(item.availability.value, int)}," \
+                f" '{self.__check_value(item.bid, str)}'," \
+                f" '{self.__check_value(item.isbn, str)}'," \
+                f" '{self.__check_value(item.title, str)}'," \
+                f" '{self.__check_value(item.author, str)}'," \
+                f" {self.__check_value(item.cataloging_level.value, int)}, " \
+                f" {self.__check_value(item.publication_state, int)}," \
+                f" {self.__check_value(item.rack, int)}," \
+                f" '{self.__check_value(item.shelf, str)}'," \
+                f" {self.__check_value(item.position, int)}, " \
+                f" {self.__check_value(item.opac_visibility, int)}," \
+                f" {self.__check_value(item.price, decimal.Decimal)}," \
+                f" {self.__set_date_str(item.publication_date)}," \
+                f" {self.__set_date_str(item.quarantine_start_date)}," \
+                f" {self.__set_date_str(item.quarantine_end_date)}," \
+                f" {self.__set_date_str(item.discarded_date)}," \
+                f" '{self.__check_value(item.note, str)}');"
         self.query(query)
 
         query = f"SELECT id FROM items ORDER BY id DESC LIMIT 1;"
@@ -310,11 +317,11 @@ class DatabaseManager:
             self.query(query)
 
         for state in item.inner_state:
-            query =f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({nid}, {state.value});"
+            query = f"INSERT INTO items_inner_states (item_id, inner_state_id) VALUES ({nid}, {state.value});"
             self.query(query)
 
         for state in item.external_state:
-            query =f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({nid},{state.value});"
+            query = f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({nid},{state.value});"
             self.query(query)
         self.query(query)
         return nid
@@ -324,29 +331,25 @@ class DatabaseManager:
         return self.query(query, returns=True)
 
     def get_items(self, search_field, search_mode, show_quarantined=False, show_discarded=False) -> [tuple]:
-        # id=None, material_id=None, nature_id=None, type_id=None, lang_id=None, availability=None, bid=None,
-        # inventory_num=None, isbn=None, title=None, author=None, cataloging_level=None, publication_date=None,
-        # publication_state=None, rack=None, shelf=None, position=None, opac_visibility=None, price=None,
-        # quarantine_start_date=None, quarantine_end_date=None, discarded=None, discarded_date=None, note=None
         query = ""
 
-        if search_mode == 0: # eccetto numero di inventario
+        if search_mode == 0:  # eccetto numero di inventario
             query += f"SELECT * FROM items where (bid like '%{search_field}%'" \
-                    f"or isbn like '%{search_field}%'" \
-                    f"or title like '%{search_field}%'" \
-                    f"or author like '%{search_field}%'" \
-                    f"or note like '%{search_field}%')"
-        elif search_mode == 1: # Title
+                     f"or isbn like '%{search_field}%'" \
+                     f"or title like '%{search_field}%'" \
+                     f"or author like '%{search_field}%'" \
+                     f"or note like '%{search_field}%')"
+        elif search_mode == 1:  # Title
             query += f"SELECT * FROM items WHERE title LIKE '%{search_field}%'"
-        elif search_mode == 2: # Author
+        elif search_mode == 2:  # Author
             query += f"SELECT * FROM items WHERE author LIKE '%{search_field}%'"
-        elif search_mode == 3: # ISBN
+        elif search_mode == 3:  # ISBN
             query += f"SELECT * FROM items WHERE isbn LIKE '%{search_field}%'"
-        elif search_mode == 4: # BID
+        elif search_mode == 4:  # BID
             query += f"SELECT * FROM items WHERE bid LIKE '%{search_field}%'"
-        elif search_mode == 5: # id / numero di inventario
+        elif search_mode == 5:  # id / numero di inventario
             query += f"SELECT * FROM items WHERE id LIKE '%{search_field}%'"
-        elif search_mode == 6: # Note
+        elif search_mode == 6:  # Note
             query += f"SELECT * FROM items WHERE note LIKE '%{search_field}%'"
         else:
             raise Exception("invalid search_mode")
@@ -360,40 +363,35 @@ class DatabaseManager:
         return self.query(query, returns=True)
 
     def get_item(self, item_id) -> tuple:
-        query = f"SELECT * FROM items WHERE id = {item_id}"
+        query = f"SELECT * FROM items WHERE id = {self.__check_value(item_id, int)}"
         dbitem = self.query(query, returns=True)
         return dbitem[0]
 
-    def edit_item(self,item) -> None:
-        query = f"update items set " \
-                f"material_id = {item.material.value}, nature_id = {item.nature.value}, type_id = {item.type.value}, "\
-                f"lang_id = {item.lang.value}, availability = {item.availability.value}, bid = '{item.bid}', "\
-                f"isbn= '{item.isbn}', title= '{item.title}', author= '{item.author}', "\
-                f"cataloging_level={item.cataloging_level.value}, publication_state = {item.publication_state}, " \
-                f"rack={item.rack}, shelf='{item.shelf}', position={item.position}," \
-                f"opac_visibility={item.opac_visibility}, price={item.price}, note= '{item.note}', "
+    def edit_item(self, item) -> None:
+        query = f"UPDATE items SET " \
+                f" material_id = {self.__check_value(item.material.value, int)}," \
+                f" nature_id = {self.__check_value(item.nature.value, int)}," \
+                f" type_id = {self.__check_value(item.type.value, int)}, " \
+                f" lang_id = {self.__check_value(item.nature.value, int)}," \
+                f" availability = {self.__check_value(item.availability.value, int)}," \
+                f" bid = '{self.__check_value(item.bid, str)}', " \
+                f" isbn= '{self.__check_value(item.isbn, str)}'," \
+                f" title= '{self.__check_value(item.title, str)}', " \
+                f" author= '{self.__check_value(item.author, str)}', " \
+                f" cataloging_level={self.__check_value(item.cataloging_level.value, int)}," \
+                f" publication_state = {self.__check_value(item.publication_state, int)}, " \
+                f" rack={self.__check_value(item.rack, int)}," \
+                f" shelf='{self.__check_value(item.shelf, str)}'," \
+                f" position={self.__check_value(item.position, int)}," \
+                f" opac_visibility={self.__check_value(item.publication_state, int)}," \
+                f" price= {round(self.__check_value(item.price, decimal.Decimal), 2)}," \
+                f" note= '{self.__check_value(item.note, str)}', " \
+                f" discarded_date= {self.__set_date_str(item.discarded_date)}, " \
+                f" publication_date= {self.__set_date_str(item.publication_date)}, " \
+                f" quarantine_start_date = {self.__set_date_str(item.quarantine_start_date)}, " \
+                f" quarantine_end_date = {self.__set_date_str(item.quarantine_end_date)}" \
+                f" WHERE id = {self.__check_value(item.id, int)}; "
 
-        if item.discarded_date is not None:
-            query += f"discarded_date='{item.discarded_date}', "
-        else:
-            query += f"discarded_date=null, "
-
-        if item.publication_date is not None:
-            query += f"publication_date=\"{item.publication_date}\", "
-        else:
-            query += f"publication_date=null, "
-
-        if item.quarantine_start_date is not None:
-            query += f"quarantine_start_date = '{item.quarantine_start_date}', "
-        else:
-            query += f"quarantine_start_date=null, "
-
-        if item.quarantine_end_date is not None:
-            query += f"quarantine_end_date = '{item.quarantine_end_date}' "
-        else:
-            query += f"quarantine_end_date=null "
-
-        query += f"where id = {item.id};\n"
         self.query(query)
 
         self.edit_genre(item)
@@ -437,7 +435,7 @@ class DatabaseManager:
 
     def get_item_inner_states(self, item_id):
         query = f"SELECT * FROM inner_states AS ins " \
-                f"INNER JOIN items_inner_states AS iis ON iis.inner_state_id = ins.id "\
+                f"INNER JOIN items_inner_states AS iis ON iis.inner_state_id = ins.id " \
                 f"WHERE iis.item_id = {item_id};"
         return self.query(query, returns=True)
 
@@ -447,7 +445,7 @@ class DatabaseManager:
                 f"WHERE ies.item_id = {item_id};"
         return self.query(query, returns=True)
 
-    def get_genres(self, genre_ids = None):
+    def get_genres(self, genre_ids=None):
         if genre_ids is None:
             query = f"SELECT * FROM genres;"
         else:
@@ -523,7 +521,7 @@ class DatabaseManager:
         # Initialize Variables
         movements = []
 
-        #itemM = ItemManager()
+        # itemM = ItemManager()
 
         # List movements
         try:
@@ -535,7 +533,7 @@ class DatabaseManager:
         for row in self.cur.fetchall():
             movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
             movement.id = row.Id
-            #movement.item = itemM.get_item(row.item)
+            # movement.item = itemM.get_item(row.item)
             movement.user = self.find_user_by_id(row.user_id)
             movements.append(movement)
 
@@ -546,7 +544,7 @@ class DatabaseManager:
             self.cur.execute(
                 f"Update movements m "
                 f"set m.mov_type = '{movement.mov_type}'"
-                f", m.timestamp = '{movement.timestamp}'"                
+                f", m.timestamp = '{movement.timestamp}'"
                 f" where id = {movement.id}")
 
         except mariadb.Error as e:
@@ -565,7 +563,7 @@ class DatabaseManager:
                 f" {movement.item_id}"
                 f", {movement.user_id}"
                 f", '{movement.mov_type}'"
-                f", '{movement.timestamp}'"                
+                f", '{movement.timestamp}'"
                 f")"
             )
 
@@ -579,23 +577,23 @@ class DatabaseManager:
         except mariadb.Error as e:
             print(f"Error: {e}")
 
-    #search:
-    #nome utente
-    #cognome utente
-    #(insieme i primi due)
-    #titolo documento
-    #isbn
-    #timestamp
+    # search:
+    # nome utente
+    # cognome utente
+    # (insieme i primi due)
+    # titolo documento
+    # isbn
+    # timestamp
 
     def find_movement(self, search_field, search_mode):
-        #itemM = ItemManager()
+        # itemM = ItemManager()
 
         # List movements
         try:
             if search_mode == 0:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
-                                 f"left join itmes i on i.id = m.item_id "  
+                                 f"left join itmes i on i.id = m.item_id "
                                  f"where u.name like '%{search_field}%' "
                                  f"or u.surname like '%{search_field}%' "
                                  f"or i.title like '%{search_field}%' "
@@ -629,13 +627,13 @@ class DatabaseManager:
         for row in self.cur.fetchall():
             movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
             movement.id = row.Id
-            #movement.item = itemM.get_item(row.item)
+            # movement.item = itemM.get_item(row.item)
             movement.user = self.find_user_by_id(row.user_id)
         return movement
 
     def find_movement_by_id(self, id):
 
-        #itemM = ItemManager()
+        # itemM = ItemManager()
 
         # List movements
         try:
@@ -647,11 +645,10 @@ class DatabaseManager:
         for row in self.cur.fetchall():
             movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
             movement.id = row.Id
-            #movement.item = itemM.get_item(row.item)
+            # movement.item = itemM.get_item(row.item)
             movement.user = self.find_user_by_id(row.user_id)
         return movement
 
-    
     def add_signed_reservation(self, signed_service_reservation):
         try:
             self.cur.execute(
@@ -723,10 +720,28 @@ class DatabaseManager:
         query = f"SELECT ssr.user_id,u.Id,concat(u.name,' ',u.surname)AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.Id = ssr.user_id WHERE concat(u.name,' ',u.surname) LIKE '%{search_field}%'"
         return self.query(query, returns=True)
 
-    def delete_unsigned_by_id(self,id):
+    def delete_unsigned_by_id(self, id):
         query = f"DELETE FROM unsigned_service_reservations WHERE id={id};"
         return self.query(query, returns=True)
 
-    def delete_signed_by_id(self,id):
+    def delete_signed_by_id(self, id):
         query = f"DELETE FROM signed_service_reservation WHERE id ={id};"
         self.query(query, returns=True)
+
+    def __set_date_str(self, item_date) -> str:
+        value = "null"
+        if isinstance(item_date, datetime):
+            value = f"'{str(item_date.date())}'"
+        elif isinstance(item_date, date):
+            value = f"'{str(item_date)}'"
+        return value
+
+    def __check_value(self, item_value, type_value):
+        value = item_value
+        if not isinstance(item_value, type_value):
+            # try conversion
+            try:
+                value = type_value(item_value)
+            except:
+                raise TypeError(f" {item_value} is not an instance of {type(type_value)}")
+        return value

@@ -3,50 +3,25 @@ import time
 import unittest
 from datetime import datetime, timedelta
 
-import mariadb
-
-import src.babelibutils
-from src.Database.DatabaseManager import DatabaseManager
+import src.Utils.Tools
+from src.Database.DatabaseManager import DatabaseManager as dbms
 from src.Items.Controllers.ItemManager import ItemManager
 from src.Items.Models.Item import Item
-from src.Database.db_settings import *
 from src.Items.Models.ItemEnumerators import *
 
 
 class TestItemManager(unittest.TestCase):
-
-    dbms = DatabaseManager()
     im = ItemManager()
     item = Item()
 
     @classmethod
     def setUpClass(cls) -> None:
-        cls.item.id = None
-        cls.item.title = 'test'
-        cls.item.author = 'test'
-        cls.item.isbn = src.babelibutils.Generators.string_digits_nor(13)
-        cls.item.bid = src.babelibutils.Generators.string_digits_nor(10)
-        cls.item.lang = LangEnum(random.randint(1, 9))
-        cls.item.material = MaterialEnum(random.randint(1, 7))
-        cls.item.type = TypeEnum(random.randint(1, 15))
-        cls.item.nature = NatureEnum(random.randint(1, 3))
-        cls.item.cataloging_level = CatalogingLevel(random.randint(0, 1))
-        cls.item.publication_date = datetime.today().date()
-        cls.item.publication_state = random.randint(0, 1)
-        cls.item.rack = random.randint(1, 100)
-        cls.item.shelf = src.babelibutils.Generators.string_nor(1)
-        cls.item.position = random.randint(1, 300)
-        cls.item.opac_visibility = random.randint(0, 1)
-        cls.item.price = random.random() * 100
-        cls.item.quarantine_start_date = None
-        cls.item.quarantine_end_date = None
-        cls.item.discarded_date = None
-        genres = cls.im.get_genres()
-        cls.item.genre = [genres[random.randint(0, len(genres)-1)]]
-        cls.item.inner_state = [SMUSIEnum(random.randint(0, len(SMUSIEnum) - 1))]
-        cls.item.external_state = [ExternalStateEnum(random.randint(1, len(ExternalStateEnum)))]
-        cls.item.note = "ITEM DI PROVA TESTING TESTING TESTING TESTING ADD TI AMO"
-        cls.item.id = cls.im.add_item(cls.item)
+        cls.dbms = dbms("../config/db.json")
+
+    def setUp(self) -> None:
+        self.item = src.Utils.Tools.generate_random_item()
+        self.item = self.im.add_item(self.item) #gia questo permette di testare la funzione add_item, se fallisce qualcosa non va
+        print(self.item)
 
     def test_get_item(self):
         self.assertEqual(self.im.get_item(self.item).id, self.item.id)
@@ -65,52 +40,26 @@ class TestItemManager(unittest.TestCase):
         self.assertEqual(len(self.im.get_inner_states()), 5)
 
     def test_get_items(self):
-        def new_test_item():
-            item = Item()
-            item.id = None
-            item.title = 'test'
-            item.author = 'test'
-            item.isbn = src.babelibutils.Generators.string_digits_nor(13)
-            item.bid = src.babelibutils.Generators.string_digits_nor(10)
-            item.lang = LangEnum(random.randint(1, 9))
-            item.material = MaterialEnum(random.randint(1, 7))
-            item.type = TypeEnum(random.randint(1, 15))
-            item.nature = NatureEnum(random.randint(1, 3))
-            item.cataloging_level = CatalogingLevel(random.randint(0, 1))
-            item.publication_date = datetime.today().date()
-            item.publication_state = random.randint(0, 1)
-            item.rack = random.randint(1, 100)
-            item.shelf = src.babelibutils.Generators.string_nor(1)
-            item.position = random.randint(1, 300)
-            item.opac_visibility = random.randint(0, 1)
-            item.price = random.random() * 100
-            item.quarantine_start_date = None
-            item.quarantine_end_date = None
-            item.discarded_date = None
-            genres = self.im.get_genres()
-            item.genre = [genres[random.randint(1, len(genres)-1)]]
-            item.inner_state = [SMUSIEnum(random.randint(0, len(SMUSIEnum) - 1))]
-            item.external_state = [ExternalStateEnum(random.randint(1, len(ExternalStateEnum)))]
-            item.note = "ITEM DI PROVA TESTING TESTING TESTING TESTING ADD TI AMO"
-            return self.im.add_item(item, return_item=True)
-
-        test_items = [self.item]
+        test_items = []
         for i in range(1,10):
-            test_items.append(new_test_item())
+            test_items.append(self.im.add_item(src.Utils.Tools.generate_random_item()))
 
-        for i, s in enumerate(self.im.get_items("test", 0)):
-            self.assertEqual(s.id, test_items[i].id)
-        for i, s in enumerate(self.im.get_items("test", 1)):
-            self.assertEqual(s.id, test_items[i].id)
-        for i, s in enumerate(self.im.get_items("test", 2)):
-            self.assertEqual(s.id, test_items[i].id)
+        for item in test_items:
+            for i, s in enumerate(self.im.get_items(item.title, 0)):
+                self.assertEqual(s.id, item.id)
+            for i, s in enumerate(self.im.get_items(item.title, 1)):
+                self.assertEqual(s.id, item.id)
+            for i, s in enumerate(self.im.get_items(item.author, 2)):
+                self.assertEqual(s.id, item.id)
 
         self.assertNotEqual(len(self.im.get_items(test_items[1].isbn, 3)), 0)
         self.assertNotEqual(len(self.im.get_items(test_items[2].bid, 4)), 0)
         self.assertNotEqual(len(self.im.get_items(test_items[3].id, 5)), 0)
         self.assertNotEqual(len(self.im.get_items(test_items[4].note, 6)), 0)
 
-        del i
+        for it in test_items:
+            self.im.delete_item(it)
+
         del test_items
 
     def test_edit_item(self):
@@ -126,23 +75,27 @@ class TestItemManager(unittest.TestCase):
 
         genres = self.im.get_genres()
         self.item.genre = [genres[random.randint(0,len(genres)-1)], genres[random.randint(0,len(genres)-1)]]
+        #inserisco un SMUSIEnum.nessuno per verificare che questo non venga aggiunto nel database
+        self.item.inner_state = [SMUSIEnum(0),SMUSIEnum(random.randint(1,len(SMUSIEnum)-1))]
+        self.item.external_state = [ExternalStateEnum(random.randint(1,len(ExternalStateEnum)-1)),
+                                    ExternalStateEnum(random.randint(1,len(ExternalStateEnum)-1))]
+
         self.im.edit_item(self.item)
-        time.sleep(0.05)
+        time.sleep(1)
         self.assertEqual(self.im.get_item_genres(self.item.id), self.item.genre)
-
-        self.item.inner_state = [SMUSIEnum(random.randint(0, len(SMUSIEnum)-1)), SMUSIEnum(random.randint(0,len(SMUSIEnum)-1))]
-        self.im.edit_item(self.item)
-        time.sleep(0.05)
-        self.assertEqual(self.im.get_item(self.item).inner_state, self.item.inner_state)
-
-        self.item.external_state = [ExternalStateEnum(random.randint(0,len(ExternalStateEnum)-1)), ExternalStateEnum(random.randint(0,len(ExternalStateEnum)-1))]
-        self.im.edit_item(self.item)
-        time.sleep(0.05)
+        # quando si inserisce SMUSIEnum.nessuno (indice 0), questo non viene inserito nel database e
+        # quando viene richiesto ritorna una lista vuota!
+        self.assertEqual(self.im.get_item(self.item).inner_state, [self.item.inner_state[1]])
         self.assertEqual(self.im.get_item(self.item).external_state, self.item.external_state)
+
+    def tearDown(self) -> None:
+        self.im.delete_item(self.item)
 
     @classmethod
     def tearDownClass(cls) -> None:
-        cls.dbms.query("DELETE FROM items WHERE title = 'test'")
+        for item in cls.dbms.get_items("test -", 0):
+            cls.im.delete_item(item)
+
 
     # def test_edit_availability(self):
     #     pass
@@ -155,8 +108,6 @@ class TestItemManager(unittest.TestCase):
     #
     # def test_discard_item(self):
     #     pass
-
-
 
 
 if __name__ == '__main__':
