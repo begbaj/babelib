@@ -2,6 +2,8 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
 from src.Items.Controllers.ItemManager import ItemManager
+from src.Movements.Controllers.MovementManager import MovementManager
+from src.Movements.Models.Movement import Movement
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
 from src.Utils.UI import Popup
@@ -11,6 +13,7 @@ class LoanView(QDialog):
 
     userM = UserManager()
     itemM = ItemManager()
+
 
     def __init__(self, widget):
         super(LoanView, self).__init__()
@@ -24,6 +27,9 @@ class LoanView(QDialog):
         # self.widget.addWidget(self)
         # self.widget.show()
         self.setup()
+        #self.movementM = MovementManager()
+        #self.movementM.findAll("tu", 1)
+
 
     def setup(self):
         self.selectuserButton.clicked.connect(lambda: self.select_user())
@@ -73,14 +79,15 @@ class LoanView(QDialog):
 # region Table
 
     def load_user_table(self, users):
-        self.users = users
-        row = 0
-        self.userTable.setRowCount(len(self.users))
-        for user in users:
-            self.userTable.setItem(row, 0, QtWidgets.QTableWidgetItem(user.name))
-            self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
-            self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.fiscal_code))
-            row = row + 1
+        if users is not None:
+            self.users = users
+            row = 0
+            self.userTable.setRowCount(len(self.users))
+            for user in users:
+                self.userTable.setItem(row, 0, QtWidgets.QTableWidgetItem(user.name))
+                self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
+                self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.fiscal_code))
+                row = row + 1
 
     def load_item_table(self, items):
         self.items = items

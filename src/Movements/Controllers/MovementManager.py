@@ -1,6 +1,6 @@
 from src.Database.DatabaseManager import DatabaseManager
 
-class UserManager:
+class MovementManager:
 
     db = DatabaseManager()
 
@@ -12,8 +12,8 @@ class UserManager:
         movements = self.db.find_movement_by_id(id)
         return movements
 
-    def findAll(self, search_field, search_mode):
-        movements = self.db.find_movement(search_field, search_mode)
+    def find_all(self,  search_field_mov_type=None, search_mode=None, search_field=None):
+        movements = self.db.find_movement(search_field_mov_type, search_mode, search_field)
         return movements
 
     def set(self, movement):

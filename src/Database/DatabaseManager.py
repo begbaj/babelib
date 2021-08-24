@@ -1,4 +1,5 @@
 import src
+from src.Items.Models.Item import Item
 from src.Items.Models.ItemEnumerators import CatalogingLevel
 from src.Movements.Models.Movement import Movement
 from src.Users.models.Nationality import Nationality
@@ -90,27 +91,8 @@ class DatabaseManager:
 
     def get_users(self):
         """Retrieves the list of contacts from the Database and prints to stdout"""
-
-        # Initialize Variables
-        users = []
-
-        # List users
-        try:
-            self.cur.execute(f"Select * from users u ")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-            user.id = row.Id
-
-            users.append(user)
-        return users
+        query = f"Select * from users u "
+        return self.query(query, returns=True)
 
     def set_user(self, user):
 
@@ -184,22 +166,9 @@ class DatabaseManager:
             print(f"Error: {e}")
 
     def find_user_by_id(self, user_id):
-        user = None
-        try:
-            self.cur.execute(f"Select * from users u "
-                             f"where u.id = {user_id}")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-            user.id = row.Id
-        return user
+        query = f"Select * from users where Id = {user_id}"
+        users = self.query(query, returns=True)
+        return users[0]
 
     def get_user_name_by_id(self, user_id):
         query = f"Select name from users where Id = {user_id}"
@@ -210,74 +179,16 @@ class DatabaseManager:
         return self.query(query, returns=True)
 
     def find_user_by_name(self, name):
-
-        # Initialize Variables
-        users = []
-
-        try:
-            self.cur.execute(f"SELECT * FROM users u "
-                             f"WHERE u.name LIKE '%{name}%'")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-
-            user.id = row.Id
-            users.append(user)
-        return users
+        query = (f"Select * from users u where u.name like '%{name}%'")
+        return self.query(query, returns=True)
 
     def find_user_by_surname(self, surname):
-
-        # Initialize Variables
-        users = []
-
-        try:
-            self.cur.execute(f"Select * from users u "
-                             f"where u.surname LIKE '%{surname}%'")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-
-            user.id = row.Id
-            users.append(user)
-        return users
+        query = (f"Select * from users u where u.surname like '%{surname}%'")
+        return self.query(query, returns=True)
 
     def find_user_by_name_and_surname(self, name, surname):
-
-        # Initialize Variables
-        users = []
-
-        try:
-            self.cur.execute(f"Select * from users u "
-                             f"where u.name LIKE '%{name}%'"
-                             f"and u.surname LIKE '%{surname}%'")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-
-            user.id = row.Id
-            users.append(user)
-        return users
+        query = (f"Select * from users u where u.name LIKE '%{name}%' and u.surname LIKE '%{surname}%'")
+        return self.query(query, returns=True)
 
     # endregion
 
@@ -562,17 +473,16 @@ class DatabaseManager:
 
         # List movements
         try:
-            self.cur.execute(f"Select * from movements m ")
+            self.cur.execute(f"Select * from movements m "
+                             f"left join users u on u.id = m.user_id "
+                             f"left join items i on i.id = m.item_id "
+                             f"")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
 
         for row in self.cur.fetchall():
-            movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
-            movement.id = row.Id
-            # movement.item = itemM.get_item(row.item)
-            movement.user = self.find_user_by_id(row.user_id)
-            movements.append(movement)
+            movements.append(self.set_movement_to_model(row))
 
         return movements
 
@@ -622,51 +532,63 @@ class DatabaseManager:
     # isbn
     # timestamp
 
-    def find_movement(self, search_field, search_mode):
+    def find_movement(self, search_field_mov_type=None, search_mode=None, search_field=None):
         # itemM = ItemManager()
 
         # List movements
+        movements = []
+
         try:
             if search_mode == 0:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
-                                 f"left join itmes i on i.id = m.item_id "
-                                 f"where u.name like '%{search_field}%' "
+                                 f"left join items i on i.id = m.item_id "
+                                 f"where (u.name like '%{search_field}%' "
                                  f"or u.surname like '%{search_field}%' "
                                  f"or i.title like '%{search_field}%' "
                                  f"or i.isbn like '%{search_field}%' "
-                                 f"or m.timestamp like '%{search_field}%' ")
+                                 f"or m.timestamp like '%{search_field}%') "
+                                 f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 1:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
-                                 f"left join itmes i on i.id = m.item_id "
-                                 f"where u.name like '%{search_field}%' "
-                                 f"or u.surname like '%{search_field}%' ")
+                                 f"left join items i on i.id = m.item_id "
+                                 f"where (u.name like '%{search_field}%' "
+                                 f"or u.surname like '%{search_field}%') "
+                                 f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 2:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
-                                 f"left join itmes i on i.id = m.item_id "
-                                 f"where i.title like '%{search_field}%' ")
+                                 f"left join items i on i.id = m.item_id "
+                                 f"where i.title like '%{search_field}%' "
+                                 f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 3:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
-                                 f"left join itmes i on i.id = m.item_id "
-                                 f"where i.isbn like '%{search_field}%' ")
+                                 f"left join items i on i.id = m.item_id "
+                                 f"where i.isbn like '%{search_field}%' "
+                                 f"and m.mov_type = {search_field_mov_type} ")
+
             elif search_mode == 4:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
-                                 f"left join itmes i on i.id = m.item_id "
-                                 f"where m.timestamp like '%{search_field}%' ")
+                                 f"left join items i on i.id = m.item_id "
+                                 f"where m.timestamp like '%{search_field}%' "
+                                 f"and m.mov_type = {search_field_mov_type} ")
+
+            elif search_mode == 5:
+                self.cur.execute(f"Select * from movements m "
+                                 f"left join users u on u.id = m.user_id "
+                                 f"left join items i on i.id = m.item_id "
+                                 f"where m.mov_type = {search_field_mov_type} ")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
 
         for row in self.cur.fetchall():
-            movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
-            movement.id = row.Id
-            # movement.item = itemM.get_item(row.item)
-            movement.user = self.find_user_by_id(row.user_id)
-        return movement
+            movements.append(self.set_movement_to_model(row))
+
+        return movements
 
     def find_movement_by_id(self, id):
 
@@ -674,17 +596,62 @@ class DatabaseManager:
 
         # List movements
         try:
-            self.cur.execute(f"Select * from movements m where id = {id}")
+            self.cur.execute(f"Select * from movements m "
+                             f"left join users u on u.id = m.user_id "
+                             f"left join items i on i.id = m.item_id "
+                             f" where id = {id}"                             
+                             f"")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
 
-        for row in self.cur.fetchall():
-            movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
-            movement.id = row.Id
-            # movement.item = itemM.get_item(row.item)
-            movement.user = self.find_user_by_id(row.user_id)
+        return self.set_movement_to_model(self.cur.fetchone())
+
+    def set_movement_to_model(self, row):
+
+        movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
+        movement.id = row.Id
+
+        movement.user = User(row.nationality, row.user_type
+                             , row.registration_date, row.name, row.surname, row.gender, row.birthplace
+                             , row.birthdate, row.city, row.address, row.postal_code, row.district
+                             , row.first_cellphone, row.telephone, row.email, row.fiscal_code
+                             , row.contect_mode, row.privacy_agreement)
+
+        movement.user.id = row.user_id
+
+        movement.item = Item()
+        movement.item.id = row.item_id
+
+        movement.item.isbn = row.isbn
+        movement.item.title = row.title
+        movement.item.note = row.note
+        movement.item.rack = row.rack
+        movement.item.author = row.author
+        movement.item.availability = row.availability
+        movement.item.bid = row.bid
+        movement.item.cataloging_level = row.cataloging_level
+        movement.item.discarded_date = row.discarded_date
+        # movement.item.external_state = row.external_state
+        # movement.item.genre = row.genre
+        # movement.item.inner_state = row.inner_state
+        # movement.item.lang = row.lang
+        # movement.item.material = row.material
+        # movement.item.nature = row.nature
+        movement.item.opac_visibility = row.opac_visibility
+        movement.item.position = row.position
+        movement.item.price = row.price
+        movement.item.publication_date = row.publication_date
+        movement.item.publication_state = row.publication_state
+        movement.item.quarantine_end_date = row.quarantine_end_date
+        movement.item.quarantine_start_date = row.quarantine_start_date
+        movement.item.shelf = row.shelf
+        # movement.item.type = row.type
+
+
         return movement
+
+    #endregion
 
     def add_signed_reservation(self, user_id, date_from, date_to):
         try:
@@ -752,7 +719,7 @@ class DatabaseManager:
         return self.query(query, returns=True)
 
     def get_signed_user_reservation(self, search_field):
-        query = f"SELECT ssr.user_id,u.Id,concat(u.name,' ',u.surname)AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.Id = ssr.user_id WHERE concat(u.name,' ',u.surname) LIKE '%{search_field}%'"
+        query = f"SELECT ssr.id, u.Id AS 'user_id',concat(u.name,' ',u.surname) AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.id = ssr.user_id WHERE concat(u.name,' ',u.surname) LIKE '%{search_field}%'"
         return self.query(query, returns=True)
 
     # region Stats
@@ -788,3 +755,11 @@ class DatabaseManager:
             except:
                 raise TypeError(f" {item_value} is not an instance of {type_value}")
         return value
+
+    def delete_unsigned_by_id(self,id):
+        query = f"DELETE FROM unsigned_service_reservations WHERE id={id};"
+        return self.query(query, returns=True)
+
+    def delete_signed_by_id(self,id):
+        query = f"DELETE FROM signed_service_reservation WHERE id ={id};"
+        return self.query(query, returns=True)

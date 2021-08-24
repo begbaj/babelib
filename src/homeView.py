@@ -3,6 +3,7 @@ from PyQt5.uic import loadUi
 from src.Stats.View.StatsView import StatsView
 from Users.View.UserView import UserView
 from src.Items.View.InventoryView import InventoryView
+from src.Services.views.NewReservationView import NewReservationView
 from src.Services.views.ReservationView import ReservationView
 from src.Users.View.UserCardView import UserCardView
 from src.Movements.View.MovementsView import MovementsView
@@ -25,7 +26,7 @@ class HomeView(QMainWindow):
         self.movementButton.clicked.connect(self.__go_movement_view)
         self.statsButton.clicked.connect(self.__go_stats_view)
         # self.reportButton.clicked.connect(self.goreportview())
-        # self.serviceButton.clicked.connect(self.goserviceview())
+        self.serviceButton.clicked.connect(self.__go_service_view)
         # self.commButton.clicked.connect(self.gocomunicationview())
         # Shortcut Button
         # self.newloanButton.clicked.connect(self.newloan())
@@ -66,6 +67,8 @@ class HomeView(QMainWindow):
         pass
 
     def __go_service_view(self):
+        self.services = ReservationView(self.widget)
+        self.services.show()
         pass
 
     def __go_communication_view(self):
@@ -79,8 +82,9 @@ class HomeView(QMainWindow):
         pass
 
     def new_reservation(self):
-        self.reservation = ReservationView(self.widget)
-        self.reservation.show()
+        self.res = NewReservationView(self.widget)
+        self.res.show()
+        pass
 
     def new_user(self):
         self.newuser = UserCardView(self.widget, None, None)

@@ -40,7 +40,7 @@
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 105)</string>
+background-color:rgba(0, 192, 225, 125)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
