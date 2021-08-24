@@ -80,22 +80,22 @@ class UserCardView(QMainWindow):
 
     def setup_combo_box(self):
         # Import Gender item
-        f = open(os.path.abspath("Database/db_settings/gender.txt"), "r")
+        f = open(os.path.abspath("config/gender.txt"), "r")
         content_list = [line.rstrip('\n') for line in f]
         f.close()
         self.genderBox.addItems(content_list)
         # Import District item
-        f = open(os.path.abspath("Database/db_settings/district.txt"), "r")
+        f = open(os.path.abspath("config/district.txt"), "r")
         content_list = [line.rstrip('\n') for line in f]
         f.close()
         self.districtBox.addItems(content_list)
         # Import UserType item
-        f = open(os.path.abspath("Database/db_settings/user_type.txt"), "r")
+        f = open(os.path.abspath("config/user_type.txt"), "r")
         content_list = [line.rstrip('\n') for line in f]
         f.close()
         self.usertypeBox.addItems(content_list)
         # Import Nationality item
-        f = open(os.path.abspath("Database/db_settings/nationality.txt"), "r")
+        f = open(os.path.abspath("config/nationality.txt"), "r")
         content_list = [line.rstrip('\n') for line in f]
         f.close()
         self.nationBox.addItems(content_list)

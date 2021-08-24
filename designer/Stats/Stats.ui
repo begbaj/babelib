@@ -140,7 +140,7 @@ border: none
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../img/registration-form.png</normaloff>../img/registration-form.png</iconset>
+       <normaloff>../img/profile.png</normaloff>../img/profile.png</iconset>
      </property>
      <property name="iconSize">
       <size>

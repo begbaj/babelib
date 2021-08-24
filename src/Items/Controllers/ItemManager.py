@@ -7,9 +7,9 @@ from src.Items.Models.ItemEnumerators import *
 
 
 class ItemManager:
-
+    dbms = DatabaseManager("config/db.json")
     def __init__(self):
-        self.dbms = DatabaseManager("config/db.json")
+        pass
 
     def add_item(self, item: Item, return_item=None) -> Item:
         item.id = self.dbms.insert_item(item)

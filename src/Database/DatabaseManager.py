@@ -7,6 +7,7 @@ import mariadb
 import json
 import os
 import decimal
+from dateutil.relativedelta import relativedelta
 from datetime import date, datetime, timedelta
 
 
@@ -141,37 +142,34 @@ class DatabaseManager:
 
     def insert_user(self, user):
         try:
-            self.cur.execute(
-                f"Insert into users"
-                f" ("
-                f"  nationality, user_type"
-                f", registration_date, name, surname, gender, birthplace"
-                f", birthdate, city, address, postal_code, district, first_cellphone"
-                f", telephone, email, fiscal_code, contect_mode, privacy_agreement"
-                f")"
-                f" values "
-                f"("
-                f" '{user.nationality}'"
-                f", '{user.user_type}'"
-                f", '{user.registration_date}'"
-                f", '{user.name}'"
-                f", '{user.surname}'"
-                f", '{user.gender}'"
-                f", '{user.birthplace}'"
-                f", '{user.birthdate}'"
-                f", '{user.city}'"
-                f", '{user.address}'"
-                f", '{user.postal_code}'"
-                f", '{user.district}'"
-                f", '{user.first_cellphone}'"
-                f", '{user.telephone}'"
-                f", '{user.email}'"
-                f", '{user.fiscal_code}'"
-                f", '{user.contect_mode}'"
-                f", {user.privacy_agreement}"
-                f")"
-
-            )
+            query = f"Insert into users"\
+                f" ("\
+                f"  nationality, user_type"\
+                f", registration_date, name, surname, gender, birthplace"\
+                f", birthdate, city, address, postal_code, district, first_cellphone"\
+                f", telephone, email, fiscal_code, contect_mode, privacy_agreement"\
+                f")"\
+                f" values "\
+                f"("\
+                f"  '{user.nationality}'"\
+                f", '{user.user_type}'"\
+                f", '{user.registration_date}'"\
+                f", '{user.name}'"\
+                f", '{user.surname}'"\
+                f", '{user.gender}'"\
+                f", '{user.birthplace}'"\
+                f", '{user.birthdate}'"\
+                f", '{user.city}'"\
+                f", '{user.address}'"\
+                f", '{user.postal_code}'"\
+                f", '{user.district}'"\
+                f", '{user.first_cellphone}'"\
+                f", '{user.telephone}'"\
+                f", '{user.email}'"\
+                f", '{user.fiscal_code}'"\
+                f", '{user.contect_mode}'"\
+                f", {user.privacy_agreement})"
+            self.cur.execute(query)
 
             # self.cur.commit()
 
@@ -389,9 +387,16 @@ class DatabaseManager:
                 query += " AND (availability <> 3)"
             query += " AND availability <> 4 "
 
+        query += " LIMIT 100;"
+
         return self.query(query, returns=True)
 
     def get_item(self, item_id) -> tuple:
+        '''
+        Get item from database by item id
+        :param item_id: item id
+        :return: item
+        '''
         query = f"SELECT * FROM items WHERE id = {self.__check_value(item_id, int)}"
         dbitem = self.query(query, returns=True)
         return dbitem[0]
@@ -749,6 +754,22 @@ class DatabaseManager:
     def get_signed_user_reservation(self, search_field):
         query = f"SELECT ssr.user_id,u.Id,concat(u.name,' ',u.surname)AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.Id = ssr.user_id WHERE concat(u.name,' ',u.surname) LIKE '%{search_field}%'"
         return self.query(query, returns=True)
+
+    # region Stats
+    def get_user_count(self):
+        query = f"SELECT COUNT(*) AS 'count' FROM users"
+        return self.query(query, returns=True)
+
+    def get_user_count_gender(self, gender):
+        query = f"SELECT COUNT(*) AS 'count' FROM users WHERE gender = '{self.__check_value(gender, str)}';"
+        return self.query(query, returns=True)
+
+    def get_user_by_birthdate(self, data_in: date, data_fi: date):
+        query = f"SELECT COUNT(*) AS 'count' FROM users WHERE {self.__set_date_str(data_in)}" \
+                f" > birthdate AND birthdate > {self.__set_date_str(data_fi)}"
+        return self.query(query,returns=True)
+
+    # endregion
 
     def __set_date_str(self, item_date) -> str:
         value = "null"

@@ -95,9 +95,10 @@ class InventoryView(QMainWindow):
             self.itemTable.setItem(row, 1, QTableWidgetItem(item.author))
             self.itemTable.setItem(row, 2, QTableWidgetItem(item.isbn))
             self.itemTable.setItem(row, 3, QTableWidgetItem(item.bid))
-            self.itemTable.setItem(row, 4, QTableWidgetItem(str(item.availability.name)))
+            self.itemTable.setItem(row, 4, QTableWidgetItem(str(item.availability.name).replace('_', ' ')))
             self.itemTable.setItem(row, 5, QTableWidgetItem(item.note))
-            row = row + 1
+
+        self.itemTable.setEditTriggers(QTableWidget.NoEditTriggers)
 
     def __get_selected_item(self):
         if self.itemTable.currentRow() != -1:

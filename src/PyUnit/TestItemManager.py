@@ -19,7 +19,7 @@ class TestItemManager(unittest.TestCase):
         cls.dbms = dbms("../config/db.json")
 
     def setUp(self) -> None:
-        self.item = src.Utils.Tools.generate_random_item()
+        self.item = src.Utils.Tools.generate_random_test_item()
         self.item = self.im.add_item(self.item) #gia questo permette di testare la funzione add_item, se fallisce qualcosa non va
         print(self.item)
 
@@ -42,7 +42,7 @@ class TestItemManager(unittest.TestCase):
     def test_get_items(self):
         test_items = []
         for i in range(1,10):
-            test_items.append(self.im.add_item(src.Utils.Tools.generate_random_item()))
+            test_items.append(self.im.add_item(src.Utils.Tools.generate_random_test_item()))
 
         for item in test_items:
             for i, s in enumerate(self.im.get_items(item.title, 0)):
