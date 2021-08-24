@@ -63,13 +63,13 @@ class ReservationView(QMainWindow):
                 row = self.reservationTable.rowCount()
                 self.reservationTable.insertRow(row)
                 self.reservationTable.setItem(row, 0, QTableWidgetItem(res.fullname))
+                self.reservationTable.setItem(row, 1, QTableWidgetItem(res.cellphone))
                 self.reservationTable.setItem(row, 2, QTableWidgetItem(res.date_from.strftime("%m/%d/%Y")))
                 self.reservationTable.setItem(row, 3, QTableWidgetItem(
                     res.date_from.strftime("%H:%M:%S") + " - " + res.date_to.strftime("%H:%M:%S")))
-                self.reservationTable.setItem(row, 1, QTableWidgetItem(res.cellphone))
                 row = row + 1
         if self.__unsigned is not None and self.__signed is not None:
-            self.__reservations = self.__signed + self.__unsigned
+            self.__reservations = self.__unsigned + self.__signed
 
     def search(self):
         """
@@ -92,7 +92,7 @@ class ReservationView(QMainWindow):
         ok = discard.exec_()
         if ok:
             if res.n_fields == 6:
-                self.resM.delete_signed(res.Id)
+                self.resM.delete_signed(res.id)
             else:
                 self.resM.delete_unsigned(res.id)
         self.search()
@@ -112,12 +112,10 @@ class ReservationView(QMainWindow):
         """
         if self.reservationTable.currentRow() != -1:
             for res in self.__reservations:
-                if res.n_fields == 5:
-                    return self.__unsigned[self.reservationTable.currentRow()]
-                if res.n_fields == 6:
-                    return self.__signed[self.reservationTable.currentRow()]
-            else:
-                return None
+                if res is not None:
+                    return self.__reservations[self.reservationTable.currentRow()]
+                else:
+                    return None
 
 
 class Dialog(QDialog):

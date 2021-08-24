@@ -798,7 +798,7 @@ class DatabaseManager:
         return self.query(query, returns=True)
 
     def get_signed_user_reservation(self, search_field):
-        query = f"SELECT ssr.user_id,u.Id,concat(u.name,' ',u.surname)AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.Id = ssr.user_id WHERE concat(u.name,' ',u.surname) LIKE '%{search_field}%'"
+        query = f"SELECT ssr.id, u.Id AS 'user_id',concat(u.name,' ',u.surname) AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.id = ssr.user_id WHERE concat(u.name,' ',u.surname) LIKE '%{search_field}%'"
         return self.query(query, returns=True)
 
     def __set_date_str(self, item_date) -> str:
@@ -818,3 +818,11 @@ class DatabaseManager:
             except:
                 raise TypeError(f" {item_value} is not an instance of {type_value}")
         return value
+
+    def delete_unsigned_by_id(self,id):
+        query = f"DELETE FROM unsigned_service_reservations WHERE id={id};"
+        return self.query(query, returns=True)
+
+    def delete_signed_by_id(self,id):
+        query = f"DELETE FROM signed_service_reservation WHERE id ={id};"
+        return self.query(query, returns=True)
