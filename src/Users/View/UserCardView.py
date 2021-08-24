@@ -248,7 +248,6 @@ class UserCardView(QMainWindow):
         self.callback(self.userM.list())
         self.close()
 
-
     def cell_contact(self):
         if self.cellField.text() == '':
             self.cellularRadio.setChecked(True)

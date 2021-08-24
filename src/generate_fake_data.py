@@ -1,6 +1,6 @@
+from src.Movements.Controllers.MovementManager import MovementManager
 from src.Users.controllers.UserManager import UserManager
 from src.Utils.Tools import *
-from src.Movements.Controllers.MovementManager import MovementManager
 
 
 def generate_users(quantity: int) -> None:
@@ -27,3 +27,4 @@ if __name__ == "__main__":
     #generate_users(100)
     #generate_items(100)
     generate_movement(10000)
+
