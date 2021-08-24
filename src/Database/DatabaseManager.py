@@ -736,6 +736,14 @@ class DatabaseManager:
                 f" > birthdate AND birthdate > {self.__set_date_str(data_fi)}"
         return self.query(query,returns=True)
 
+    def get_top_3_items(self):
+        query = f"SELECT i.title, i.author, i.isbn, COUNT(*) AS 'count' FROM movements AS m JOIN items AS i ON m.item_id = i.id GROUP BY i.isbn ORDER BY COUNT(*) DESC LIMIT 3"
+        return self.query(query,returns=True)
+
+    def get_top_3_genres(self):
+        query = f"SELECT g.description, COUNT(*) AS 'count' FROM movements AS m JOIN items AS i ON m.item_id = i.id JOIN items_genres AS ig ON ig.item_id = i.id JOIN genres AS g ON g.id = ig.genre_id GROUP BY g.description ORDER BY COUNT(*) DESC LIMIT 3"
+        return self.query(query, returns=True)
+
     # endregion
 
     def __set_date_str(self, item_date) -> str:
