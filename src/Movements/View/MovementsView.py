@@ -25,13 +25,17 @@ class MovementsView(QMainWindow):
         self.consultationButton.clicked.connect(lambda: self.new_consultation())
         self.infoButton.clicked.connect(lambda: self.movement_info())
         self.backButton.clicked.connect(lambda: self.close())
-        self.searchField.textChanged.connect(lambda: self.search())
 
         self.loanRadio.setChecked(True)
 
-        self.movements = Movement()
+        self.searchField.textChanged.connect(lambda: self.search())
+        self.loanRadio.toggled.connect(lambda: self.search())
+
         self.movements = self.movementM.find_all(self.loanRadio.isChecked(), 5)
         self.load_table()
+
+
+
 
     def style(self):
         # Button Style
@@ -73,4 +77,28 @@ class MovementsView(QMainWindow):
             row = row + 1
 
     def search(self):
-        pass
+
+        numSearchMode = 0
+
+        if self.searchField.text() != '':
+            if self.searchMode.currentText() == 'In tutti i campi':
+                numSearchMode = 0
+            elif self.searchMode.currentText() == 'Utente':
+                numSearchMode = 1
+            elif self.searchMode.currentText() == 'Titolo':
+                numSearchMode = 2
+            elif self.searchMode.currentText() == 'Data':
+                numSearchMode = 3
+            elif self.searchMode.currentText() == 'ISBN':
+                numSearchMode = 4
+
+            self.movements = self.movementM.find_all(self.loanRadio.isChecked(), numSearchMode, self.searchField.text())
+        else:
+            self.movements = self.movementM.find_all(self.loanRadio.isChecked(), 5)
+
+        self.load_table()
+
+
+
+
+

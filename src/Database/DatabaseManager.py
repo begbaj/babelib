@@ -617,7 +617,7 @@ class DatabaseManager:
     # isbn
     # timestamp
 
-    def find_movement(self, search_field, search_mode):
+    def find_movement(self, search_field_mov_type=None, search_mode=None, search_field=None):
         # itemM = ItemManager()
 
         # List movements
@@ -628,38 +628,44 @@ class DatabaseManager:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where u.name like '%{search_field}%' "
+                                 f"where (u.name like '%{search_field}%' "
                                  f"or u.surname like '%{search_field}%' "
                                  f"or i.title like '%{search_field}%' "
                                  f"or i.isbn like '%{search_field}%' "
-                                 f"or m.timestamp like '%{search_field}%' ")
+                                 f"or m.timestamp like '%{search_field}%') "
+                                 f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 1:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where u.name like '%{search_field}%' "
-                                 f"or u.surname like '%{search_field}%' ")
+                                 f"where (u.name like '%{search_field}%' "
+                                 f"or u.surname like '%{search_field}%') "
+                                 f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 2:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where i.title like '%{search_field}%' ")
+                                 f"where i.title like '%{search_field}%' "
+                                 f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 3:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where i.isbn like '%{search_field}%' ")
+                                 f"where i.isbn like '%{search_field}%' "
+                                 f"and m.mov_type = {search_field_mov_type} ")
+
             elif search_mode == 4:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where m.timestamp like '%{search_field}%' ")
+                                 f"where m.timestamp like '%{search_field}%' "
+                                 f"and m.mov_type = {search_field_mov_type} ")
 
             elif search_mode == 5:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where m.mov_type like '%{search_field}%' ")
+                                 f"where m.mov_type = {search_field_mov_type} ")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
