@@ -59,7 +59,8 @@ class HomeView(QMainWindow):
         pass
 
     def __go_stats_view(self):
-        pass
+        self.statsview = StatsView(self.widget)
+        self.statsview.show()
 
     def __go_report_view(self):
         pass
