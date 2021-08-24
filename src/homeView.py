@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
+from src.Stats.View.StatsView import StatsView
 from Users.View.UserView import UserView
 from src.Items.View.InventoryView import InventoryView
 from src.Services.views.NewReservationView import NewReservationView
@@ -20,17 +21,17 @@ class HomeView(QMainWindow):
 
     def setup(self):
         # Menu Button
-        self.userButton.clicked.connect(lambda: self.__go_user_view())
-        self.catalogingButton.clicked.connect(lambda: self.__go_inventory_view())
-        self.movementButton.clicked.connect(lambda: self.__go_movement_view())
-        self.statsButton.clicked.connect(lambda: self.__go_stats_view())
+        self.userButton.clicked.connect(self.__go_user_view)
+        self.catalogingButton.clicked.connect(self.__go_inventory_view)
+        self.movementButton.clicked.connect(self.__go_movement_view)
+        self.statsButton.clicked.connect(self.__go_stats_view)
         # self.reportButton.clicked.connect(self.goreportview())
-        self.serviceButton.clicked.connect(lambda: self.__go_service_view())
+        self.serviceButton.clicked.connect(self.__go_service_view)
         # self.commButton.clicked.connect(self.gocomunicationview())
         # Shortcut Button
         # self.newloanButton.clicked.connect(self.newloan())
-        self.newreservButton.clicked.connect(lambda: self.new_reservation())
-        self.newuserButton.clicked.connect(lambda: self.new_user())
+        self.newreservButton.clicked.connect(self.new_reservation)
+        self.newuserButton.clicked.connect(self.new_user)
         # Setting Button
         # self.settingButton.clicked.connect(self.setting())
         self.style()
@@ -59,7 +60,8 @@ class HomeView(QMainWindow):
         pass
 
     def __go_stats_view(self):
-        pass
+        self.statsview = StatsView(self.widget)
+        self.statsview.show()
 
     def __go_report_view(self):
         pass
@@ -75,6 +77,7 @@ class HomeView(QMainWindow):
     # endregion
 
     # region Shortcut functions
+
     def new_loan(self):
         pass
 
@@ -90,4 +93,4 @@ class HomeView(QMainWindow):
 
     def setting(self):
         pass
-    # end region
+    # endregion

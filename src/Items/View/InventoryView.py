@@ -97,9 +97,8 @@ class InventoryView(QMainWindow):
             self.itemTable.setItem(row, 3, QTableWidgetItem(item.bid))
             self.itemTable.setItem(row, 4, QTableWidgetItem(str(item.availability.name)))
             self.itemTable.setItem(row, 5, QTableWidgetItem(item.note))
-            self.itemTable.setEditTriggers(QTableWidget.NoEditTriggers)
 
-            row = row + 1
+        self.itemTable.setEditTriggers(QTableWidget.NoEditTriggers)
 
     def __get_selected_item(self):
         if self.itemTable.currentRow() != -1:

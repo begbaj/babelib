@@ -8,6 +8,7 @@ import mariadb
 import json
 import os
 import decimal
+from dateutil.relativedelta import relativedelta
 from datetime import date, datetime, timedelta
 
 
@@ -90,27 +91,8 @@ class DatabaseManager:
 
     def get_users(self):
         """Retrieves the list of contacts from the Database and prints to stdout"""
-
-        # Initialize Variables
-        users = []
-
-        # List users
-        try:
-            self.cur.execute(f"Select * from users u ")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-            user.id = row.Id
-
-            users.append(user)
-        return users
+        query = f"Select * from users u "
+        return self.query(query, returns=True)
 
     def set_user(self, user):
 
@@ -142,37 +124,34 @@ class DatabaseManager:
 
     def insert_user(self, user):
         try:
-            self.cur.execute(
-                f"Insert into users"
-                f" ("
-                f"  nationality, user_type"
-                f", registration_date, name, surname, gender, birthplace"
-                f", birthdate, city, address, postal_code, district, first_cellphone"
-                f", telephone, email, fiscal_code, contect_mode, privacy_agreement"
-                f")"
-                f" values "
-                f"("
-                f" '{user.nationality}'"
-                f", '{user.user_type}'"
-                f", '{user.registration_date}'"
-                f", '{user.name}'"
-                f", '{user.surname}'"
-                f", '{user.gender}'"
-                f", '{user.birthplace}'"
-                f", '{user.birthdate}'"
-                f", '{user.city}'"
-                f", '{user.address}'"
-                f", '{user.postal_code}'"
-                f", '{user.district}'"
-                f", '{user.first_cellphone}'"
-                f", '{user.telephone}'"
-                f", '{user.email}'"
-                f", '{user.fiscal_code}'"
-                f", '{user.contect_mode}'"
-                f", {user.privacy_agreement}"
-                f")"
-
-            )
+            query = f"Insert into users"\
+                f" ("\
+                f"  nationality, user_type"\
+                f", registration_date, name, surname, gender, birthplace"\
+                f", birthdate, city, address, postal_code, district, first_cellphone"\
+                f", telephone, email, fiscal_code, contect_mode, privacy_agreement"\
+                f")"\
+                f" values "\
+                f"("\
+                f"  '{user.nationality}'"\
+                f", '{user.user_type}'"\
+                f", '{user.registration_date}'"\
+                f", '{user.name}'"\
+                f", '{user.surname}'"\
+                f", '{user.gender}'"\
+                f", '{user.birthplace}'"\
+                f", '{user.birthdate}'"\
+                f", '{user.city}'"\
+                f", '{user.address}'"\
+                f", '{user.postal_code}'"\
+                f", '{user.district}'"\
+                f", '{user.first_cellphone}'"\
+                f", '{user.telephone}'"\
+                f", '{user.email}'"\
+                f", '{user.fiscal_code}'"\
+                f", '{user.contect_mode}'"\
+                f", {user.privacy_agreement})"
+            self.cur.execute(query)
 
             # self.cur.commit()
 
@@ -187,22 +166,9 @@ class DatabaseManager:
             print(f"Error: {e}")
 
     def find_user_by_id(self, user_id):
-        user = None
-        try:
-            self.cur.execute(f"Select * from users u "
-                             f"where u.id = {user_id}")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-            user.id = row.Id
-        return user
+        query = f"Select * from users where Id = {user_id}"
+        users = self.query(query, returns=True)
+        return users[0]
 
     def get_user_name_by_id(self, user_id):
         query = f"Select name from users where Id = {user_id}"
@@ -213,74 +179,16 @@ class DatabaseManager:
         return self.query(query, returns=True)
 
     def find_user_by_name(self, name):
-
-        # Initialize Variables
-        users = []
-
-        try:
-            self.cur.execute(f"SELECT * FROM users u "
-                             f"WHERE u.name LIKE '%{name}%'")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-
-            user.id = row.Id
-            users.append(user)
-        return users
+        query = (f"Select * from users u where u.name like '%{name}%'")
+        return self.query(query, returns=True)
 
     def find_user_by_surname(self, surname):
-
-        # Initialize Variables
-        users = []
-
-        try:
-            self.cur.execute(f"Select * from users u "
-                             f"where u.surname LIKE '%{surname}%'")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-
-            user.id = row.Id
-            users.append(user)
-        return users
+        query = (f"Select * from users u where u.surname like '%{surname}%'")
+        return self.query(query, returns=True)
 
     def find_user_by_name_and_surname(self, name, surname):
-
-        # Initialize Variables
-        users = []
-
-        try:
-            self.cur.execute(f"Select * from users u "
-                             f"where u.name LIKE '%{name}%'"
-                             f"and u.surname LIKE '%{surname}%'")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-
-            user.id = row.Id
-            users.append(user)
-        return users
+        query = (f"Select * from users u where u.name LIKE '%{name}%' and u.surname LIKE '%{surname}%'")
+        return self.query(query, returns=True)
 
     # endregion
 
@@ -390,9 +298,16 @@ class DatabaseManager:
                 query += " AND (availability <> 3)"
             query += " AND availability <> 4 "
 
+        query += " LIMIT 100;"
+
         return self.query(query, returns=True)
 
     def get_item(self, item_id) -> tuple:
+        '''
+        Get item from database by item id
+        :param item_id: item id
+        :return: item
+        '''
         query = f"SELECT * FROM items WHERE id = {self.__check_value(item_id, int)}"
         dbitem = self.query(query, returns=True)
         return dbitem[0]
@@ -617,7 +532,7 @@ class DatabaseManager:
     # isbn
     # timestamp
 
-    def find_movement(self, search_field, search_mode):
+    def find_movement(self, search_field_mov_type=None, search_mode=None, search_field=None):
         # itemM = ItemManager()
 
         # List movements
@@ -628,38 +543,44 @@ class DatabaseManager:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where u.name like '%{search_field}%' "
+                                 f"where (u.name like '%{search_field}%' "
                                  f"or u.surname like '%{search_field}%' "
                                  f"or i.title like '%{search_field}%' "
                                  f"or i.isbn like '%{search_field}%' "
-                                 f"or m.timestamp like '%{search_field}%' ")
+                                 f"or m.timestamp like '%{search_field}%') "
+                                 f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 1:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where u.name like '%{search_field}%' "
-                                 f"or u.surname like '%{search_field}%' ")
+                                 f"where (u.name like '%{search_field}%' "
+                                 f"or u.surname like '%{search_field}%') "
+                                 f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 2:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where i.title like '%{search_field}%' ")
+                                 f"where i.title like '%{search_field}%' "
+                                 f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 3:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where i.isbn like '%{search_field}%' ")
+                                 f"where i.isbn like '%{search_field}%' "
+                                 f"and m.mov_type = {search_field_mov_type} ")
+
             elif search_mode == 4:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where m.timestamp like '%{search_field}%' ")
+                                 f"where m.timestamp like '%{search_field}%' "
+                                 f"and m.mov_type = {search_field_mov_type} ")
 
             elif search_mode == 5:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where m.mov_type like '%{search_field}%' ")
+                                 f"where m.mov_type = {search_field_mov_type} ")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
@@ -800,6 +721,22 @@ class DatabaseManager:
     def get_signed_user_reservation(self, search_field):
         query = f"SELECT ssr.id, u.Id AS 'user_id',concat(u.name,' ',u.surname) AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.id = ssr.user_id WHERE concat(u.name,' ',u.surname) LIKE '%{search_field}%'"
         return self.query(query, returns=True)
+
+    # region Stats
+    def get_user_count(self):
+        query = f"SELECT COUNT(*) AS 'count' FROM users"
+        return self.query(query, returns=True)
+
+    def get_user_count_gender(self, gender):
+        query = f"SELECT COUNT(*) AS 'count' FROM users WHERE gender = '{self.__check_value(gender, str)}';"
+        return self.query(query, returns=True)
+
+    def get_user_by_birthdate(self, data_in: date, data_fi: date):
+        query = f"SELECT COUNT(*) AS 'count' FROM users WHERE {self.__set_date_str(data_in)}" \
+                f" > birthdate AND birthdate > {self.__set_date_str(data_fi)}"
+        return self.query(query,returns=True)
+
+    # endregion
 
     def __set_date_str(self, item_date) -> str:
         value = "null"

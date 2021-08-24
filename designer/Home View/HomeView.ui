@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1680</width>
+    <width>1600</width>
     <height>1000</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1680</width>
+    <width>1600</width>
     <height>1000</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1680</width>
+    <width>1600</width>
     <height>1000</height>
    </size>
   </property>
@@ -26,13 +26,20 @@
    <string>Babelib</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">  MainWindow {
-        background-image: url(&quot;D:/img/Sfondo.jpeg&quot;); 
-        background-repeat: no-repeat; 
-        background-position: center;
-    }</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget[isBackground=true]{
+	background-image: url(&quot;../img/Sfondo.jpeg&quot;);
+	background-repeat: no-repeat;
+    background-size: 30px 30px;
+	background-position: center;
+}</string>
+   </property>
+   <property name="isBackground" stdset="0">
+    <bool>true</bool>
+   </property>
    <widget class="QPushButton" name="newreservButton">
     <property name="geometry">
      <rect>
@@ -257,14 +264,14 @@ border-radius:10px;</string>
        <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>false</bool>
        </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>30</number>
+       </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>120</number>
        </attribute>
        <attribute name="horizontalHeaderHighlightSections">
         <bool>false</bool>
-       </attribute>
-       <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>30</number>
        </attribute>
        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
         <bool>false</bool>
@@ -503,14 +510,14 @@ border-radius:10px;</string>
        <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>false</bool>
        </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>30</number>
+       </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>120</number>
        </attribute>
        <attribute name="horizontalHeaderHighlightSections">
         <bool>false</bool>
-       </attribute>
-       <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>30</number>
        </attribute>
        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
         <bool>false</bool>
@@ -673,14 +680,14 @@ border-radius:10px;</string>
        <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>false</bool>
        </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>30</number>
+       </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>120</number>
        </attribute>
        <attribute name="horizontalHeaderHighlightSections">
         <bool>false</bool>
-       </attribute>
-       <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>30</number>
        </attribute>
        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
         <bool>false</bool>
@@ -1286,29 +1293,6 @@ background-color:transparent;</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1681</width>
-      <height>1001</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="textFormat">
-     <enum>Qt::RichText</enum>
-    </property>
-    <property name="pixmap">
-     <pixmap>img/Sfondo.jpeg</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <zorder>label</zorder>
    <zorder>frame</zorder>
    <zorder>newreservButton</zorder>
    <zorder>newuserButton</zorder>

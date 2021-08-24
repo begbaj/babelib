@@ -8,25 +8,38 @@ class UserManager:
 
     db = DatabaseManager()
 
-    def list(self):
-        users = self.db.get_users()
+    def set_users_to_model(self, rows, one):
+
+        users = []
+
+        for row in rows:
+            user = User(row.nationality, row.user_type
+                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
+                        , row.birthdate, row.city, row.address, row.postal_code, row.district
+                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
+                        , row.contect_mode, row.privacy_agreement)
+
+            user.id = row.Id
+            if one == True:
+                return user
+            else:
+                users.append(user)
         return users
+
+    def list(self):
+        return self.set_users_to_model(self.db.get_users(), False)
 
     def find(self, id):
-        user = self.db.find_user_by_id(id)
-        return user
+        return self.set_users_to_model(self.db.find_user_by_id(id), True)
 
     def findName(self, name):
-        users = self.db.find_user_by_name(name)
-        return users
+        return self.set_users_to_model(self.db.find_user_by_name(name), False)
 
     def findSurname(self, surname):
-        users = self.db.find_user_by_surname(surname)
-        return users
+        return self.set_users_to_model(self.db.find_user_by_surname(surname), False)
 
     def findNameSurname(self, name, surname):
-        users = self.db.find_user_by_name_and_surname(name, surname)
-        return users
+        return self.set_users_to_model(self.db.find_user_by_name_and_surname(name, surname), False)
 
     def set(self, user):
         self.db.set_user(user)
