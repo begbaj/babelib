@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QDialog, QDialogButtonBox
+from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QDialog, QDialogButtonBox, QTableWidget
 from PyQt5.uic import loadUi
 from datetime import datetime
 
@@ -68,6 +68,9 @@ class ReservationView(QMainWindow):
                 self.reservationTable.setItem(row, 3, QTableWidgetItem(
                     res.date_from.strftime("%H:%M:%S") + " - " + res.date_to.strftime("%H:%M:%S")))
                 row = row + 1
+
+        self.reservationTable.setEditTriggers(QTableWidget.NoEditTriggers)
+
         if self.__unsigned is not None and self.__signed is not None:
             self.__reservations = self.__unsigned + self.__signed
 
