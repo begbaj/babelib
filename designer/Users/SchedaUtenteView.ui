@@ -175,7 +175,7 @@ QPushButton::pressed
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
+background-color:rgba(0, 192, 225, 125)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -334,7 +334,7 @@ background-color: transparent</string>
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
+background-color:rgba(0, 192, 225, 125)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -563,7 +563,7 @@ border:none;</string>
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
+background-color:rgba(0, 192, 225, 125)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -799,7 +799,7 @@ background-color:none;</string>
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
+background-color:rgba(0, 192, 225, 125)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -1182,7 +1182,7 @@ background-color: transparent</string>
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 85)</string>
+background-color:rgba(0, 192, 225, 125)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>

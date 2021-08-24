@@ -52,8 +52,7 @@
     </property>
     <property name="styleSheet">
      <string notr="true">border:none;
-background-color:rgb(26, 25, 39);
-</string>
+background-color:rgb(20, 18, 29)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -125,12 +124,16 @@ background-color:rgb(26, 25, 39);
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(28, 181, 209, 255), stop:0.454545 rgba(21, 143, 166, 255), stop:0.619318 rgba(15, 103, 120, 255), stop:1 rgba(11, 79, 93, 255));
-color:rgb(255, 255, 255);
-font: 10pt;
+      <string notr="true">QPushButton 
+{
 border-radius:15px;
-border: none
-</string>
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
      </property>
      <property name="text">
       <string>Salva</string>
@@ -148,6 +151,9 @@ border: none
     </widget>
    </widget>
    <widget class="QLabel" name="background">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -157,7 +163,7 @@ border: none
      </rect>
     </property>
     <property name="sizePolicy">
-     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
       <horstretch>0</horstretch>
       <verstretch>0</verstretch>
      </sizepolicy>
@@ -169,7 +175,7 @@ border: none
      <enum>Qt::RichText</enum>
     </property>
     <property name="pixmap">
-     <pixmap>../img/background_blur.jpg</pixmap>
+     <pixmap>../img/Sfondo.jpeg</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -195,7 +201,7 @@ border: none
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 200)</string>
+background-color:rgba(0, 192, 225, 125)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -239,79 +245,6 @@ background-color:none;</string>
       <string>Autore *</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="title">
-     <property name="geometry">
-      <rect>
-       <x>140</x>
-       <y>30</y>
-       <width>301</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777214</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::WheelFocus</enum>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::RightToLeft</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
-color:rgb(255, 255, 255);
-border-radius: 20px;
-border-style: solid;
-border:none;
-text-align: center;
-</string>
-     </property>
-     <property name="isUpper" stdset="0">
-      <bool>false</bool>
-     </property>
-     <property name="isMandatory" stdset="0">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="author">
-     <property name="geometry">
-      <rect>
-       <x>140</x>
-       <y>60</y>
-       <width>301</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
-color:rgb(255, 255, 255);
-border-radius: 20px;
-border-style: solid;
-border:none;
-text-align: center;</string>
-     </property>
-     <property name="isUpper" stdset="0">
-      <bool>false</bool>
-     </property>
-     <property name="isMandatory" stdset="0">
-      <bool>true</bool>
-     </property>
-    </widget>
     <widget class="QComboBox" name="material">
      <property name="geometry">
       <rect>
@@ -322,9 +255,7 @@ text-align: center;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
-color:rgb(255, 255, 255);
-border-radius: 20px;
+      <string notr="true">border-radius: 20px;
 border-style: solid;
 border:none;
 text-align: center;</string>
@@ -343,8 +274,7 @@ text-align: center;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
-color:rgb(255, 255, 255);
+      <string notr="true">
 border-radius: 20px;
 border-style: solid;
 border:none;
@@ -364,36 +294,10 @@ text-align: center;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
-color:rgb(255, 255, 255);
-border-radius: 20px;
+      <string notr="true">border-radius: 20px;
 border-style: solid;
 border:none;
 text-align: center;</string>
-     </property>
-     <property name="isMandatory" stdset="0">
-      <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="isbn">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>240</y>
-       <width>231</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
-color:rgb(255, 255, 255);
-border-radius: 20px;
-border-style: solid;
-border:none;
-text-align: center;</string>
-     </property>
-     <property name="isUpper" stdset="0">
-      <bool>true</bool>
      </property>
      <property name="isMandatory" stdset="0">
       <bool>false</bool>
@@ -412,12 +316,13 @@ text-align: center;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
 color:rgb(255, 255, 255);
-border-radius: 20px;
-border-style: solid;
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
-text-align: center;</string>
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
      </property>
      <property name="isUpper" stdset="0">
       <bool>false</bool>
@@ -562,12 +467,13 @@ background-color:none;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
 color:rgb(255, 255, 255);
-border-radius: 20px;
-border-style: solid;
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
-text-align: center;</string>
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
      </property>
      <property name="isUpper" stdset="0">
       <bool>true</bool>
@@ -604,12 +510,13 @@ background-color:none;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
 color:rgb(255, 255, 255);
-border-radius: 20px;
-border-style: solid;
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
-text-align: center;</string>
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
      </property>
      <property name="isUpper" stdset="0">
       <bool>false</bool>
@@ -646,8 +553,7 @@ background-color:none;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
-color:rgb(255, 255, 255);
+      <string notr="true">
 border-radius: 20px;
 border-style: solid;
 border:none;
@@ -685,8 +591,7 @@ background-color:none;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
-color:rgb(255, 255, 255);
+      <string notr="true">
 border-radius: 20px;
 border-style: solid;
 border:none;
@@ -694,6 +599,99 @@ text-align: center;</string>
      </property>
      <property name="isMandatory" stdset="0">
       <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="title">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>30</y>
+       <width>301</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="author">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>60</y>
+       <width>301</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="isbn">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>240</y>
+       <width>231</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
      </property>
     </widget>
    </widget>
@@ -717,7 +715,7 @@ text-align: center;</string>
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 200)</string>
+background-color:rgba(0, 192, 225, 125)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -789,12 +787,13 @@ background-color:none;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
 color:rgb(255, 255, 255);
-border-radius: 20px;
-border-style: solid;
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
-text-align: center;</string>
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
      </property>
      <property name="isUpper" stdset="0">
       <bool>true</bool>
@@ -813,12 +812,13 @@ text-align: center;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
 color:rgb(255, 255, 255);
-border-radius: 20px;
-border-style: solid;
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
-text-align: center;</string>
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
      </property>
      <property name="isUpper" stdset="0">
       <bool>false</bool>
@@ -837,12 +837,13 @@ text-align: center;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
 color:rgb(255, 255, 255);
-border-radius: 20px;
-border-style: solid;
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
-text-align: center;</string>
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
      </property>
      <property name="isUpper" stdset="0">
       <bool>false</bool>
@@ -891,7 +892,7 @@ text-align: center;</string>
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 200)</string>
+background-color:rgba(0, 192, 225, 125)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -945,9 +946,7 @@ background-color:none;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
-color:rgb(255, 255, 255);
-border-radius: 20px;
+      <string notr="true">border-radius: 20px;
 border-style: solid;
 border:none;
 text-align: center;</string>
@@ -1002,9 +1001,7 @@ background-color:none;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
-color:rgb(255, 255, 255);
-border-radius: 20px;
+      <string notr="true">border-radius: 20px;
 border-style: solid;
 border:none;
 text-align: center;</string>
@@ -1059,9 +1056,7 @@ background-color:none;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
-color:rgb(255, 255, 255);
-border-radius: 20px;
+      <string notr="true">border-radius: 20px;
 border-style: solid;
 border:none;
 text-align: center;</string>
@@ -1080,9 +1075,7 @@ text-align: center;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
-color:rgb(255, 255, 255);
-border-radius: 20px;
+      <string notr="true">border-radius: 20px;
 border-style: solid;
 border:none;
 text-align: center;</string>
@@ -1150,7 +1143,7 @@ text-align: center;</string>
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 200)</string>
+background-color:rgba(0, 192, 225, 125)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -1198,12 +1191,13 @@ border: none
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
 color:rgb(255, 255, 255);
-border-radius: 20px;
-border-style: solid;
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
-text-align: center;</string>
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
      </property>
      <property name="isUpper" stdset="0">
       <bool>false</bool>
@@ -1258,12 +1252,13 @@ background-color:none;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
+      <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
 color:rgb(255, 255, 255);
-border-radius: 20px;
-border-style: solid;
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
-text-align: center;</string>
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
      </property>
      <property name="isUpper" stdset="0">
       <bool>false</bool>
@@ -1293,7 +1288,7 @@ text-align: center;</string>
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 200)</string>
+background-color:rgba(0, 192, 225, 125)</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -1304,20 +1299,22 @@ background-color:rgba(0, 192, 225, 200)</string>
     <widget class="QTextEdit" name="note">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>20</x>
        <y>40</y>
-       <width>351</width>
-       <height>251</height>
+       <width>321</width>
+       <height>241</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgba(23, 28, 78, 100);
-color:rgb(255, 255, 255);
-border-radius: 20px;
+      <string notr="true">border-radius: 20px;
 border-style: solid;
 border:none;
 padding: 10px;
-text-align: center;</string>
+text-align: center;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+border:none;
+border: 2px solid rgba(255, 255, 255, 100);</string>
      </property>
      <property name="placeholderText">
       <string>Scrivi qui una nota sul documento</string>
@@ -1329,7 +1326,7 @@ text-align: center;</string>
     <widget class="QLabel" name="note_label">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>20</x>
        <y>10</y>
        <width>47</width>
        <height>21</height>
