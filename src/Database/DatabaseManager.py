@@ -655,6 +655,12 @@ class DatabaseManager:
                                  f"left join items i on i.id = m.item_id "
                                  f"where m.timestamp like '%{search_field}%' ")
 
+            elif search_mode == 5:
+                self.cur.execute(f"Select * from movements m "
+                                 f"left join users u on u.id = m.user_id "
+                                 f"left join items i on i.id = m.item_id "
+                                 f"where m.move_type like '%{search_field}%' ")
+
         except mariadb.Error as e:
             print(f"Error: {e}")
 
