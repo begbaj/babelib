@@ -12,7 +12,7 @@ class MovementManager:
         movements = self.db.find_movement_by_id(id)
         return movements
 
-    def findAll(self, search_field, search_mode):
+    def find_all(self, search_field, search_mode):
         movements = self.db.find_movement(search_field, search_mode)
         return movements
 

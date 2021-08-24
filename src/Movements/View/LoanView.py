@@ -27,8 +27,8 @@ class LoanView(QDialog):
         # self.widget.addWidget(self)
         # self.widget.show()
         self.setup()
-        self.movementM = MovementManager()
-        self.movementM.findAll("tu", 1)
+        #self.movementM = MovementManager()
+        #self.movementM.findAll("tu", 1)
 
 
     def setup(self):
