@@ -30,7 +30,7 @@ class MovementsView(QMainWindow):
         self.loanRadio.setChecked(True)
 
         self.movements = Movement()
-        self.movements = self.movementM.list()
+        self.movements = self.movementM.find_all(self.loanRadio.isChecked(), 5)
         self.load_table()
 
     def style(self):
