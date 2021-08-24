@@ -29,9 +29,9 @@
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>290</x>
       <y>50</y>
-      <width>571</width>
+      <width>621</width>
       <height>131</height>
      </rect>
     </property>
@@ -378,10 +378,10 @@ QPushButton::pressed
     </property>
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>290</x>
       <y>200</y>
-      <width>570</width>
-      <height>511</height>
+      <width>621</width>
+      <height>521</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -471,7 +471,7 @@ QHeaderView::section{
      <bool>false</bool>
     </attribute>
     <attribute name="horizontalHeaderDefaultSectionSize">
-     <number>130</number>
+     <number>150</number>
     </attribute>
     <attribute name="horizontalHeaderHighlightSections">
      <bool>false</bool>
@@ -544,18 +544,12 @@ QHeaderView::section{
     </column>
     <column>
      <property name="text">
-      <string>Città</string>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
+      <string>Codifice Fiscale</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Affidabilità</string>
+      <string>Città</string>
      </property>
      <property name="font">
       <font>
@@ -576,7 +570,7 @@ QHeaderView::section{
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>300</x>
       <y>20</y>
       <width>51</width>
       <height>51</height>
