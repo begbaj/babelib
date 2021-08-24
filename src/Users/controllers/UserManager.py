@@ -9,23 +9,77 @@ class UserManager:
     db = DatabaseManager()
 
     def list(self):
-        users = self.db.get_users()
+
+        users = []
+
+        for row in self.db.get_users():
+            user = User(row.nationality, row.user_type
+                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
+                        , row.birthdate, row.city, row.address, row.postal_code, row.district
+                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
+                        , row.contect_mode, row.privacy_agreement)
+            user.id = row.Id
+
+            users.append(user)
         return users
 
     def find(self, id):
-        user = self.db.find_user_by_id(id)
+        row = self.db.find_user_by_id(id)
+
+        user = User(row.nationality, row.user_type
+                    , row.registration_date, row.name, row.surname, row.gender, row.birthplace
+                    , row.birthdate, row.city, row.address, row.postal_code, row.district
+                    , row.first_cellphone, row.telephone, row.email, row.fiscal_code
+                    , row.contect_mode, row.privacy_agreement)
+        user.id = row.Id
+
         return user
 
     def findName(self, name):
-        users = self.db.find_user_by_name(name)
+
+        users = []
+
+        for row in self.db.find_user_by_name(name):
+            user = User(row.nationality, row.user_type
+                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
+                        , row.birthdate, row.city, row.address, row.postal_code, row.district
+                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
+                        , row.contect_mode, row.privacy_agreement)
+
+            user.id = row.Id
+            users.append(user)
+
         return users
 
     def findSurname(self, surname):
-        users = self.db.find_user_by_surname(surname)
+
+        users = []
+
+        for row in self.db.find_user_by_surname(surname):
+            user = User(row.nationality, row.user_type
+                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
+                        , row.birthdate, row.city, row.address, row.postal_code, row.district
+                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
+                        , row.contect_mode, row.privacy_agreement)
+
+            user.id = row.Id
+            users.append(user)
+
         return users
 
     def findNameSurname(self, name, surname):
-        users = self.db.find_user_by_name_and_surname(name, surname)
+
+        users = []
+
+        for row in self.db.find_user_by_name_and_surname(name, surname):
+            user = User(row.nationality, row.user_type
+                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
+                        , row.birthdate, row.city, row.address, row.postal_code, row.district
+                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
+                        , row.contect_mode, row.privacy_agreement)
+
+            user.id = row.Id
+            users.append(user)
         return users
 
     def set(self, user):

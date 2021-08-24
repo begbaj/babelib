@@ -90,27 +90,8 @@ class DatabaseManager:
 
     def get_users(self):
         """Retrieves the list of contacts from the Database and prints to stdout"""
-
-        # Initialize Variables
-        users = []
-
-        # List users
-        try:
-            self.cur.execute(f"Select * from users u ")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-            user.id = row.Id
-
-            users.append(user)
-        return users
+        query = f"Select * from users u "
+        return self.query(query, returns=True)
 
     def set_user(self, user):
 
@@ -187,22 +168,9 @@ class DatabaseManager:
             print(f"Error: {e}")
 
     def find_user_by_id(self, user_id):
-        user = None
-        try:
-            self.cur.execute(f"Select * from users u "
-                             f"where u.id = {user_id}")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-            user.id = row.Id
-        return user
+        query = f"Select * from users where Id = {user_id}"
+        users = self.query(query, returns=True)
+        return users[0]
 
     def get_user_name_by_id(self, user_id):
         query = f"Select name from users where Id = {user_id}"
@@ -213,74 +181,16 @@ class DatabaseManager:
         return self.query(query, returns=True)
 
     def find_user_by_name(self, name):
-
-        # Initialize Variables
-        users = []
-
-        try:
-            self.cur.execute(f"SELECT * FROM users u "
-                             f"WHERE u.name LIKE '%{name}%'")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-
-            user.id = row.Id
-            users.append(user)
-        return users
+        query = (f"Select * from users u where u.name like '%{name}%'")
+        return self.query(query, returns=True)
 
     def find_user_by_surname(self, surname):
-
-        # Initialize Variables
-        users = []
-
-        try:
-            self.cur.execute(f"Select * from users u "
-                             f"where u.surname LIKE '%{surname}%'")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-
-            user.id = row.Id
-            users.append(user)
-        return users
+        query = (f"Select * from users u where u.surname like '%{surname}%'")
+        return self.query(query, returns=True)
 
     def find_user_by_name_and_surname(self, name, surname):
-
-        # Initialize Variables
-        users = []
-
-        try:
-            self.cur.execute(f"Select * from users u "
-                             f"where u.name LIKE '%{name}%'"
-                             f"and u.surname LIKE '%{surname}%'")
-
-        except mariadb.Error as e:
-            print(f"Error: {e}")
-
-        for row in self.cur.fetchall():
-            user = User(row.nationality, row.user_type
-                        , row.registration_date, row.name, row.surname, row.gender, row.birthplace
-                        , row.birthdate, row.city, row.address, row.postal_code, row.district
-                        , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                        , row.contect_mode, row.privacy_agreement)
-
-            user.id = row.Id
-            users.append(user)
-        return users
+        query = (f"Select * from users u where u.name LIKE '%{name}%' and u.surname LIKE '%{surname}%'")
+        return self.query(query, returns=True)
 
     # endregion
 
