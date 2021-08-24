@@ -71,8 +71,13 @@ class ReservationView(QMainWindow):
 
         self.reservationTable.setEditTriggers(QTableWidget.NoEditTriggers)
 
-        if self.__unsigned is not None and self.__signed is not None:
-            self.__reservations = self.__unsigned + self.__signed
+        self.__reservations = []
+        if self.__unsigned is not None:
+            for i in self.__unsigned:
+                self.__reservations.append(i)
+        if self.__signed is not None:
+            for i in self.__signed:
+                self.__reservations.append(i)
 
     def search(self):
         """
