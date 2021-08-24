@@ -38,7 +38,6 @@ class TestItemManager(unittest.TestCase):
 
     def test_get_inner_states(self):
         self.assertEqual(len(self.im.get_inner_states()), 5)
-
     def test_get_items(self):
         test_items = []
         for i in range(1,10):
@@ -61,6 +60,7 @@ class TestItemManager(unittest.TestCase):
             self.im.delete_item(it)
 
         del test_items
+
 
     def test_edit_item(self):
         self.item.quarantine_start_date = datetime.today().date()
