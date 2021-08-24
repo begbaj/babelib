@@ -27,3 +27,4 @@ class StatsView(QMainWindow):
         self.foneplus.setText(str(round((self.statsM.get_user_by_bdate(date.today()-relativedelta(years=50), date.today()- relativedelta(years=200))/user_count)*100, 2)) + '%')
 
 
+
