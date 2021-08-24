@@ -25,10 +25,6 @@ class User:
     contect_mode = ''
     privacy_agreement = 0
 
-
-    def __init__(self):
-        pass
-
     def __init__(self, nationality = None, user_type = None
                  , registration_date = None, name = None, surname = None, gender = None, birthplace = None
                  , birthdate = None, city = None, address = None, postal_code = None, district = None
