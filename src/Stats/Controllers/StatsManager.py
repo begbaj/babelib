@@ -16,3 +16,9 @@ class StatsManager:
 
     def get_user_by_bdate(self, date_i: date, date_f: date):
         return self.dbms.get_user_by_birthdate(date_i, date_f)[0][0]
+
+    def get_top_3(self):
+        return self.dbms.get_top_3_items()
+
+    def get_top_3_genres(self):
+        return self.dbms.get_top_3_genres()

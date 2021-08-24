@@ -2,14 +2,16 @@ import random
 import string
 from faker import Faker
 from datetime import datetime, timedelta
-
+from src.Users.controllers.UserManager import UserManager
 import src.Users.View.UserCardView
+from src.Movements.Models.Movement import Movement
 from src.Users.models.User import User
 from src.Users.models.UserType import UserType
 from src.Users.models.Nationality import Nationality
 from src.Items.Controllers.ItemManager import ItemManager
 from src.Items.Models.Item import Item
 from src.Items.Models.ItemEnumerators import *
+from src.Database.DatabaseManager import DatabaseManager
 
 
 def string_digits(length):
@@ -145,3 +147,17 @@ def user_generator():
     user.contect_mode = "1"
 
     return user
+
+
+def movement_generator(im: ItemManager, um: UserManager):
+    fake = Faker(locale="it_IT")
+    movement = Movement()
+    movement.id = 'null'
+    movement.item = im.convert_dbitem(im.dbms.query("SELECT * FROM items ORDER BY RAND() LIMIT 1;", returns=True)[0])
+    movement.item_id = movement.item.id
+    movement.user = um.set_users_to_model(um.db.query("SELECT * FROM users ORDER BY RAND() LIMIT 1;", returns=True), True)
+    movement.user_id = movement.user.id
+    movement.mov_type = 1
+    movement.timestamp = fake.date_time()
+    return movement
+

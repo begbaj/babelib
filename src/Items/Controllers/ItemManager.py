@@ -16,7 +16,7 @@ class ItemManager:
         return item
 
     def get_item(self, item: Item):
-        item = self.__convert_dbitem(self.dbms.get_item(item.id))
+        item = self.convert_dbitem(self.dbms.get_item(item.id))
 
         item.genre = []
         for genre in self.dbms.get_item_genres(item.id):
@@ -86,7 +86,7 @@ class ItemManager:
         """
         fitems = []
         for dbitem in self.dbms.get_items(search_field, search_mode, quarantined, discarded):
-            item = self.__convert_dbitem(dbitem)
+            item = self.convert_dbitem(dbitem)
 
             item.genre = []
             for genre in self.dbms.get_item_genres(item.id):
@@ -176,7 +176,7 @@ class ItemManager:
     #     else:
     #         return False
 
-    def __convert_dbitem(self, dbitem) -> Item:
+    def convert_dbitem(self, dbitem) -> Item:
         """
         This method converts a DatabaseManager obj into a Item obj
         :param dbitem: DatabaseManager object
