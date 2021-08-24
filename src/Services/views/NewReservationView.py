@@ -19,7 +19,7 @@ class NewReservationView(QMainWindow):
     u_s_r = UnsignedServiceReservation()
     __users = []
 
-    def __init__(self, widget):
+    def __init__(self, widget, update_func):
         """
         init method
         :param widget: widget to open view
@@ -36,6 +36,7 @@ class NewReservationView(QMainWindow):
         self.get_field.clicked.connect(lambda: self.get_fields())
         self.clear_field.clicked.connect(lambda: self.clear_fields())
         self.save_button.clicked.connect(lambda: self.set_fields())
+        self.save_button.clicked.connect(update_func)
         self.telephone.setValidator(QIntValidator())
         self.name.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z]*$')))
         self.surname.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z]*$')))
@@ -114,7 +115,7 @@ class NewReservationView(QMainWindow):
         if self.__get_selected_user() is not None:
             self.name.setText(self.__get_selected_user().name)
             self.surname.setText(self.__get_selected_user().surname)
-            self.telephone.setText(self.__get_selected_user().telephone)
+            self.telephone.setText(self.__get_selected_user().first_cellphone)
             self.name.setReadOnly(True)
             self.surname.setReadOnly(True)
             self.telephone.setReadOnly(True)

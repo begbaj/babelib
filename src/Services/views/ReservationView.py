@@ -38,7 +38,7 @@ class ReservationView(QMainWindow):
         this method allows to go to reservation view
         :return:
         """
-        self.new_res = NewReservationView(self.widget)
+        self.new_res = NewReservationView(self.widget, self.search)
         self.new_res.show()
 
     def __update_table(self):
