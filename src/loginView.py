@@ -45,3 +45,4 @@ class LoginView(QMainWindow):
         home_view = HomeView(self.widget)
         self.widget.addWidget(home_view)
         self.widget.setCurrentIndex(self.widget.currentIndex() + 1)
+
