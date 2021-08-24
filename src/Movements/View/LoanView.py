@@ -1,3 +1,5 @@
+from datetime import datetime, date
+
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
@@ -13,15 +15,26 @@ class LoanView(QDialog):
 
     userM = UserManager()
     itemM = ItemManager()
+    movementM = MovementManager()
 
 
-    def __init__(self, widget):
+    def __init__(self, widget, callback, flag):
         super(LoanView, self).__init__()
+
+        # true-prestito, false-consultazione
+
         loadUi("../designer/Movements/LoanView.ui", self)
         self.widget = widget
         self.users = self.userM.list()
-        self.items = self.itemM.get_items('', 0)
+        self.items = self.movementM.get_items_available()
         self.user = ''
+        self.movement = Movement()
+
+        self.callback = callback
+
+
+        self.flag = flag
+
         # self.setModal(True)
         # self.widget = QtWidgets.QStackedWidget()
         # self.widget.addWidget(self)
@@ -30,6 +43,13 @@ class LoanView(QDialog):
         #self.movementM = MovementManager()
         #self.movementM.findAll("tu", 1)
 
+        if not self.flag:
+            self.loantypeBox.hide()
+            self.expirationEdit.hide()
+            self.label_9.hide()
+            self.label_10.hide()
+
+
 
     def setup(self):
         self.selectuserButton.clicked.connect(lambda: self.select_user())
@@ -37,6 +57,7 @@ class LoanView(QDialog):
         self.selectdocButton.clicked.connect(lambda: self.select_item())
         self.selectdocButton.setDisabled(False)
         self.newuserButton.clicked.connect(lambda: self.new_user())
+        self.confirmButton.clicked.connect(lambda: self.save()) #salvataggio del movimento
         self.userField.setReadOnly(True)
         self.fiscalcodeField.setReadOnly(True)
         self.cellField.setReadOnly(True)
@@ -58,6 +79,10 @@ class LoanView(QDialog):
         else:
             row = self.userTable.currentRow()
             self.user = self.users[row]
+
+            # assegno l'id dello user al movimento
+            self.movement.user_id = self.user.id
+
             self.userField.setText(self.user.name + " " + self.user.surname)
             self.fiscalcodeField.setText(self.user.fiscal_code)
             self.cellField.setText(self.user.first_cellphone)
@@ -69,6 +94,10 @@ class LoanView(QDialog):
         else:
             row = self.itemTable.currentRow()
             item = self.items[row]
+
+            #assegno l'id dell'item al movimento
+            self.movement.item_id = item.id
+
             self.isbnField.setText(item.isbn)
             self.titleField.setText(item.title)
 
@@ -115,5 +144,28 @@ class LoanView(QDialog):
 
     def search_item(self):
         self.load_item_table(self.itemM.get_items(self.itemField.text(), 1))
+
+# endregion
+
+# region Save and back
+
+    def save(self):
+
+        if self.movement.user_id is None or self.movement.item_id is None:
+            self.pop = Popup("Selezionare sia un Utente sia un Documento")
+            self.pop.show()
+
+        else:
+            if self.flag:
+                self.movement.mov_type = True
+            else:
+                self.movement.mov_type = False
+            self.movement.timestamp = date.today()
+            self.movementM.add(self.movement)
+            self.back()
+
+    def back(self):
+        self.callback()
+        self.close()
 
 # endregion

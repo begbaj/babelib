@@ -8,7 +8,7 @@ import mariadb
 import json
 import os
 import decimal
-from dateutil.relativedelta import relativedelta
+#from dateutil.relativedelta import relativedelta
 from datetime import date, datetime, timedelta
 
 
@@ -500,7 +500,7 @@ class DatabaseManager:
     def insert_movement(self, movement):
         try:
             self.cur.execute(
-                f"Insert into movemets"
+                f"Insert into movements"
                 f" ("
                 f"  item_id, user_id"
                 f", mov_type, timestamp"
@@ -509,8 +509,8 @@ class DatabaseManager:
                 f"("
                 f" {movement.item_id}"
                 f", {movement.user_id}"
-                f", '{movement.mov_type}'"
-                f", '{movement.timestamp}'"
+                f", {movement.mov_type}"
+                f", '{movement.timestamp}'"                
                 f")"
             )
 

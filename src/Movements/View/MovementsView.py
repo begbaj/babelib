@@ -31,9 +31,7 @@ class MovementsView(QMainWindow):
         self.searchField.textChanged.connect(lambda: self.search())
         self.loanRadio.toggled.connect(lambda: self.search())
 
-        self.movements = self.movementM.find_all(self.loanRadio.isChecked(), 5)
-        self.load_table()
-
+        self.load_data()
 
 
 
@@ -48,16 +46,19 @@ class MovementsView(QMainWindow):
         self.movementTable.setStyleSheet(open("../designer/style/TableTheme.txt", "r").read())
 
     def new_consultation(self):
-        pass
+        self.view = LoanView(self.widget, self.load_data, False)
+        self.view.show()
 
     def new_loan(self):
-        self.view = LoanView(self.widget)
+        self.view = LoanView(self.widget, self.load_data, True)
         self.view.show()
 
     def movement_info(self):
         pass
 
-
+    def load_data(self):
+        self.movements = self.movementM.find_all(self.loanRadio.isChecked(), 5)
+        self.load_table()
 
     def load_table(self):
         """
