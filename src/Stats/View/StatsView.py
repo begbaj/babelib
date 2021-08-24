@@ -13,7 +13,7 @@ class StatsView(QMainWindow):
         loadUi("../designer/Stats/Stats.ui", self)
         self.widget = widget
         self.load_user_fields()
-        self.loan_stats()
+        #self.loan_stats()
 
     def load_user_fields(self):
         user_count = self.statsM.get_user_count()

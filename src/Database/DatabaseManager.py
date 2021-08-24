@@ -8,7 +8,7 @@ import mariadb
 import json
 import os
 import decimal
-#from dateutil.relativedelta import relativedelta
+# from dateutil.relativedelta import relativedelta
 from datetime import date, datetime, timedelta
 
 
@@ -58,9 +58,10 @@ class DatabaseManager:
         _conn.autocommit = True
         self.conn = _conn
 
-    def query(self, query: str, returns=False) -> list:
+    def query(self, query: str, args=None, returns=False) -> list:
         """
         Executes the given query, returns the result, if any, and commits
+        :param args:
         :param query: sql query
         :param returns: set True if a return value is expected
         :return: list of objects
@@ -68,13 +69,12 @@ class DatabaseManager:
 
         try:
             a = []
-            self.cur.execute(query)
+            self.cur.execute(query, args)
             if returns:
                 a = self.cur.fetchall()
             self.conn.commit()
             return a
         except mariadb.Error as e:
-            # TODO: Gestire l'eccezione
             print(f"Error: {e}")
 
     def login(self, username):
@@ -124,37 +124,15 @@ class DatabaseManager:
 
     def insert_user(self, user):
         try:
-            query = f"Insert into users"\
-                f" ("\
-                f"  nationality, user_type"\
-                f", registration_date, name, surname, gender, birthplace"\
-                f", birthdate, city, address, postal_code, district, first_cellphone"\
-                f", telephone, email, fiscal_code, contect_mode, privacy_agreement"\
-                f")"\
-                f" values "\
-                f"("\
-                f"  '{user.nationality}'"\
-                f", '{user.user_type}'"\
-                f", '{user.registration_date}'"\
-                f", '{user.name}'"\
-                f", '{user.surname}'"\
-                f", '{user.gender}'"\
-                f", '{user.birthplace}'"\
-                f", '{user.birthdate}'"\
-                f", '{user.city}'"\
-                f", '{user.address}'"\
-                f", '{user.postal_code}'"\
-                f", '{user.district}'"\
-                f", '{user.first_cellphone}'"\
-                f", '{user.telephone}'"\
-                f", '{user.email}'"\
-                f", '{user.fiscal_code}'"\
-                f", '{user.contect_mode}'"\
-                f", {user.privacy_agreement})"
-            self.cur.execute(query)
+            query = f"Insert into users" \
+                    f" (nationality, user_type, registration_date, name, surname, gender, birthplace, birthdate, city," \
+                    f" address, postal_code, district, first_cellphone, telephone, email, fiscal_code, contect_mode," \
+                    f" privacy_agreement) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %d);"
 
-            # self.cur.commit()
-
+            self.query(query, (user.nationality, user.user_type, user.registration_date, user.name, user.surname,
+                                    user.gender, user.birthplace, user.birthdate, user.city, user.address,
+                                    user.postal_code, user.district, user.first_cellphone, user.telephone, user.email,
+                                    user.fiscal_code, user.contect_mode, user.privacy_agreement))
         except mariadb.Error as e:
             print(f"Error: {e}")
 
@@ -213,10 +191,10 @@ class DatabaseManager:
                 f" {self.__check_value(item.lang.value, int)}," \
                 f" {self.__check_value(item.availability.value, int)}," \
                 f" '{self.__check_value(item.bid, str)}'," \
-                f" '{self.__check_value(item.isbn, str)}'," \
-                f" '{self.__check_value(item.title, str)}'," \
-                f" '{self.__check_value(item.author, str)}'," \
-                f" {self.__check_value(item.cataloging_level.value, int)}, " \
+                f" '{self.__check_value(item.isbn, str)}',"
+        query +=" %s, "
+        query +=" %s, "
+        query +=f" {self.__check_value(item.cataloging_level.value, int)}, " \
                 f" {self.__check_value(item.publication_state, int)}," \
                 f" {self.__check_value(item.rack, int)}," \
                 f" '{self.__check_value(item.shelf, str)}'," \
@@ -227,8 +205,8 @@ class DatabaseManager:
                 f" {self.__set_date_str(item.quarantine_start_date)}," \
                 f" {self.__set_date_str(item.quarantine_end_date)}," \
                 f" {self.__set_date_str(item.discarded_date)}," \
-                f" '{self.__check_value(item.note, str)}');"
-        self.query(query)
+                f" %s);"
+        self.query(query, (item.title, item.author, item.note))
 
         query = f"SELECT id FROM items ORDER BY id DESC LIMIT 1;"
         nid = self.query(query, returns=True)[0].id
@@ -259,7 +237,7 @@ class DatabaseManager:
         query = f"SELECT * FROM genres WHERE id={genre_id}"
         return self.query(query, returns=True)
 
-    def get_items(self, search_field, search_mode, show_quarantined=False, show_discarded=False) -> [tuple]:
+    def get_items(self, search_field='', search_mode=0, show_quarantined=False, show_discarded=False) -> [tuple]:
         """
         Get a list of items that matches the search query
         :param search_field: string corresponding to the search query
@@ -275,19 +253,19 @@ class DatabaseManager:
                      f"or isbn like '%{search_field}%'" \
                      f"or title like '%{search_field}%'" \
                      f"or author like '%{search_field}%'" \
-                     f"or note like '%{search_field}%')"
+                     f"or note like '%{search_field}%') "
         elif search_mode == 1:  # Title
-            query += f"SELECT * FROM items WHERE title LIKE '%{search_field}%'"
+            query += f"SELECT * FROM items WHERE title LIKE  '%{search_field}%' "
         elif search_mode == 2:  # Author
-            query += f"SELECT * FROM items WHERE author LIKE '%{search_field}%'"
+            query += f"SELECT * FROM items WHERE author LIKE  '%{search_field}%' "
         elif search_mode == 3:  # ISBN
-            query += f"SELECT * FROM items WHERE isbn LIKE '%{search_field}%'"
+            query += f"SELECT * FROM items WHERE isbn LIKE  '%{search_field}%' "
         elif search_mode == 4:  # BID
-            query += f"SELECT * FROM items WHERE bid LIKE '%{search_field}%'"
+            query += f"SELECT * FROM items WHERE bid LIKE  '%{search_field}%' "
         elif search_mode == 5:  # id / numero di inventario
-            query += f"SELECT * FROM items WHERE id LIKE '%{search_field}%'"
+            query += f"SELECT * FROM items WHERE id LIKE  '%{search_field}%' "
         elif search_mode == 6:  # Note
-            query += f"SELECT * FROM items WHERE note LIKE '%{search_field}%'"
+            query += f"SELECT * FROM items WHERE note LIKE  '%{search_field}%' "
         else:
             raise Exception("invalid search_mode")
 
@@ -299,7 +277,7 @@ class DatabaseManager:
             query += " AND availability <> 4 "
 
         query += " LIMIT 100;"
-
+        field = "%"+search_field+"%"
         return self.query(query, returns=True)
 
     def get_item(self, item_id) -> tuple:
@@ -510,7 +488,7 @@ class DatabaseManager:
                 f" {movement.item_id}"
                 f", {movement.user_id}"
                 f", {movement.mov_type}"
-                f", '{movement.timestamp}'"                
+                f", '{movement.timestamp}'"
                 f")"
             )
 
@@ -543,37 +521,37 @@ class DatabaseManager:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where (u.name like '%{search_field}%' "
-                                 f"or u.surname like '%{search_field}%' "
-                                 f"or i.title like '%{search_field}%' "
-                                 f"or i.isbn like '%{search_field}%' "
-                                 f"or m.timestamp like '%{search_field}%') "
+                                 f"where (u.name like '%(search_field)%' "
+                                 f"or u.surname like '%(search_field)%' "
+                                 f"or i.title like '%(search_field)%' "
+                                 f"or i.isbn like '%(search_field)%' "
+                                 f"or m.timestamp like '%(search_field)%') "
                                  f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 1:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where (u.name like '%{search_field}%' "
-                                 f"or u.surname like '%{search_field}%') "
+                                 f"where (u.name like '%(search_field)%' "
+                                 f"or u.surname like '%(search_field)%') "
                                  f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 2:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where i.title like '%{search_field}%' "
+                                 f"where i.title like '%(search_field)%' "
                                  f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 3:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where i.isbn like '%{search_field}%' "
+                                 f"where i.isbn like '%(search_field)%' "
                                  f"and m.mov_type = {search_field_mov_type} ")
 
             elif search_mode == 4:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where m.timestamp like '%{search_field}%' "
+                                 f"where m.timestamp like '%(search_field)%' "
                                  f"and m.mov_type = {search_field_mov_type} ")
 
             elif search_mode == 5:
@@ -599,7 +577,7 @@ class DatabaseManager:
             self.cur.execute(f"Select * from movements m "
                              f"left join users u on u.id = m.user_id "
                              f"left join items i on i.id = m.item_id "
-                             f" where id = {id}"                             
+                             f" where id = {id}"
                              f"")
 
         except mariadb.Error as e:
@@ -648,10 +626,9 @@ class DatabaseManager:
         movement.item.shelf = row.shelf
         # movement.item.type = row.type
 
-
         return movement
 
-    #endregion
+    # endregion
 
     def add_signed_reservation(self, user_id, date_from, date_to):
         try:
@@ -702,7 +679,7 @@ class DatabaseManager:
         return res[0]
 
     def get_unsigned_reservations(self, search_field='') -> [tuple]:
-        query = f"SELECT * FROM unsigned_service_reservations where (fullname like '%{search_field}%')"
+        query = f"SELECT * FROM unsigned_service_reservations where (fullname like '%(search_field)%')"
         return self.query(query, returns=True)
 
     def get_signed_reservation_by_user_id(self, user_id) -> [tuple]:
@@ -719,7 +696,7 @@ class DatabaseManager:
         return self.query(query, returns=True)
 
     def get_signed_user_reservation(self, search_field):
-        query = f"SELECT ssr.id, u.Id AS 'user_id',concat(u.name,' ',u.surname) AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.id = ssr.user_id WHERE concat(u.name,' ',u.surname) LIKE '%{search_field}%'"
+        query = f"SELECT ssr.id, u.Id AS 'user_id',concat(u.name,' ',u.surname) AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.id = ssr.user_id WHERE concat(u.name,' ',u.surname) LIKE '%(search_field)%'"
         return self.query(query, returns=True)
 
     # region Stats
@@ -734,11 +711,11 @@ class DatabaseManager:
     def get_user_by_birthdate(self, data_in: date, data_fi: date):
         query = f"SELECT COUNT(*) AS 'count' FROM users WHERE {self.__set_date_str(data_in)}" \
                 f" > birthdate AND birthdate > {self.__set_date_str(data_fi)}"
-        return self.query(query,returns=True)
+        return self.query(query, returns=True)
 
     def get_top_3_items(self):
         query = f"SELECT i.title, i.author, i.isbn, COUNT(*) AS 'count' FROM movements AS m JOIN items AS i ON m.item_id = i.id GROUP BY i.isbn ORDER BY COUNT(*) DESC LIMIT 3"
-        return self.query(query,returns=True)
+        return self.query(query, returns=True)
 
     def get_top_3_genres(self):
         query = f"SELECT g.description, COUNT(*) AS 'count' FROM movements AS m JOIN items AS i ON m.item_id = i.id JOIN items_genres AS ig ON ig.item_id = i.id JOIN genres AS g ON g.id = ig.genre_id GROUP BY g.description ORDER BY COUNT(*) DESC LIMIT 3"
@@ -760,14 +737,16 @@ class DatabaseManager:
             # try conversion
             try:
                 value = type_value(item_value)
+                if type_value is str:
+                    value.replace("'", "\'")
             except:
                 raise TypeError(f" {item_value} is not an instance of {type_value}")
         return value
 
-    def delete_unsigned_by_id(self,id):
+    def delete_unsigned_by_id(self, id):
         query = f"DELETE FROM unsigned_service_reservations WHERE id={id};"
         return self.query(query, returns=True)
 
-    def delete_signed_by_id(self,id):
+    def delete_signed_by_id(self, id):
         query = f"DELETE FROM signed_service_reservation WHERE id ={id};"
         return self.query(query, returns=True)

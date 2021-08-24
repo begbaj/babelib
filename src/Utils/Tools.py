@@ -13,7 +13,6 @@ from src.Items.Models.Item import Item
 from src.Items.Models.ItemEnumerators import *
 from src.Database.DatabaseManager import DatabaseManager
 
-
 def string_digits(length):
     sample_string = string.ascii_uppercase + string.digits  # define the specific string
     # define the condition for random string
@@ -113,19 +112,19 @@ def user_generator():
     user.id = None
     with open("config/user_type.txt", 'r') as file:
         lines = file.readlines()
-        user.user_type = lines[random.randint(0, len(lines) - 1)].rstrip('\n')
+        user.user_type = lines[random.randint(0, len(lines) - 1)].rstrip(' \n')
     with open("config/district.txt", 'r') as file:
         lines = file.readlines()
-        user.district = lines[random.randint(0, len(lines) - 1)].rstrip('\n')
-    with open("config/nationality.txt", 'r') as file:
-        lines = file.readlines()
-        user.nationality = lines[random.randint(0, len(lines) - 1)].rstrip('\n')
+        user.district = lines[random.randint(0, len(lines) - 1)].rstrip('\n').rstrip('\t').strip(' ').replace("'","''")
+    # with open("config/nationality.txt", 'r') as file:
+    #     lines = file.readlines()
+    #     user.nationality = lines[random.randint(0, len(lines) - 1)].rstrip(' \n')
     with open("config/gender.txt", 'r') as file:
         lines = file.readlines()
-        user.gender = lines[random.randint(0, len(lines) - 1)].rstrip('\n')
+        user.gender = lines[random.randint(0, len(lines) - 1)].rstrip(' \n')
 
     user.registration_date = fake.date()
-
+    user.nationality = "Italiana"
     if user.gender == "Maschio(M)":
         user.name = fake.first_name_male()
         user.surname = fake.last_name_male()
@@ -136,15 +135,16 @@ def user_generator():
 
     user.address = fake.street_address()
     user.birthdate = fake.date_of_birth()
-    user.birthplace = fake.city()
+    user.birthplace = fake.state()
     user.first_cellphone = fake.phone_number()
     user.postal_code = fake.postcode()
     user.state_id = "IT"
     user.city = fake.city()
     user.email = fake.email()
-    user.fiscal_code = "sdfhsdkjfhsdkhf"
-    user.privacy_agreement = 1
-    user.contect_mode = "1"
+    user.telephone = fake.phone_number()
+    user.fiscal_code = string_digits_nor(16)
+    user.privacy_agreement = random.choice([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1])
+    user.contect_mode = random.choice([user.first_cellphone, user.email])
 
     return user
 
