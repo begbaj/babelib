@@ -1095,14 +1095,14 @@ QHeaderView::section{
       <attribute name="horizontalHeaderCascadingSectionResizes">
        <bool>false</bool>
       </attribute>
-      <attribute name="horizontalHeaderMinimumSectionSize">
-       <number>50</number>
-      </attribute>
       <attribute name="horizontalHeaderDefaultSectionSize">
        <number>145</number>
       </attribute>
       <attribute name="horizontalHeaderHighlightSections">
        <bool>false</bool>
+      </attribute>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>50</number>
       </attribute>
       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
        <bool>true</bool>
@@ -1359,27 +1359,6 @@ background-color:none;</string>
         <string>Ritardo più grande</string>
        </property>
       </widget>
-      <widget class="QLabel" name="name_label">
-       <property name="geometry">
-        <rect>
-         <x>210</x>
-         <y>20</y>
-         <width>231</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color:rgba(23, 28, 78, 100);
-color:rgb(255, 255, 255);
-border-radius: 20px;
-border-style: solid;
-border:none;
-text-align: center;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
       <widget class="QLabel" name="surname_label">
        <property name="geometry">
         <rect>
@@ -1485,11 +1464,11 @@ text-align: center;</string>
         <string/>
        </property>
       </widget>
-      <widget class="QLabel" name="avarage_return_time">
+      <widget class="QLabel" name="rating_label">
        <property name="geometry">
         <rect>
          <x>210</x>
-         <y>200</y>
+         <y>230</y>
          <width>231</width>
          <height>21</height>
         </rect>
@@ -1506,11 +1485,32 @@ text-align: center;</string>
         <string/>
        </property>
       </widget>
-      <widget class="QLabel" name="rating_label">
+      <widget class="QLabel" name="name_label">
        <property name="geometry">
         <rect>
          <x>210</x>
-         <y>230</y>
+         <y>20</y>
+         <width>231</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="average_return_time">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>200</y>
          <width>231</width>
          <height>21</height>
         </rect>

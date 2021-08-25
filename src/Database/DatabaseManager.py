@@ -568,6 +568,14 @@ class DatabaseManager:
 
         return movements
 
+    def find_mov_by_user_id(self,u_id):
+        query = f"SELECT * FROM movements WHERE user_id = {u_id}"
+        return self.query(query, returns=True)
+
+    def find_delay(self,id):
+        query = f"SELECT m.item_id, m.user_id, m.TIMESTAMP AS 'loan_date', r.timestamp AS 'return_date' FROM movements AS m JOIN movements AS r ON (m.item_id = r.item_id AND m.user_id = r.user_id) WHERE m.user_id = {id} AND m.mov_type = 1 AND r.mov_type = 2"
+        return self.query(query, returns=True)
+
     def find_movement_by_id(self, id):
 
         # itemM = ItemManager()

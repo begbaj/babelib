@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QIntValidator, QRegExpValidator
-from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QDialog
+from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem, QDialog, QTableWidget
 from PyQt5.uic import loadUi
 from src.Users.controllers.UserManager import UserManager
 from src.Users.models.User import User
@@ -58,6 +58,8 @@ class NewReservationView(QMainWindow):
             self.userTable.setItem(row, 2, QTableWidgetItem(user.fiscal_code))
             row = row + 1
             self.__users.append(user)
+        self.userTable.setEditTriggers(QTableWidget.NoEditTriggers)
+
 
     def load_data(self):
         """

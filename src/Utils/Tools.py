@@ -149,15 +149,23 @@ def user_generator():
     return user
 
 
-def movement_generator(im: ItemManager, um: UserManager):
+def movement_generator(im: ItemManager, um: UserManager, mov = None):
     fake = Faker(locale="it_IT")
     movement = Movement()
     movement.id = 'null'
-    movement.item = im.convert_dbitem(im.dbms.query("SELECT * FROM items ORDER BY RAND() LIMIT 1;", returns=True)[0])
-    movement.item_id = movement.item.id
-    movement.user = um.set_users_to_model(um.db.query("SELECT * FROM users ORDER BY RAND() LIMIT 1;", returns=True), True)
-    movement.user_id = movement.user.id
-    movement.mov_type = 1
-    movement.timestamp = fake.date_time()
+    if mov is not None:
+        movement.user_id = mov.user_id
+        movement.item_id = mov.item_id
+        movement.mov_type = 2
+        movement.timestamp = mov.timestamp + timedelta(days=random.randint(3, 60))
+    else:
+        movement.mov_type = 1
+        movement.timestamp = fake.date_time()
+        movement.item = im.convert_dbitem(
+            im.dbms.query("SELECT * FROM items ORDER BY RAND() LIMIT 1;", returns=True)[0])
+        movement.item_id = movement.item.id
+        movement.user = um.set_users_to_model(um.db.query("SELECT * FROM users ORDER BY RAND() LIMIT 1;", returns=True),
+                                              True)
+        movement.user_id = movement.user.id
     return movement
 

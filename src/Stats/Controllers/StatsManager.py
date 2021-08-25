@@ -22,3 +22,6 @@ class StatsManager:
 
     def get_top_3_genres(self):
         return self.dbms.get_top_3_genres()
+
+    def find_dalay(self, id):
+        return self.dbms.find_delay(id)

@@ -26,7 +26,10 @@ def generate_items(quantity: int, im) -> None:
 def generate_movement(quantity: int, im, um, mm) -> None:
     for i in range(0, quantity):
         try:
-            mm.add(movement_generator(im, um))
+            mov = movement_generator(im, um)
+            mm.add(mov)
+            mov2 = movement_generator(im, um, mov)
+            mm.add(mov2)
             print(f"{i} of {quantity} movements generated.")
         except Exception as err:
             print(err)
@@ -34,12 +37,12 @@ def generate_movement(quantity: int, im, um, mm) -> None:
 
 def delete_all_previous():
     db = DatabaseManager()
-    db.query("DELETE FROM users;")
-    db.query("DELETE FROM items;")
+    #db.query("DELETE FROM users;")
+    #db.query("DELETE FROM items;")
     db.query("DELETE FROM movements;")
-    db.query("DELETE FROM items_genres;")
-    db.query("DELETE FROM items_inner_states;")
-    db.query("DELETE FROM items_external_states;")
+    #db.query("DELETE FROM items_genres;")
+    #db.query("DELETE FROM items_inner_states;")
+    #db.query("DELETE FROM items_external_states;")
 
 
 def test_thread():
@@ -51,14 +54,11 @@ if __name__ == "__main__":
     um = UserManager()
     mm = MovementManager()
 
-    gu1 = Thread(target=test_thread)
-    gu1.start()
-
-    gu1.join()
+    delete_all_previous()
 
     #generate_users(10000, um)
     #generate_items(50000, im)
-    generate_movement(100000, im, um, mm)
+    generate_movement(1000, im, um, mm)
 
 
     # _thread.start_new_thread(generate_items, (25000,))
