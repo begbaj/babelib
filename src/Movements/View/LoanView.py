@@ -21,7 +21,13 @@ class LoanView(QDialog):
     def __init__(self, widget, callback, flag):
         super(LoanView, self).__init__()
 
-        # true-prestito, false-consultazione
+        '''
+        
+        0:Consultazione
+        1:Prestito
+        2:Rientro
+        
+        '''
 
         loadUi("../designer/Movements/LoanView.ui", self)
         self.widget = widget
@@ -43,7 +49,7 @@ class LoanView(QDialog):
         #self.movementM = MovementManager()
         #self.movementM.findAll("tu", 1)
 
-        if not self.flag:
+        if self.flag == 0:
             self.loantypeBox.hide()
             self.expirationEdit.hide()
             self.label_9.hide()
@@ -147,7 +153,7 @@ class LoanView(QDialog):
 
 # endregion
 
-# region Save and back
+# region Save_and_back
 
     def save(self):
 
@@ -156,10 +162,10 @@ class LoanView(QDialog):
             self.pop.show()
 
         else:
-            if self.flag:
-                self.movement.mov_type = True
+            if self.flag == 1:
+                self.movement.mov_type = 1
             else:
-                self.movement.mov_type = False
+                self.movement.mov_type = 0
             self.movement.timestamp = date.today()
             self.movementM.add(self.movement)
             self.back()

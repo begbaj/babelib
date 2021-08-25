@@ -5,7 +5,9 @@ from PyQt5.QtWidgets import QDialog, QMainWindow
 
 from src.Movements.Controllers.MovementManager import MovementManager
 from src.Movements.Models.Movement import Movement
+from src.Movements.View.ShowMovementView import ShowMovementView
 from src.Movements.View.LoanView import LoanView
+from src.Utils.UI import Popup
 
 
 class MovementsView(QMainWindow):
@@ -46,15 +48,24 @@ class MovementsView(QMainWindow):
         self.movementTable.setStyleSheet(open("../designer/style/TableTheme.txt", "r").read())
 
     def new_consultation(self):
-        self.view = LoanView(self.widget, self.load_data, False)
+        self.view = LoanView(self.widget, self.load_data, 0)
         self.view.show()
 
     def new_loan(self):
-        self.view = LoanView(self.widget, self.load_data, True)
+        self.view = LoanView(self.widget, self.load_data, 1)
         self.view.show()
 
     def movement_info(self):
-        pass
+        rowtable = self.movementTable.currentRow()
+        if rowtable == -1:
+            self.popUp = Popup("Selezionare prima un movimento!")
+            self.popUp.show()
+        else:
+            movement = self.movements[rowtable]
+            self.view = ShowMovementView(self.widget, movement)
+            self.view.show()
+
+
 
     def load_data(self):
         self.movements = self.movementM.find_all(self.loanRadio.isChecked(), 5)

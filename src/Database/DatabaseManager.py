@@ -470,6 +470,7 @@ class DatabaseManager:
                 f"Update movements m "
                 f"set m.mov_type = '{movement.mov_type}'"
                 f", m.timestamp = '{movement.timestamp}'"
+                f", m.note = '{movement.note}'"
                 f" where id = {movement.id}")
 
         except mariadb.Error as e:
@@ -481,7 +482,7 @@ class DatabaseManager:
                 f"Insert into movements"
                 f" ("
                 f"  item_id, user_id"
-                f", mov_type, timestamp"
+                f", mov_type, timestamp, note"
                 f")"
                 f" values "
                 f"("
@@ -489,6 +490,7 @@ class DatabaseManager:
                 f", {movement.user_id}"
                 f", {movement.mov_type}"
                 f", '{movement.timestamp}'"
+                f", '{movement.note}'"
                 f")"
             )
 
@@ -501,14 +503,6 @@ class DatabaseManager:
 
         except mariadb.Error as e:
             print(f"Error: {e}")
-
-    # search:
-    # nome utente
-    # cognome utente
-    # (insieme i primi due)
-    # titolo documento
-    # isbn
-    # timestamp
 
     def find_movement(self, search_field_mov_type=None, search_mode=None, search_field=None):
         # itemM = ItemManager()
@@ -525,7 +519,7 @@ class DatabaseManager:
                                  f"or u.surname like '%{search_field}%' "
                                  f"or i.title like '%{search_field}%' "
                                  f"or i.isbn like '%{search_field}%' "
-                                 f"or m.timestamp like '%{search_field}%') "
+                                 f"or m.timestamp like '%{search_field}%')"
                                  f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 1:
                 self.cur.execute(f"Select * from movements m "
@@ -595,7 +589,7 @@ class DatabaseManager:
 
     def set_movement_to_model(self, row):
 
-        movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp)
+        movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp, row.note)
         movement.id = row.Id
 
         movement.user = User(row.nationality, row.user_type
