@@ -534,13 +534,12 @@ background-color:none;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
-color:rgb(255, 255, 255);
+      <string notr="true">color:rgb(255, 255, 255);
 font: 14pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
 border-bottom: 1px solid rgba(255, 255, 255, 100);
-</string>
+border:none;
+background-color: rgba(23, 28, 78, 17);</string>
      </property>
      <property name="text">
       <string/>
