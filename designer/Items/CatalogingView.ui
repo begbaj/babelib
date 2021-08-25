@@ -324,6 +324,9 @@ border:none;
 border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
      <property name="isUpper" stdset="0">
       <bool>false</bool>
      </property>
@@ -626,7 +629,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="placeholderText">
       <string/>
@@ -657,7 +660,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="placeholderText">
       <string/>
@@ -688,7 +691,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
      <property name="readOnly">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="placeholderText">
       <string/>
@@ -1199,6 +1202,9 @@ border:none;
 border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
      </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
      <property name="isUpper" stdset="0">
       <bool>false</bool>
      </property>
@@ -1259,6 +1265,9 @@ font: 14pt &quot;Source Code Pro for Powerline&quot;;
 border:none;
 border-bottom: 1px solid rgba(255, 255, 255, 100);
 </string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
      </property>
      <property name="isUpper" stdset="0">
       <bool>false</bool>

@@ -17,7 +17,7 @@ class InventoryView(QMainWindow):
         super(InventoryView, self).__init__(parent)
         loadUi("../designer/Items/InventoryViewNew.ui", self)
         self.widget = widget
-        self.show_item_view = ShowItemView(self.widget, Item())
+        self.show_item_view = ShowItemView(self.widget)
         self.cataloging_view = CatalogingView(self.widget, Item(), self.search)
 
         try:
@@ -80,7 +80,11 @@ class InventoryView(QMainWindow):
 
     def __get_items(self):
         self.__items = []
-        self.__items = self.itmManager.get_items(self.searchField.text(),
+        query = self.searchField.text()
+        # if "\'" in query:
+        #     query.replace("\'", "\x27")
+
+        self.__items = self.itmManager.get_items(query,
                                                  self.searchMode.currentIndex(),
                                                  self.quarantineCheckBox.isChecked(),
                                                  self.discardedCheckBox.isChecked())
@@ -126,7 +130,7 @@ class InventoryView(QMainWindow):
         self.cataloging_view.show()
 
     def __go_to_show_item_view(self):
-        self.show_item_view.item = self.__get_selected_item()
+        self.show_item_view.load_item(self.__get_selected_item())
         self.show_item_view.show()
 
     # endregion

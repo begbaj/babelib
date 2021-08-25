@@ -6,11 +6,12 @@ from src.Items.Models import ItemEnumerators
 
 class ShowItemView(QMainWindow):
 
-    def __init__(self, widget, item):
+    def __init__(self, widget):
         super(ShowItemView, self).__init__(widget)
         loadUi("../designer/Items/ShowItemView.ui", self)
         self.widget = widget
 
+    def load_item(self, item):
         text = f"### Generalità\n\n" \
                f"**Disponibilità**: {item.availability.name}\n\n" \
                f"**Livello catalogazione**: {item.cataloging_level.name}\n\n" \
@@ -31,7 +32,7 @@ class ShowItemView(QMainWindow):
         text += f"\n\n### Identificativo\n\n" \
                 f"**ISBN**: {item.isbn}\n\n" \
                 f"**BID**: {item.bid}\n\n\n\n" \
-                f"**Lingua**: {item.lang}\n\n" \
+                f"**Lingua**: {item.lang.name}\n\n" \
                 f"### Pubblicazione\n\n" \
                 f"**Data di pubblicazione**: {item.publication_date}\n\n" \
                 f"**Stato pubblicazione**: {item.publication_state}\n\n" \
@@ -54,3 +55,5 @@ class ShowItemView(QMainWindow):
                     f"**Data di scarto**: {item.discarded_date}\n\n"
 
         self.itemInfo.setText(text)
+
+

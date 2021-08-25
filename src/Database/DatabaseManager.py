@@ -249,10 +249,10 @@ class DatabaseManager:
         query = ""
 
         if search_mode == 0:  # eccetto numero di inventario
-            query += f"SELECT * FROM items where (bid like '%{search_field}%'" \
-                     f"or isbn like '%{search_field}%'" \
-                     f"or title like '%{search_field}%'" \
-                     f"or author like '%{search_field}%'" \
+            query += f"SELECT * FROM items where (bid like '%{search_field}%' " \
+                     f"or isbn like '%{search_field}%' " \
+                     f"or title like '%{search_field}%' " \
+                     f"or author like '%{search_field}%' " \
                      f"or note like '%{search_field}%') "
         elif search_mode == 1:  # Title
             query += f"SELECT * FROM items WHERE title LIKE  '%{search_field}%' "
@@ -521,37 +521,37 @@ class DatabaseManager:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where (u.name like '%(search_field)%' "
-                                 f"or u.surname like '%(search_field)%' "
-                                 f"or i.title like '%(search_field)%' "
-                                 f"or i.isbn like '%(search_field)%' "
-                                 f"or m.timestamp like '%(search_field)%') "
+                                 f"where (u.name like '%{search_field}%' "
+                                 f"or u.surname like '%{search_field}%' "
+                                 f"or i.title like '%{search_field}%' "
+                                 f"or i.isbn like '%{search_field}%' "
+                                 f"or m.timestamp like '%{search_field}%') "
                                  f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 1:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where (u.name like '%(search_field)%' "
-                                 f"or u.surname like '%(search_field)%') "
+                                 f"where (u.name like '%{search_field}%' "
+                                 f"or u.surname like '%{search_field}%') "
                                  f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 2:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where i.title like '%(search_field)%' "
+                                 f"where i.title like '%{search_field}%' "
                                  f"and m.mov_type = {search_field_mov_type} ")
             elif search_mode == 3:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where i.isbn like '%(search_field)%' "
+                                 f"where i.isbn like '%{search_field}%' "
                                  f"and m.mov_type = {search_field_mov_type} ")
 
             elif search_mode == 4:
                 self.cur.execute(f"Select * from movements m "
                                  f"left join users u on u.id = m.user_id "
                                  f"left join items i on i.id = m.item_id "
-                                 f"where m.timestamp like '%(search_field)%' "
+                                 f"where m.timestamp like '%{search_field}%' "
                                  f"and m.mov_type = {search_field_mov_type} ")
 
             elif search_mode == 5:
@@ -679,7 +679,7 @@ class DatabaseManager:
         return res[0]
 
     def get_unsigned_reservations(self, search_field='') -> [tuple]:
-        query = f"SELECT * FROM unsigned_service_reservations where (fullname like '%(search_field)%')"
+        query = f"SELECT * FROM unsigned_service_reservations where (fullname like '%{search_field}%')"
         return self.query(query, returns=True)
 
     def get_signed_reservation_by_user_id(self, user_id) -> [tuple]:
@@ -696,7 +696,7 @@ class DatabaseManager:
         return self.query(query, returns=True)
 
     def get_signed_user_reservation(self, search_field):
-        query = f"SELECT ssr.id, u.Id AS 'user_id',concat(u.name,' ',u.surname) AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.id = ssr.user_id WHERE concat(u.name,' ',u.surname) LIKE '%(search_field)%'"
+        query = f"SELECT ssr.id, u.Id AS 'user_id',concat(u.name,' ',u.surname) AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.id = ssr.user_id WHERE concat(u.name,' ',u.surname) LIKE '%{search_field}%'"
         return self.query(query, returns=True)
 
     # region Stats
@@ -737,8 +737,8 @@ class DatabaseManager:
             # try conversion
             try:
                 value = type_value(item_value)
-                if type_value is str:
-                    value.replace("'", "\'")
+                # if type_value is str:
+                #     value.replace("'", "\x27")
             except:
                 raise TypeError(f" {item_value} is not an instance of {type_value}")
         return value

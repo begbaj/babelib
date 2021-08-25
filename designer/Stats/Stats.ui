@@ -149,7 +149,7 @@ border: none
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="loan_stats">
+    <widget class="QPushButton" name="loan_stats_button">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -190,7 +190,7 @@ border: none
       <x>180</x>
       <y>40</y>
       <width>391</width>
-      <height>331</height>
+      <height>351</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -491,8 +491,8 @@ text-align: center;</string>
      <rect>
       <x>580</x>
       <y>40</y>
-      <width>451</width>
-      <height>331</height>
+      <width>441</width>
+      <height>171</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -514,29 +514,11 @@ background-color:rgba(0, 192, 225, 200)</string>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="author_label_3">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>180</y>
-       <width>151</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
-border:none;
-background-color:none;</string>
-     </property>
-     <property name="text">
-      <string>Generi più richiesti</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="title_label_3">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>30</y>
+       <x>10</x>
+       <y>10</y>
        <width>121</width>
        <height>21</height>
       </rect>
@@ -550,24 +532,67 @@ background-color:none;</string>
       <string>Libri più prestati</string>
      </property>
     </widget>
-    <widget class="QListView" name="listView">
+    <widget class="QLabel" name="first_most_loaned">
      <property name="geometry">
       <rect>
-       <x>170</x>
-       <y>30</y>
-       <width>256</width>
-       <height>111</height>
+       <x>20</x>
+       <y>40</y>
+       <width>411</width>
+       <height>31</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
     </widget>
-    <widget class="QListView" name="listView_2">
+    <widget class="QLabel" name="second_most_loaned">
      <property name="geometry">
       <rect>
-       <x>170</x>
-       <y>180</y>
-       <width>256</width>
-       <height>111</height>
+       <x>20</x>
+       <y>80</y>
+       <width>411</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="third_most_loaned">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>120</y>
+       <width>411</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
      </property>
     </widget>
    </widget>
@@ -593,10 +618,121 @@ background-color:none;</string>
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QFrame" name="cataloging_frame_3">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>220</y>
+      <width>451</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>1</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 20px;
+border-style: outset;
+border-width: 2px;
+border-color:rgb(27,25,39);
+background-color:rgba(0, 192, 225, 200)</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="title_label_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>171</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+     </property>
+     <property name="text">
+      <string>Generei più richiesti</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="first_genre">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>411</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="second_genre">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>80</y>
+       <width>411</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="third_genre">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>120</y>
+       <width>411</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </widget>
    <zorder>label_6</zorder>
    <zorder>menu_frame</zorder>
    <zorder>cataloging_frame</zorder>
    <zorder>cataloging_frame_2</zorder>
+   <zorder>cataloging_frame_3</zorder>
   </widget>
   <action name="actionModifica">
    <property name="text">
