@@ -5,9 +5,11 @@ from PyQt5.QtWidgets import QDialog, QMainWindow
 
 from src.Movements.Controllers.MovementManager import MovementManager
 from src.Movements.Models.Movement import Movement
-from src.Movements.View.ShowMovementView import ShowMovementView
+from src.Movements.View.InfoView import InfoView
 from src.Movements.View.LoanView import LoanView
 from src.Utils.UI import Popup
+
+
 
 
 class MovementsView(QMainWindow):
@@ -62,7 +64,9 @@ class MovementsView(QMainWindow):
             self.popUp.show()
         else:
             movement = self.movements[rowtable]
-            self.view = ShowMovementView(self.widget, movement)
+            #print("Porcodio")
+            self.view = InfoView(movement)
+            #self.view = LoanView(self.widget, self.load_data, 1)
             self.view.show()
 
 

@@ -9,17 +9,29 @@ from src.Movements.View.LoanView import LoanView
 from datetime import datetime, timedelta
 
 
-class ShowMovementView(QMainWindow):
+class InfoView(QMainWindow):
 
     movementM = MovementManager()
 
-    def __init__(self, widget, movement):
-        super(ShowMovementView, self).__init__()
+    '''def __init__(self, widget, movement):
+        super(InfoView, self).__init__()
         loadUi("../designer/Movements/ShowMovementView.ui", self)
         self.widget = widget
-        self.view = ''
-        self.setup()
+        #self.view = ''
+        #self.setup()
         self.movement = movement
+        #self.fill_movement()'''
+
+    def __init__(self, movement):
+        super(InfoView, self).__init__()
+        loadUi("../designer/Movements/ShowMovementView.ui", self)
+        self.movement = movement
+        #self.setup()
+
+
+    def setup(self):
+        self.confirmButton.clicked.connect(self.save)
+        self.returnButton.clicked.connect(self.close)
 
     def fill_movement(self):
         #Utente
@@ -51,3 +63,8 @@ class ShowMovementView(QMainWindow):
             self.movtypeField.setext("Rientrato")
 
         self.noteField.setText(self.movement.note)
+
+    def save(self):
+        self.movement.note = self.self.noteField.text()
+        self.movementM.set(self.movement)
+        self.close()
