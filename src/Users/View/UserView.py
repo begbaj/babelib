@@ -28,7 +28,6 @@ class UserView(QMainWindow):
         # Ricerca Dinamica
         self.nameField.textChanged.connect(lambda: self.search())
         self.surnameField.textChanged.connect(lambda: self.search())
-        self.selectButton.hide()
         self.style()
 
     def style(self):

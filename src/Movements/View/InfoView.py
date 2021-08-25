@@ -9,29 +9,22 @@ from src.Movements.View.LoanView import LoanView
 from datetime import datetime, timedelta
 
 
-class InfoView(QMainWindow):
+class InfoView(QDialog):
 
     movementM = MovementManager()
 
-    '''def __init__(self, widget, movement):
+    def __init__(self, widget, movement):
         super(InfoView, self).__init__()
         loadUi("../designer/Movements/ShowMovementView.ui", self)
         self.widget = widget
-        #self.view = ''
-        #self.setup()
+        self.view = ''
+        self.setup()
         self.movement = movement
-        #self.fill_movement()'''
-
-    def __init__(self, movement):
-        super(InfoView, self).__init__()
-        loadUi("../designer/Movements/ShowMovementView.ui", self)
-        self.movement = movement
-        #self.setup()
-
+        self.fill_movement()
 
     def setup(self):
-        self.confirmButton.clicked.connect(self.save)
-        self.returnButton.clicked.connect(self.close)
+        self.confirmButton.clicked.connect(lambda: self.save())
+        self.returnButton.clicked.connect(lambda: self.close())
 
     def fill_movement(self):
         #Utente
@@ -47,24 +40,24 @@ class InfoView(QMainWindow):
         self.titleField.setText(self.movement.item.title)
         self.bidField.setText(self.movement.item.bid)
         self.authorField.setText(self.movement.item.author)
-        self.rackField.setText(self.movement.item.rack)
+        self.rackField.setText(str(self.movement.item.rack))
         self.shelfField.setText(self.movement.item.shelf)
-        self.positionField.setText(self.movement.item.position)
+        self.positionField.setText(str(self.movement.item.position))
 
         #Movimento
         self.dateTimeIni.setDate(self.movement.timestamp)
         self.dateTimeEnd.setDate(self.movement.timestamp + timedelta(30))
 
         if self.movement.mov_type == 0:
-            self.movtypeField.setext("Consultazione")
+            self.movtypeField.setText("Consultazione")
         elif self.movement.mov_type == 1:
-            self.movtypeField.setext("Presitito")
+            self.movtypeField.setText("Presitito")
         elif self.movement.mov_type == 2:
-            self.movtypeField.setext("Rientrato")
+            self.movtypeField.setText("Rientrato")
 
         self.noteField.setText(self.movement.note)
 
     def save(self):
-        self.movement.note = self.self.noteField.text()
+        self.movement.note = self.noteField.toPlainText()
         self.movementM.set(self.movement)
         self.close()

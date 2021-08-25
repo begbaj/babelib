@@ -6,7 +6,7 @@ class Movement:
     id = 0
     item_id = 0
     user_id = 0
-    mov_type = ''
+    mov_type = 0
     timestamp = ''
     note = ''
 

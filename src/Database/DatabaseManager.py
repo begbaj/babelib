@@ -468,10 +468,10 @@ class DatabaseManager:
         try:
             self.cur.execute(
                 f"Update movements m "
-                f"set m.mov_type = '{movement.mov_type}'"
-                f", m.timestamp = '{movement.timestamp}'"
-                f", m.note = '{movement.note}'"
-                f" where id = {movement.id}")
+                f"set m.mov_type = {movement.mov_type} "
+                f", m.timestamp = '{movement.timestamp}' "
+                f", m.note = '{movement.note}' "
+                f" where m.id = {movement.id}")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
@@ -590,7 +590,7 @@ class DatabaseManager:
     def set_movement_to_model(self, row):
 
         movement = Movement(row.item_id, row.user_id, row.mov_type, row.timestamp, row.note)
-        movement.id = row.Id
+        movement.id = row.id
 
         movement.user = User(row.nationality, row.user_type
                              , row.registration_date, row.name, row.surname, row.gender, row.birthplace
