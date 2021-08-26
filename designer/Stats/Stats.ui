@@ -407,7 +407,7 @@ text-align: center;</string>
         <string/>
        </property>
       </widget>
-      <widget class="QLabel" name="n_users_2">
+      <widget class="QLabel" name="male">
        <property name="geometry">
         <rect>
          <x>120</x>
