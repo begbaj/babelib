@@ -9,6 +9,7 @@ from src.Users.models.User import User
 from src.Users.models.UserType import UserType
 from src.Users.models.Nationality import Nationality
 from src.Items.Controllers.ItemManager import ItemManager
+from src.Services.controllers.ServiceReservationManager import ServiceReservationManager
 from src.Items.Models.Item import Item
 from src.Items.Models.ItemEnumerators import *
 from src.Database.DatabaseManager import DatabaseManager
@@ -168,4 +169,14 @@ def movement_generator(im: ItemManager, um: UserManager, mov = None):
                                               True)
         movement.user_id = movement.user.id
     return movement
+
+def generate_service_reservation(sm: ServiceReservationManager):
+    fake = Faker(locale="it_IT")
+    if random.randint(0,10) < 7: #SIGNED
+        user = sm.dbms.query("SELECT * FROM users ORDER BY RAND() LIMIT 1;", returns=True)[0]
+        d_f = fake.date_time()
+        sm.add_signed_reservation(user.Id, d_f, d_f + timedelta(hours=random.randint(1,4)))
+    else: #UNSIGNED
+        d_f = fake.date_time()
+        sm.add_unsigned_reservation(d_f, d_f + timedelta(hours=random.randint(1,4)), fake.phone_number(), fake.name())
 
