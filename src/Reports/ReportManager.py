@@ -1,7 +1,5 @@
 from datetime import timedelta
-
 from docx import Document
-
 from src.Movements.Models.Movement import Movement
 
 
@@ -64,7 +62,7 @@ class ReportManager:
 
         par = doc.add_paragraph(f"Il lettore  {self.user}\nCodice:     {self.fiscal_code}\nRecapiti:  {self.contact}")
 
-        par = doc.add_paragraph('ottiene in prestito il documento con i seguenti dati di collocazione:')
+        par = doc.add_paragraph('\nottiene in prestito il documento con i seguenti dati di collocazione:')
 
         par = doc.add_paragraph(f"Titolo:    {self.title}\nAutore:  {self.author}\nN. inv:    {self.numInv}\nColloc:   {self.coll}\n")
         par.add_run(f"In prestito dal {self.dateIn} Scade il {self.dateEnd}").bold = True

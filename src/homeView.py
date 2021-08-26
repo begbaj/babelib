@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QTableWidget, QTableWidgetItem, QDesktopWidget
+from PyQt5.QtWidgets import QMainWindow, QTableWidget, QTableWidgetItem, QDesktopWidget, QWidget
 from PyQt5.uic import loadUi
 from src.Movements.Controllers.MovementManager import MovementManager
 from src.Services.controllers.ServiceReservationManager import ServiceReservationManager
@@ -23,6 +23,7 @@ class HomeView(QMainWindow):
         self.resM = ServiceReservationManager()
         # Metodi Iniziali
         self.setup()
+        self.showMaximized()
 
     def setup(self):
         # Menu Button
