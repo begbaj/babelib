@@ -18,7 +18,11 @@ class ServiceReservationManager:
         :param d_to: end date and end time of the reservation
         :return: None
         """
-        self.dbms.add_signed_reservation(id, d_from, d_to)
+        if self.count_res(d_from) < 20:
+            self.dbms.add_signed_reservation(id, d_from, d_to)
+            return True
+        else:
+            return False
 
     def add_unsigned_reservation(self, date_from, date_to, cell_phone, full_name):
         """
@@ -29,7 +33,11 @@ class ServiceReservationManager:
         :param full_name: name and surname of the unregistered user
         :return: None
         """
-        self.dbms.add_unsigned_reservation(date_from, date_to, cell_phone, full_name)
+        if self.count_res(date_from) < 20:
+            self.dbms.add_unsigned_reservation(date_from, date_to, cell_phone, full_name)
+            return True
+        else:
+            return False
 
     def get_unsigned_(self, search_field: str):
         """
@@ -67,3 +75,8 @@ class ServiceReservationManager:
             return True
         else:
             return False
+
+    def count_res(self, date_from):
+        return self.dbms.count_signed(date_from)[0].count + self.dbms.count_unsigned(date_from)[0].count
+
+

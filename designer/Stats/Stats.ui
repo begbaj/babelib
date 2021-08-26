@@ -103,6 +103,96 @@ background-color:rgb(26, 25, 39);
       </size>
      </property>
     </widget>
+    <widget class="QPushButton" name="user_stats">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>151</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(28, 181, 209, 255), stop:0.454545 rgba(21, 143, 166, 255), stop:0.619318 rgba(15, 103, 120, 255), stop:1 rgba(11, 79, 93, 255));
+color:rgb(255, 255, 255);
+font: 10pt;
+border-radius:15px;
+border: none
+</string>
+     </property>
+     <property name="text">
+      <string>Statiche Utenti</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/profile.png</normaloff>../img/profile.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="loan_stats_button">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>200</y>
+       <width>151</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(28, 181, 209, 255), stop:0.454545 rgba(21, 143, 166, 255), stop:0.619318 rgba(15, 103, 120, 255), stop:1 rgba(11, 79, 93, 255));
+color:rgb(255, 255, 255);
+font: 10pt;
+border-radius:15px;
+border: none
+</string>
+     </property>
+     <property name="text">
+      <string>Statistiche Prestiti</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/Icona Prestito.png</normaloff>../img/Icona Prestito.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>-200</y>
+      <width>1321</width>
+      <height>1001</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="pixmap">
+     <pixmap>../img/background_blur.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
@@ -110,17 +200,14 @@ background-color:rgb(26, 25, 39);
       <x>170</x>
       <y>0</y>
       <width>971</width>
-      <height>511</height>
+      <height>581</height>
      </rect>
     </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
     <property name="styleSheet">
-     <string notr="true">border: none;</string>
+     <string notr="true">background: transparent;</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="general_tab">
      <attribute name="title">
@@ -129,10 +216,10 @@ background-color:rgb(26, 25, 39);
      <widget class="QFrame" name="cataloging_frame">
       <property name="geometry">
        <rect>
-        <x>80</x>
-        <y>40</y>
-        <width>241</width>
-        <height>381</height>
+        <x>0</x>
+        <y>20</y>
+        <width>471</width>
+        <height>141</height>
        </rect>
       </property>
       <property name="minimumSize">
@@ -146,7 +233,7 @@ background-color:rgb(26, 25, 39);
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 180)</string>
+background-color:rgba(0, 192, 225, 200)</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -158,7 +245,7 @@ background-color:rgba(0, 192, 225, 180)</string>
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>70</y>
+         <y>20</y>
          <width>121</width>
          <height>21</height>
         </rect>
@@ -176,7 +263,7 @@ background-color:none;</string>
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>100</y>
+         <y>50</y>
          <width>121</width>
          <height>21</height>
         </rect>
@@ -194,7 +281,7 @@ background-color:none;</string>
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>130</y>
+         <y>75</y>
          <width>121</width>
          <height>21</height>
         </rect>
@@ -211,10 +298,10 @@ background-color:none;</string>
       <widget class="QLabel" name="material_label_2">
        <property name="geometry">
         <rect>
-         <x>48</x>
-         <y>230</y>
-         <width>31</width>
-         <height>20</height>
+         <x>250</x>
+         <y>20</y>
+         <width>121</width>
+         <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -229,9 +316,9 @@ background-color:none;</string>
       <widget class="QLabel" name="material_label_6">
        <property name="geometry">
         <rect>
-         <x>43</x>
-         <y>260</y>
-         <width>31</width>
+         <x>250</x>
+         <y>50</y>
+         <width>121</width>
          <height>21</height>
         </rect>
        </property>
@@ -247,10 +334,10 @@ background-color:none;</string>
       <widget class="QLabel" name="material_label_7">
        <property name="geometry">
         <rect>
-         <x>44</x>
-         <y>290</y>
-         <width>41</width>
-         <height>20</height>
+         <x>250</x>
+         <y>80</y>
+         <width>121</width>
+         <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -265,9 +352,9 @@ background-color:none;</string>
       <widget class="QLabel" name="material_label_8">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>320</y>
-         <width>21</width>
+         <x>250</x>
+         <y>110</y>
+         <width>121</width>
          <height>21</height>
         </rect>
        </property>
@@ -283,20 +370,19 @@ background-color:none;</string>
       <widget class="QLabel" name="n_users">
        <property name="geometry">
         <rect>
-         <x>120</x>
-         <y>70</y>
-         <width>91</width>
-         <height>21</height>
+         <x>140</x>
+         <y>24</y>
+         <width>81</width>
+         <height>16</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-text-align: center;
-</string>
+text-align: center;</string>
        </property>
        <property name="text">
         <string/>
@@ -305,18 +391,18 @@ text-align: center;
       <widget class="QLabel" name="foneplus">
        <property name="geometry">
         <rect>
-         <x>100</x>
-         <y>320</y>
+         <x>370</x>
+         <y>110</y>
          <width>81</width>
-         <height>21</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
 text-align: center;</string>
        </property>
        <property name="text">
@@ -326,18 +412,39 @@ text-align: center;</string>
       <widget class="QLabel" name="zero_seventeen">
        <property name="geometry">
         <rect>
-         <x>100</x>
-         <y>230</y>
+         <x>370</x>
+         <y>20</y>
          <width>81</width>
-         <height>21</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
+text-align: center;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="male">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>51</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
 text-align: center;</string>
        </property>
        <property name="text">
@@ -347,18 +454,18 @@ text-align: center;</string>
       <widget class="QLabel" name="tsixfifty">
        <property name="geometry">
         <rect>
-         <x>100</x>
-         <y>290</y>
+         <x>370</x>
+         <y>80</y>
          <width>81</width>
-         <height>21</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
 text-align: center;</string>
        </property>
        <property name="text">
@@ -368,18 +475,18 @@ text-align: center;</string>
       <widget class="QLabel" name="eighteentfive">
        <property name="geometry">
         <rect>
-         <x>100</x>
-         <y>260</y>
+         <x>370</x>
+         <y>50</y>
          <width>81</width>
-         <height>21</height>
+         <height>16</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
 text-align: center;</string>
        </property>
        <property name="text">
@@ -389,105 +496,32 @@ text-align: center;</string>
       <widget class="QLabel" name="female">
        <property name="geometry">
         <rect>
-         <x>120</x>
-         <y>130</y>
-         <width>91</width>
-         <height>21</height>
+         <x>140</x>
+         <y>78</y>
+         <width>81</width>
+         <height>16</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
 text-align: center;</string>
        </property>
        <property name="text">
         <string/>
-       </property>
-      </widget>
-      <widget class="QLabel" name="n_users_2">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>100</y>
-         <width>91</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
-color:rgb(255, 255, 255);
-border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-text-align: center;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_6">
-       <property name="geometry">
-        <rect>
-         <x>85</x>
-         <y>170</y>
-         <width>51</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background:transparent;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::RichText</enum>
-       </property>
-       <property name="pixmap">
-        <pixmap>../img/fascia eta.png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_7">
-       <property name="geometry">
-        <rect>
-         <x>90</x>
-         <y>14</y>
-         <width>41</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background:transparent;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::RichText</enum>
-       </property>
-       <property name="pixmap">
-        <pixmap>../img/male-female.png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
        </property>
       </widget>
      </widget>
-     <widget class="QFrame" name="cataloging_frame_3">
+     <widget class="QFrame" name="cataloging_frame_2">
       <property name="geometry">
        <rect>
-        <x>340</x>
-        <y>40</y>
-        <width>551</width>
-        <height>381</height>
+        <x>490</x>
+        <y>200</y>
+        <width>451</width>
+        <height>171</height>
        </rect>
       </property>
       <property name="minimumSize">
@@ -501,7 +535,7 @@ background:transparent;</string>
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 180)</string>
+background-color:rgba(0, 192, 225, 200)</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -509,164 +543,11 @@ background-color:rgba(0, 192, 225, 180)</string>
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QLabel" name="title_label_4">
-       <property name="geometry">
-        <rect>
-         <x>270</x>
-         <y>21</y>
-         <width>171</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
-border:none;
-background-color:none;</string>
-       </property>
-       <property name="text">
-        <string>Generi più richiesti</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="first_genre">
-       <property name="geometry">
-        <rect>
-         <x>190</x>
-         <y>64</y>
-         <width>231</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
-color:rgb(255, 255, 255);
-border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-text-align: center;
-</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QLabel" name="second_genre">
-       <property name="geometry">
-        <rect>
-         <x>190</x>
-         <y>104</y>
-         <width>231</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
-color:rgb(255, 255, 255);
-border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-text-align: center;
-</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QLabel" name="third_genre">
-       <property name="geometry">
-        <rect>
-         <x>190</x>
-         <y>144</y>
-         <width>231</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
-color:rgb(255, 255, 255);
-border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-text-align: center;
-</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_3">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>64</y>
-         <width>41</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background:transparent;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../img/medal (1).png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_4">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>104</y>
-         <width>41</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background:transparent;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../img/medal (2).png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_5">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>144</y>
-         <width>41</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background:transparent;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../img/medal (3).png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
       <widget class="QLabel" name="title_label_3">
        <property name="geometry">
         <rect>
-         <x>280</x>
-         <y>204</y>
+         <x>10</x>
+         <y>10</y>
          <width>121</width>
          <height>21</height>
         </rect>
@@ -683,213 +564,177 @@ background-color:none;</string>
       <widget class="QLabel" name="first_most_loaned">
        <property name="geometry">
         <rect>
-         <x>120</x>
-         <y>250</y>
-         <width>361</width>
+         <x>20</x>
+         <y>40</y>
+         <width>411</width>
          <height>31</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-text-align: center;
-</string>
+text-align: center;</string>
        </property>
        <property name="text">
-        <string/>
+        <string>TextLabel</string>
        </property>
       </widget>
       <widget class="QLabel" name="second_most_loaned">
        <property name="geometry">
         <rect>
-         <x>120</x>
-         <y>290</y>
-         <width>361</width>
+         <x>20</x>
+         <y>80</y>
+         <width>411</width>
          <height>31</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-text-align: center;
-</string>
+text-align: center;</string>
        </property>
        <property name="text">
-        <string/>
+        <string>TextLabel</string>
        </property>
       </widget>
       <widget class="QLabel" name="third_most_loaned">
        <property name="geometry">
         <rect>
-         <x>120</x>
-         <y>330</y>
-         <width>361</width>
+         <x>20</x>
+         <y>120</y>
+         <width>411</width>
          <height>31</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-text-align: center;
-</string>
+text-align: center;</string>
        </property>
        <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_8">
-       <property name="geometry">
-        <rect>
-         <x>230</x>
-         <y>194</y>
-         <width>41</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background:transparent;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::RichText</enum>
-       </property>
-       <property name="pixmap">
-        <pixmap>../img/trophy.png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_9">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>250</y>
-         <width>41</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background:transparent;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../img/medal (1).png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_10">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>290</y>
-         <width>41</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background:transparent;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../img/medal (2).png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_11">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>330</y>
-         <width>41</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background:transparent;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../img/medal (3).png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_12">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>11</y>
-         <width>41</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background:transparent;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::RichText</enum>
-       </property>
-       <property name="pixmap">
-        <pixmap>../img/award.png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
+        <string>TextLabel</string>
        </property>
       </widget>
      </widget>
-     <widget class="QLabel" name="label">
+     <widget class="QFrame" name="cataloging_frame_3">
       <property name="geometry">
        <rect>
-        <x>-10</x>
-        <y>0</y>
-        <width>1231</width>
-        <height>471</height>
+        <x>490</x>
+        <y>20</y>
+        <width>451</width>
+        <height>171</height>
        </rect>
       </property>
-      <property name="text">
-       <string/>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>1</height>
+       </size>
       </property>
-      <property name="pixmap">
-       <pixmap>../img/Sfondo.jpeg</pixmap>
+      <property name="styleSheet">
+       <string notr="true">border-radius: 20px;
+border-style: outset;
+border-width: 2px;
+border-color:rgb(27,25,39);
+background-color:rgba(0, 192, 225, 200)</string>
       </property>
-      <property name="scaledContents">
-       <bool>true</bool>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
       </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="title_label_4">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>171</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+       </property>
+       <property name="text">
+        <string>Generei più richiesti</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="first_genre">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>411</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="second_genre">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>80</y>
+         <width>411</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="third_genre">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>120</y>
+         <width>411</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
      </widget>
-     <zorder>label</zorder>
-     <zorder>cataloging_frame</zorder>
-     <zorder>cataloging_frame_3</zorder>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -899,7 +744,7 @@ background:transparent;</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>20</y>
+        <y>30</y>
         <width>451</width>
         <height>111</height>
        </rect>
@@ -915,7 +760,7 @@ background:transparent;</string>
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 180)</string>
+background-color:rgba(0, 192, 225, 125)</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -1009,6 +854,121 @@ background-color:none;</string>
         <string>Nome</string>
        </property>
       </widget>
+      <widget class="QFrame" name="cataloging_frame_5">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>110</y>
+         <width>451</width>
+         <height>111</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>1</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border-radius: 20px;
+border-style: outset;
+border-width: 2px;
+border-color:rgb(27,25,39);
+background-color:rgba(0, 192, 225, 125)</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLineEdit" name="surnameField_2">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>60</y>
+          <width>251</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="nameField_2">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>20</y>
+          <width>251</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border:none;
+background-color: rgba(23, 28, 78, 17);
+color:rgb(255, 255, 255);
+font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border:none;
+border-bottom: 1px solid rgba(255, 255, 255, 100);
+</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="author_label_4">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>60</y>
+          <width>121</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+        </property>
+        <property name="text">
+         <string>Cognome</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="title_label_6">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>20</y>
+          <width>121</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 75 bold 11pt &quot;Arial&quot;;
+border:none;
+background-color:none;</string>
+        </property>
+        <property name="text">
+         <string>Nome</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
      <widget class="QLabel" name="logo_icon_2">
       <property name="geometry">
@@ -1047,7 +1007,7 @@ background-color:none;</string>
         <x>10</x>
         <y>150</y>
         <width>451</width>
-        <height>291</height>
+        <height>211</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -1231,9 +1191,9 @@ QHeaderView::section{
       <property name="geometry">
        <rect>
         <x>480</x>
-        <y>20</y>
-        <width>471</width>
-        <height>421</height>
+        <y>80</y>
+        <width>481</width>
+        <height>281</height>
        </rect>
       </property>
       <property name="minimumSize">
@@ -1247,7 +1207,7 @@ QHeaderView::section{
 border-style: outset;
 border-width: 2px;
 border-color:rgb(27,25,39);
-background-color:rgba(0, 192, 225, 200)</string>
+background-color:rgba(0, 192, 225, 125)</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -1258,8 +1218,8 @@ background-color:rgba(0, 192, 225, 200)</string>
       <widget class="QLabel" name="title_label_7">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>70</y>
+         <x>10</x>
+         <y>20</y>
          <width>121</width>
          <height>31</height>
         </rect>
@@ -1276,8 +1236,8 @@ background-color:none;</string>
       <widget class="QLabel" name="title_label_8">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>110</y>
+         <x>10</x>
+         <y>50</y>
          <width>121</width>
          <height>31</height>
         </rect>
@@ -1294,8 +1254,8 @@ background-color:none;</string>
       <widget class="QLabel" name="title_label_9">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>150</y>
+         <x>10</x>
+         <y>80</y>
          <width>121</width>
          <height>31</height>
         </rect>
@@ -1312,8 +1272,8 @@ background-color:none;</string>
       <widget class="QLabel" name="title_label_10">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>190</y>
+         <x>10</x>
+         <y>110</y>
          <width>121</width>
          <height>31</height>
         </rect>
@@ -1330,8 +1290,8 @@ background-color:none;</string>
       <widget class="QLabel" name="title_label_11">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>350</y>
+         <x>10</x>
+         <y>230</y>
          <width>121</width>
          <height>31</height>
         </rect>
@@ -1348,8 +1308,8 @@ background-color:none;</string>
       <widget class="QLabel" name="title_label_12">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>310</y>
+         <x>10</x>
+         <y>200</y>
          <width>121</width>
          <height>31</height>
         </rect>
@@ -1366,8 +1326,8 @@ background-color:none;</string>
       <widget class="QLabel" name="title_label_13">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>230</y>
+         <x>10</x>
+         <y>140</y>
          <width>191</width>
          <height>31</height>
         </rect>
@@ -1384,8 +1344,8 @@ background-color:none;</string>
       <widget class="QLabel" name="title_label_14">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>270</y>
+         <x>10</x>
+         <y>170</y>
          <width>191</width>
          <height>31</height>
         </rect>
@@ -1402,20 +1362,19 @@ background-color:none;</string>
       <widget class="QLabel" name="surname_label">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>110</y>
+         <x>210</x>
+         <y>50</y>
          <width>231</width>
-         <height>31</height>
+         <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
-font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-</string>
+text-align: center;</string>
        </property>
        <property name="text">
         <string/>
@@ -1424,20 +1383,19 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
       <widget class="QLabel" name="cf_label">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>150</y>
+         <x>210</x>
+         <y>80</y>
          <width>231</width>
-         <height>31</height>
+         <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
-font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-</string>
+text-align: center;</string>
        </property>
        <property name="text">
         <string/>
@@ -1446,20 +1404,19 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
       <widget class="QLabel" name="item_borrowed">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>190</y>
+         <x>210</x>
+         <y>110</y>
          <width>231</width>
-         <height>31</height>
+         <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
-font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-</string>
+text-align: center;</string>
        </property>
        <property name="text">
         <string/>
@@ -1468,20 +1425,19 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
       <widget class="QLabel" name="item_late">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>230</y>
+         <x>210</x>
+         <y>140</y>
          <width>231</width>
-         <height>31</height>
+         <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
-font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-</string>
+text-align: center;</string>
        </property>
        <property name="text">
         <string/>
@@ -1490,20 +1446,19 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
       <widget class="QLabel" name="item_most_late">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>270</y>
+         <x>210</x>
+         <y>170</y>
          <width>231</width>
-         <height>31</height>
+         <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
-font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-</string>
+text-align: center;</string>
        </property>
        <property name="text">
         <string/>
@@ -1512,20 +1467,19 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
       <widget class="QLabel" name="rating_label">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>350</y>
+         <x>210</x>
+         <y>230</y>
          <width>231</width>
-         <height>31</height>
+         <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
-font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-</string>
+text-align: center;</string>
        </property>
        <property name="text">
         <string/>
@@ -1534,20 +1488,19 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
       <widget class="QLabel" name="name_label">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>70</y>
+         <x>210</x>
+         <y>20</y>
          <width>231</width>
-         <height>31</height>
+         <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
 color:rgb(255, 255, 255);
-font: 14pt &quot;Source Code Pro for Powerline&quot;;
+border-radius: 20px;
+border-style: solid;
 border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-</string>
+text-align: center;</string>
        </property>
        <property name="text">
         <string/>
@@ -1556,78 +1509,30 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
       <widget class="QLabel" name="average_return_time">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>310</y>
-         <width>231</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border:none;
-background-color: rgba(23, 28, 78, 17);
-color:rgb(255, 255, 255);
-font: 14pt &quot;Source Code Pro for Powerline&quot;;
-border:none;
-border-bottom: 1px solid rgba(255, 255, 255, 100);
-</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_13">
-       <property name="geometry">
-        <rect>
          <x>210</x>
-         <y>10</y>
-         <width>41</width>
-         <height>41</height>
+         <y>200</y>
+         <width>231</width>
+         <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border:none;
-background:transparent;</string>
+        <string notr="true">background-color:rgba(23, 28, 78, 100);
+color:rgb(255, 255, 255);
+border-radius: 20px;
+border-style: solid;
+border:none;
+text-align: center;</string>
        </property>
        <property name="text">
         <string/>
        </property>
-       <property name="textFormat">
-        <enum>Qt::RichText</enum>
-       </property>
-       <property name="pixmap">
-        <pixmap>../img/user_stats.png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
       </widget>
      </widget>
-     <widget class="QLabel" name="label_2">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>1231</width>
-        <height>471</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="pixmap">
-       <pixmap>../img/Sfondo.jpeg</pixmap>
-      </property>
-      <property name="scaledContents">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <zorder>label_2</zorder>
-     <zorder>cataloging_frame_4</zorder>
-     <zorder>logo_icon_2</zorder>
-     <zorder>userTable</zorder>
-     <zorder>cataloging_frame_6</zorder>
     </widget>
    </widget>
+   <zorder>label_6</zorder>
+   <zorder>menu_frame</zorder>
+   <zorder>tabWidget</zorder>
   </widget>
   <action name="actionModifica">
    <property name="text">

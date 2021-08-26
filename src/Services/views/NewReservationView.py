@@ -36,6 +36,7 @@ class NewReservationView(QMainWindow):
         self.get_field.clicked.connect(lambda: self.get_fields())
         self.clear_field.clicked.connect(lambda: self.clear_fields())
         self.save_button.clicked.connect(lambda: self.set_fields())
+        self.go_back_button.clicked.connect(lambda: self.close())
         if update_func is not None:
             self.save_button.clicked.connect(update_func)
         self.telephone.setValidator(QIntValidator())
@@ -156,12 +157,16 @@ class NewReservationView(QMainWindow):
         :return: None
         """
         if self.__get_selected_user() is not None:
-            self.serviceM.add_signed_reservation(self.__get_selected_user().id,
+            if not self.serviceM.add_signed_reservation(self.__get_selected_user().id,
                                                  self.dateEdit.dateTime().toString("yyyy-MM-dd") + ' ' +
                                                  self.timeEdit.dateTime().toString("hh:mm:ss"),
                                                  self.dateEdit.dateTime().toString("yyyy-MM-dd") + ' ' +
-                                                 self.timeEdit_2.dateTime().toString("hh:mm:ss"))
-            self.close()
+                                                 self.timeEdit_2.dateTime().toString("hh:mm:ss")):
+                self.pop = Popup()
+                self.pop.label.setText("I posti sono terminati.")
+                self.pop.show()
+            else:
+                self.close()
         else:
             if self.telephone.text() == '' or self.name.text() == '' or self.surname.text() == '':
                 self.pop = Popup()

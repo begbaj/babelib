@@ -752,3 +752,12 @@ class DatabaseManager:
     def delete_signed_by_id(self, id):
         query = f"DELETE FROM signed_service_reservation WHERE id ={id};"
         return self.query(query, returns=True)
+
+    def count_signed(self, date_from):
+        query = f"SELECT COUNT(*) AS 'count' FROM signed_service_reservation WHERE date_from LIKE '%{date_from}%'"
+        return self.query(query, returns=True)
+
+    def count_unsigned(self,date_from):
+        query = f"SELECT COUNT(*) AS 'count' FROM unsigned_service_reservations WHERE date_from LIKE '%{date_from}%'"
+        return self.query(query, returns=True)
+

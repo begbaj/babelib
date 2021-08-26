@@ -166,9 +166,3 @@ class StatsView(QMainWindow):
                 return n_mov, rit, perc, average, biggest_delay
             else:
                 return 0, 0, '100 %', 0, 0
-
-
-
-
-
-
