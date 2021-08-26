@@ -1,5 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QTableWidget, QTableWidgetItem, QDesktopWidget, QWidget
 from PyQt5.uic import loadUi
+
+from src.Comunication.View.MailView import MailView
 from src.Movements.Controllers.MovementManager import MovementManager
 from src.Services.controllers.ServiceReservationManager import ServiceReservationManager
 
@@ -33,7 +35,7 @@ class HomeView(QMainWindow):
         self.statsButton.clicked.connect(self.__go_stats_view)
         # self.reportButton.clicked.connect(self.goreportview())
         self.serviceButton.clicked.connect(self.__go_service_view)
-        # self.commButton.clicked.connect(self.gocomunicationview())
+        self.commButton.clicked.connect(self.__go_comunication_view)
         # Shortcut Button
         # self.newloanButton.clicked.connect(self.newloan())
         self.newreservButton.clicked.connect(self.new_reservation)
@@ -81,8 +83,9 @@ class HomeView(QMainWindow):
         self.services.show()
         pass
 
-    def __go_communication_view(self):
-        pass
+    def __go_comunication_view(self):
+        self.comunications = MailView(self.widget)
+        self.comunications.show()
 
     # endregion
 

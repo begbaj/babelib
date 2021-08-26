@@ -2,7 +2,7 @@ from src.Comunication.Model.Comunication import Comunication
 from src.Database.DatabaseManager import DatabaseManager
 
 
-class ReportManager:
+class ComunicationManager:
 
     db = DatabaseManager()
 
