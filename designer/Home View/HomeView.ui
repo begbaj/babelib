@@ -198,9 +198,9 @@ QPushButton::pressed
     <widget class="QPushButton" name="newuserButton">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>110</x>
        <y>730</y>
-       <width>311</width>
+       <width>291</width>
        <height>61</height>
       </rect>
      </property>
