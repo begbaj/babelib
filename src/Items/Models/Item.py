@@ -47,3 +47,10 @@ class Item:
 
     def __str__(self):
         return self.title + " " + self.author
+
+
+    def set_avalabilty(self, num):
+        if num == 1:
+            self.availability.value = AvailabilityEnum.disponibile
+        elif num == 5:
+            self.availability.value = AvailabilityEnum.non_disponibile

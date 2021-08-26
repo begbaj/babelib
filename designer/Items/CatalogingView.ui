@@ -634,6 +634,9 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
      <property name="placeholderText">
       <string/>
      </property>
+     <property name="isMandatory" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QLineEdit" name="author">
      <property name="geometry">
@@ -665,6 +668,9 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
      <property name="placeholderText">
       <string/>
      </property>
+     <property name="isMandatory" stdset="0">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QLineEdit" name="isbn">
      <property name="geometry">
@@ -695,6 +701,9 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
      </property>
      <property name="placeholderText">
       <string/>
+     </property>
+     <property name="isUpper" stdset="0">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>

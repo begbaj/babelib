@@ -9,7 +9,7 @@ from src.Movements.Models.Movement import Movement
 from src.Movements.View.InfoView import InfoView
 from src.Movements.View.LoanView import LoanView
 from src.Utils.UI import Popup
-
+from src.Items.Models.ItemEnumerators import *
 
 
 
@@ -131,9 +131,9 @@ class MovementsView(QMainWindow):
 
     def giving(self):
         rowtable = self.movementTable.currentRow()
-
-
-        self.movements[rowtable].item.availability = 1
+        self.movements[rowtable].item.availability = AvailabilityEnum.disponibile
+        self.movements[rowtable].item.cataloging_level = CatalogingLevel.max
+        self.movements[rowtable].item.publication_state = 0
         self.movements[rowtable].mov_type = 2
         self.movementM.set(self.movements[rowtable])
         self.itemM.edit_item(self.movements[self.movementTable.currentRow()].item)

@@ -58,8 +58,6 @@ class StatsView(QMainWindow):
             self.item_most_late.setText(str(biggest_delay))
             self.average_return_time.setText(str(average))
 
-
-
     def loan_stats(self):
         top_items = self.statsM.get_top_3()
         top_genres = self.statsM.get_top_3_genres()
@@ -88,7 +86,6 @@ class StatsView(QMainWindow):
             row = row + 1
             self.__users.append(user)
         self.userTable.setEditTriggers(QTableWidget.NoEditTriggers)
-
 
     def load_data(self):
         """

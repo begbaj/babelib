@@ -9,6 +9,7 @@ from src.Movements.Models.Movement import Movement
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
 from src.Utils.UI import Popup
+from src.Items.Models.ItemEnumerators import *
 
 
 class LoanView(QDialog):
@@ -55,8 +56,6 @@ class LoanView(QDialog):
             self.label_9.hide()
             self.label_10.hide()
 
-
-
     def setup(self):
         self.selectuserButton.clicked.connect(lambda: self.select_user())
         self.selectuserButton.setDisabled(False)
@@ -68,7 +67,7 @@ class LoanView(QDialog):
         self.fiscalcodeField.setReadOnly(True)
         self.cellField.setReadOnly(True)
         self.style()
-        self.load_user_table(self.users)
+        self.load_user_table()
         self.load_item_table(self.items)
 
     def style(self):
@@ -113,12 +112,12 @@ class LoanView(QDialog):
 
 # region Table
 
-    def load_user_table(self, users):
-        if users is not None:
-            self.users = users
+    def load_user_table(self):
+        self.users = self.userM.list()
+        if self.users is not None:
             row = 0
             self.userTable.setRowCount(len(self.users))
-            for user in users:
+            for user in self.users:
                 self.userTable.setItem(row, 0, QtWidgets.QTableWidgetItem(user.name))
                 self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
                 self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.fiscal_code))
@@ -156,7 +155,7 @@ class LoanView(QDialog):
 # region Save_and_back
 
     def save(self):
-
+        row = self.itemTable.currentRow()
         if self.movement.user_id is None or self.movement.item_id is None:
             self.pop = Popup("Selezionare sia un Utente sia un Documento")
             self.pop.show()
@@ -169,6 +168,9 @@ class LoanView(QDialog):
             self.movement.timestamp = date.today()
             self.movementM.add(self.movement)
             self.back()
+
+        self.items[row].availability = AvailabilityEnum.in_prestito
+        self.itemM.edit_item(self.items[row])
 
     def back(self):
         self.callback()
