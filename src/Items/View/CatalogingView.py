@@ -17,9 +17,9 @@ from src.Utils.UI import ErrorMessage
 
 
 class CatalogingView(QMainWindow):
-    '''
+    """
     CatalogingView script
-    '''
+    """
 
     def __init__(self, widget, item, update_func):
         '''
@@ -32,7 +32,7 @@ class CatalogingView(QMainWindow):
 
         self.update = update_func
         self.something_changed = False
-        self.validators_status = False
+        self.validators_status = None
         self.__field_with_validator = []
         self.__dbms = DatabaseManager()
         self.__im = ItemManager()
@@ -73,6 +73,7 @@ class CatalogingView(QMainWindow):
         self.shelf.textChanged.connect(self.something_changed_set)
         self.position.textChanged.connect(self.something_changed_set)
         self.price.textChanged.connect(self.something_changed_set)
+        self.quarantine_start_button.clicked.connect(self.something_changed_set)
 
         self.set_validators()
         self.check_validators()
@@ -175,8 +176,8 @@ class CatalogingView(QMainWindow):
 
         if state == PyQt5.QtGui.QValidator.Acceptable:
             color = 'background-color:rgba(23, 28, 78, 100); color:rgba(255, 255, 255); border-radius: 20px;' \
-                    'border-style: solid; border:none; text-align: center;' # green'
-            if sender.property("isMandatory"):
+                    'border-style: solid; border:none; text-align: center;'  # green'
+            if sender.property("isMandatory") and self.validators_status is not False:
                 self.validators_status = True
         elif state == PyQt5.QtGui.QValidator.Intermediate:
             color = 'background-color:rgba(255, 255, 0, 200); color:rgba(0, 0, 0); border-radius: 20px;' \
@@ -198,7 +199,7 @@ class CatalogingView(QMainWindow):
         self.isbn.setValidator(QRegExpValidator(QRegExp('^\\w{13}$')))
 
         self.rack.setValidator(QRegExpValidator(QRegExp('^\\d{1,4}$')))
-        self.shelf.setValidator(QRegExpValidator(QRegExp('^\\w{1}$')))
+        self.shelf.setValidator(QRegExpValidator(QRegExp('^[a-zA-Z]{1}$')))
         self.position.setValidator(QRegExpValidator(QRegExp('^\\d{1,3}$')))
 
         self.price.setValidator(QRegExpValidator(QRegExp('^(\\d+)\.(\\d{0,2})$')))
@@ -215,7 +216,7 @@ class CatalogingView(QMainWindow):
         # self.quarantine_due_time.setValidator(QRegExpValidator(QRegExp('^\\d{1,4}$')))
         # self.quarantine_end_date.setValidator(QRegExpValidator(QRegExp('^\\d{1,4}$')))
 
-        #QRegExpValidator(QRegExp('^[a-zA-Z]*$'))
+        # QRegExpValidator(QRegExp('^[a-zA-Z]*$'))
 
     @staticmethod
     def __fill_with_enum(enum, obj, starts_at=1, selected_index=None) -> None:
@@ -310,14 +311,19 @@ class CatalogingView(QMainWindow):
         self.availability.setCurrentIndex(AvailabilityEnum.in_quarantena.value - 1)
 
     def __save_button(self) -> None:
-        if self.validators_status:
-            if self.item.id is not None:
-                self.__im.edit_item(self.__get_from_view())
+        self.check_validators()
+        if self.something_changed:
+            if self.validators_status:
+                if self.item.id is not None:
+                    self.__im.edit_item(self.__get_from_view())
+                else:
+                    self.__im.add_item(self.__get_from_view())
+                self.close()
             else:
-                self.__im.add_item(self.__get_from_view())
-            self.close()
+                src.Utils.UI.ErrorMessage("Non sono stati riempiti tutti i campi obbligatori! Ricontrollare.").exec_()
         else:
-            src.Utils.UI.ErrorMessage("Non sono stati riempiti tutti i campi obbligatori! Ricontrollare.").exec_()
+            self.close()
+
 
     def check_validators(self):
         for validator in self.__field_with_validator:
