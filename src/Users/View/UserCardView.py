@@ -245,7 +245,7 @@ class UserCardView(QMainWindow):
                     )
         self.saveButton.setEnabled(False)
         self.userM.add(user)
-        self.callback(self.userM.list())
+        self.callback()
         self.close()
 
     def cell_contact(self):
@@ -280,7 +280,7 @@ class UserCardView(QMainWindow):
 # region View Function
 
     def closeEvent(self, event):
-        self.callback(None)
+        self.callback()
 
     def load_user(self):
         """

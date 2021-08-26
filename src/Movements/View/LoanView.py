@@ -9,6 +9,7 @@ from src.Movements.Models.Movement import Movement
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
 from src.Utils.UI import Popup
+from src.Items.Models.ItemEnumerators import *
 
 
 class LoanView(QDialog):
@@ -68,7 +69,7 @@ class LoanView(QDialog):
         self.fiscalcodeField.setReadOnly(True)
         self.cellField.setReadOnly(True)
         self.style()
-        self.load_user_table(self.users)
+        self.load_user_table()
         self.load_item_table(self.items)
 
     def style(self):
@@ -113,12 +114,12 @@ class LoanView(QDialog):
 
 # region Table
 
-    def load_user_table(self, users):
-        if users is not None:
-            self.users = users
+    def load_user_table(self):
+        self.users = self.userM.list()
+        if self.users is not None:
             row = 0
             self.userTable.setRowCount(len(self.users))
-            for user in users:
+            for user in self.users:
                 self.userTable.setItem(row, 0, QtWidgets.QTableWidgetItem(user.name))
                 self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
                 self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.fiscal_code))
@@ -169,6 +170,9 @@ class LoanView(QDialog):
             self.movement.timestamp = date.today()
             self.movementM.add(self.movement)
             self.back()
+
+        self.movement.item.availability.value = AvailabilityEnum.non_disponibile
+        self.itemM.edit_item(self.movement.item)
 
     def back(self):
         self.callback()
