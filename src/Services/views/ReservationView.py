@@ -31,6 +31,8 @@ class ReservationView(QMainWindow):
         self.add_reservation.clicked.connect(lambda: self.go_new_reservation())
         self.delete_reservation.clicked.connect(lambda: self.discard_res())
         self.searchField.textChanged.connect(lambda: self.search())
+        self.reservationTable.setSelectionBehavior(QTableWidget.SelectRows)
+
         self.search()
 
     def go_new_reservation(self):
@@ -78,6 +80,8 @@ class ReservationView(QMainWindow):
         if self.__signed is not None:
             for i in self.__signed:
                 self.__reservations.append(i)
+
+
 
     def search(self):
         """
