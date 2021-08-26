@@ -646,6 +646,31 @@ class DatabaseManager:
         return movs
     # endregion
 
+    # region Comunication
+
+    def get_comunications(self):
+        query = f"Select * from email_default_message "
+        return self.query(query, returns=True)
+
+    def get_comunications_by_id(self, id):
+        query = f"Select * from email_default_message where id = {id} "
+        comunications = self.query(query, returns=True)
+        return comunications[0]
+
+    def set_comunications(self, comunication):
+
+        try:
+            self.cur.execute(
+                f"Update email_default_message edm "
+                f"set edm.text = '{comunication.text}'"
+                f", edm.subject = '{comunication.subject}'"            
+                f" where edm.id = {comunication.id}")
+
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
+    # endregion
+
     def add_signed_reservation(self, user_id, date_from, date_to):
         try:
             self.cur.execute(
