@@ -229,7 +229,7 @@ class CatalogingView(QMainWindow):
         en_list = []
         en_id = []
         for i in range(starts_at, len(enum) + starts_at):
-            en_list.append(enum(i).name)
+            en_list.append(enum(i).name.replace('_', ' ').capitalize())
             en_id.append(enum(i).value)
         for index, element in enumerate(en_list):
             obj.addItem(element)
@@ -264,6 +264,9 @@ class CatalogingView(QMainWindow):
         new_item.publication_date = self.publication_date.dateTime().toString("yyyy-MM-dd")
 
         new_item.isbn = self.isbn.text()
+
+
+
 
         # if len(new_item.isbn) != 13:
         #     self.isbn.setStyleSheet('border-color:rgb(255,0,0')
@@ -305,6 +308,15 @@ class CatalogingView(QMainWindow):
         self.availability.setCurrentIndex(AvailabilityEnum.in_quarantena.value - 1)
 
     def __save_button(self) -> None:
+        if len(self.bid.text()) < 10 and len(self.bid.text()) > 0 and len(self.isbn.text()) < 13 and len(self.isbn.text()) > 0:
+            src.Utils.UI.ErrorMessage("ISBN e BID troppo corti").exec_()
+            return
+        if len(self.isbn.text()) < 13 and len(self.isbn.text()) > 0:
+            src.Utils.UI.ErrorMessage("ISBN troppo corto").exec_()
+            return
+        if len(self.bid.text()) < 10 and len(self.bid.text()) > 0:
+            src.Utils.UI.ErrorMessage("BID troppo corto").exec_()
+            return
         self.check_validators()
         if self.something_changed:
             if self.validators_status:

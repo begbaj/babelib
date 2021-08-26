@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QTableWidget
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QMainWindow
@@ -96,6 +96,8 @@ class MovementsView(QMainWindow):
             self.movementTable.setItem(row, 4, QtWidgets.QTableWidgetItem(movement.user.name + " " + movement.user.surname))
             self.movementTable.setItem(row, 5, QtWidgets.QTableWidgetItem(movement.user.first_cellphone))
             row = row + 1
+        self.movementTable.setEditTriggers(QTableWidget.NoEditTriggers)
+
 
     def search(self):
 

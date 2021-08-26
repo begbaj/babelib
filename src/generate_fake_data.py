@@ -69,9 +69,9 @@ if __name__ == "__main__":
     #delete_all_previous()
 
     #generate_users(50, um)
-    #generate_items(500, im)
+    generate_items(500, im)
     #generate_movement(10000, im, um, mm)
-    generate_service_reservations(5000, sm)
+    #generate_service_reservations(5000, sm)
 
 
     # _thread.start_new_thread(generate_items, (25000,))
