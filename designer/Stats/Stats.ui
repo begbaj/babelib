@@ -81,7 +81,7 @@ background-color:rgb(26, 25, 39);
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>300</y>
+       <y>340</y>
        <width>171</width>
        <height>101</height>
       </rect>
@@ -1119,6 +1119,9 @@ QHeaderView::section{
       </property>
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="showGrid">
+       <bool>false</bool>
       </property>
       <property name="gridStyle">
        <enum>Qt::SolidLine</enum>

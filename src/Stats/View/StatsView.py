@@ -26,6 +26,7 @@ class StatsView(QMainWindow):
         self.nameField.textChanged.connect(self.search)
         self.surnameField.textChanged.connect(self.search)
         self.userTable.itemDoubleClicked.connect(self.load_user_fields)
+        self.go_back_button.clicked.connect(lambda: self.close())
 
     def load_user_fields(self):
         user_count = self.statsM.get_user_count()

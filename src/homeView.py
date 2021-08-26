@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QTableWidget, QTableWidgetItem
+from PyQt5.QtWidgets import QMainWindow, QTableWidget, QTableWidgetItem, QDesktopWidget
 from PyQt5.uic import loadUi
 from src.Movements.Controllers.MovementManager import MovementManager
 from src.Services.controllers.ServiceReservationManager import ServiceReservationManager

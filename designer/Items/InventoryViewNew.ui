@@ -604,7 +604,7 @@ QHeaderView::section{
      <bool>true</bool>
     </property>
     <property name="rowCount">
-     <number>0</number>
+     <number>3</number>
     </property>
     <attribute name="horizontalHeaderVisible">
      <bool>true</bool>
@@ -642,6 +642,21 @@ QHeaderView::section{
     <attribute name="verticalHeaderStretchLastSection">
      <bool>false</bool>
     </attribute>
+    <row>
+     <property name="text">
+      <string/>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string/>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string/>
+     </property>
+    </row>
     <column>
      <property name="text">
       <string>Titolo</string>
@@ -689,23 +704,6 @@ QHeaderView::section{
     <column>
      <property name="text">
       <string>Stato</string>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Quarantena</string>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
      </property>
     </column>
     <column>

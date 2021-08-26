@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     generate_users(50, um)
     generate_items(500, im)
-    generate_movement(10000, im, um, mm)
+    generate_movement(100, im, um, mm)
 
 
     # _thread.start_new_thread(generate_items, (25000,))

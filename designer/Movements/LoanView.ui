@@ -405,6 +405,9 @@ QHeaderView::section{
    <property name="selectionBehavior">
     <enum>QAbstractItemView::SelectRows</enum>
    </property>
+   <property name="showGrid">
+    <bool>false</bool>
+   </property>
    <property name="gridStyle">
     <enum>Qt::SolidLine</enum>
    </property>
@@ -616,6 +619,9 @@ QHeaderView::section{
    </property>
    <property name="selectionBehavior">
     <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <property name="showGrid">
+    <bool>false</bool>
    </property>
    <property name="gridStyle">
     <enum>Qt::SolidLine</enum>
