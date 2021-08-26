@@ -42,3 +42,7 @@ class MovementManager:
 
     def get_movements_by_date(self, date: datetime.date):
         return self.db.get_movements_by_date(date)
+
+    def get_last_movement_id(self):
+        ids_mov = self.db.get_movements_id()
+        return ids_mov[0].id

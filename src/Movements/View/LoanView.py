@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, date
 
 from PyQt5 import QtWidgets
@@ -6,6 +7,7 @@ from PyQt5.uic import loadUi
 from src.Items.Controllers.ItemManager import ItemManager
 from src.Movements.Controllers.MovementManager import MovementManager
 from src.Movements.Models.Movement import Movement
+from src.Reports.ReportManager import ReportManager
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
 from src.Utils.UI import Popup
@@ -167,6 +169,15 @@ class LoanView(QDialog):
                 self.movement.mov_type = 0
             self.movement.timestamp = date.today()
             self.movementM.add(self.movement)
+
+            self.movement = self.movementM.find(self.movementM.get_last_movement_id())
+
+            newpath = os.path.expanduser("~/Desktop/Moduli Prestito")
+            if not os.path.exists(newpath):
+                os.makedirs(newpath)
+
+            self.reportM = ReportManager(self.movement, newpath)
+            self.reportM.set_report()
             self.back()
 
         self.items[row].availability = AvailabilityEnum.in_prestito

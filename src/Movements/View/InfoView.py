@@ -8,10 +8,13 @@ from src.Movements.Models.Movement import Movement
 from src.Movements.View.LoanView import LoanView
 from datetime import datetime, timedelta
 
+from src.Reports.ReportManager import ReportManager
+
 
 class InfoView(QDialog):
 
     movementM = MovementManager()
+
 
     def __init__(self, widget, movement):
         super(InfoView, self).__init__()

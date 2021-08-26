@@ -579,13 +579,17 @@ class DatabaseManager:
             self.cur.execute(f"Select * from movements m "
                              f"left join users u on u.id = m.user_id "
                              f"left join items i on i.id = m.item_id "
-                             f" where id = {id}"
+                             f" where m.id = {id}"
                              f"")
 
         except mariadb.Error as e:
             print(f"Error: {e}")
 
         return self.set_movement_to_model(self.cur.fetchone())
+
+    def get_movements_id(self):
+        query = f"select m.id from movements m order by m.id desc"
+        return self.query(query, returns=True)
 
     def set_movement_to_model(self, row):
 
