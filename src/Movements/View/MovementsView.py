@@ -70,7 +70,6 @@ class MovementsView(QMainWindow):
             self.popUp.show()
         else:
             movement = self.movements[rowtable]
-            #print("Porcodio")
             self.view = InfoView(self.widget, movement)
             #self.view = LoanView(self.widget, self.load_data, 1)
             self.view.show()
