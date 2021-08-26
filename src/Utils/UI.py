@@ -40,10 +40,10 @@ class CheckableComboBox(QComboBox):
         else:
             item.setCheckState(Qt.Checked)
 
-    def checkedItems(self):
+    def checkedItems(self, start_from=0):
         checkedItems = []
-        for index in range(self.count()):
-            item = self.model().item(index)
+        for index in range(start_from, self.count()+start_from):
+            item = self.model().item(index-start_from)
             if item.checkState() == Qt.Checked:
                 checkedItems.append(index)
         return checkedItems

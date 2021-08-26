@@ -196,11 +196,11 @@ class DatabaseManager:
         query +=" %s, "
         query +=f" {self.__check_value(item.cataloging_level.value, int)}, " \
                 f" {self.__check_value(item.publication_state, int)}," \
-                f" {self.__check_value(item.rack, int)}," \
-                f" '{self.__check_value(item.shelf, str)}'," \
-                f" {self.__check_value(item.position, int)}, " \
-                f" {self.__check_value(item.opac_visibility, int)}," \
-                f" {round(self.__check_value(item.price, decimal.Decimal), 2)}," \
+                f" {self.__check_value(item.rack, int, 0)}," \
+                f" '{self.__check_value(item.shelf, str, '')}'," \
+                f" {self.__check_value(item.position, int, 0)}, " \
+                f" {self.__check_value(item.opac_visibility, int, 0)}," \
+                f" {round(self.__check_value(item.price, decimal.Decimal, 0), 2)}," \
                 f" {self.__set_date_str(item.publication_date)}," \
                 f" {self.__set_date_str(item.quarantine_start_date)}," \
                 f" {self.__set_date_str(item.quarantine_end_date)}," \
@@ -225,7 +225,7 @@ class DatabaseManager:
             for state in item.external_state:
                 query = f"INSERT INTO items_external_states (item_id, external_state_id) VALUES ({nid},{state.value});"
                 self.query(query)
-        self.query(query)
+
         return nid
 
     def get_genre_value(self, genre_id):
@@ -766,7 +766,7 @@ class DatabaseManager:
                 value = f"'{str(item_date)}'"
             return value
 
-    def __check_value(self, item_value, type_value):
+    def __check_value(self, item_value, type_value, return_this=None):
         value = item_value
         if not isinstance(item_value, type_value):
             # try conversion
@@ -775,7 +775,10 @@ class DatabaseManager:
                 # if type_value is str:
                 #     value.replace("'", "\x27")
             except:
-                raise TypeError(f" {item_value} is not an instance of {type_value}")
+                if return_this is None:
+                    raise TypeError(f" {item_value} is not an instance of {type_value}")
+                else:
+                    return return_this
         return value
 
     def delete_unsigned_by_id(self, id):

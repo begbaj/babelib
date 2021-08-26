@@ -177,18 +177,12 @@ class CatalogingView(QMainWindow):
         if state == PyQt5.QtGui.QValidator.Acceptable:
             color = 'background-color:rgba(23, 28, 78, 100); color:rgba(255, 255, 255); border-radius: 20px;' \
                     'border-style: solid; border:none; text-align: center;'  # green'
-            if sender.property("isMandatory") and self.validators_status is not False:
-                self.validators_status = True
         elif state == PyQt5.QtGui.QValidator.Intermediate:
             color = 'background-color:rgba(255, 255, 0, 200); color:rgba(0, 0, 0); border-radius: 20px;' \
                     'border-style: solid; border:none; text-align: center;'  # yellow
-            if sender.property("isMandatory"):
-                self.validators_status = False
         else:
             color = 'background-color:rgba(255, 0, 0, 100); color:rgb(0, 0, 0); border-radius: 20px;' \
                     'border-style: solid; border:none; text-align: center;'  # red
-            if sender.property("isMandatory"):
-                self.validators_status = False
         sender.setStyleSheet('QLineEdit { %s }' % color)
 
     def set_validators(self):
@@ -293,7 +287,7 @@ class CatalogingView(QMainWindow):
 
         new_item.note = self.note.toPlainText()
 
-        new_item.genre = self.__im.get_genres(self.genre.checkedItems())
+        new_item.genre = self.__im.get_genres(self.genre.checkedItems(1))
 
         # if self.genre.checkedItems() == []:
         #     self.genre.setStyleSheet('border-color:rgb(255,0,0)')
@@ -326,8 +320,15 @@ class CatalogingView(QMainWindow):
 
 
     def check_validators(self):
+        self.validators_status = None
         for validator in self.__field_with_validator:
-            validator.validator().validate(validator.text(), 0)
+            status = validator.validator().validate(validator.text(), 0)
+            if validator.property("isMandatory") and self.validators_status is not False:
+                if status[0] == 2:
+                    self.validators_status = True
+                else:
+                    self.validators_status = False
+
 
     def close(self) -> bool:
         self.item = None
