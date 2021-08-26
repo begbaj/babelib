@@ -145,8 +145,15 @@ class DatabaseManager:
 
     def find_user_by_id(self, user_id):
         query = f"Select * from users where Id = {user_id}"
-        users = self.query(query, returns=True)
-        return users[0]
+        #users = self.query(query, returns=True)
+        return self.query(query, returns=True)
+
+    def get_users_with_email(self, search_field):
+        query = f"SELECT * FROM users where (name like '%{search_field}%' " \
+                 f"or surname like '%{search_field}%' " \
+                 f"or fiscal_code like '%{search_field}%') " \
+                f" and email like '%{search_field}%' "
+        return self.query(query, returns=True)
 
     def get_user_name_by_id(self, user_id):
         query = f"Select name from users where Id = {user_id}"
@@ -649,13 +656,13 @@ class DatabaseManager:
     # region Comunication
 
     def get_comunications(self):
-        query = f"Select * from email_default_message "
+        query = f"Select * from email_default_message order by id asc "
         return self.query(query, returns=True)
 
     def get_comunications_by_id(self, id):
         query = f"Select * from email_default_message where id = {id} "
-        comunications = self.query(query, returns=True)
-        return comunications[0]
+        #comunications = self.query(query, returns=True)
+        return self.query(query, returns=True)
 
     def set_comunications(self, comunication):
 
