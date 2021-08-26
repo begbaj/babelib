@@ -673,7 +673,7 @@ class DatabaseManager:
                 f" '{date_from}'"
                 f", '{date_to}'"
                 f", '{full_name}'"
-                f",{cell_phone})"
+                f", '{cell_phone}')"
             )
 
 

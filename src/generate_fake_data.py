@@ -1,6 +1,9 @@
 from src.Users.controllers.UserManager import UserManager
 from src.Utils.Tools import *
 from src.Movements.Controllers.MovementManager import MovementManager
+from src.Items.Controllers.ItemManager import ItemManager
+from src.Services.controllers.ServiceReservationManager import ServiceReservationManager
+
 from threading import *
 import time
 
@@ -34,6 +37,14 @@ def generate_movement(quantity: int, im, um, mm) -> None:
         except Exception as err:
             print(err)
 
+def generate_service_reservations(quantity: int, sm) -> None:
+    for i in range(0, quantity):
+        try:
+            generate_service_reservation(sm)
+            print(f"{i} of {quantity} service generated.")
+        except Exception as err:
+            print(err)
+
 
 def delete_all_previous():
     db = DatabaseManager()
@@ -53,12 +64,14 @@ if __name__ == "__main__":
     im = ItemManager()
     um = UserManager()
     mm = MovementManager()
+    sm = ServiceReservationManager()
 
     #delete_all_previous()
 
-    generate_users(50, um)
-    generate_items(500, im)
-    generate_movement(10000, im, um, mm)
+    #generate_users(50, um)
+    #generate_items(500, im)
+    #generate_movement(10000, im, um, mm)
+    generate_service_reservations(5000, sm)
 
 
     # _thread.start_new_thread(generate_items, (25000,))
