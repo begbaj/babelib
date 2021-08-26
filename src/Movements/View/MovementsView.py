@@ -3,14 +3,20 @@ from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QMainWindow
 
+from src.Items.Controllers.ItemManager import ItemManager
 from src.Movements.Controllers.MovementManager import MovementManager
 from src.Movements.Models.Movement import Movement
+from src.Movements.View.InfoView import InfoView
 from src.Movements.View.LoanView import LoanView
+from src.Utils.UI import Popup
+from src.Items.Models.ItemEnumerators import *
+
 
 
 class MovementsView(QMainWindow):
 
     movementM = MovementManager()
+    itemM = ItemManager()
 
     def __init__(self, widget):
         super(MovementsView, self).__init__()
@@ -25,11 +31,15 @@ class MovementsView(QMainWindow):
         self.consultationButton.clicked.connect(lambda: self.new_consultation())
         self.infoButton.clicked.connect(lambda: self.movement_info())
         self.backButton.clicked.connect(lambda: self.close())
+        self.givingbookButton.clicked.connect(lambda: self.giving())
 
         self.loanRadio.setChecked(True)
 
         self.searchField.textChanged.connect(lambda: self.search())
+
         self.loanRadio.toggled.connect(lambda: self.search())
+        self.consultationRadio.toggled.connect(lambda: self.search())
+        self.backRadio.toggled.connect(lambda: self.search())
 
         self.load_data()
 
@@ -46,18 +56,29 @@ class MovementsView(QMainWindow):
         self.movementTable.setStyleSheet(open("../designer/style/TableTheme.txt", "r").read())
 
     def new_consultation(self):
-        self.view = LoanView(self.widget, self.load_data, False)
+        self.view = LoanView(self.widget, self.load_data, 0)
         self.view.show()
 
     def new_loan(self):
-        self.view = LoanView(self.widget, self.load_data, True)
+        self.view = LoanView(self.widget, self.load_data, 1)
         self.view.show()
 
     def movement_info(self):
-        pass
+        rowtable = self.movementTable.currentRow()
+        if rowtable == -1:
+            self.popUp = Popup("Selezionare prima un movimento!")
+            self.popUp.show()
+        else:
+            movement = self.movements[rowtable]
+            #print("Porcodio")
+            self.view = InfoView(self.widget, movement)
+            #self.view = LoanView(self.widget, self.load_data, 1)
+            self.view.show()
+
+
 
     def load_data(self):
-        self.movements = self.movementM.find_all(self.loanRadio.isChecked(), 5)
+        self.movements = self.movementM.find_all(self.radio_selection(), 5)
         self.load_table()
 
     def load_table(self):
@@ -93,12 +114,30 @@ class MovementsView(QMainWindow):
             elif self.searchMode.currentText() == 'ISBN':
                 numSearchMode = 4
 
-            self.movements = self.movementM.find_all(self.loanRadio.isChecked(), numSearchMode, self.searchField.text())
+
+            self.movements = self.movementM.find_all(self.radio_selection(), numSearchMode, self.searchField.text())
         else:
-            self.movements = self.movementM.find_all(self.loanRadio.isChecked(), 5)
+            self.movements = self.movementM.find_all(self.radio_selection(), 5)
 
         self.load_table()
 
+    def radio_selection(self):
+        if self.consultationRadio.isChecked():
+            return 0
+        elif self.loanRadio.isChecked():
+            return 1
+        elif self.backRadio.isChecked():
+            return 2
+
+    def giving(self):
+        rowtable = self.movementTable.currentRow()
+        self.movements[rowtable].item.availability = AvailabilityEnum.disponibile
+        self.movements[rowtable].item.cataloging_level = CatalogingLevel.max
+        self.movements[rowtable].item.publication_state = 0
+        self.movements[rowtable].mov_type = 2
+        self.movementM.set(self.movements[rowtable])
+        self.itemM.edit_item(self.movements[self.movementTable.currentRow()].item)
+        self.load_data()
 
 
 
