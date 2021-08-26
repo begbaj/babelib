@@ -57,6 +57,7 @@ class LoanView(QDialog):
             self.expirationEdit.hide()
             self.label_9.hide()
             self.label_10.hide()
+            self.frame_13.setGeometry(931,210)
 
     def setup(self):
         self.selectuserButton.clicked.connect(lambda: self.select_user())
