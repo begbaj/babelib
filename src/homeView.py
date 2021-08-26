@@ -156,7 +156,7 @@ class HomeView(QMainWindow):
         :return: None
         """
         row = 0
-        movements = self.movem.find_all(search_mode=0, search_field='', search_field_mov_type=1)
+        movements = self.movem.get_movements_by_date(self.service_reservation_calendar_widget.selectedDate().toPyDate())
         self.movement_table_widget.setRowCount(len(movements))
         for movement in movements:
             self.movement_table_widget.setItem(row, 0, QTableWidgetItem(movement.timestamp.strftime('%d/%m/%Y %H:%M:%S')))

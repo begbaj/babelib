@@ -630,6 +630,16 @@ class DatabaseManager:
 
         return movement
 
+
+    def get_movements_by_date(self, m_date: date):
+        query = f"Select * from movements m "\
+                f"left join users u on u.id = m.user_id "\
+                f"left join items i on i.id = m.item_id "\
+                f" where m.timestamp like '%{self.__set_date_str(m_date, no_apici=True)}%';"
+        movs = []
+        for mov in self.query(query, returns=True):
+            movs.append(self.set_movement_to_model(mov))
+        return movs
     # endregion
 
     def add_signed_reservation(self, user_id, date_from, date_to):

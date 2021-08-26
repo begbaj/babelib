@@ -1,3 +1,5 @@
+import datetime
+
 from src.Database.DatabaseManager import DatabaseManager
 from src.Items.Controllers.ItemManager import ItemManager
 
@@ -37,3 +39,6 @@ class MovementManager:
                 self.items_available.append(item)
 
         return self.items_available
+
+    def get_movements_by_date(self, date: datetime.date):
+        return self.db.get_movements_by_date(date)
