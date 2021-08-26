@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QTableWidget
 from PyQt5.uic import loadUi
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
@@ -56,6 +56,8 @@ class UserView(QMainWindow):
             self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.fiscal_code))
             self.userTable.setItem(row, 3, QtWidgets.QTableWidgetItem(user.city))
             row = row + 1
+        self.userTable.setEditTriggers(QTableWidget.NoEditTriggers)
+
 
     def load_data(self, users=None):
         if users is None:

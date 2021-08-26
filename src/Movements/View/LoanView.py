@@ -2,7 +2,7 @@ import os
 from datetime import datetime, date
 
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QDialog, QTableWidget
 from PyQt5.uic import loadUi
 from src.Items.Controllers.ItemManager import ItemManager
 from src.Movements.Controllers.MovementManager import MovementManager
@@ -125,6 +125,7 @@ class LoanView(QDialog):
                 self.userTable.setItem(row, 1, QtWidgets.QTableWidgetItem(user.surname))
                 self.userTable.setItem(row, 2, QtWidgets.QTableWidgetItem(user.fiscal_code))
                 row = row + 1
+            self.userTable.setEditTriggers(QTableWidget.NoEditTriggers)
 
     def load_item_table(self, items):
         self.items = items
@@ -135,6 +136,8 @@ class LoanView(QDialog):
             self.itemTable.setItem(row, 1, QtWidgets.QTableWidgetItem(item.author))
             self.itemTable.setItem(row, 2, QtWidgets.QTableWidgetItem(item.isbn))
             row = row + 1
+        self.itemTable.setEditTriggers(QTableWidget.NoEditTriggers)
+
 
 # endregion
 
