@@ -1,3 +1,5 @@
+import datetime
+
 from src.Database.DatabaseManager import DatabaseManager
 from src.Services.models import SignedServiceReservation, UnsignedServiceReservation
 
@@ -38,8 +40,9 @@ class ServiceReservationManager:
         :param search_field: text to compare to database fields
         :return: a mariadb row depending on search_field
         """
-        if self.dbms.get_unsigned_reservations(search_field):
-            return self.dbms.get_unsigned_reservations(search_field)
+        ret = self.dbms.get_unsigned_reservations(search_field)
+        if ret is not None:
+            return ret
 
     def get_all_signed(self, search_field: str):
         """
@@ -48,6 +51,25 @@ class ServiceReservationManager:
         :return: a mariadb row depending on search_field
         """
         return self.dbms.get_signed_user_reservation(search_field)
+
+    def get_unsigned_by_date(self, date: datetime.date):
+        """
+        this method gets an unsigned reservation searching over rows in database that have fields similar to searching
+        field
+        :param search_field: text to compare to database fields
+        :return: a mariadb row depending on search_field
+        """
+        ret = self.dbms.get_unsigned_reservations_by_date(date)
+        if ret is not None:
+            return ret
+
+    def get_all_signed_by_date(self, date: datetime.date):
+        """
+        this method will get all the signed reservations searching over rows in database that have fields similar to searching
+        :param search_field: text to compare to database fields
+        :return: a mariadb row depending on search_field
+        """
+        return self.dbms.get_signed_user_reservation_by_date(date)
 
     def delete_unsigned(self, id):
         """

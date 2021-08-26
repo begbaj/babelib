@@ -181,7 +181,7 @@ background-color: transparent;
 border:none;</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
@@ -445,7 +445,7 @@ border-radius:10px;</string>
       <attribute name="title">
        <string>Movimenti</string>
       </attribute>
-      <widget class="QTableWidget" name="reservation_table_widget_2">
+      <widget class="QTableWidget" name="movement_table_widget">
        <property name="enabled">
         <bool>true</bool>
        </property>

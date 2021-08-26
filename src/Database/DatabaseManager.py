@@ -684,6 +684,14 @@ class DatabaseManager:
         query = f"SELECT * FROM unsigned_service_reservations where (fullname like '%{search_field}%')"
         return self.query(query, returns=True)
 
+    def get_unsigned_reservations_by_date(self, date=datetime.date)-> [tuple]:
+        query = f"SELECT * FROM unsigned_service_reservations where (date_from like '%{self.__set_date_str(date, no_apici=True)}%')"
+        return self.query(query, returns=True)
+
+    def get_signed_reservations_by_date(self, date=datetime.date)-> [tuple]:
+        query = f"SELECT * FROM signed_service_reservation where (date_from like '%{self.__set_date_str(date, no_apici=True)}%')"
+        return self.query(query, returns=True)
+
     def get_signed_reservation_by_user_id(self, user_id) -> [tuple]:
         query = f"SELECT * FROM signed_service_reservation where (user_id like '%{user_id}%')"
         return self.query(query, returns=True)
@@ -699,6 +707,10 @@ class DatabaseManager:
 
     def get_signed_user_reservation(self, search_field):
         query = f"SELECT ssr.id, u.Id AS 'user_id',concat(u.name,' ',u.surname) AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.id = ssr.user_id WHERE concat(u.name,' ',u.surname) LIKE '%{search_field}%'"
+        return self.query(query, returns=True)
+
+    def get_signed_user_reservation_by_date(self, search_field):
+        query = f"SELECT ssr.id, u.Id AS 'user_id',concat(u.name,' ',u.surname) AS 'fullname' ,u.first_cellphone AS cellphone,ssr.date_from,ssr.date_to FROM users AS u JOIN signed_service_reservation AS ssr ON u.id = ssr.user_id WHERE ssr.date_from LIKE '%{self.__set_date_str(search_field, no_apici=True)}%'"
         return self.query(query, returns=True)
 
     # region Stats
@@ -725,13 +737,20 @@ class DatabaseManager:
 
     # endregion
 
-    def __set_date_str(self, item_date) -> str:
+    def __set_date_str(self, item_date, no_apici=False) -> str:
         value = "null"
-        if isinstance(item_date, datetime):
-            value = f"'{str(item_date.date())}'"
-        elif isinstance(item_date, date):
-            value = f"'{str(item_date)}'"
-        return value
+        if no_apici:
+            if isinstance(item_date, datetime):
+                value = f"{str(item_date.date())}"
+            elif isinstance(item_date, date):
+                value = f"{str(item_date)}"
+            return value
+        else:
+            if isinstance(item_date, datetime):
+                value = f"'{str(item_date.date())}'"
+            elif isinstance(item_date, date):
+                value = f"'{str(item_date)}'"
+            return value
 
     def __check_value(self, item_value, type_value):
         value = item_value

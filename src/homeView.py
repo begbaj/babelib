@@ -1,5 +1,8 @@
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QTableWidget, QTableWidgetItem
 from PyQt5.uic import loadUi
+from src.Movements.Controllers.MovementManager import MovementManager
+from src.Services.controllers.ServiceReservationManager import ServiceReservationManager
+
 from src.Stats.View.StatsView import StatsView
 from Users.View.UserView import UserView
 from src.Items.View.InventoryView import InventoryView
@@ -16,6 +19,8 @@ class HomeView(QMainWindow):
         loadUi("../designer/Home view/HomeView.ui", self)
         # Variabili di Istanza
         self.widget = widget
+        self.movem = MovementManager()
+        self.resM = ServiceReservationManager()
         # Metodi Iniziali
         self.setup()
 
@@ -32,6 +37,10 @@ class HomeView(QMainWindow):
         # self.newloanButton.clicked.connect(self.newloan())
         self.newreservButton.clicked.connect(self.new_reservation)
         self.newuserButton.clicked.connect(self.new_user)
+        self.service_reservation_calendar_widget.selectionChanged.connect(self.__update_reservation_table)
+        self.service_reservation_calendar_widget.selectionChanged.connect(self.load_movement_table)
+        self.__update_reservation_table()
+        self.load_movement_table()
         # Setting Button
         # self.settingButton.clicked.connect(self.setting())
         self.style()
@@ -93,4 +102,69 @@ class HomeView(QMainWindow):
 
     def setting(self):
         pass
+
+    def __update_reservation_table(self):
+        """
+        this method allows to update the table with all the reservations
+        :return: returns a list with the signed and unsigned reservations
+        """
+        self.reservation_table_widget.clearSelection()
+        self.__remove_rows()
+        self.__unsigned = self.resM.get_unsigned_by_date(self.service_reservation_calendar_widget.selectedDate().toPyDate())
+        self.__signed = self.resM.get_all_signed_by_date(self.service_reservation_calendar_widget.selectedDate().toPyDate())
+        if len(self.__unsigned) > 0:
+            for res in self.__unsigned:
+                row = self.reservation_table_widget.rowCount()
+                self.reservation_table_widget.insertRow(row)
+                self.reservation_table_widget.setItem(row, 0, QTableWidgetItem(res.fullname))
+                self.reservation_table_widget.setItem(row, 2, QTableWidgetItem(res.date_from.strftime("%m/%d/%Y")))
+                self.reservation_table_widget.setItem(row, 3, QTableWidgetItem(res.date_from.strftime("%H:%M:%S") + " - " + res.date_to.strftime("%H:%M:%S")))
+                self.reservation_table_widget.setItem(row, 1, QTableWidgetItem(res.cellphone))
+        if len(self.__signed) > 0:
+            for res in self.__signed:
+                row = self.reservation_table_widget.rowCount()
+                self.reservation_table_widget.insertRow(row)
+                self.reservation_table_widget.setItem(row, 0, QTableWidgetItem(res.fullname))
+                self.reservation_table_widget.setItem(row, 1, QTableWidgetItem(res.cellphone))
+                self.reservation_table_widget.setItem(row, 2, QTableWidgetItem(res.date_from.strftime("%m/%d/%Y")))
+                self.reservation_table_widget.setItem(row, 3, QTableWidgetItem(
+                    res.date_from.strftime("%H:%M:%S") + " - " + res.date_to.strftime("%H:%M:%S")))
+                row = row + 1
+
+        self.reservation_table_widget.setEditTriggers(QTableWidget.NoEditTriggers)
+
+        self.__reservations = []
+        if self.__unsigned is not None:
+            for i in self.__unsigned:
+                self.__reservations.append(i)
+        if self.__signed is not None:
+            for i in self.__signed:
+                self.__reservations.append(i)
+
+    def __remove_rows(self):
+        """
+        this method allows to remove rows from the reservations table
+        :return: None
+        """
+        for i in reversed(range(0, self.reservation_table_widget.rowCount())):
+            self.reservation_table_widget.removeRow(i)
+
+    def load_movement_table(self):
+        """
+        Questo metodo permette di rimpire la QTableWidget presente nella view con una lista di utenti
+        :param users:
+        :return: None
+        """
+        row = 0
+        movements = self.movem.find_all(search_mode=0, search_field='', search_field_mov_type=1)
+        self.movement_table_widget.setRowCount(len(movements))
+        for movement in movements:
+            self.movement_table_widget.setItem(row, 0, QTableWidgetItem(movement.timestamp.strftime('%d/%m/%Y %H:%M:%S')))
+            self.movement_table_widget.setItem(row, 1, QTableWidgetItem(movement.item.isbn))
+            self.movement_table_widget.setItem(row, 2, QTableWidgetItem(movement.item.title))
+            self.movement_table_widget.setItem(row, 3, QTableWidgetItem(movement.user.fiscal_code))
+            self.movement_table_widget.setItem(row, 4, QTableWidgetItem(movement.user.name + " " + movement.user.surname))
+            self.movement_table_widget.setItem(row, 5, QTableWidgetItem(movement.user.first_cellphone))
+            row = row + 1
+
     # endregion
