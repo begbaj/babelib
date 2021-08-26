@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QMainWindow
+from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
@@ -57,7 +57,7 @@ class UserView(QMainWindow):
             self.userTable.setItem(row, 3, QtWidgets.QTableWidgetItem(user.city))
             row = row + 1
 
-    def load_data(self, users = None):
+    def load_data(self, users=None):
         if users is None:
             self.users = self.userM.list()
             self.load_table(self.users)
@@ -67,11 +67,6 @@ class UserView(QMainWindow):
     # Region 'User Operation'
 
     def search(self):
-        """
-        Questo metodo consente la ricerca degli utenti all'interno del sistema
-        :return:
-        """
-        # Reload all the Users
         if (self.nameField.text() == '') and (self.surnameField.text() == ''):
             self.load_data()
         # Search User by name

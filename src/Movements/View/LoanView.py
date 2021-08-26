@@ -56,8 +56,6 @@ class LoanView(QDialog):
             self.label_9.hide()
             self.label_10.hide()
 
-
-
     def setup(self):
         self.selectuserButton.clicked.connect(lambda: self.select_user())
         self.selectuserButton.setDisabled(False)
@@ -157,7 +155,7 @@ class LoanView(QDialog):
 # region Save_and_back
 
     def save(self):
-
+        row = self.itemTable.currentRow()
         if self.movement.user_id is None or self.movement.item_id is None:
             self.pop = Popup("Selezionare sia un Utente sia un Documento")
             self.pop.show()
@@ -171,8 +169,8 @@ class LoanView(QDialog):
             self.movementM.add(self.movement)
             self.back()
 
-        self.movement.item.availability.value = AvailabilityEnum.non_disponibile
-        self.itemM.edit_item(self.movement.item)
+        self.items[row].availability = AvailabilityEnum.in_prestito
+        self.itemM.edit_item(self.items[row])
 
     def back(self):
         self.callback()
