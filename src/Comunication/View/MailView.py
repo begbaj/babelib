@@ -1,3 +1,8 @@
+from email.header import Header
+from email.mime.base import MIMEBase
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
+
 from PyQt5.QtWidgets import QWidget
 from PyQt5.uic import loadUi
 from src.Comunication.Controllers.ComunicationManager import ComunicationManager
@@ -106,8 +111,14 @@ class MailView(QWidget):
         # Destinatario
         self.rec_email = f"{self.users_combo[self.recipientBox.currentIndex()-1].email}"
         # Contenuto del Messaggio
-        self.msg = MIMEText(self.textMail.toPlainText())
-        self.msg['Subject'] = self.objectMail.toPlainText()
+        self.msg = MIMEMultipart()
+        self.msg['Subject'] = Header(self.objectMail.toPlainText()).encode()
+        self.msg['To'] = self.rec_email
+        self.txt = MIMEText(self.textMail.toPlainText())
+        self.msg.attach(self.txt)
+        email_end = open('config/end_mail.html').read()
+        end = MIMEText(email_end, 'html')
+        self.msg.attach(end)
         # Connessione con il Server
         self.server = smtplib.SMTP('smtp.gmail.com', 587)
         self.server.starttls()
