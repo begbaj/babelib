@@ -150,7 +150,7 @@ def user_generator():
     return user
 
 
-def movement_generator(im: ItemManager, um: UserManager, mov = None):
+def movement_generator(im: ItemManager, um: UserManager, mov=None):
     fake = Faker(locale="it_IT")
     movement = Movement()
     movement.id = 'null'
@@ -159,6 +159,7 @@ def movement_generator(im: ItemManager, um: UserManager, mov = None):
         movement.item_id = mov.item_id
         movement.mov_type = 2
         movement.timestamp = mov.timestamp + timedelta(days=random.randint(3, 60))
+        movement.note = mov.note
     else:
         movement.mov_type = 1
         movement.timestamp = fake.date_time()
@@ -168,6 +169,7 @@ def movement_generator(im: ItemManager, um: UserManager, mov = None):
         movement.user = um.set_users_to_model(um.db.query("SELECT * FROM users ORDER BY RAND() LIMIT 1;", returns=True),
                                               True)
         movement.user_id = movement.user.id
+        movement.note = fake.sentence()
     return movement
 
 def generate_service_reservation(sm: ServiceReservationManager):
@@ -179,4 +181,3 @@ def generate_service_reservation(sm: ServiceReservationManager):
     else: #UNSIGNED
         d_f = fake.date_time()
         sm.add_unsigned_reservation(d_f, d_f + timedelta(hours=random.randint(1,4)), fake.phone_number(), fake.name())
-
