@@ -3,6 +3,7 @@ from PyQt5.uic import loadUi
 
 from src.Comunication.View.MailView import MailView
 from src.Movements.Controllers.MovementManager import MovementManager
+from src.Movements.View.LoanView import LoanView
 from src.Services.controllers.ServiceReservationManager import ServiceReservationManager
 
 from src.Stats.View.StatsView import StatsView
@@ -37,7 +38,7 @@ class HomeView(QMainWindow):
         self.serviceButton.clicked.connect(self.__go_service_view)
         self.commButton.clicked.connect(self.__go_comunication_view)
         # Shortcut Button
-        # self.newloanButton.clicked.connect(self.newloan())
+        self.newloanButton.clicked.connect(self.new_loan)
         self.newreservButton.clicked.connect(self.new_reservation)
         self.newuserButton.clicked.connect(self.new_user)
         self.service_reservation_calendar_widget.selectionChanged.connect(self.__update_reservation_table)
@@ -92,7 +93,8 @@ class HomeView(QMainWindow):
     # region Shortcut functions
 
     def new_loan(self):
-        pass
+        self.loanview = LoanView(self.widget, self.close, True)
+        self.loanview.show()
 
     def new_reservation(self):
         self.res = NewReservationView(self.widget)

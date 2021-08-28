@@ -1,6 +1,4 @@
 from email.header import Header
-from email.mime.base import MIMEBase
-from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 
 from PyQt5.QtWidgets import QWidget
@@ -114,7 +112,8 @@ class MailView(QWidget):
         self.msg = MIMEMultipart()
         self.msg['Subject'] = Header(self.objectMail.toPlainText()).encode()
         self.msg['To'] = self.rec_email
-        self.txt = MIMEText(self.textMail.toPlainText())
+        self.txt = MIMEText('Gentile ' + self.users_combo[self.recipientBox.currentIndex()-1].name +',\n'
+                            + self.textMail.toPlainText())
         self.msg.attach(self.txt)
         email_end = open('config/end_mail.html').read()
         end = MIMEText(email_end, 'html')
