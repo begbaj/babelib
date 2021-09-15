@@ -405,7 +405,7 @@ QPushButton::pressed
    <property name="geometry">
     <rect>
      <x>450</x>
-     <y>650</y>
+     <y>640</y>
      <width>221</width>
      <height>61</height>
     </rect>
@@ -504,6 +504,22 @@ QPushButton::pressed
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QProgressBar" name="progressBar">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>710</y>
+     <width>641</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>24</number>
+   </property>
+   <property name="textVisible">
+    <bool>false</bool>
+   </property>
+  </widget>
   <zorder>label_7</zorder>
   <zorder>frame_3</zorder>
   <zorder>frame</zorder>
@@ -511,6 +527,7 @@ QPushButton::pressed
   <zorder>sendButton</zorder>
   <zorder>label_8</zorder>
   <zorder>label_9</zorder>
+  <zorder>progressBar</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -1,3 +1,4 @@
+import time
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
 
@@ -56,6 +57,11 @@ class MailView(QWidget):
         self.objectMail.setReadOnly(True)
         # ComboBox
         self.set_combo_box()
+        # Progress bar
+        self.progressBar.setVisible(False)
+        #self.progressBar.setMaximum(100)
+        #self.progressBar.setMinimum(0)
+
 
     def set_combo_box(self):
         # Lista dei Messaggi Predefiniti
@@ -79,6 +85,7 @@ class MailView(QWidget):
         self.recipientBox.addItems(self.com_rec_list)
         # Al cambiare dell'utente selezionato cambia il destinatario
         self.recipientBox.currentTextChanged.connect(self.on_recipient_box_changed)
+        self.allBox.stateChanged.connect(self.state_changed)
 
     def setup_email(self):
         # Credenziali per la mail
@@ -106,13 +113,45 @@ class MailView(QWidget):
         self.rec_email = self.users_combo[self.recipientBox.currentIndex() - 1].email
 
     def send(self):
+
+        progress = 100 / self.users_combo.__len__()
+        self.progressBar.setVisible(True)
+        sum = 0
+
+        if self.allBox.isChecked() == True:
+            for i in range(0, self.users_combo.__len__()):
+                sum = sum + progress
+                self.progressBar.setValue(sum)
+                self.sendEmail(i)
+
+                #if i == (self.users_combo.__len__() - 1):
+                    #self.progressBar.setValue(100 - progress)
+
+            self.progressBar.setVisible(False)
+            str = "Email inviate con successo!"
+
+        else:
+            self.sendEmail(self.recipientBox.currentIndex()-1)
+            str = "Email inviata con successo!"
+
+        self.pop = Popup(str)
+        self.pop.show()
+        print("Email has been sent to ", self.msg)
+
+    def state_changed(self):
+        if self.allBox.isChecked() == True:
+            self.recipientBox.setEnabled(False)
+        else:
+            self.recipientBox.setEnabled(True)
+
+    def sendEmail(self, i):
         # Destinatario
-        self.rec_email = f"{self.users_combo[self.recipientBox.currentIndex()-1].email}"
+        self.rec_email = f"{self.users_combo[i].email}"
         # Contenuto del Messaggio
         self.msg = MIMEMultipart()
         self.msg['Subject'] = Header(self.objectMail.toPlainText()).encode()
         self.msg['To'] = self.rec_email
-        self.txt = MIMEText('Gentile ' + self.users_combo[self.recipientBox.currentIndex()-1].name +',\n'
+        self.txt = MIMEText('Gentile ' + self.users_combo[self.recipientBox.currentIndex() - 1].name + ',\n'
                             + self.textMail.toPlainText())
         self.msg.attach(self.txt)
         email_end = open('config/end_mail.html').read()
@@ -125,9 +164,9 @@ class MailView(QWidget):
         print("Login success")
         # Inoltro e-mail
         self.server.sendmail(self.sender_email, self.rec_email, self.msg.as_string())
-        self.pop = Popup("Email inviata con successo!")
-        self.pop.show()
-        print("Email has been sent to ", self.msg)
+
+
+
 
     def refresh_text(self):
         self.comunication.text = self.textMail.toPlainText()
