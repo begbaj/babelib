@@ -236,7 +236,7 @@ QPushButton::pressed
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="deleteButton">
+    <widget class="QPushButton" name="disableButton">
      <property name="geometry">
       <rect>
        <x>50</x>
@@ -258,7 +258,7 @@ QPushButton::pressed
 }</string>
      </property>
      <property name="text">
-      <string>Elimina Utene</string>
+      <string>Disabilita Utene</string>
      </property>
      <property name="icon">
       <iconset>

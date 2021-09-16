@@ -25,6 +25,7 @@ class InfoView(QDialog):
         self.movement = movement
         self.fill_movement()
 
+#lblUserDisabled
     def setup(self):
         self.confirmButton.clicked.connect(lambda: self.save())
         self.returnButton.clicked.connect(lambda: self.close())
@@ -37,6 +38,12 @@ class InfoView(QDialog):
         self.cityField.setText(self.movement.user.city)
         self.addressField.setText(self.movement.user.address)
         self.postalCodeField.setText(self.movement.user.postal_code)
+        #self.lblUserDisabled.setVisible(self.movement.user.disabled)
+        #print(self.movement.user.disabled)
+        if self.movement.user.disabled == b'\x00':
+            self.lblUserDisabled.setVisible(False)
+        elif self.movement.user.disabled == b'\x01':
+            self.lblUserDisabled.setVisible(True)
 
         #Libro
         self.isbnField.setText(self.movement.item.isbn)

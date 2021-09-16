@@ -123,7 +123,16 @@ background-color:rgb(20, 18, 29)</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:transparent;</string>
+     <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color:transparent;
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
     </property>
     <property name="text">
      <string/>
@@ -1141,6 +1150,24 @@ border-bottom: 1px solid rgba(255, 255, 255, 100);
     </property>
     <property name="placeholderText">
      <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblUserDisabled">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>180</y>
+      <width>341</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 0, 0);
+border:none;
+background-color:transparent</string>
+    </property>
+    <property name="text">
+     <string>ATTENZIONE! Questo utente è stato disabilitato.</string>
     </property>
    </widget>
   </widget>

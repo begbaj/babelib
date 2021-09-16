@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QMainWindow, QTableWidget
 from PyQt5.uic import loadUi
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
-from src.Utils.UI import Popup, DeletePopup
+from src.Utils.UI import Popup, DeletePopup, DisableUserPopup
 
 
 class UserView(QMainWindow):
@@ -24,7 +24,7 @@ class UserView(QMainWindow):
         self.userButton.clicked.connect(self.__go_new_user)
         self.backButton.clicked.connect(self.close)
         self.schedaButton.clicked.connect(self.__go_user_card)
-        self.deleteButton.clicked.connect(self.delete)
+        self.disableButton.clicked.connect(self.disable)
         # Ricerca Dinamica
         self.nameField.textChanged.connect(lambda: self.search())
         self.surnameField.textChanged.connect(lambda: self.search())
@@ -71,6 +71,9 @@ class UserView(QMainWindow):
     # Region 'User Operation'
 
     def search(self):
+
+        self.disableButton.setVisible(not self.checkBoxUserDisabled.isChecked())
+
         if (self.nameField.text() == '') and (self.surnameField.text() == ''):
             self.load_data()
         # Search User by name
@@ -83,12 +86,20 @@ class UserView(QMainWindow):
         elif (self.nameField.text() != '') and (self.surnameField.text() != ''):
             self.load_data_research(self.userM.findNameSurname(self.nameField.text(), self.surnameField.text(), self.checkBoxUserDisabled.isChecked()))
 
-    def delete(self):
+    '''def delete(self):
         rowtable = self.userTable.currentRow()
         if rowtable == -1:
             self.show_popup()
         else:
             self.pop = DeletePopup(self.delete_user)
+            self.pop.show()'''
+
+    def disable(self):
+        rowtable = self.userTable.currentRow()
+        if rowtable == -1:
+            self.show_popup()
+        else:
+            self.pop = DisableUserPopup(self.disable_user)
             self.pop.show()
 
     # endregion
@@ -109,6 +120,18 @@ class UserView(QMainWindow):
         """
         row = self.userTable.currentRow()
         self.userM.delete(self.users[row].id)
+        self.users.remove(self.users[row])
+        self.userTable.removeRow(row)
+
+    def disable_user(self):
+        """
+        Questo metodo permette di disabilitare l'utente selezionato dal sistema
+        :return: None
+        """
+        row = self.userTable.currentRow()
+        #self.userM.delete(self.users[row].id)
+        self.users[row].disabled = True
+        self.userM.set(self.users[row])
         self.users.remove(self.users[row])
         self.userTable.removeRow(row)
 

@@ -124,7 +124,7 @@ class DatabaseManager:
                 f", u.fiscal_code = '{user.fiscal_code}'"
                 f", u.contect_mode = '{user.contect_mode}'"
                 # f", u.privacy_agreement = {user.privacy_agreement}"
-                f", u.disabled = '{user.disabled}'"
+                f", u.disabled = {user.disabled}"
                 f" where id = {user.id}")
 
         except mariadb.Error as e:
@@ -629,7 +629,7 @@ class DatabaseManager:
                              , row.registration_date, row.name, row.surname, row.gender, row.birthplace
                              , row.birthdate, row.city, row.address, row.postal_code, row.district
                              , row.first_cellphone, row.telephone, row.email, row.fiscal_code
-                             , row.contect_mode, row.privacy_agreement)
+                             , row.contect_mode, row.privacy_agreement, row.disabled)
 
         movement.user.id = row.user_id
 

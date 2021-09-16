@@ -98,3 +98,18 @@ class DeletePopup(QDialog):
     def confirm(self):
         self.funct()
         self.close()
+
+class DisableUserPopup(QDialog):
+
+    def __init__(self, funct):
+        super(DisableUserPopup, self).__init__()
+        loadUi("../designer/Pop-Up/DisableUser Pop-Up/disableuser.ui", self)
+        self.setWindowTitle('Attenzione')
+        self.setModal(True)
+        self.funct = funct
+        self.confirmButton.clicked.connect(self.confirm)
+        self.cancelButton.clicked.connect(self.close)
+
+    def confirm(self):
+        self.funct()
+        self.close()

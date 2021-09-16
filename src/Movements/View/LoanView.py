@@ -66,6 +66,7 @@ class LoanView(QDialog):
         self.selectdocButton.setDisabled(False)
         self.newuserButton.clicked.connect(lambda: self.new_user())
         self.confirmButton.clicked.connect(lambda: self.save()) #salvataggio del movimento
+        self.returnButton.clicked.connect(lambda: self.close())
         self.userField.setReadOnly(True)
         self.fiscalcodeField.setReadOnly(True)
         self.cellField.setReadOnly(True)
