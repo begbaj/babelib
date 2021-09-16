@@ -89,9 +89,16 @@ class DatabaseManager:
 
     # region Users
 
+    # USER ENABLED
     def get_users(self):
         """Retrieves the list of contacts from the Database and prints to stdout"""
-        query = f"Select * from users u "
+        query = f"Select * from users u where u.disabled = FALSE"
+        return self.query(query, returns=True)
+
+    # USER DISABLED
+    def get_users_disabled(self):
+        """Retrieves the list of contacts from the Database and prints to stdout"""
+        query = f"Select * from users u where u.disabled = TRUE"
         return self.query(query, returns=True)
 
     def set_user(self, user):
@@ -117,6 +124,7 @@ class DatabaseManager:
                 f", u.fiscal_code = '{user.fiscal_code}'"
                 f", u.contect_mode = '{user.contect_mode}'"
                 # f", u.privacy_agreement = {user.privacy_agreement}"
+                f", u.disabled = '{user.disabled}'"
                 f" where id = {user.id}")
 
         except mariadb.Error as e:
@@ -163,16 +171,30 @@ class DatabaseManager:
         query = (f"Select surname from users where Id = {user_id}")
         return self.query(query, returns=True)
 
+    #USER ENABLED
     def find_user_by_name(self, name):
-        query = (f"Select * from users u where u.name like '%{name}%'")
+        query = (f"Select * from users u where u.name like '%{name}%' and u.disabled = FALSE")
         return self.query(query, returns=True)
 
     def find_user_by_surname(self, surname):
-        query = (f"Select * from users u where u.surname like '%{surname}%'")
+        query = (f"Select * from users u where u.surname like '%{surname}%' and u.disabled = FALSE")
         return self.query(query, returns=True)
 
     def find_user_by_name_and_surname(self, name, surname):
-        query = (f"Select * from users u where u.name LIKE '%{name}%' and u.surname LIKE '%{surname}%'")
+        query = (f"Select * from users u where u.name LIKE '%{name}%' and u.surname LIKE '%{surname}%' and u.disabled = FALSE")
+        return self.query(query, returns=True)
+
+    # USER DISABLED
+    def find_user_disabled_by_name(self, name):
+        query = (f"Select * from users u where u.name like '%{name}%' and u.disabled = TRUE")
+        return self.query(query, returns=True)
+
+    def find_user_disabled_by_surname(self, surname):
+        query = (f"Select * from users u where u.surname like '%{surname}%' and u.disabled = TRUE")
+        return self.query(query, returns=True)
+
+    def find_user_disabled_by_name_and_surname(self, name, surname):
+        query = (f"Select * from users u where u.name LIKE '%{name}%' and u.surname LIKE '%{surname}%' and u.disabled = TRUE")
         return self.query(query, returns=True)
 
     # endregion

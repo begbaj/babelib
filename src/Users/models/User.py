@@ -24,12 +24,13 @@ class User:
     fiscal_code = ''
     contect_mode = ''
     privacy_agreement = 0
+    disabled = False
 
     def __init__(self, nationality = None, user_type = None
                  , registration_date = None, name = None, surname = None, gender = None, birthplace = None
                  , birthdate = None, city = None, address = None, postal_code = None, district = None
                  ,first_cellphone = None, telephone = None, email = None, fiscal_code = None, contect_mode = None
-                 ,privacy_agreement = None):
+                 ,privacy_agreement = None, disabled = None):
 
         # self.id = id
         self.nationality = nationality
@@ -50,7 +51,7 @@ class User:
         self.fiscal_code = fiscal_code
         self.contect_mode = contect_mode
         self.privacy_agreement = privacy_agreement
-
+        self.disabled = disabled
 
 
 

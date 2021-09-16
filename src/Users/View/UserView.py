@@ -29,6 +29,8 @@ class UserView(QMainWindow):
         self.nameField.textChanged.connect(lambda: self.search())
         self.surnameField.textChanged.connect(lambda: self.search())
         self.style()
+        #checkbox
+        self.checkBoxUserDisabled.stateChanged.connect(lambda: self.search())
 
     def style(self):
         self.schedaButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
@@ -61,7 +63,7 @@ class UserView(QMainWindow):
 
     def load_data(self, users=None):
         if users is None:
-            self.users = self.userM.list()
+            self.users = self.userM.list(self.checkBoxUserDisabled.isChecked())
             self.load_table(self.users)
         else:
             self.load_table(users)
@@ -73,13 +75,13 @@ class UserView(QMainWindow):
             self.load_data()
         # Search User by name
         elif (self.nameField.text() != '') and (self.surnameField.text() == ''):
-            self.load_data_research(self.userM.findName(self.nameField.text()))
+            self.load_data_research(self.userM.findName(self.nameField.text(), self.checkBoxUserDisabled.isChecked()))
         # Search User by surname
         elif (self.nameField.text() == '') and (self.surnameField.text() != ''):
-            self.load_data_research(self.userM.findSurname(self.surnameField.text()))
+            self.load_data_research(self.userM.findSurname(self.surnameField.text(), self.checkBoxUserDisabled.isChecked()))
         # Search User by both
         elif (self.nameField.text() != '') and (self.surnameField.text() != ''):
-            self.load_data_research(self.userM.findNameSurname(self.nameField.text(), self.surnameField.text()))
+            self.load_data_research(self.userM.findNameSurname(self.nameField.text(), self.surnameField.text(), self.checkBoxUserDisabled.isChecked()))
 
     def delete(self):
         rowtable = self.userTable.currentRow()
