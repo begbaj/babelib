@@ -72,7 +72,7 @@ QPushButton::pressed
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>240</y>
+       <y>230</y>
        <width>191</width>
        <height>51</height>
       </rect>
@@ -141,7 +141,7 @@ QPushButton::pressed
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>330</y>
+       <y>310</y>
        <width>191</width>
        <height>51</height>
       </rect>
@@ -198,7 +198,7 @@ QPushButton::pressed
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>410</y>
+       <y>390</y>
        <width>191</width>
        <height>51</height>
       </rect>
@@ -226,6 +226,41 @@ QPushButton::pressed
       <size>
        <width>32</width>
        <height>32</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="deleteMovements">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>470</y>
+       <width>191</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
+     </property>
+     <property name="text">
+      <string>Elimina Movimento</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
       </size>
      </property>
     </widget>
@@ -592,14 +627,14 @@ QHeaderView::section{
     <attribute name="horizontalHeaderCascadingSectionResizes">
      <bool>false</bool>
     </attribute>
+    <attribute name="horizontalHeaderMinimumSectionSize">
+     <number>50</number>
+    </attribute>
     <attribute name="horizontalHeaderDefaultSectionSize">
      <number>180</number>
     </attribute>
     <attribute name="horizontalHeaderHighlightSections">
      <bool>false</bool>
-    </attribute>
-    <attribute name="horizontalHeaderMinimumSectionSize">
-     <number>50</number>
     </attribute>
     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
      <bool>true</bool>

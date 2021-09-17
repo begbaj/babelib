@@ -8,7 +8,7 @@ from src.Movements.Controllers.MovementManager import MovementManager
 from src.Movements.Models.Movement import Movement
 from src.Movements.View.InfoView import InfoView
 from src.Movements.View.LoanView import LoanView
-from src.Utils.UI import Popup
+from src.Utils.UI import Popup, DeletePopup
 from src.Items.Models.ItemEnumerators import *
 
 
@@ -32,6 +32,7 @@ class MovementsView(QMainWindow):
         self.infoButton.clicked.connect(lambda: self.movement_info())
         self.backButton.clicked.connect(lambda: self.close())
         self.givingbookButton.clicked.connect(lambda: self.giving())
+        self.deleteMovements.clicked.connect(lambda: self.delete())
 
         self.loanRadio.setChecked(True)
 
@@ -139,6 +140,26 @@ class MovementsView(QMainWindow):
         self.movementM.set(self.movements[rowtable])
         self.itemM.edit_item(self.movements[self.movementTable.currentRow()].item)
         self.load_data()
+#deleteMovements
+    def delete(self):
+        rowtable = self.movementTable.currentRow()
+        if rowtable == -1:
+            self.show_popup()
+        else:
+            text = "Sei sicuro di voler eliminare il movimento?"
+            self.pop = DeletePopup(self.delete_movement, text)
+            self.pop.show()
+
+    def delete_movement(self):
+        """
+        Questo metodo permette di rimuovere l'utente selezionato dal sistema
+        :return: None
+        """
+        row = self.movementTable.currentRow()
+        self.movementM.delete(self.movements[row].id)
+        self.movements.remove(self.movements[row])
+        self.movementTable.removeRow(row)
+
 
 
 

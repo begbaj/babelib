@@ -86,9 +86,10 @@ class Popup(QDialog):
 
 class DeletePopup(QDialog):
 
-    def __init__(self, funct):
+    def __init__(self, funct, text = "Sei sicuro di voler eliminare l'utente?"):
         super(DeletePopup, self).__init__()
         loadUi("../designer/Pop-Up/Delete Pop-Up/deletepopup.ui", self)
+        self.label.setText(text)
         self.setWindowTitle('Attenzione')
         self.setModal(True)
         self.funct = funct

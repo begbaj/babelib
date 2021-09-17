@@ -47,4 +47,7 @@ class MovementManager:
         ids_mov = self.db.get_movements_id()
         return ids_mov[0].id
 
+    def delete(self, id):
+        self.db.delete_movement(id)
+
 

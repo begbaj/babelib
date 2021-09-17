@@ -678,6 +678,15 @@ class DatabaseManager:
         for mov in self.query(query, returns=True):
             movs.append(self.set_movement_to_model(mov))
         return movs
+
+    def delete_movement(self, movement_id):
+        try:
+            self.cur.execute(f"delete from movements where id = {movement_id}")
+
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+
+
     # endregion
 
     # region Comunication

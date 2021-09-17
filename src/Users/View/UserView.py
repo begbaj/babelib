@@ -108,9 +108,9 @@ class UserView(QMainWindow):
         else:
 
             if self.checkBoxUserDisabled.isChecked():
-                text = 'Sicuro di voler abilitare l" utente?'
+                text = "Sicuro di voler abilitare l' utente?"
             else:
-                text = 'Sicuro di voler disabilitare l" utente?'
+                text = "Sicuro di voler disabilitare l' utente?"
 
             self.pop = EnableDisableUserPopup(self.enable_disable_user, text)
             self.pop.show()
