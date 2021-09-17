@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QMainWindow, QTableWidget
 from PyQt5.uic import loadUi
 from src.Users.View.UserCardView import UserCardView
 from src.Users.controllers.UserManager import UserManager
-from src.Utils.UI import Popup, DeletePopup, DisableUserPopup
+from src.Utils.UI import Popup, DeletePopup, EnableDisableUserPopup
 
 
 class UserView(QMainWindow):
@@ -24,7 +24,13 @@ class UserView(QMainWindow):
         self.userButton.clicked.connect(self.__go_new_user)
         self.backButton.clicked.connect(self.close)
         self.schedaButton.clicked.connect(self.__go_user_card)
-        self.disableButton.clicked.connect(self.disable)
+        self.disableButton.clicked.connect(self.enable_disable)
+        self.enableButton.clicked.connect(self.enable_disable)
+        self.deleteButton.clicked.connect(self.delete)
+
+        self.disableButton.setVisible(True)
+        self.enableButton.setVisible(False)
+        #enableButton
         # Ricerca Dinamica
         self.nameField.textChanged.connect(lambda: self.search())
         self.surnameField.textChanged.connect(lambda: self.search())
@@ -73,6 +79,7 @@ class UserView(QMainWindow):
     def search(self):
 
         self.disableButton.setVisible(not self.checkBoxUserDisabled.isChecked())
+        self.enableButton.setVisible(self.checkBoxUserDisabled.isChecked())
 
         if (self.nameField.text() == '') and (self.surnameField.text() == ''):
             self.load_data()
@@ -86,20 +93,26 @@ class UserView(QMainWindow):
         elif (self.nameField.text() != '') and (self.surnameField.text() != ''):
             self.load_data_research(self.userM.findNameSurname(self.nameField.text(), self.surnameField.text(), self.checkBoxUserDisabled.isChecked()))
 
-    '''def delete(self):
+    def delete(self):
         rowtable = self.userTable.currentRow()
         if rowtable == -1:
             self.show_popup()
         else:
             self.pop = DeletePopup(self.delete_user)
-            self.pop.show()'''
+            self.pop.show()
 
-    def disable(self):
+    def enable_disable(self):
         rowtable = self.userTable.currentRow()
         if rowtable == -1:
             self.show_popup()
         else:
-            self.pop = DisableUserPopup(self.disable_user)
+
+            if self.checkBoxUserDisabled.isChecked():
+                text = 'Sicuro di voler abilitare l" utente?'
+            else:
+                text = 'Sicuro di voler disabilitare l" utente?'
+
+            self.pop = EnableDisableUserPopup(self.enable_disable_user, text)
             self.pop.show()
 
     # endregion
@@ -119,21 +132,27 @@ class UserView(QMainWindow):
         :return: None
         """
         row = self.userTable.currentRow()
-        self.userM.delete(self.users[row].id)
-        self.users.remove(self.users[row])
-        self.userTable.removeRow(row)
 
-    def disable_user(self):
+        if self.userM.count_movement_with_the_same_user_id(self.users[row].id) == 0:
+            self.userM.delete(self.users[row].id)
+            self.users.remove(self.users[row])
+            self.userTable.removeRow(row)
+        else:
+            self.pop = Popup("Utente già presente in almeno 1 movimento.")
+            self.pop.show()
+
+    def enable_disable_user(self):
         """
         Questo metodo permette di disabilitare l'utente selezionato dal sistema
         :return: None
         """
         row = self.userTable.currentRow()
         #self.userM.delete(self.users[row].id)
-        self.users[row].disabled = True
+        self.users[row].disabled = not self.checkBoxUserDisabled.isChecked()
         self.userM.set(self.users[row])
         self.users.remove(self.users[row])
         self.userTable.removeRow(row)
+
 
     def show_popup(self):
         self.pop = Popup("Selezionare un utente")

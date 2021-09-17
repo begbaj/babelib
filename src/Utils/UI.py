@@ -99,11 +99,12 @@ class DeletePopup(QDialog):
         self.funct()
         self.close()
 
-class DisableUserPopup(QDialog):
+class EnableDisableUserPopup(QDialog):
 
-    def __init__(self, funct):
-        super(DisableUserPopup, self).__init__()
-        loadUi("../designer/Pop-Up/DisableUser Pop-Up/disableuser.ui", self)
+    def __init__(self, funct, text = ''):
+        super(EnableDisableUserPopup, self).__init__()
+        loadUi("../designer/Pop-Up/EnableDisableUser Pop-Up/enabledisableuser.ui", self)
+        self.label.setText(text)
         self.setWindowTitle('Attenzione')
         self.setModal(True)
         self.funct = funct

@@ -599,6 +599,11 @@ class DatabaseManager:
         query = f"SELECT m.item_id, m.user_id, m.TIMESTAMP AS 'loan_date', r.timestamp AS 'return_date' FROM movements AS m JOIN movements AS r ON (m.item_id = r.item_id AND m.user_id = r.user_id) WHERE m.user_id = {id} AND m.mov_type = 1 AND r.mov_type = 2"
         return self.query(query, returns=True)
 
+    def find_movement_by_user_id(self, user_id):
+        query = f"select * from movements where user_id = {user_id}"
+        return self.query(query, returns=True)
+
+
     def find_movement_by_id(self, id):
 
         # itemM = ItemManager()

@@ -56,6 +56,13 @@ class UserManager:
         elif disabled:
             return self.set_users_to_model(self.db.find_user_disabled_by_name_and_surname(name, surname), False)
 
+    def count_movement_with_the_same_user_id(self, user_id):
+        numMovements = 0
+        listTubleDb = self.db.find_movement_by_user_id(user_id)
+        for tupl in listTubleDb:
+            numMovements = numMovements + 1
+        return numMovements
+
     # endregion
 
     def set(self, user):

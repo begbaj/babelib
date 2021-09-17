@@ -258,11 +258,11 @@ QPushButton::pressed
 }</string>
      </property>
      <property name="text">
-      <string>Disabilita Utene</string>
+      <string>Disabilita Utente</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../img/Icona Scarta.png</normaloff>../img/Icona Scarta.png</iconset>
+       <normaloff>../img/2.png</normaloff>../img/2.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -329,6 +329,76 @@ background-color:transparent;</string>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="deleteButton">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>420</y>
+       <width>161</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
+     </property>
+     <property name="text">
+      <string>Elimina Utente</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/Icona Scarta.png</normaloff>../img/Icona Scarta.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="enableButton">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>330</y>
+       <width>161</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton 
+{
+border-radius:15px;
+background-color: rgb(51, 49, 77);
+color:rgb(255, 255, 255);
+}
+QPushButton::pressed
+{
+	background-color:rgb(30, 97, 255)
+}</string>
+     </property>
+     <property name="text">
+      <string>Abilita Utente</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/1.png</normaloff>../img/1.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
      </property>
     </widget>
    </widget>
