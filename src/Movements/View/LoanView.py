@@ -4,6 +4,8 @@ from datetime import datetime, date
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QTableWidget
 from PyQt5.uic import loadUi
+
+import src
 from src.Items.Controllers.ItemManager import ItemManager
 from src.Movements.Controllers.MovementManager import MovementManager
 from src.Movements.Models.Movement import Movement
@@ -116,8 +118,11 @@ class LoanView(QDialog):
 
 # region Table
 
-    def load_user_table(self):
-        self.users = self.userM.list()
+    def load_user_table(self, users=None):
+        if users is None:
+            self.users = self.userM.list()
+        else:
+            self.users = users
         if self.users is not None:
             row = 0
             self.userTable.setRowCount(len(self.users))
@@ -145,14 +150,21 @@ class LoanView(QDialog):
 # region Search
 
     def search_user(self):
-        if (self.nameField.text() == '') and (self.surnameField.text() == ''):
-            self.load_user_table(self.userM.list())
-        elif (self.nameField.text() != '') and (self.surnameField.text() == ''):
-            self.load_user_table(self.userM.findName(self.nameField.text()))
-        elif (self.nameField.text() == '') and (self.surnameField.text() != ''):
-            self.load_user_table(self.userM.findSurname(self.surnameField.text()))
-        elif (self.nameField.text() != '') and (self.surnameField.text() != ''):
-            self.load_user_table(self.userM.findNameSurname(self.nameField.text(), self.surnameField.text()))
+
+        try:
+
+            if (self.nameField.text() == '') and (self.surnameField.text() == ''):
+                self.load_user_table(self.userM.list())
+            elif (self.nameField.text() != '') and (self.surnameField.text() == ''):
+                #print(self.userM.findName(self.nameField.text(), False))
+                self.load_user_table(self.userM.findName(self.nameField.text()))
+            elif (self.nameField.text() == '') and (self.surnameField.text() != ''):
+                self.load_user_table(self.userM.findSurname(self.surnameField.text()))
+            elif (self.nameField.text() != '') and (self.surnameField.text() != ''):
+                self.load_user_table(self.userM.findNameSurname(self.nameField.text(), self.surnameField.text()))
+
+        except FileNotFoundError as err:
+            src.Utils.UI.ErrorMessage(err).show()
 
     def search_item(self):
         self.load_item_table(self.itemM.get_items(self.itemField.text(), 1))
