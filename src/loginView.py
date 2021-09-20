@@ -26,10 +26,11 @@ class LoginView(QMainWindow):
         try:
             if password == result.password:
                 self.errorLabel.setText("")
+                self.__go_home_view()
             else:
                 self.errorLabel.setText("Username o Password Sbagliati")
         except Exception as err:
-            self.errorLabel.setText('err')
+            self.errorLabel.setText("Username o Password Sbagliati")
 
     def login(self):
         username = self.usernameField.text()
@@ -37,9 +38,9 @@ class LoginView(QMainWindow):
         if len(username) == 0 or len(password) == 0:
             self.errorLabel.setText("Inserisci tutti i campi")
         else:
-            result = self.__db.login(username)
+            result = self.__db.login(username, password)
             self.pass_compare(password, result)
-            self.__go_home_view()
+
 
     def __go_home_view(self):
         home_view = HomeView(self.widget)

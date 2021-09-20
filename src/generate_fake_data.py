@@ -66,12 +66,12 @@ if __name__ == "__main__":
     mm = MovementManager()
     sm = ServiceReservationManager()
 
-    #delete_all_previous()
+    delete_all_previous()
 
-    #generate_users(5000, um)
-    #generate_items(50000, im)
-    generate_movement(100000, im, um, mm)
-    #generate_service_reservations(5000, sm)
+    generate_users(1000, um)
+    generate_items(500, im)
+    generate_movement(1000, im, um, mm)
+    generate_service_reservations(200, sm)
 
 
     # _thread.start_new_thread(generate_items, (25000,))

@@ -77,13 +77,13 @@ class DatabaseManager:
         except mariadb.Error as e:
             print(f"Error: {e}")
 
-    def login(self, username):
+    def login(self, username, password):
         """
         Returns the password of the selected user (this is to AVOID for security reasons)
         :param username: username od the administrator
         :return: passowrd
         """
-        self.cur.execute(f"SELECT password FROM administrator WHERE username = '{username}'")
+        self.cur.execute(f"SELECT password FROM administrator WHERE username = '{username}' AND password = '{password}'")
         # codice insicuro, ritorna la password in chiaro.
         return self.cur.fetchone()
 
