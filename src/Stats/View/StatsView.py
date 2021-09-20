@@ -27,6 +27,19 @@ class StatsView(QMainWindow):
         self.surnameField.textChanged.connect(self.search)
         self.userTable.itemDoubleClicked.connect(self.load_user_fields)
         self.go_back_button.clicked.connect(lambda: self.close())
+        #self.style()
+
+    def style(self):
+        """
+        Questo metodo setta lo stile della view
+        :return:
+        """
+        self.first_genre.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        self.second_genre.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        self.third_genre.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        self.first_most_loaned.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        self.second_most_loaned.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
+        self.third_most_loaned.setStyleSheet(open("../designer/style/TextBoxTheme.txt", "r").read())
 
     def load_user_fields(self):
         user_count = self.statsM.get_user_count()
@@ -63,13 +76,39 @@ class StatsView(QMainWindow):
         top_items = self.statsM.get_top_3()
         top_genres = self.statsM.get_top_3_genres()
 
-        self.first_most_loaned.setText(top_items[0].title + " con " + str(top_items[0].count) + " prestiti.")
-        self.second_most_loaned.setText(top_items[1].title + " con " + str(top_items[1].count) + " prestiti.")
-        self.third_most_loaned.setText(top_items[2].title + " con " + str(top_items[2].count) + " prestiti.")
+        if len(top_items) >= 1:
+            self.first_most_loaned.setText(top_items[0].title + " con " + str(top_items[0].count) + " prestiti.")
+        else:
+            self.first_most_loaned.setText("Non ci sono abbastanza libri prestati")
+            self.first_most_loaned.setStyleSheet("color:gray")
+        if len(top_items) >= 2:
+            self.second_most_loaned.setText(top_items[1].title + " con " + str(top_items[1].count) + " prestiti.")
+        else:
+            self.second_most_loaned.setStyleSheet("color:gray")
+            self.second_most_loaned.setText("Non ci sono abbastanza libri prestati")
+        if len(top_items) >= 3:
+            self.third_most_loaned.setText(top_items[2].title + " con " + str(top_items[2].count) + " prestiti.")
+        else:
+            self.third_most_loaned.setStyleSheet("color:gray")
+            self.third_most_loaned.setText("Non ci sono abbastanza libri prestati")
 
-        self.first_genre.setText(top_genres[0].description + " con " + str(top_genres[0].count) + " prestiti.")
-        self.second_genre.setText(top_genres[1].description + " con " + str(top_genres[1].count) + " prestiti.")
-        self.third_genre.setText(top_genres[2].description + " con " + str(top_genres[2].count) + " prestiti.")
+        if len(top_genres) >= 1:
+            self.first_genre.setText(top_genres[0].description + " con " + str(top_genres[0].count) + " prestiti.")
+        else:
+            self.first_genre.setStyleSheet("color:gray")
+            self.first_genre.setText("Non ci sono abbastanza libri prestati")
+        if len(top_genres) >= 2:
+            self.second_genre.setText(top_genres[1].description + " con " + str(top_genres[1].count) + " prestiti.")
+        else:
+            self.second_genre.setStyleSheet("color:gray")
+            self.second_genre.setText("Non ci sono abbastanza libri prestati")
+        if len(top_genres) >= 3:
+            self.third_genre.setText(top_genres[2].description + " con " + str(top_genres[2].count) + " prestiti.")
+        else:
+            self.third_genre.setStyleSheet("color:gray")
+            self.third_genre.setText("Non ci sono abbastanza libri prestati")
+
+
 
     def load_table(self, users):
         """

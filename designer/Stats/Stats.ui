@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1139</width>
+    <width>955</width>
     <height>487</height>
    </rect>
   </property>
@@ -120,7 +120,7 @@ background-color:rgb(26, 25, 39);
      <string notr="true">border: none;</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="general_tab">
      <attribute name="title">
@@ -1261,7 +1261,7 @@ background-color:rgba(0, 192, 225, 200)</string>
       <widget class="QLabel" name="title_label_7">
        <property name="geometry">
         <rect>
-         <x>50</x>
+         <x>40</x>
          <y>70</y>
          <width>121</width>
          <height>31</height>
@@ -1279,7 +1279,7 @@ background-color:none;</string>
       <widget class="QLabel" name="title_label_8">
        <property name="geometry">
         <rect>
-         <x>50</x>
+         <x>40</x>
          <y>110</y>
          <width>121</width>
          <height>31</height>
@@ -1297,7 +1297,7 @@ background-color:none;</string>
       <widget class="QLabel" name="title_label_9">
        <property name="geometry">
         <rect>
-         <x>50</x>
+         <x>40</x>
          <y>150</y>
          <width>121</width>
          <height>31</height>
@@ -1315,7 +1315,7 @@ background-color:none;</string>
       <widget class="QLabel" name="title_label_10">
        <property name="geometry">
         <rect>
-         <x>50</x>
+         <x>40</x>
          <y>190</y>
          <width>121</width>
          <height>31</height>
@@ -1333,7 +1333,7 @@ background-color:none;</string>
       <widget class="QLabel" name="title_label_11">
        <property name="geometry">
         <rect>
-         <x>50</x>
+         <x>40</x>
          <y>350</y>
          <width>121</width>
          <height>31</height>
@@ -1351,7 +1351,7 @@ background-color:none;</string>
       <widget class="QLabel" name="title_label_12">
        <property name="geometry">
         <rect>
-         <x>50</x>
+         <x>40</x>
          <y>310</y>
          <width>121</width>
          <height>31</height>
@@ -1369,7 +1369,7 @@ background-color:none;</string>
       <widget class="QLabel" name="title_label_13">
        <property name="geometry">
         <rect>
-         <x>50</x>
+         <x>40</x>
          <y>230</y>
          <width>191</width>
          <height>31</height>
@@ -1381,13 +1381,13 @@ border:none;
 background-color:none;</string>
        </property>
        <property name="text">
-        <string>Libri consegnati in ritardo</string>
+        <string>Consegnati in ritardo</string>
        </property>
       </widget>
       <widget class="QLabel" name="title_label_14">
        <property name="geometry">
         <rect>
-         <x>50</x>
+         <x>40</x>
          <y>270</y>
          <width>191</width>
          <height>31</height>
