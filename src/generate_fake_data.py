@@ -66,7 +66,7 @@ if __name__ == "__main__":
     mm = MovementManager()
     sm = ServiceReservationManager()
 
-    delete_all_previous()
+    #delete_all_previous()
 
     generate_users(1000, um)
     generate_items(500, im)
