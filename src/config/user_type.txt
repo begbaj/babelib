@@ -1,0 +1,4 @@
+Studente
+Lavoratore
+Disoccupato
+Impiegato Statale

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1297</width>
+    <height>797</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QFrame" name="menuFrame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>211</width>
+      <height>801</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;
+background-color:qlineargradient(spread:pad, x1:0.83936, y1:0, x2:1, y2:0, stop:0 rgba(32, 30, 39, 255), stop:0.571429 rgba(0, 178, 210, 48));
+</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="logoImage">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>20</y>
+       <width>91</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::RichText</enum>
+     </property>
+     <property name="pixmap">
+      <pixmap>../img/Babelib.icns</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="returnButton">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>710</y>
+       <width>181</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:transparent;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/go back.png</normaloff>../img/go back.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="button">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>160</y>
+       <width>141</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius:16px;
+background-color:qradialgradient(spread:pad, cx:0.499926, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(18, 125, 160, 249), stop:1 rgba(27, 213, 241, 241));</string>
+     </property>
+     <property name="text">
+      <string>Modifica Campi</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../img/edit.png</normaloff>../img/edit.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="background">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1321</width>
+      <height>801</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="pixmap">
+     <pixmap>../img/background_blur.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QFrame" name="mainFrame">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>130</y>
+      <width>451</width>
+      <height>431</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>1</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 20px;
+border-style: outset;
+border-width: 2px;
+border-color:rgb(27,25,39);
+background-color:rgba(0, 192, 225, 85)</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
+   <zorder>background</zorder>
+   <zorder>menuFrame</zorder>
+   <zorder>mainFrame</zorder>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
