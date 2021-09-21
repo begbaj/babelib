@@ -1,3 +1,4 @@
+from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QMainWindow, QTableWidget, QTableWidgetItem, QDesktopWidget, QWidget
 from PyQt5.uic import loadUi
 
@@ -27,6 +28,8 @@ class HomeView(QMainWindow):
         # Metodi Iniziali
         self.setup()
         self.showMaximized()
+
+
 
     def setup(self):
         # Menu Button

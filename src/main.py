@@ -1,5 +1,6 @@
 import sys
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
 from loginView import LoginView
 
