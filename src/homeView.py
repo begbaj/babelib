@@ -52,7 +52,7 @@ class HomeView(QMainWindow):
 
     def style(self):
         #self.setStyleSheet(open("../designer/style/window.txt", "r").read())
-
+        #test
         # Menu Button Style
         self.userButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
         self.catalogingButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
