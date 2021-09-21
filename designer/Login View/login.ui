@@ -115,9 +115,9 @@ padding: 10px</string>
      <property name="geometry">
       <rect>
        <x>36</x>
-       <y>430</y>
+       <y>420</y>
        <width>291</width>
-       <height>41</height>
+       <height>51</height>
       </rect>
      </property>
      <property name="autoFillBackground">
@@ -219,7 +219,7 @@ border:null;</string>
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>390</y>
+       <y>370</y>
        <width>281</width>
        <height>21</height>
       </rect>
@@ -231,24 +231,6 @@ background-color:transparent;</string>
      </property>
      <property name="text">
       <string/>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="remember_box">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>360</y>
-       <width>141</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:transparent;
-border:none;
-</string>
-     </property>
-     <property name="text">
-      <string>Mantieni l'accesso</string>
      </property>
     </widget>
     <widget class="QLabel" name="label">

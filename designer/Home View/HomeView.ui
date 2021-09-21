@@ -2,6 +2,12 @@
 <ui version="4.0">
  <class>Home</class>
  <widget class="QMainWindow" name="Home">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -35,12 +41,6 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
    <property name="minimumSize">
     <size>
      <width>1600</width>
@@ -578,41 +578,6 @@ QPushButton::pressed
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="reportButton">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>850</y>
-       <width>101</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton 
-{
-border-radius:15px;
-background-color: rgb(51, 49, 77);
-color:rgb(255, 255, 255);
-}
-QPushButton::pressed
-{
-	background-color:rgb(30, 97, 255)
-}</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../img/Icona Report.png</normaloff>../img/Icona Report.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>40</width>
-       <height>40</height>
-      </size>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
@@ -688,26 +653,6 @@ background-color:transparent;</string>
      </property>
      <property name="text">
       <string>Servizi</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_11">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>910</y>
-       <width>161</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color:rgb(255, 255, 255);
-background-color:transparent;</string>
-     </property>
-     <property name="text">
-      <string>Report</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -903,14 +848,14 @@ QHeaderView::section{
     <attribute name="horizontalHeaderCascadingSectionResizes">
      <bool>false</bool>
     </attribute>
+    <attribute name="horizontalHeaderMinimumSectionSize">
+     <number>50</number>
+    </attribute>
     <attribute name="horizontalHeaderDefaultSectionSize">
      <number>190</number>
     </attribute>
     <attribute name="horizontalHeaderHighlightSections">
      <bool>false</bool>
-    </attribute>
-    <attribute name="horizontalHeaderMinimumSectionSize">
-     <number>50</number>
     </attribute>
     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
      <bool>true</bool>
@@ -1084,14 +1029,14 @@ QHeaderView::section{
     <attribute name="horizontalHeaderCascadingSectionResizes">
      <bool>false</bool>
     </attribute>
+    <attribute name="horizontalHeaderMinimumSectionSize">
+     <number>50</number>
+    </attribute>
     <attribute name="horizontalHeaderDefaultSectionSize">
      <number>180</number>
     </attribute>
     <attribute name="horizontalHeaderHighlightSections">
      <bool>false</bool>
-    </attribute>
-    <attribute name="horizontalHeaderMinimumSectionSize">
-     <number>50</number>
     </attribute>
     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
      <bool>true</bool>
