@@ -346,7 +346,7 @@ background-color:rgb(20, 18, 29)
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>740</y>
+       <y>790</y>
        <width>101</width>
        <height>61</height>
       </rect>
@@ -382,7 +382,7 @@ QPushButton::pressed
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>410</y>
+       <y>430</y>
        <width>101</width>
        <height>61</height>
       </rect>
@@ -417,7 +417,7 @@ QPushButton::pressed
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>520</y>
+       <y>550</y>
        <width>101</width>
        <height>61</height>
       </rect>
@@ -452,7 +452,7 @@ QPushButton::pressed
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>630</y>
+       <y>670</y>
        <width>101</width>
        <height>61</height>
       </rect>
@@ -487,7 +487,7 @@ QPushButton::pressed
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>300</y>
+       <y>310</y>
        <width>101</width>
        <height>61</height>
       </rect>
@@ -578,46 +578,11 @@ QPushButton::pressed
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="reportButton">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>850</y>
-       <width>101</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton 
-{
-border-radius:15px;
-background-color: rgb(51, 49, 77);
-color:rgb(255, 255, 255);
-}
-QPushButton::pressed
-{
-	background-color:rgb(30, 97, 255)
-}</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../img/Icona Report.png</normaloff>../img/Icona Report.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>40</width>
-       <height>40</height>
-      </size>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>360</y>
+       <y>370</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -637,7 +602,7 @@ background-color:transparent;</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>470</y>
+       <y>490</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -677,7 +642,7 @@ background-color:transparent;</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>800</y>
+       <y>850</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -693,31 +658,11 @@ background-color:transparent;</string>
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="label_11">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>910</y>
-       <width>161</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color:rgb(255, 255, 255);
-background-color:transparent;</string>
-     </property>
-     <property name="text">
-      <string>Report</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_12">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>580</y>
+       <y>610</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -737,7 +682,7 @@ background-color:transparent;</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>690</y>
+       <y>730</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -1200,7 +1145,7 @@ background-color:transparent;</string>
      <rect>
       <x>960</x>
       <y>30</y>
-      <width>211</width>
+      <width>261</width>
       <height>31</height>
      </rect>
     </property>
