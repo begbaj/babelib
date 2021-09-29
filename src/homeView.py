@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QSize
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMainWindow, QTableWidget, QTableWidgetItem, QDesktopWidget, QWidget
 from PyQt5.uic import loadUi
 
@@ -27,9 +27,7 @@ class HomeView(QMainWindow):
         self.resM = ServiceReservationManager()
         # Metodi Iniziali
         self.setup()
-        self.showMaximized()
-
-
+        #self.showMaximized()
 
     def setup(self):
         # Menu Button
@@ -53,6 +51,8 @@ class HomeView(QMainWindow):
         self.style()
 
     def style(self):
+        #self.setStyleSheet(open("../designer/style/window.txt", "r").read())
+        #test
         # Menu Button Style
         self.userButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
         self.catalogingButton.setStyleSheet(open("../designer/style/ButtonTheme.txt", "r").read())
