@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="babelib_db@localhost [2]" uuid="afbdc065-94d5-44f8-9bcc-8b4a0456eb90">
+    <data-source source="LOCAL" name="babelib_db@localhost" uuid="9bb2358f-d09b-48e5-bf9c-387571c06832">
       <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
