@@ -346,7 +346,7 @@ background-color:rgb(20, 18, 29)
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>740</y>
+       <y>790</y>
        <width>101</width>
        <height>61</height>
       </rect>
@@ -382,7 +382,7 @@ QPushButton::pressed
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>410</y>
+       <y>430</y>
        <width>101</width>
        <height>61</height>
       </rect>
@@ -417,7 +417,7 @@ QPushButton::pressed
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>520</y>
+       <y>550</y>
        <width>101</width>
        <height>61</height>
       </rect>
@@ -452,7 +452,7 @@ QPushButton::pressed
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>630</y>
+       <y>670</y>
        <width>101</width>
        <height>61</height>
       </rect>
@@ -487,7 +487,7 @@ QPushButton::pressed
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>300</y>
+       <y>310</y>
        <width>101</width>
        <height>61</height>
       </rect>
@@ -582,7 +582,7 @@ QPushButton::pressed
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>360</y>
+       <y>370</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -602,7 +602,7 @@ background-color:transparent;</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>470</y>
+       <y>490</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -642,7 +642,7 @@ background-color:transparent;</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>800</y>
+       <y>850</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -662,7 +662,7 @@ background-color:transparent;</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>580</y>
+       <y>610</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -682,7 +682,7 @@ background-color:transparent;</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>690</y>
+       <y>730</y>
        <width>161</width>
        <height>20</height>
       </rect>
@@ -1145,7 +1145,7 @@ background-color:transparent;</string>
      <rect>
       <x>960</x>
       <y>30</y>
-      <width>211</width>
+      <width>261</width>
       <height>31</height>
      </rect>
     </property>

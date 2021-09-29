@@ -115,9 +115,9 @@ padding: 10px</string>
      <property name="geometry">
       <rect>
        <x>36</x>
-       <y>420</y>
+       <y>410</y>
        <width>291</width>
-       <height>51</height>
+       <height>61</height>
       </rect>
      </property>
      <property name="autoFillBackground">
@@ -227,10 +227,16 @@ border:null;</string>
      <property name="styleSheet">
       <string notr="true">color:red;
 border:none;
-background-color:transparent;</string>
+background-color:transparent;
+font: 12pt &quot;.AppleSystemUIFont&quot;;
+
+</string>
      </property>
      <property name="text">
       <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="label">
